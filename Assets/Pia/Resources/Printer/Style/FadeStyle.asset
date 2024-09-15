@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcb583cd7e681841a0e745fc5330f9e, type: 3}
+  m_Name: FadeStyle
+  m_EditorClassIdentifier: 
+  name: fade
+  appearInterval: 0.1
+  repeatInterval: 0.3
+  disappearInterval: 0.1
+  appearAndRepeatUnit: 2
+  disappearUnit: 2
+  useAppearAnimation: 1
+  appearScaleSpeed: 1
+  appearBeginScale: {x: 1, y: 1, z: 1}
+  appearEndScale: {x: 1, y: 1, z: 1}
+  appearScaleEase: 30
+  appearPositionSpeed: 1
+  appearBeginPosition: {x: 0, y: 0, z: 0}
+  appearEndPosition: {x: 0, y: 0, z: 0}
+  appearPositionEase: 0
+  appearRotationSpeed: 1
+  appearBeginRotation: {x: 0, y: 0, z: 0}
+  appearEndRotation: {x: 0, y: 0, z: 0}
+  appearRotationEase: 0
+  appearColorSpeed: 0.1
+  appearBeginColor: {r: 1, g: 1, b: 1, a: 0}
+  appearEndColor: {r: 1, g: 1, b: 1, a: 1}
+  appearColorEase: 0
+  useRepeatAnimation: 0
+  repeatLoopType: 1
+  repeatScaleSpeed: 1
+  repeatBeginScale: {x: 1, y: 1, z: 1}
+  repeatEndScale: {x: 2, y: 2, z: 2}
+  repeatScaleEase: 0
+  repeatPositionSpeed: 1
+  repeatBeginPosition: {x: 0, y: 0, z: 0}
+  repeatEndPosition: {x: 0, y: 0, z: 0}
+  repeatPositionEase: 0
+  repeatRotationSpeed: 1
+  repeatBeginRotation: {x: 0, y: 0, z: 0}
+  repeatEndRotation: {x: 0, y: 0, z: 0}
+  repeatRotationEase: 0
+  repeatColorSpeed: 1
+  repeatBeginColor: {r: 1, g: 1, b: 1, a: 1}
+  repeatEndColor: {r: 1, g: 1, b: 1, a: 1}
+  repeatColorEase: 0
+  useDisappearAnimation: 1
+  disappearScaleSpeed: 1
+  disappearBeginScale: {x: 1, y: 1, z: 1}
+  disappearEndScale: {x: 1, y: 1, z: 1}
+  disappearScaleEase: 0
+  disappearPositionSpeed: 1
+  disappearBeginPosition: {x: 0, y: 0, z: 0}
+  disappearEndPosition: {x: 0, y: 0, z: 0}
+  disappearPositionEase: 0
+  disappearRotationSpeed: 1
+  disappearBeginRotation: {x: 0, y: 0, z: 0}
+  disappearEndRotation: {x: 0, y: 0, z: 0}
+  disappearRotationEase: 0
+  disappearColorSpeed: 1
+  disappearBeginColor: {r: 1, g: 1, b: 1, a: 1}
+  disappearEndColor: {r: 1, g: 1, b: 1, a: 0}
+  disappearColorEase: 0

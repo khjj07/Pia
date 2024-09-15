@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7eb0eb7f5e6a564bb678c2d330adb95, type: 3}
+  m_Name: Sound List Asset
+  m_EditorClassIdentifier: 
+  sounds:
+  - clip: {fileID: 8300000, guid: 8dd1f7bd2a1ab85459f33d16a0bc5e01, type: 3}
+    name: BGM_Title
+  - clip: {fileID: 8300000, guid: c8e4e61bf64a4f442b7686721b2fad47, type: 3}
+    name: stand_up
+  - clip: {fileID: 8300000, guid: 40b5842998641fc47ba9afcfd42222a2, type: 3}
+    name: war2
+  - clip: {fileID: 8300000, guid: 449f9852a69e50543b457414ba793dd7, type: 3}
+    name: "\uAD70\uD654 \uB2EC\uB9AC\uB294 \uC18C\uB9AC"
+  - clip: {fileID: 8300000, guid: d67d2f8bc39214844b86d2566aff0ec4, type: 3}
+    name: "\uBD80\uCD95\uD55C \uCEF7\uC2E0 BGM"
+  - clip: {fileID: 8300000, guid: 160516a8ed9f0924294fe82b45881aa6, type: 3}
+    name: "\uC6B8\uBA39\uC774\uBA70 \uB6F0\uB294 \uC18C\uB9AC"
+  - clip: {fileID: 8300000, guid: d222b893473eefb43b0d1a842e7740e5, type: 3}
+    name: "\uCC98\uC74C W\uD0A4 \uB20C\uB800\uC744 \uB54C 2man_walk"
+  - clip: {fileID: 8300000, guid: dde82a45d3f63d343a4b50efe54966c4, type: 3}
+    name: "\uCD1D\uC54C \uC2A4\uCE58\uB294 \uC18C\uB9AC"
+  floder: {fileID: 102900000, guid: 38556610fc87f074ea49a4ec39c7edc4, type: 3}

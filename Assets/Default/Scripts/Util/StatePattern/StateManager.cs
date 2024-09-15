@@ -1,0 +1,99 @@
+using System;
+using UnityEditor;
+using UnityEngine;
+
+namespace Default.Scripts.Util.StatePattern
+{
+    [CustomEditor(typeof(StateManagerBase), true)]
+    public class StateManagerInspector : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            if (!Application.isPlaying)
+            {
+                var sm = (StateManagerBase)target;
+                sm.states = sm.GetComponentsInChildren<StateBase>(true);
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Previous Node"))
+                {
+                    sm.Previous();
+                }
+                if (GUILayout.Button("Next Node"))
+                {
+                    sm.Next();
+                }
+                GUILayout.EndHorizontal();
+            }
+        }
+    }
+
+    public abstract class StateManagerBase : MonoBehaviour
+    {
+        public StateBase[] states;
+        public int currentIndex;
+        public abstract void Next();
+        public abstract void Previous();
+        public abstract void Change(StateBase state);
+    }
+
+    public abstract class StateManager<T> : StateManagerBase where T : State<T>
+    {
+        public T currentState;
+        
+        public virtual void Start()
+        {
+            states = GetComponentsInChildren<T>(true);
+            foreach (var state in states)
+            {
+                state.gameObject.SetActive(false);
+            }
+            if (states.Length > 0)
+            {
+                currentState = states[currentIndex] as T;
+                if (currentState != null)
+                {
+                    currentState.gameObject.SetActive(true);
+                    currentState.OnEnter();
+                }
+            }
+        }
+
+        public override void Next()
+        {
+            if (currentIndex < states.Length - 1)
+            {
+                currentIndex++;
+                Change(states[currentIndex]);
+            }
+#if UNITY_EDITOR
+            else
+            {
+                UnityEngine.Debug.Log("Out Of Range");
+            }
+#endif
+        }
+
+        public override void Previous()
+        {
+            if (currentIndex > 0)
+            {
+                currentIndex--;
+                Change(states[currentIndex]);
+            }
+#if UNITY_EDITOR
+            else
+            {
+                UnityEngine.Debug.Log("Out Of Range");
+            }
+#endif
+        }
+
+        public override async void Change(StateBase state)
+        {
+            await currentState.OnExit();
+            currentState = state as T;
+            await currentState.OnEnter();
+        }
+    }
+}
