@@ -104,7 +104,7 @@ Material:
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _NoiseOffset: 12.16
-    - _NoiseScale: 39.6
+    - _NoiseScale: 22
     - _OpaqueCullMode: 2
     - _OutScale: 2
     - _PerPixelSorting: 0

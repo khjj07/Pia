@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DirtController : MonoBehaviour
 {
-    [Range(0.1f,2.0f)]
-    public float dirtHeight;
+    [Range(0.0f, 1.0f)]
+    public float holeDepth;
 
     private MeshRenderer _dirt;
 
@@ -16,14 +16,14 @@ public class DirtController : MonoBehaviour
     public void Start()
     {
         _dirt = GetComponent<MeshRenderer>();
-        dirtHeight =  _dirt.sharedMaterial.GetFloat("_Height" );
+        holeDepth =  _dirt.sharedMaterial.GetFloat("_HoleDepth" );
         worldHeight = top.position.y - bottom.position.y;
-        initialDirtHeight=dirtHeight;
+        initialDirtHeight= holeDepth;
     }
 
     public void Update()
     {
-        top.position = bottom.position + Vector3.up * worldHeight * dirtHeight/initialDirtHeight; 
-        _dirt.material.SetFloat("_Height",dirtHeight);
+        top.position = bottom.position + Vector3.down * worldHeight * holeDepth; 
+        _dirt.material.SetFloat("_HoleDepth", holeDepth);
     }
 }
