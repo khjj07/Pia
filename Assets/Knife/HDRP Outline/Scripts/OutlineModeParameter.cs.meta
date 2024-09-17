@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9cb7c38b23cf963489f21fa9ed61a300
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Scripts/OutlineModeParameter.cs
+  uploadId: 519235

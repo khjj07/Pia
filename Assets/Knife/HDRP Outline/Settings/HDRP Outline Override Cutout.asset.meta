@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 28ec4d59711765247b95cd21c0ae22e7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Settings/HDRP Outline Override Cutout.asset
+  uploadId: 519235

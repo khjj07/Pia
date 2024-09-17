@@ -12,7 +12,7 @@ namespace Assets.Pia.Scripts.Path
     {
         public override async Task Appear()
         {
-            StoryModeManager.SetState(StoryModeManager.State.LandMine);
+            StoryModeManager.SetState(StoryModeManager.State.LandMineDirt);
         }
 
         public override Task Disappear()

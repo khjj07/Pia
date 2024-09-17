@@ -114,6 +114,7 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
                 node.OnTriggerEnterAsObservable().Subscribe(_ =>
                 {
                     appearQueue.Enqueue(node);
+                    node.GetComponent<SphereCollider>().enabled = false;
                 });
             }
         }

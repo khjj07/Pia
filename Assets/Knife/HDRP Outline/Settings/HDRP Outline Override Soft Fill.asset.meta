@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc4c19fe9236d64428ebeb31b3448aed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Settings/HDRP Outline Override Soft Fill.asset
+  uploadId: 519235

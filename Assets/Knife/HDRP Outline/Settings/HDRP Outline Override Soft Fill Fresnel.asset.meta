@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dc9457a4bdedd9345bb5a7b9947669ce
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Settings/HDRP Outline Override Soft Fill Fresnel.asset
+  uploadId: 519235

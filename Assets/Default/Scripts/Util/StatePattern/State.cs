@@ -12,11 +12,6 @@ namespace Default.Scripts.Util.StatePattern
 
     public abstract class State<T> : StateBase
     {
-        public void Start()
-        {
-            //gameObject.SetActive(false);
-        }
-
         public override Task OnEnter()
         {
            gameObject.SetActive(true);

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a123fc0ac58cb774e8592c925f167e7c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Settings/SampleSceneSkyandFogSettings.asset
+  uploadId: 519235

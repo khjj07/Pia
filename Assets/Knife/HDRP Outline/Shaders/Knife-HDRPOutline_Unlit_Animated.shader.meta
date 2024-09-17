@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ba0026fd7f148944a9a0dc9398ed12b7
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Shaders/Knife-HDRPOutline_Unlit_Animated.shader
+  uploadId: 519235

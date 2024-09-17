@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Pia.Scripts.Effect;
 using Assets.Pia.Scripts.General;
 using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.StoryMode.Walking;
@@ -31,6 +32,7 @@ namespace Pia.Scripts.StoryMode
         public enum State
         {
             Walking,
+            LandMineDirt,
             LandMine
         }
 
@@ -60,20 +62,32 @@ namespace Pia.Scripts.StoryMode
                     _player.InactivePlayerUI();
                 });
 
-            stateSubject.Where(x => x == State.LandMine)
+            stateSubject.Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
                     _player.ActivePlayerUI();
                     _player.ActiveBagSlot();
                     _player.ActiveHealthBar();
                     _landMineUI.Appear();
-                    PlayerPrefs.SetString("Save","LandMine");
+                    PlayerPrefs.SetString("Save","LandMineDirt");
                     _player.UpdateAsObservable()
-                        .TakeWhile(_=>currentState==State.LandMine)
-                        .Subscribe(_=>_player.RepositioningThroughFoot(_landMine.GetComponentInChildren<DirtController>().top))
+                        .TakeWhile(_ => currentState == State.LandMineDirt)
+                        .Where(_ => _landMine.IsAvailable())
+                        .Subscribe(_ =>
+                        {
+                            SetState(State.LandMine);
+                            _player.Crouch();
+                        })
+                        .AddTo(_player.gameObject);
+
+                    _player.UpdateAsObservable()
+                        .TakeWhile(_=>currentState==State.LandMineDirt)
+                        .Subscribe(_=>_player.RepositioningThroughFoot(_landMine.dirtController.top))
                         .AddTo(_player.gameObject);
                     //Position세팅
                 });
+
+            
             CheckSaveFlag();
         }
 
@@ -81,9 +95,9 @@ namespace Pia.Scripts.StoryMode
         {
             if (PlayerPrefs.HasKey("Save"))
             {
-                if (PlayerPrefs.GetString("Save") == "LandMine")
+                if (PlayerPrefs.GetString("Save") == "LandMineDirt")
                 {
-                    SetState(State.LandMine);
+                    SetState(State.LandMineDirt);
                 }
                 else
                 {

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9dff909c182ebfc4b874fadddc299432
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Shaders/Knife-HDRPOutline_Unlit.shader
+  uploadId: 519235

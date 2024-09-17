@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6e4f26dca34a46d4792b902fc997e631
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Materials/Outline.mat
+  uploadId: 519235

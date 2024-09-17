@@ -147,6 +147,7 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Highlight: {r: 0.0005608878, g: 0.0005608878, b: 0.0005608878, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutScale: {r: 1, g: 1, b: 0, a: 0}
     - _SpherizedStrength: {r: 1, g: 1, b: 0, a: 0}

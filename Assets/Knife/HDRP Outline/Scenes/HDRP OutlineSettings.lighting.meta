@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 828a106c33d82c14ea7fb1a41cbc64f9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162150
+  packageName: HDRP Outline
+  packageVersion: 1.11
+  assetPath: Assets/Knife/HDRP Outline/Scenes/HDRP OutlineSettings.lighting
+  uploadId: 519235
