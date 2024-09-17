@@ -203,7 +203,7 @@ namespace Assets.Pia.Scripts.StoryMode
                 .Select(_ => CheckTarget(tag))
                 .Where(_=>_isInteractable)
                 .Where(x => x != null)
-                .Subscribe(x => interact.Invoke(x))
+                .Subscribe(interact.Invoke)
                 .AddTo(gameObject);
         }
         public void CreateInteractionStream(IObservable<Unit> takeUntil, string tag, Action<InteractableClass> interact)
@@ -213,7 +213,7 @@ namespace Assets.Pia.Scripts.StoryMode
                .Select(_ => CheckTarget(tag))
                .Where(_ => _isInteractable)
                .Where(x => x != null)
-               .Subscribe(x => interact.Invoke(x))
+               .Subscribe(interact.Invoke)
                .AddTo(gameObject);
         }
         private void CreateCameraStream()
@@ -540,7 +540,10 @@ namespace Assets.Pia.Scripts.StoryMode
         {
             t.OnInteract(this);
         }
-
+        private void UsePen(InteractableClass t)
+        {
+            t.OnInteract(this);
+        }
         private void UseShovel(InteractableClass t)
         {
             var shovelKeyReleasedStream = GlobalInputBinder.CreateGetKeyUpStream(shovelKey);
@@ -619,10 +622,14 @@ namespace Assets.Pia.Scripts.StoryMode
             var penReleaseStream = GlobalInputBinder.CreateGetKeyUpStream(penKey);
             var cartridgeCloseStream = GlobalInputBinder.CreateGetKeyUpStream(cartridgeKey);
 
-            penReleaseStream.Amb(cartridgeCloseStream).First().Subscribe(_ => OnPenKeyRelaese());
+            var cancelStream = penReleaseStream.Amb(cartridgeCloseStream);
+            cancelStream.First().Subscribe(_ => OnPenKeyRelaese());
             upperStateSubject.OnNext(UpperState.Pen);
             _playerUI.SetSlotActive(_playerUI.penSlot);
+            CreateInteractionStream(cancelStream, "PenHole", UsePen);
         }
+
+  
 
         private void OnPenKeyRelaese()
         {

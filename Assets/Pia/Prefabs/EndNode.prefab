@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2351092148184706223, guid: dba67732afae90942b64b8586ad359b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.594
+      value: -0.3793
       objectReference: {fileID: 0}
     - target: {fileID: 2351092148184706223, guid: dba67732afae90942b64b8586ad359b6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2351092148184706223, guid: dba67732afae90942b64b8586ad359b6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2351092148184706223, guid: dba67732afae90942b64b8586ad359b6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -318,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2351092148184706223, guid: dba67732afae90942b64b8586ad359b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 2351092148184706223, guid: dba67732afae90942b64b8586ad359b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -329,9 +329,21 @@ PrefabInstance:
       value: LandMine
       objectReference: {fileID: 0}
     - target: {fileID: 9021546512531688856, guid: dba67732afae90942b64b8586ad359b6, type: 3}
+      propertyPath: currentState
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021546512531688856, guid: dba67732afae90942b64b8586ad359b6, type: 3}
       propertyPath: dirtController
       value: 
       objectReference: {fileID: 2068198237686047055}
+    - target: {fileID: 9021546512531688856, guid: dba67732afae90942b64b8586ad359b6, type: 3}
+      propertyPath: states.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021546512531688856, guid: dba67732afae90942b64b8586ad359b6, type: 3}
+      propertyPath: 'states.Array.data[4]'
+      value: 
+      objectReference: {fileID: 4465911259186254815}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -342,6 +354,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2351092148184706223, guid: dba67732afae90942b64b8586ad359b6, type: 3}
   m_PrefabInstance: {fileID: 2894555733312791114}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4465911259186254815 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1572211169276146069, guid: dba67732afae90942b64b8586ad359b6, type: 3}
+  m_PrefabInstance: {fileID: 2894555733312791114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f549e91967fdcd40a6aa9f77585a021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8391133579555073599
 PrefabInstance:
   m_ObjectHideFlags: 0

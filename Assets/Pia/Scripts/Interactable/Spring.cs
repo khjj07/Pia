@@ -46,7 +46,11 @@ public class Spring : InteractableClass
         GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Mouse0)
             .TakeUntil(cancelStream)
             .TakeWhile(_ => progress < 1)
-            .Subscribe(_ => SetProgress(progress + extent),null,()=>
+            .Subscribe(_ =>
+            {
+                transform.DOShakePosition(0.1f, 0.1f);
+                SetProgress(progress + extent);
+            },null,()=>
             {
                 p.SetCursorUnlocked();
                 RemoveCheck();

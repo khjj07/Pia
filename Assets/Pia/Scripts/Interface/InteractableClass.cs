@@ -13,9 +13,10 @@ namespace Assets.Pia.Scripts.Interface
         protected OutlineController availableOutline;
         [SerializeField]
         protected OutlineController inavailableOutline;
-        public void Awake()
-        {
 
+        public virtual void Start()
+        {
+            GetComponent<Collider>().enabled = _isAvailable;
         }
         public virtual void SetAvailable(bool value)
         {

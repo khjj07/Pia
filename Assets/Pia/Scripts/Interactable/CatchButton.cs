@@ -11,11 +11,11 @@ using UnityEngine.UI;
 
 public class CatchButton : InteractableClass
 {
-    private bool _isPressed;
-    private OutlineController pressedOutline;
+    public OutlineController pressedOutline;
+    public bool isPressed;
     public override void OnHover(Player.UpperState state)
     {
-        if (_isPressed)
+        if (isPressed)
         {
             pressedOutline.gameObject.SetActive(true);
         }
@@ -36,11 +36,14 @@ public class CatchButton : InteractableClass
     public override void OnInteract(object player)
     {
         var p = (Player)player;
-
         var daggerKeyReleasedStream = GlobalInputBinder.CreateGetKeyUpStream(p.daggerKey);
         var cartridgeCloseStream = GlobalInputBinder.CreateGetKeyUpStream(p.cartridgeKey);
         var cancelStream = daggerKeyReleasedStream.Amb(cartridgeCloseStream);
-        cancelStream.First().Subscribe(_ => _isPressed = false).AddTo(gameObject);
-        _isPressed = true;
+        cancelStream.First().Subscribe(_ =>
+        {
+            pressedOutline.gameObject.SetActive(false);
+            isPressed = false;
+        }).AddTo(gameObject);
+        isPressed = true;
     }
 }

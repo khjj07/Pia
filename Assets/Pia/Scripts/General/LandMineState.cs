@@ -11,6 +11,7 @@ public class LandMineState : State<LandMineState>
         foreach (var interatable in GetComponentsInChildren<InteractableClass>())
         {
             interatable.SetAvailable(true);
+            interatable.GetComponent<Collider>().enabled = true;
         }
         return Task.CompletedTask;
     }

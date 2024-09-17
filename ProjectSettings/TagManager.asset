@@ -8,6 +8,8 @@ TagManager:
   - Bolt
   - General
   - Spring
+  - Dagger
+  - PenHole
   layers:
   - Default
   - TransparentFX

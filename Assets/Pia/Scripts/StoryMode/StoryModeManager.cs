@@ -163,5 +163,10 @@ namespace Pia.Scripts.StoryMode
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
+
+        public static void GameClear()
+        {
+            Debug.Log("Clear");
+        }
     }
 }
