@@ -62,7 +62,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: Use
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 1
   m_Transitions:
   - {fileID: 3094014805469033193}
   m_StateMachineBehaviours: []
@@ -100,7 +100,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9142857
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

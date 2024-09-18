@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6709673371040999230}
   - component: {fileID: 3846723456722907914}
   - component: {fileID: 4582306048247578668}
-  - component: {fileID: 5844857971443656962}
+  - component: {fileID: 4059568216101003274}
   m_Layer: 0
   m_Name: AvailableOutline
   m_TagString: Untagged
@@ -105,7 +105,7 @@ MonoBehaviour:
   fresnelScale: 2
   fresnelPower: 2
   alphaThreshold: 0.5
---- !u!114 &5844857971443656962
+--- !u!114 &4059568216101003274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 857766036433638440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dabf364fbf4d0439f1e77c976785d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5779c1d13e0c86c4586e57038e2cdd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1670131657117741336
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 7776195921483828927}
   - component: {fileID: 3192467470775938868}
   - component: {fileID: 3388027068847768706}
-  - component: {fileID: 4805389693942061503}
+  - component: {fileID: 6076144340187887880}
   m_Layer: 0
   m_Name: InavailableOutline
   m_TagString: Untagged
@@ -333,7 +333,7 @@ MonoBehaviour:
   fresnelScale: 2
   fresnelPower: 2
   alphaThreshold: 0.5
---- !u!114 &4805389693942061503
+--- !u!114 &6076144340187887880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2744138542676073284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dabf364fbf4d0439f1e77c976785d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5779c1d13e0c86c4586e57038e2cdd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2869517730948969000
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 3696840629915160580}
   - component: {fileID: 4932101803323796557}
   - component: {fileID: 3655237586410595924}
-  - component: {fileID: 4200328056946317433}
+  - component: {fileID: 8418047664039768148}
   m_Layer: 0
   m_Name: InavailableOutline
   m_TagString: Untagged
@@ -450,7 +450,7 @@ MonoBehaviour:
   fresnelScale: 2
   fresnelPower: 2
   alphaThreshold: 0.5
---- !u!114 &4200328056946317433
+--- !u!114 &8418047664039768148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2869517730948969000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dabf364fbf4d0439f1e77c976785d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5779c1d13e0c86c4586e57038e2cdd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3700435657011692820
@@ -691,8 +691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  availableOutline: {fileID: 5844857971443656962}
-  inavailableOutline: {fileID: 4200328056946317433}
+  availableOutline: {fileID: 4059568216101003274}
+  inavailableOutline: {fileID: 8418047664039768148}
   catchButton: {fileID: 5888898703156862791}
   pressurePlateCanvas: {fileID: 146753310137032107}
   boundingArea: {fileID: 6202979699016650947}
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 3311758488607055886}
   - component: {fileID: 231097658704549053}
   - component: {fileID: 894548515974201162}
-  - component: {fileID: 8391746012165342610}
+  - component: {fileID: 8745198465694637798}
   m_Layer: 0
   m_Name: AvailableOutline
   m_TagString: Untagged
@@ -882,7 +882,7 @@ MonoBehaviour:
   fresnelScale: 2
   fresnelPower: 2
   alphaThreshold: 0.5
---- !u!114 &8391746012165342610
+--- !u!114 &8745198465694637798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4863018962115677858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dabf364fbf4d0439f1e77c976785d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5779c1d13e0c86c4586e57038e2cdd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4888240310524654515
@@ -903,7 +903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3049431113346408064}
-  - component: {fileID: 8832247837552084722}
+  - component: {fileID: 5618216694615490081}
   m_Layer: 0
   m_Name: Part4
   m_TagString: Untagged
@@ -928,7 +928,7 @@ Transform:
   - {fileID: 2181082170941978367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8832247837552084722
+--- !u!114 &5618216694615490081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -937,10 +937,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4888240310524654515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be18873557b4df4ebd3efc20ea0230f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dca92f91b983724ab29fb50081539b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressurePlate: {fileID: 0}
+  pressurePlate: {fileID: 8423082356319489719}
 --- !u!1 &4921742192599918691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7314779251342226766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dabf364fbf4d0439f1e77c976785d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5779c1d13e0c86c4586e57038e2cdd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7861706113810084696
@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  availableOutline: {fileID: 8391746012165342610}
-  inavailableOutline: {fileID: 4805389693942061503}
+  availableOutline: {fileID: 8745198465694637798}
+  inavailableOutline: {fileID: 6076144340187887880}
   pressedOutline: {fileID: 3606641173454893975}
   isPressed: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Pia.Scripts.Effect;
+using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.General;
 using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.StoryMode.Walking;
@@ -47,6 +48,8 @@ namespace Pia.Scripts.StoryMode
         [SerializeField]
         private LandMine _landMine;
 
+        private bool _isInteractionActive;
+
         public void Awake()
         {
             _pathManager = GetComponentInChildren<PathManager>(true);
@@ -59,13 +62,13 @@ namespace Pia.Scripts.StoryMode
             stateSubject.Where(x => x == State.Walking)
                 .Subscribe(_ =>
                 {
-                    _player.InactivePlayerUI();
+                    _isInteractionActive = false;
                 });
 
             stateSubject.Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
-                    _player.ActivePlayerUI();
+                    _isInteractionActive = true;
                     _player.ActiveBagSlot();
                     _player.ActiveHealthBar();
                     _landMineUI.Appear();
@@ -82,7 +85,7 @@ namespace Pia.Scripts.StoryMode
 
                     _player.UpdateAsObservable()
                         .TakeWhile(_=>currentState==State.LandMineDirt)
-                        .Subscribe(_=>_player.RepositioningThroughFoot(_landMine.dirtController.top))
+                        .Subscribe(_=>_player.RepositioningThroughFoot(_landMine.Dirt.top))
                         .AddTo(_player.gameObject);
                     //Position세팅
                 });
@@ -167,6 +170,11 @@ namespace Pia.Scripts.StoryMode
         public static void GameClear()
         {
             Debug.Log("Clear");
+        }
+
+        public static bool IsInteractionActive()
+        {
+            return Instance._isInteractionActive;
         }
     }
 }
