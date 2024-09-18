@@ -16,7 +16,7 @@ namespace Assets.Pia.Scripts.Path
         private Canvas canvas;
         public virtual void Start()
         {
-            canvas = GetComponentInChildren<Canvas>();
+            canvas = GetComponentInChildren<Canvas>(true);
             _subNodes = GetComponentsInChildren<SubPathNode>();
             foreach (var state in _subNodes)
             {

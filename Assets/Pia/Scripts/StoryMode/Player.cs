@@ -15,6 +15,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using GlobalInputBinder = Default.Scripts.Util.GlobalInputBinder;
+using Random = UnityEngine.Random;
 using Unit = UniRx.Unit;
 
 namespace Assets.Pia.Scripts.StoryMode
@@ -77,7 +78,8 @@ namespace Assets.Pia.Scripts.StoryMode
         [SerializeField] private Transform arm;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Transform foot;
-        [SerializeField] private Transform crouchArmTransform;
+        [SerializeField] private Transform crouchArmTransform1;
+        [SerializeField] private Transform crouchArmTransform2;
         [SerializeField] private Transform standArmTransform;
         [SerializeField] private Transform crouchHeadTransform1;
         [SerializeField] private Transform crouchHeadTransform2;
@@ -151,15 +153,23 @@ namespace Assets.Pia.Scripts.StoryMode
         [SerializeField] private PlayerCursor playerCursor;
         public float shovelInterval = 1.0f;
         public float driverInterval = 1.0f;
-
-
         private InteractableClass target;
+
+        [Header("HP")]
+        public int initialHp = 600;
+        public float hpDecreaseInterval = 1;
+        public int hpReduction = 1;
+        private int hp;
+        private bool _isBleeding=false;
+        [SerializeField] private Image hpBar;
+
 
 
         void Start()
         {
             Initialize();
         }
+
         private void Initialize()
         {
             initialLocalPosition = mainCamera.transform.localPosition;
@@ -171,7 +181,46 @@ namespace Assets.Pia.Scripts.StoryMode
             CreateUpperBodyStream();
             CreateCameraStream();
             CreateInteractionStream( "General", UseHand);
+            CreateHoverStream();
+            CreateHPStream();
+            CreateRandomBleedEvent(0.95f,0.87f);
+            CreateRandomBleedEvent(0.65f, 0.50f);
+        }
 
+        private void CreateRandomBleedEvent(float p0, float p1)
+        {
+           float random =  Random.Range(p1, p0);
+           Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval))
+                .Where(_ => random * initialHp >= hp).First()
+               .Subscribe(_ => Bleed())
+               .AddTo(gameObject);
+        }
+
+        private void CreateHPStream()
+        {
+            hp = initialHp;
+            Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval)).Subscribe(_ => SetHP(hp- hpReduction));
+        }
+
+        private void SetHP(int value)
+        {
+            hp = Math.Max(value,0);
+            hpBar.DOFillAmount((float)hp / initialHp, hpDecreaseInterval);
+        }
+
+        private void Bleed()
+        {
+            hpReduction = 2;
+            _isBleeding = true;
+        }
+
+        private void CureBleed()
+        {
+            hpReduction = 1;
+            _isBleeding = false;
+        }
+        private void CreateHoverStream()
+        {
             this.UpdateAsObservable()
                 .Where(t => _isInteractable)
                 .Select(_ => CheckInteractable())
@@ -557,6 +606,8 @@ namespace Assets.Pia.Scripts.StoryMode
                 upperStateSubject.OnNext(UpperState.ShovelUse);
             });
             upperStateSubject.OnNext(UpperState.ShovelUse);
+            stopUseStream.TakeUntil(shovelKeyReleasedStream.Amb(secondaryBagCloseStream)).First()
+                .Subscribe(_ => upperStateSubject.OnNext(UpperState.Shovel));
         }
         public void Crouch()
         {
@@ -567,14 +618,16 @@ namespace Assets.Pia.Scripts.StoryMode
                 _ableToCrouch = true;
                 SetCursorUnlocked();
             });
-            arm.DOLocalMove(crouchArmTransform.localPosition, crouchDuration);
+            
             if (StoryModeManager.GetState() == StoryModeManager.State.LandMineDirt)
             {
                 head.DOLocalMove(crouchHeadTransform1.localPosition, crouchDuration);
+                arm.DOLocalMove(crouchArmTransform1.localPosition, crouchDuration);
             }
             else if (StoryModeManager.GetState() == StoryModeManager.State.LandMine)
             {
                 head.DOLocalMove(crouchHeadTransform2.localPosition, crouchDuration);
+                arm.DOLocalMove(crouchArmTransform2.localPosition, crouchDuration);
             }
             mainCamera.DOFieldOfView(crouchFov, crouchDuration);
             DOTween.To(() => rotationX, x => rotationX = x, crouchMaxRotationX, crouchDuration);
@@ -820,13 +873,7 @@ namespace Assets.Pia.Scripts.StoryMode
             _playerUI.SetSlotInactive(_playerUI.bandageSlot);
             upperStateSubject.OnNext(UpperState.None);
         }
-
-
         #endregion
-
-
-
-
 
         public void ActivePlayerUI()
         {

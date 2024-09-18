@@ -128,6 +128,7 @@ public class PressurePlate : InteractableClass
         else
         {
             _currentLevel++;
+            origin.DOShakeRotation(0.1f, Vector3.up * 5).SetEase(Ease.OutBack);
         }
         SetLevel(_currentLevel);
     }

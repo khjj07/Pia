@@ -104,7 +104,7 @@ Material:
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _NoiseOffset: 12.16
-    - _NoiseScale: 22
+    - _NoiseScale: 40
     - _OpaqueCullMode: 2
     - _OutScale: 2
     - _PerPixelSorting: 0
@@ -114,7 +114,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Roughness: 1
+    - _Roughness: 0.56
     - _Scale: 0
     - _ScaleOffset: 23.89
     - _Smoothness: -10
