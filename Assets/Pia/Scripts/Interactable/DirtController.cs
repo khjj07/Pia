@@ -24,6 +24,7 @@ namespace Assets.Pia.Scripts.Effect
         public Transform bottom;
         public float worldHeight;
         private float initialHoleDepth;
+        public float targetDepth;
 
         public override void OnInteract(object interval)
         {
@@ -72,9 +73,9 @@ namespace Assets.Pia.Scripts.Effect
             holeDepth = Mathf.Clamp(holeDepth + extend, 0, 1);
 
             transform.DOShakeRotation(interval, 0.1f, 1);
-            if (holeDepth == 1)
+            if (holeDepth >= targetDepth)
             {
-                gameObject.SetActive(false);
+                GetComponent<Collider>().enabled = false;
             }
         }
         public void HightLightOff()

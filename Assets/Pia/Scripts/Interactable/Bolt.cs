@@ -54,7 +54,7 @@ public class Bolt : InteractableClass
         {
             progress = Mathf.Clamp(progress + extent, 0, 1);
             transform.DOLocalMoveY(initialHeight + maxRelativeHeight * progress, interval);
-            transform.DOLocalRotate(Vector3.up * 10, interval).SetRelative();
+            transform.DOLocalRotate(Vector3.up * 20, interval).SetRelative();
         }
     }
 

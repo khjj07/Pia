@@ -1188,6 +1188,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1046381022793079520}
+    - target: {fileID: 3902543382888347447, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000787560400653409, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.395
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280555431201999890, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: targetDepth
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4309796732699793452, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: keyPressedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
