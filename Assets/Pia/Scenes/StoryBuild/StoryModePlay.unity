@@ -1240,6 +1240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HPUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5878506145842237197, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5914635225012443299, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: slot
       value: 
@@ -1455,6 +1459,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1046381022793079520}
+    - target: {fileID: 2604899281171752467, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2744919164489446365, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1487,6 +1495,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1046381022793079520}
+    - target: {fileID: 6662226234872973074, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6720043417680830729, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_Camera
       value: 

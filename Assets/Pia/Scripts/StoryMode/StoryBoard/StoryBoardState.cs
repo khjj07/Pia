@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Assets.Pia.Scripts.StoryMode.Synopsis.Sub;
 using Default.Scripts.Printer;
@@ -10,6 +11,12 @@ namespace Pia.Scripts.Dialog
 {
     public class StoryBoardState : State<StoryBoardState>
     {
+        public enum AppearMode
+        {
+            Sequence,
+            Simultaneous
+        }
+
         public KeyCode nextkey = KeyCode.Mouse0;
 
         protected bool _isAppearing;
@@ -18,6 +25,8 @@ namespace Pia.Scripts.Dialog
 
         [SerializeField]
         private StoryBoardSubState[] _subStates;
+
+        [SerializeField] private AppearMode appearMode;
 
         public void Awake()
         {
@@ -42,11 +51,27 @@ namespace Pia.Scripts.Dialog
             {
                 await GlobalFadeManager.FadeIn();
             }
-            foreach (var state in _subStates)
+
+            switch (appearMode)
             {
-                state.gameObject.SetActive(true);
-                await state.Appear();
+                case AppearMode.Sequence:
+                    foreach (var state in _subStates)
+                    {
+                        state.gameObject.SetActive(true);
+                        await state.Appear();
+                    }
+                    break;
+                case AppearMode.Simultaneous:
+                    foreach (var state in _subStates)
+                    {
+                        state.gameObject.SetActive(true);
+                        state.Appear();
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+          
             _isAppearing = false;
         }
 
