@@ -31,9 +31,7 @@ namespace Assets.Pia.Scripts.Game
         public KeyCode stepKey = KeyCode.S;
         public KeyCode stepPedalKey = KeyCode.F7;
 
-
         public Bag bag;
-
 
         [Header("Body Part")]
         [SerializeField] private Transform head;
@@ -106,12 +104,14 @@ namespace Assets.Pia.Scripts.Game
         public float driverInterval = 1.0f;
 
         [Header("HP")]
+        [SerializeField] private RectTransform hpUI;
+        [SerializeField] private Image hpBar;
         public int initialHp = 600;
         public float hpDecreaseInterval = 1;
         public int hpReduction = 1;
         private int hp;
         private bool _isBleeding=false;
-        [SerializeField] private Image hpBar;
+
 
 
         public InteractableClass target;
@@ -120,6 +120,7 @@ namespace Assets.Pia.Scripts.Game
         void Start()
         {
             Initialize();
+            bag.Initialize(this);
         }
 
         private void Initialize()
@@ -127,8 +128,6 @@ namespace Assets.Pia.Scripts.Game
             initialLocalPosition = mainCamera.transform.localPosition;
             initialLocalRotation = mainCamera.transform.localRotation;
             mainCamera.fieldOfView = defaultFov;
-
-            bag.Initialize(this);
 
             SetCursorLocked();
             CreateAnimationSubject();
@@ -482,12 +481,12 @@ namespace Assets.Pia.Scripts.Game
 
         public void ActiveBagSlot()
         {
-            bag.ui.bagSlot.gameObject.SetActive(true);
+            bag.Activate();
         }
 
         public void ActiveHealthBar()
         {
-            //_bagUi.healthBar.gameObject.SetActive(true);
+            hpUI.gameObject.SetActive(true);
         }
 
         public UsableItem Hold(UsableItem item)

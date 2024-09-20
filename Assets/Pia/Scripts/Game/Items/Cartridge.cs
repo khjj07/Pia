@@ -10,6 +10,7 @@ namespace Assets.Pia.Scripts.Game.Items
 {
     public class Cartridge : Item
     {
+   
         [Header("아이템")]
         public Item[] items;
 

@@ -9,18 +9,17 @@ using UniRx.Triggers;
 
 namespace Assets.Pia.Scripts.Game.Items
 {
-    [Serializable]
-    public class Bag
+    public class Bag : MonoBehaviour
     {
-
         public KeyCode openKey;
 
-        [Header("UI")] 
-        public BagUI ui;
+        [Header("UI")]
+        public TapUI ui;
         [Header("아이템")]
         public Item[] items;
 
         private bool _isOpen = false;
+
         public void Initialize(Player player)
         {
             foreach (var item in items)
@@ -32,26 +31,36 @@ namespace Assets.Pia.Scripts.Game.Items
         private void CreateUseStream()
         {
             GlobalInputBinder.CreateGetKeyDownStream(openKey)
-                .SkipWhile(_=>StoryModeManager.IsInteractionActive())
-                .Where(_=>!_isOpen).Subscribe(_ =>Open());
-            GlobalInputBinder.CreateGetKeyDownStream(openKey)
-                .SkipWhile(_ => StoryModeManager.IsInteractionActive())
-                .Where(_ => _isOpen).Subscribe(_ => Close());
+                .SkipWhile(_=>!StoryModeManager.IsInteractionActive())
+                .Subscribe(_ =>
+                {
+                    if (_isOpen)
+                    {
+                        Close();
+                    }
+                    else
+                    {
+                        Open();
+                    }
+                }).AddTo(gameObject);
         }
+
+        public void Activate()
+        {
+           ui.gameObject.SetActive(true);
+        }
+
         private void Open()
         {
-            ui.OpenBag();
+            Debug.Log("1");
+            ui.SetActive(true);
             _isOpen=true;
         }
         private void Close()
         {
-            ui.CloseBag();
-            _isOpen = false;
-        }
-
-        public bool IsOpen()
-        {
-            return _isOpen;
+            Debug.Log("2");
+            _isOpen=false;
+            ui.SetActive(false);
         }
     }
 }

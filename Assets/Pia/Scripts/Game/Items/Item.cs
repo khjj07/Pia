@@ -1,6 +1,8 @@
 ﻿using System;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
+using Assets.Pia.Scripts.UI;
+using Assets.Pia.Scripts.UI.Slot;
 using Default.Scripts.Util;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -11,9 +13,12 @@ namespace Assets.Pia.Scripts.Game.Items
     public abstract class Item : MonoBehaviour
     {
         [SerializeField]
+        private SlotUI slot;
+        [SerializeField]
         protected KeyCode holdKey;
 
         protected bool _isHold=false;
+
 
         public IDisposable holdStream;
         public IObservable<Unit> CreateHoldStream()
@@ -35,7 +40,8 @@ namespace Assets.Pia.Scripts.Game.Items
         }
         public virtual void OnHold(Player player)
         {
-            _isHold = true;
+            _isHold = true; 
+            slot.SetActive(true);
         }
         public virtual void OnStopHold()
         {

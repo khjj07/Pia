@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Pia.Scripts.UI;
 using Default.Scripts.Util;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -11,6 +12,16 @@ namespace Assets.Pia.Scripts.Game.Items
         [SerializeField]
         protected KeyCode useKey = KeyCode.Mouse0;
 
+
+        public override void OnHold(Player player)
+        {
+            base.OnHold(player);
+        }
+        public override void OnStopHold()
+        {
+            base.OnStopHold();
+        }
+
         public IObservable<Unit> CreateUseStream()
         {
             return GlobalInputBinder.CreateGetKeyDownStream(useKey)
@@ -20,8 +31,6 @@ namespace Assets.Pia.Scripts.Game.Items
         {
             return GlobalInputBinder.CreateGetKeyUpStream(useKey);
         }
-
-
 
         public override void Initialize(Player player)
         {
