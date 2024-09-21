@@ -3,6 +3,7 @@ using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode.Walking;
 using Assets.Pia.Scripts.UI;
+using Default.Scripts.Printer;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -111,11 +112,22 @@ namespace Assets.Pia.Scripts.Game
         public int hpReduction = 1;
         private int hp;
         private bool _isBleeding=false;
+        [SerializeField]
+        private Image bleedUI;
+        [SerializeField]
+        private Image dyingUI;
+        private Tween _bleedTween;
 
-
+        [Header("Event")]
+        private Printer eventPrinter;
 
         public InteractableClass target;
         private UsableItem hand;
+
+        public void PrintEvent(string text)
+        {
+
+        }
 
         void Start()
         {
@@ -166,7 +178,37 @@ namespace Assets.Pia.Scripts.Game
         {
             hp = Math.Max(value,0);
             hpBar.DOFillAmount((float)hp / initialHp, hpDecreaseInterval);
+
+            CheckAndInvokeHPEvent();
         }
+
+        private void CheckAndInvokeHPEvent()
+        {
+            var hpRate = (float)hp / initialHp;
+
+            if (0.8f >= hpRate)
+            {
+
+            }
+            else if (0.6f >= hpRate)
+            {
+
+            }
+            else if (0.4f >= hpRate)
+            {
+
+            }
+            else if (0.2f >= hpRate)
+            {
+
+            }
+            else if (0.1f >= hpRate)
+            {
+                dyingUI.gameObject.SetActive(true);
+                dyingUI.CrossFadeAlpha((0.1f-hpRate)/0.1f, 0.1f, false);
+            }
+        }
+
         public bool IsBleeeding()
         {
             return _isBleeding;
@@ -175,12 +217,21 @@ namespace Assets.Pia.Scripts.Game
         {
             hpReduction = 2;
             _isBleeding = true;
+
+            bleedUI.gameObject.SetActive(true);
+            bleedUI.color = Color.white;
+            _bleedTween = bleedUI.DOFade(0.5f, 0.5f).SetLoops(-1,LoopType.Yoyo);
         }
 
         private void CureBleed()
         {
             hpReduction = 1;
             _isBleeding = false;
+            _bleedTween.Kill();
+            _bleedTween = bleedUI.DOFade(0, 0.5f).OnComplete(() =>
+            {
+                bleedUI.gameObject.SetActive(false);
+            });
         }
         private void CreateHoverStream()
         {
@@ -475,7 +526,6 @@ namespace Assets.Pia.Scripts.Game
             head.DOLocalMove(standHeadTransform.localPosition, crouchDuration);
             mainCamera.DOFieldOfView(defaultFov, standUpDuration);
             DOTween.To(() => rotationX, x => rotationX = x, (maxRotationX + minRotationX) / 2, standUpDuration);
-
         }
 
         public void ActiveBagSlot()
