@@ -29,7 +29,7 @@ namespace Assets.Pia.Scripts.Game.Items
                         animator.SetBool("Use", false);
                     }).AddTo(player.gameObject);
 
-                CreateStopUseStream().First()
+                CreateStopUseStream().Take(1)
                     .Subscribe(_ => animator.SetBool("Use", false))
                     .AddTo(player.gameObject);
             }

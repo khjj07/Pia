@@ -10,10 +10,12 @@ namespace Assets.Pia.Scripts.Path.Sub
     {
         public KeyCode nextKey = KeyCode.Tab;
         public UnityEvent keyPressedEvent;
-        public async override Task Appear()
+        public override async Task Appear()
         {
+            gameObject.SetActive(true);
             await WaitForKeyPress(nextKey);
             keyPressedEvent.Invoke();
+            gameObject.SetActive(false);
         }
 
         public override Task Disappear()
@@ -34,7 +36,7 @@ namespace Assets.Pia.Scripts.Path.Sub
             }
 
             GlobalInputBinder.CreateGetKeyDownStream(key)
-                .First()
+                .Take(1)
                 .Subscribe(_ => CheckKeyInput())
                 .AddTo(gameObject);
 

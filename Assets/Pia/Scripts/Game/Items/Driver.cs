@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.Pia.Scripts.Interface;
 using UniRx;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 namespace Assets.Pia.Scripts.Game.Items
@@ -9,15 +10,15 @@ namespace Assets.Pia.Scripts.Game.Items
     {
         [SerializeField]
         private float screwInterval;
-        
+
         public override void OnUse(Player player)
         {
             if (player.target is Bolt bolt)
             {
                 Observable.Interval(TimeSpan.FromSeconds(screwInterval))
                     .TakeUntil(CreateStopUseStream())
-                    .TakeWhile(_=>_isHold)
-                    .Subscribe(_=> bolt.Screw(screwInterval));
+                    .TakeWhile(_ => _isHold && player.target == bolt)
+                    .Subscribe(_ => bolt.Screw(screwInterval));
             }
         }
     }

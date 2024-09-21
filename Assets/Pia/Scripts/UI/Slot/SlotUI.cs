@@ -12,7 +12,7 @@ namespace Assets.Pia.Scripts.UI.Slot
         protected Tween _tween;
 
       
-        public virtual void SetActive(bool value)
+        public virtual Tween SetActive(bool value)
         {
             if (value)
             {
@@ -22,6 +22,8 @@ namespace Assets.Pia.Scripts.UI.Slot
             {
                 ChangeSlotColor(inactivateColor);
             }
+
+            return null;
         }
      
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.Pia.Scripts.UI;
 using Default.Scripts.Util;
+using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using TMPro;
 using UniRx;
@@ -50,17 +51,20 @@ namespace Assets.Pia.Scripts.Game.Items
            ui.gameObject.SetActive(true);
         }
 
-        private void Open()
+        public void Open()
         {
-            Debug.Log("1");
-            ui.SetActive(true);
-            _isOpen=true;
+            ui.SetActive(true).OnComplete(() =>
+            {
+                _isOpen = true;
+            });
+           
         }
-        private void Close()
+        public void Close()
         {
-            Debug.Log("2");
-            _isOpen=false;
-            ui.SetActive(false);
+            ui.SetActive(false).OnComplete(() =>
+            {
+                _isOpen = false;
+            });
         }
     }
 }

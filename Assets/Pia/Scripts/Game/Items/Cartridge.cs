@@ -19,17 +19,19 @@ namespace Assets.Pia.Scripts.Game.Items
             base.OnHold(player);
             foreach (var item in items)
             {
-               item.Initialize(player);
+                Debug.Log("Initialize");
+                item.Initialize(player);
             }
         }
 
         public override void OnStopHold()
         {
             base.OnStopHold();
-            Debug.Log("Stop");
             foreach (var item in items)
             {
+                Debug.Log("Dispose");
                 item.DisposeHoldStream();
+                item.OnStopHold();
             }
         }
     }

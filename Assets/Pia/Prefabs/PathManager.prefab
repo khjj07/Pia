@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &395194182127067746
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &903569002561872189
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &996497587378082975
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 1
+  _subNodes: []
 --- !u!1 &1023321307923724525
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &1106954020579893168
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &1762324750291729215
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &2126765689181126456
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,9 +993,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1181088067452461006}
+  - component: {fileID: 1554713990519221920}
   - component: {fileID: 8621536455331999881}
   - component: {fileID: 2232301874627877892}
-  - component: {fileID: 1554713990519221920}
   - component: {fileID: 6331543169796164660}
   m_Layer: 5
   m_Name: Arrow
@@ -1016,6 +1023,14 @@ RectTransform:
   m_AnchoredPosition: {x: -260, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1554713990519221920
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126765689181126456}
+  m_CullTransparentMesh: 1
 --- !u!114 &8621536455331999881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,14 +1078,6 @@ MonoBehaviour:
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.5
---- !u!222 &1554713990519221920
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126765689181126456}
-  m_CullTransparentMesh: 1
 --- !u!114 &6331543169796164660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,6 +1531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &4166218825289298377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopAtNode: 0
+  _subNodes: []
 --- !u!1 &4472882453577918019
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,19 +13,9 @@ namespace Assets.Pia.Scripts.Game.Items
         protected KeyCode useKey = KeyCode.Mouse0;
 
 
-        public override void OnHold(Player player)
-        {
-            base.OnHold(player);
-        }
-        public override void OnStopHold()
-        {
-            base.OnStopHold();
-        }
-
         public IObservable<Unit> CreateUseStream()
         {
-            return GlobalInputBinder.CreateGetKeyDownStream(useKey)
-                .TakeUntil(CreateStopHoldStream());
+            return GlobalInputBinder.CreateGetKeyDownStream(useKey);
         }
         public IObservable<Unit> CreateStopUseStream()
         {
@@ -44,7 +34,6 @@ namespace Assets.Pia.Scripts.Game.Items
                         OnHold(player);
                         CreateUseStream()
                             .TakeWhile(_ => _isHold)
-                            .TakeUntil(CreateStopHoldStream())
                             .Where(_ => player.IsInteractable())
                             .Subscribe(_ =>
                             {
@@ -53,6 +42,8 @@ namespace Assets.Pia.Scripts.Game.Items
                             .AddTo(player.gameObject);
 
                         CreateStopHoldStream()
+                            .TakeWhile(_ => _isHold)
+                            .Take(1)
                             .Subscribe(_ =>
                             {
                                 player.Hold(null);

@@ -1,5 +1,6 @@
 ﻿using Assets.Pia.Scripts.UI;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace Assets.Pia.Scripts.Game.Items
 {
@@ -12,6 +13,7 @@ namespace Assets.Pia.Scripts.Game.Items
             base.OnHold(player);
             foreach (var item in items)
             {
+                Debug.Log("Initialize");
                 item.Initialize(player);
             }
         }
@@ -21,6 +23,8 @@ namespace Assets.Pia.Scripts.Game.Items
             base.OnStopHold();
             foreach (var item in items)
             {
+                Debug.Log("Dispose");
+                item.DisposeHoldStream();
                 item.OnStopHold();
             }
         }

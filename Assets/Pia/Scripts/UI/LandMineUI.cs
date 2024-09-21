@@ -29,7 +29,7 @@ namespace Assets.Pia.Scripts.UI
         {
             Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeUntil(StoryModeManager.GetStepStream())
                         .Subscribe(_ => SetTimer(timer - 0.1f)).AddTo(gameObject);
-            StoryModeManager.GetStepStream().First().Subscribe(_ =>
+            StoryModeManager.GetStepStream().Take(1).Subscribe(_ =>
             {
                 StoryModeManager.GetStepUpStream()
                     .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.MineExplosion))

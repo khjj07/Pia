@@ -27,8 +27,7 @@ namespace Assets.Pia.Scripts.Game.Items
         }
         public IObservable<Unit> CreateStopHoldStream()
         {
-            return GlobalInputBinder.CreateGetKeyUpStream(holdKey)
-                .TakeWhile(_ => _isHold);
+            return GlobalInputBinder.CreateGetKeyUpStream(holdKey);
         }
 
         public void DisposeHoldStream()
@@ -46,6 +45,7 @@ namespace Assets.Pia.Scripts.Game.Items
         public virtual void OnStopHold()
         {
             _isHold = false;
+            slot.SetActive(false);
         }
 
         public virtual void Initialize(Player player)
@@ -57,6 +57,8 @@ namespace Assets.Pia.Scripts.Game.Items
                     //player.Hold(this);
                     OnHold(player);
                     CreateStopHoldStream()
+                        .TakeWhile(_ => _isHold)
+                        .Take(1)
                         .Subscribe(_ =>
                         {
                             player.Hold(null);

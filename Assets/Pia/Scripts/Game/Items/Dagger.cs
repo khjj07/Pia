@@ -15,10 +15,11 @@ namespace Assets.Pia.Scripts.Game.Items
             if (player.target is CatchButton button)
             {
                 button.Press();
-                this.UpdateAsObservable()
-                    .Where(_ => !_isHold)
-                    .First()
-                    .Subscribe(_=>button.StopPress());
+                player.UpdateAsObservable().Where(_ => !_isHold)
+                    .Take(1).Subscribe(_ =>
+                    {
+                        button.StopPress();
+                    });
             }
             else if (player.target is PressurePlate plate)
             {
@@ -26,13 +27,11 @@ namespace Assets.Pia.Scripts.Game.Items
                 {
                     player.SetCursorLocked();
                     plate.Initialize();
-                    Observable.Interval(TimeSpan.FromSeconds(0.01f))
-                        .TakeWhile(_ => _isHold)
+                    var spinStream = Observable.Interval(TimeSpan.FromSeconds(0.01f))
                         .TakeWhile(_ => plate.IsFinish())
                         .Subscribe(_ => plate.MatchBarMove());
 
-                    this.UpdateAsObservable()
-                        .TakeWhile(_ => _isHold)
+                    var useStream = this.UpdateAsObservable()
                         .TakeWhile(_ => plate.IsFinish())
                         .Where(_ => Input.GetKeyDown(useKey))
                         .Subscribe(_ =>
@@ -50,8 +49,17 @@ namespace Assets.Pia.Scripts.Game.Items
                             player.SetCursorUnlocked();
                             plate.ResetAll();
                         });
+
+                    player.UpdateAsObservable().Where(_ => !_isHold)
+                        .Take(1).Subscribe(_ =>
+                        {
+                            player.SetCursorUnlocked();
+                            plate.ResetAll();
+                            spinStream.Dispose();
+                            useStream.Dispose();
+                        });
                 }
-              
+
             }
         }
     }

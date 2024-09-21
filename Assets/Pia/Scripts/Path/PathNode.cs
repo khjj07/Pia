@@ -10,14 +10,14 @@ namespace Assets.Pia.Scripts.Path
     public class PathNode : MonoBehaviour
     {
         public bool stopAtNode = false;
-
+        [SerializeField]
         private SubPathNode[] _subNodes;
         private bool _isPrinting;
         private Canvas canvas;
         public virtual void Start()
         {
             canvas = GetComponentInChildren<Canvas>(true);
-            _subNodes = GetComponentsInChildren<SubPathNode>();
+            _subNodes = GetComponentsInChildren<SubPathNode>(true);
             foreach (var state in _subNodes)
             {
                 state.gameObject.SetActive(false);

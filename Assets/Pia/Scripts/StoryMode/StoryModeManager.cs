@@ -7,6 +7,7 @@ using Assets.Pia.Scripts.StoryMode.Walking;
 using Assets.Pia.Scripts.UI;
 using Default.Scripts.Util;
 using Pia.Scripts.Dialog;
+using Pia.Scripts.Manager;
 using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
@@ -58,14 +59,14 @@ namespace Pia.Scripts.StoryMode
         public void Start()
         {
             stateSubject = new Subject<State>();
-            stateSubject.Subscribe(x=> currentState=x);
-            stateSubject.Where(x => x == State.Walking)
+            stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
+            stateSubject.DistinctUntilChanged().Where(x => x == State.Walking)
                 .Subscribe(_ =>
                 {
                     _isInteractionActive = false;
                 });
 
-            stateSubject.Where(x => x == State.LandMineDirt)
+            stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
                     _isInteractionActive = true;
@@ -167,14 +168,19 @@ namespace Pia.Scripts.StoryMode
             }
         }
 
-        public static void GameClear()
+        public void GameClear()
         {
-            Debug.Log("Clear");
+            StartCoroutine(StoryModeLoadingManager.Load("StoryModeEnding", 1.0f)); ;
         }
 
         public static bool IsInteractionActive()
         {
             return Instance._isInteractionActive;
+        }
+
+        public void SetInteractionActive()
+        {
+            _isInteractionActive = true;
         }
     }
 }

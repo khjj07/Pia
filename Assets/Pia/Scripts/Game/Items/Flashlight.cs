@@ -15,11 +15,13 @@ namespace Assets.Pia.Scripts.Game.Items
         }
         public override void OnHold(Player player)
         {
-            _lightComponent.enabled = true;
+            base.OnHold(player);
+            gameObject.SetActive(true);
         }
         public override void OnStopHold()
         {
-            _lightComponent.enabled = true;
+            base.OnStopHold();
+            gameObject.SetActive(false);
         }
     }
 }

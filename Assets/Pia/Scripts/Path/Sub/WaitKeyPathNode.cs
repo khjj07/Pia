@@ -33,7 +33,7 @@ namespace Assets.Pia.Scripts.Path.Sub
             }
 
             GlobalInputBinder.CreateGetKeyDownStream(key)
-                .First()
+                .Take(1)
                 .Subscribe(_ => CheckKeyInput())
                 .AddTo(gameObject);
 

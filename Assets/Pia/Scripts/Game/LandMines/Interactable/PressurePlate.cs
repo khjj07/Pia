@@ -46,7 +46,7 @@ public class PressurePlate : InteractableClass
         }
 
     }
-    
+
 
     public void ResetCurrent()
     {

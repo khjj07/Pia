@@ -31,7 +31,7 @@ namespace Pia.Scripts.Synopsis
             guideNotice.gameObject.SetActive(false);
 
             this.UpdateAsObservable()
-                .First().Repeat()
+                .Take(1).Repeat()
                 .Where(_ => currentState.CanGoNext())
                 .Where(_ => Input.GetKeyDown(currentState.nextkey))
                 .ThrottleFirst(TimeSpan.FromSeconds(1f))

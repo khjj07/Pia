@@ -5,33 +5,36 @@ using Default.Scripts.Util;
 using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Pia.Scripts.Game.Items
 {
     public class Nipper : UsableItem
     {
-
-        public override void OnStopHold()
-        {
-            gameObject.SetActive(false);
-        }
         public override void OnUse(Player player)
         {
             if (player.target is Spring spring)
             {
-                spring.Initialize(this.UpdateAsObservable().Where(_ => !_isHold));
                 player.SetCursorLocked();
-                GlobalInputBinder.CreateGetKeyDownStream(useKey)
-                    .TakeWhile(_=>_isHold)
-                    .TakeWhile(_ => spring.progress < 1)
+                spring.Initialize();
+                var cutStream = GlobalInputBinder.CreateGetKeyDownStream(useKey)
+                    .TakeWhile(_=>spring.progress < 1)
                     .Subscribe(_ =>
                     {
                         spring.TryToCut();
-                    }, null, () =>
+                    },null, () =>
+                    {
+                        spring.CheckFinish();
+                        player.SetCursorUnlocked();
+                    }).AddTo(gameObject);
+
+                player.UpdateAsObservable().Where(_ => !_isHold)
+                    .Take(1).Subscribe(_=>
                     {
                         player.SetCursorUnlocked();
-                        spring.CheckRemove();
+                        spring.Cancel();
+                        cutStream.Dispose();
                     });
             }
         }

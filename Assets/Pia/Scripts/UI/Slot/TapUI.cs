@@ -12,27 +12,28 @@ namespace Assets.Pia.Scripts.UI
     {
         public RectTransform tap;
 
-        public override void SetActive(bool value)
+        public override Tween SetActive(bool value)
         {
             if (value)
             {
-                Open();
+                return Open();
             }
             else
             {
-                Close();
+                return Close();
             }
         }
-        private void Open()
+        private Tween Open()
         {
             tap.gameObject.SetActive(true);
             tap.localScale = Vector3.zero;
             ChangeSlotColor(activateColor);
             CancelTween(_tween);
             _tween = tap.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
+            return _tween;
         }
 
-        private void Close()
+        private Tween Close()
         {
             CancelTween(_tween);
             _tween = tap.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
@@ -40,6 +41,7 @@ namespace Assets.Pia.Scripts.UI
                 tap.gameObject.SetActive(false);
                 ChangeSlotColor(inactivateColor);
             });
+            return _tween;
         }
     }
 }

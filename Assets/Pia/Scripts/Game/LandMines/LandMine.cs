@@ -16,7 +16,7 @@ namespace Assets.Pia.Scripts.General
         {
             this.UpdateAsObservable()
                 .Where(_=> Dirt.holeDepth >= Dirt.targetDepth)
-                .First()
+                .Take(1)
                 .Subscribe(_ => BecomeAvailable());
             
         }

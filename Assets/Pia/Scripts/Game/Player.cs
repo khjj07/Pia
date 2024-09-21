@@ -120,7 +120,6 @@ namespace Assets.Pia.Scripts.Game
         void Start()
         {
             Initialize();
-            bag.Initialize(this);
         }
 
         private void Initialize()
@@ -152,7 +151,7 @@ namespace Assets.Pia.Scripts.Game
         {
            float random =  Random.Range(p1, p0);
            Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval))
-                .Where(_ => random * initialHp >= hp).First()
+                .Where(_ => random * initialHp >= hp).Take(1)
                .Subscribe(_ => Bleed())
                .AddTo(gameObject);
         }
@@ -429,7 +428,7 @@ namespace Assets.Pia.Scripts.Game
             var beginPosition = Input.mousePosition;
             mouseUpStream.Select(_ => Input.mousePosition)
                 .Where(_ => t != null)
-                .First()
+                .Take(1)
                 .Subscribe(v =>
                 {
                     if (t is Cover cover)
@@ -482,6 +481,7 @@ namespace Assets.Pia.Scripts.Game
         public void ActiveBagSlot()
         {
             bag.Activate();
+            bag.Initialize(this);
         }
 
         public void ActiveHealthBar()

@@ -14,16 +14,12 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
         [SerializeField] private Color beginColor = new Color();
         [SerializeField] private Color endColor = Color.white;
         [SerializeField] private float duration = 0.5f;
-
-        private void Start()
-        {
-            _image = GetComponent<Image>();
-            _image.color = beginColor;
-        }
         public override async Task Appear()
         {
             await Task.Delay((int)(appearDelay * 1000));
             gameObject.SetActive(true);
+            _image = GetComponent<Image>();
+            _image.color = beginColor;
             _image.DOColor(endColor, duration);
         }
         public override Task Disappear()

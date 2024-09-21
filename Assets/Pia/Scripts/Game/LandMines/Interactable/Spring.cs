@@ -25,6 +25,8 @@ public class Spring : InteractableClass
     [SerializeField] private Image springProgressImage;
     [SerializeField] private Mesh brokenModel;
 
+    private IDisposable decreaseStream;
+
     public override void OnHover(Item item)
     {
 
@@ -38,38 +40,37 @@ public class Spring : InteractableClass
         }
     }
 
-    public void Initialize(IObservable<Unit> cancelStream)
+    public void Initialize()
     {
         springCanvas.gameObject.SetActive(true);
         springProgressImage.fillAmount = 0;
         springUIImage.rectTransform.anchoredPosition = Input.mousePosition;
-        Observable.Interval(TimeSpan.FromSeconds(decreaseInterval))
-            .TakeUntil(cancelStream)
+        decreaseStream= Observable.Interval(TimeSpan.FromSeconds(decreaseInterval))
             .TakeWhile(_ => progress < 1)
             .Subscribe(_ => SetProgress(progress - decreaseExtent));
     }
 
+    public void Cancel()
+    {
+        springCanvas.gameObject.SetActive(false);
+        decreaseStream.Dispose();
+        progress = 0;
+    }
 
-    public void CheckRemove()
+    public void CheckFinish()
     {
         if (progress >= 1)
         {
             springCanvas.gameObject.SetActive(false);
             GetComponent<MeshFilter>().sharedMesh = brokenModel;
             DOTween.To(() => GetComponent<MeshRenderer>().material.GetFloat("_Alpha"),
-                x => GetComponent<MeshRenderer>().material.SetFloat("_Alpha", x),0, 1).OnComplete(() =>
+                x => GetComponent<MeshRenderer>().material.SetFloat("_Alpha", x), 0, 1).OnComplete(() =>
             {
                 gameObject.SetActive(false);
             });
             isDead = true;
             _isAvailable = false;
         }
-        else
-        {
-            springCanvas.gameObject.SetActive(false);
-            progress = 0;
-        }
-       
     }
 
     public void TryToCut()
