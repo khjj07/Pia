@@ -10,8 +10,7 @@ namespace Assets.Pia.Scripts.Game.Items
 
         public void Start()
         {
-            _lightComponent = GetComponent<Light>();
-            _lightComponent.enabled = false;
+            gameObject.SetActive(false);
         }
         public override void OnHold(Player player)
         {

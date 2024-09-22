@@ -14,6 +14,10 @@ namespace Default.Scripts.Util
             DontDestroyOnLoad(gameObject);
         }
 
+        public void OnSceneLoaded()
+        {
+
+        }
         public static IEnumerator Load(string scene, float defaultDelay = 0.0f)
         {
             UnityEngine.Debug.Log("Load " + scene);
@@ -24,10 +28,7 @@ namespace Default.Scripts.Util
             yield return new WaitForSeconds(defaultDelay);
             yield return new WaitUntil(() => loadOperation.progress >= 0.9f);
             loadOperation.allowSceneActivation = true;
-            Observable.Timer(TimeSpan.FromSeconds(defaultDelay)).Subscribe(_ =>
-            {
-                Instance.OnLoadEnd();
-            }).AddTo(Instance.gameObject);
+            Instance.OnLoadEnd();
         }
 
         protected virtual void OnLoadEnd()

@@ -12,7 +12,6 @@ namespace Pia.Scripts.Manager
         {
             GlobalFadeManager.FadeOut();
         }
-
         protected override void OnLoadEnd()
         {
             GlobalFadeManager.FadeIn();

@@ -41,8 +41,9 @@ namespace Pia.Scripts.StoryMode
         public Subject<State> stateSubject;
         public State currentState;
         public ControlMode controlMode;
-
+        [SerializeField]
         private PathManager _pathManager;
+        [SerializeField]
         private LandMineUI _landMineUI;
         [SerializeField]
         private Player _player;
@@ -50,12 +51,6 @@ namespace Pia.Scripts.StoryMode
         private LandMine _landMine;
 
         private bool _isInteractionActive;
-
-        public void Awake()
-        {
-            _pathManager = GetComponentInChildren<PathManager>(true);
-            _landMineUI = GetComponentInChildren<LandMineUI>(true);
-        }
         public void Start()
         {
             stateSubject = new Subject<State>();
@@ -70,8 +65,7 @@ namespace Pia.Scripts.StoryMode
                 .Subscribe(_ =>
                 {
                     _isInteractionActive = true;
-                    _player.ActiveBagSlot();
-                    _player.ActiveHealthBar();
+                    _player.OnStepMine();
                     _landMineUI.Appear();
                     PlayerPrefs.SetString("Save","LandMineDirt");
                     _player.UpdateAsObservable()
@@ -88,10 +82,7 @@ namespace Pia.Scripts.StoryMode
                         .TakeWhile(_=>currentState==State.LandMineDirt)
                         .Subscribe(_=>_player.RepositioningThroughFoot(_landMine.Dirt.top))
                         .AddTo(_player.gameObject);
-                    //Position세팅
                 });
-
-            
             CheckSaveFlag();
         }
 

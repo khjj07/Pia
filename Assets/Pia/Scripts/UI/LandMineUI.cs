@@ -1,9 +1,11 @@
 ﻿using System;
 using Default.Scripts.Util;
+using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Pia.Scripts.UI
 {
@@ -12,6 +14,7 @@ namespace Assets.Pia.Scripts.UI
         public TMP_Text timerText;
         public float timeLimit;
         public float timer;
+        public Image blood;
 
         [SerializeField] private RectTransform generalControlAlert;
         [SerializeField] private RectTransform PedalControlAlert;
@@ -40,7 +43,9 @@ namespace Assets.Pia.Scripts.UI
 
         public void Appear()
         {
+
             gameObject.SetActive(true);
+            blood.DOFade(0.5f,1).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);
             SetTimer(timeLimit);
             CreateLandMineStream();
             switch (StoryModeManager.GetControlMode())

@@ -19,18 +19,23 @@ namespace Assets.Pia.Scripts.Game.Items
                 player.SetCursorLocked();
                 spring.Initialize();
                 var cutStream = GlobalInputBinder.CreateGetKeyDownStream(useKey)
-                    .TakeWhile(_=>spring.progress < 1)
+                    .TakeWhile(_ => spring.progress < 1)
                     .Subscribe(_ =>
                     {
                         spring.TryToCut();
-                    },null, () =>
-                    {
-                        spring.CheckFinish();
-                        player.SetCursorUnlocked();
                     }).AddTo(gameObject);
 
+                this.UpdateAsObservable()
+                    .Where(_ => spring.progress >= 1.0f)
+                    .Take(1).Subscribe(_ =>
+                    {
+                        spring.Finish();
+                        player.SetCursorUnlocked();
+                    });
+
+
                 player.UpdateAsObservable().Where(_ => !_isHold)
-                    .Take(1).Subscribe(_=>
+                    .Take(1).Subscribe(_ =>
                     {
                         player.SetCursorUnlocked();
                         spring.Cancel();

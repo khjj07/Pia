@@ -31,17 +31,23 @@ namespace Assets.Pia.Scripts.StoryMode
         public void Start()
         {
             _eventPrinter = GetComponent<Printer>();
-            gameObject.SetActive(false);
         }
 
-        public async void PrintEvent(Event e)
+        public static async Task PrintEvent(Event e)
         {
-            await _eventPrinter.Disappear();
-            _eventPrinter.StopPrinting();
-            _eventPrinter.SetOriginalText(eventText[(int)e]);
-            await _eventPrinter.Print();
-            await Task.Delay((int)(duration * 1000));
-            await _eventPrinter.Disappear();
+            if (Instance._eventPrinter.IsPrinting())
+            {
+                Instance._eventPrinter.Skip();
+                await Instance._eventPrinter.Disappear();
+            }
+            Debug.Log(Instance.eventText[(int)e]);
+            Instance._eventPrinter.SetOriginalText(Instance.eventText[(int)e]);
+            await Instance._eventPrinter.Print();
+            await Task.Delay((int)(Instance.duration * 1000));
+            if (!Instance._eventPrinter.IsPrinting())
+            {
+                await Instance._eventPrinter.Disappear();
+            }
         }
     }
 }

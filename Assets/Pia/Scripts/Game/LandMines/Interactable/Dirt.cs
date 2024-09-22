@@ -47,12 +47,12 @@ namespace Assets.Pia.Scripts.Effect
 
         public override void Start()
         {
-            _dirt = GetComponent<MeshRenderer>();
+            _dirt = GetComponentInParent<MeshRenderer>();
             holeDepth = _dirt.sharedMaterial.GetFloat("_HoleDepth");
             worldHeight = top.position.y - bottom.position.y;
             initialHoleDepth = holeDepth;
             _isAvailable = true;
-            GetComponent<Collider>().enabled = _isAvailable;
+            GetComponentInParent<Collider>().enabled = _isAvailable;
         }
 
         public void Update()

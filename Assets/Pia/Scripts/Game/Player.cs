@@ -1,6 +1,7 @@
 using System;
 using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
+using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.StoryMode.Walking;
 using Assets.Pia.Scripts.UI;
 using Default.Scripts.Printer;
@@ -110,25 +111,17 @@ namespace Assets.Pia.Scripts.Game
         public int initialHp = 600;
         public float hpDecreaseInterval = 1;
         public int hpReduction = 1;
-        private int hp;
+        [SerializeField] private int hp;
         private bool _isBleeding=false;
         [SerializeField]
         private Image bleedUI;
         [SerializeField]
+        private Image bandageGuideImage;
+        [SerializeField]
         private Image dyingUI;
-        private Tween _bleedTween;
-
-        [Header("Event")]
-        private Printer eventPrinter;
 
         public InteractableClass target;
         private UsableItem hand;
-
-        public void PrintEvent(string text)
-        {
-
-        }
-
         void Start()
         {
             Initialize();
@@ -146,9 +139,34 @@ namespace Assets.Pia.Scripts.Game
             CreateCameraStream();
             CreateHandStream();
             CreateHoverStream();
+        }
+
+        public void OnStepMine()
+        {
+            ActiveBagSlot();
+            ActiveHealthBar();
             CreateHPStream();
-            CreateRandomBleedEvent(0.95f,0.87f);
-            CreateRandomBleedEvent(0.65f, 0.50f);
+            CreateRandomBleedEvent(0.95f, 0.87f, EventManager.Event.Bleed1);
+            CreateRandomBleedEvent(0.65f, 0.50f, EventManager.Event.Bleed2);
+            CreateHPEventStream();
+        }
+
+        private void CreateHPEventStream()
+        {
+            var hpStream = this.UpdateAsObservable()
+                .Select(_ => (float)hp / initialHp);
+
+            hpStream.Where(hpRate => hpRate <= 0.8f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP80));
+            hpStream.Where(hpRate => hpRate <= 0.6f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP60));
+            hpStream.Where(hpRate => hpRate <= 0.4f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP40));
+            hpStream.Where(hpRate => hpRate <= 0.2f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP20));
+            hpStream.Where(hpRate => hpRate <= 0.1f).Take(1).Subscribe(hpRate =>
+            {
+                EventManager.PrintEvent(EventManager.Event.HP10);
+                dyingUI.gameObject.SetActive(true);
+                dyingUI.CrossFadeAlpha((0.1f - hpRate) / 0.1f, 0.1f, false);
+            });
+         
         }
 
         private void CreateHandStream()
@@ -159,12 +177,16 @@ namespace Assets.Pia.Scripts.Game
                 .AddTo(gameObject);
         }
 
-        private void CreateRandomBleedEvent(float p0, float p1)
+        private void CreateRandomBleedEvent(float p0, float p1, EventManager.Event e)
         {
            float random =  Random.Range(p1, p0);
            Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval))
                 .Where(_ => random * initialHp >= hp).Take(1)
-               .Subscribe(_ => Bleed())
+               .Subscribe(_ =>
+               {
+                   Bleed();
+                   EventManager.PrintEvent(e);
+               })
                .AddTo(gameObject);
         }
 
@@ -176,36 +198,12 @@ namespace Assets.Pia.Scripts.Game
 
         private void SetHP(int value)
         {
+            Debug.Log(hp);
             hp = Math.Max(value,0);
             hpBar.DOFillAmount((float)hp / initialHp, hpDecreaseInterval);
-
-            CheckAndInvokeHPEvent();
-        }
-
-        private void CheckAndInvokeHPEvent()
-        {
-            var hpRate = (float)hp / initialHp;
-
-            if (0.8f >= hpRate)
+            if (hp == 0)
             {
-
-            }
-            else if (0.6f >= hpRate)
-            {
-
-            }
-            else if (0.4f >= hpRate)
-            {
-
-            }
-            else if (0.2f >= hpRate)
-            {
-
-            }
-            else if (0.1f >= hpRate)
-            {
-                dyingUI.gameObject.SetActive(true);
-                dyingUI.CrossFadeAlpha((0.1f-hpRate)/0.1f, 0.1f, false);
+                StoryModeManager.GameOver(StoryModeManager.GameOverType.Bleed);
             }
         }
 
@@ -220,15 +218,21 @@ namespace Assets.Pia.Scripts.Game
 
             bleedUI.gameObject.SetActive(true);
             bleedUI.color = Color.white;
-            _bleedTween = bleedUI.DOFade(0.5f, 0.5f).SetLoops(-1,LoopType.Yoyo);
+            bleedUI.DOFade(0.5f, 1).SetLoops(-1,LoopType.Yoyo).SetId("BleedTween");
+            bandageGuideImage.DOFade(0.5f, 1).SetLoops(-1,LoopType.Yoyo).SetId("BandageGuideTween");
         }
 
-        private void CureBleed()
+        public void CureBleed()
         {
             hpReduction = 1;
             _isBleeding = false;
-            _bleedTween.Kill();
-            _bleedTween = bleedUI.DOFade(0, 0.5f).OnComplete(() =>
+            DOTween.Kill("BleedTween");
+            DOTween.Kill("BandageGuideTween");
+            bandageGuideImage.DOFade(0, 1).OnComplete(() =>
+            {
+                bleedUI.gameObject.SetActive(false);
+            });
+            bleedUI.DOFade(0, 1).OnComplete(() =>
             {
                 bleedUI.gameObject.SetActive(false);
             });

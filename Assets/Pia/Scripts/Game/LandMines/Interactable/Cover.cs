@@ -22,7 +22,7 @@ public class Cover : InteractableClass
         Debug.Log((Vector3)direction);
         if (Vector3.Dot(standardDirection, (Vector3)direction) > 0.5f)
         {
-            Throw((Vector3)direction);
+            Throw((Vector3)direction+Vector3.up);
         }
     }
 

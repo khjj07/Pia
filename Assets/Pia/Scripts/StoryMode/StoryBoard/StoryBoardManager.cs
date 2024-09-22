@@ -8,6 +8,7 @@ using Pia.Scripts.StoryMode;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Pia.Scripts.Synopsis
@@ -15,14 +16,22 @@ namespace Pia.Scripts.Synopsis
     public class StoryBoardManager : StateManager<StoryBoardState>
     {
         [SerializeField] private Image guideNotice;
+        [SerializeField] string nextScene;
+        private IDisposable goNextStream;
+        private IDisposable guideNoticeStream;
 
         public override void Next()
         {
             if (currentIndex >= states.Length - 1)
             {
-                StartCoroutine(StoryModeLoadingManager.Load("StoryModePlay", 1.0f));
+                goNextStream.Dispose();
+                guideNoticeStream.Dispose();
+                StartCoroutine(StoryModeLoadingManager.Load(nextScene, 1.0f));
             }
-            base.Next();
+            else
+            {
+                base.Next();
+            }
         }
 
         public override void Start()
@@ -30,7 +39,7 @@ namespace Pia.Scripts.Synopsis
             base.Start();
             guideNotice.gameObject.SetActive(false);
 
-            this.UpdateAsObservable()
+            goNextStream = this.UpdateAsObservable()
                 .Take(1).Repeat()
                 .Where(_ => currentState.CanGoNext())
                 .Where(_ => Input.GetKeyDown(currentState.nextkey))
@@ -41,7 +50,7 @@ namespace Pia.Scripts.Synopsis
                     HideGuideNotice();
                 }).AddTo(gameObject);
 
-            this.UpdateAsObservable()
+            guideNoticeStream = this.UpdateAsObservable()
                 .Where(_=>currentState.nextkey==KeyCode.Mouse0)
                 .Select(_ => currentState.CanGoNext())
                 .DistinctUntilChanged()
@@ -60,7 +69,6 @@ namespace Pia.Scripts.Synopsis
                 HideGuideNotice();
             }
         }
-
         private void HideGuideNotice()
         {
             guideNotice.DOColor(new Color(0,0,0,0), 0.5f).OnComplete(() =>

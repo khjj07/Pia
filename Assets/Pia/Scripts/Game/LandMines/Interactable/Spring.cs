@@ -45,7 +45,7 @@ public class Spring : InteractableClass
         springCanvas.gameObject.SetActive(true);
         springProgressImage.fillAmount = 0;
         springUIImage.rectTransform.anchoredPosition = Input.mousePosition;
-        decreaseStream= Observable.Interval(TimeSpan.FromSeconds(decreaseInterval))
+        decreaseStream = Observable.Interval(TimeSpan.FromSeconds(decreaseInterval))
             .TakeWhile(_ => progress < 1)
             .Subscribe(_ => SetProgress(progress - decreaseExtent));
     }
@@ -57,20 +57,17 @@ public class Spring : InteractableClass
         progress = 0;
     }
 
-    public void CheckFinish()
+    public void Finish()
     {
-        if (progress >= 1)
+        springCanvas.gameObject.SetActive(false);
+        GetComponent<MeshFilter>().sharedMesh = brokenModel;
+        DOTween.To(() => GetComponent<MeshRenderer>().material.GetFloat("_Alpha"),
+            x => GetComponent<MeshRenderer>().material.SetFloat("_Alpha", x), 0, 1).OnComplete(() =>
         {
-            springCanvas.gameObject.SetActive(false);
-            GetComponent<MeshFilter>().sharedMesh = brokenModel;
-            DOTween.To(() => GetComponent<MeshRenderer>().material.GetFloat("_Alpha"),
-                x => GetComponent<MeshRenderer>().material.SetFloat("_Alpha", x), 0, 1).OnComplete(() =>
-            {
-                gameObject.SetActive(false);
-            });
-            isDead = true;
-            _isAvailable = false;
-        }
+            gameObject.SetActive(false);
+        });
+        isDead = true;
+        _isAvailable = false;
     }
 
     public void TryToCut()
@@ -82,6 +79,6 @@ public class Spring : InteractableClass
     {
         progress = Mathf.Clamp(value, 0, 1);
         springProgressImage.DOKill();
-        springProgressImage.DOFillAmount(progress,0.1f);
+        springProgressImage.DOFillAmount(progress, 0.1f);
     }
 }

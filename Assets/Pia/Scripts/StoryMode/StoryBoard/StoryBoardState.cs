@@ -62,11 +62,14 @@ namespace Pia.Scripts.Dialog
                     }
                     break;
                 case AppearMode.Simultaneous:
+                    var tasks = new List<Task>();
                     foreach (var state in _subStates)
                     {
                         state.gameObject.SetActive(true);
-                        state.Appear();
+                        tasks.Add(state.Appear());
                     }
+
+                    await Task.WhenAll(tasks.ToArray());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

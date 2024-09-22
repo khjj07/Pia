@@ -14,12 +14,6 @@ namespace Pia.Scripts.Manager
         public Image fadeImage;
         private Camera _fadeCamera;
         public float fadeDuration;
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
         private void Start()
         {
             _fadeCamera = GetComponentInChildren<Camera>();

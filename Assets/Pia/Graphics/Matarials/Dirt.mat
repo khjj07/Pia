@@ -37,11 +37,11 @@ Material:
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
-  - TransparentDepthPrepass
+  - MOTIONVECTORS
   - TransparentDepthPostpass
   - TransparentBackface
   - RayTracingPrepass
-  - MOTIONVECTORS
+  - TransparentDepthPrepass
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -100,13 +100,19 @@ Material:
     - _ExcludeFromTUAndAA: 0
     - _Height: 0.5
     - _HoleDepth: 0
-    - _HoleSize: 24.43
+    - _HoleSize: 0
+    - _HoleWidth: 1.5
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _NoiseOffset: 12.16
-    - _NoiseScale: 40
+    - _NoiseScale: 67.6
+    - _Offset1: -0.31
+    - _Offset2: -1.81
+    - _Offset24: 0
+    - _Offset3: -0.85
+    - _Offset4: 0
     - _OpaqueCullMode: 2
-    - _OutScale: 2
+    - _OutScale: 1
     - _PerPixelSorting: 0
     - _RayTracing: 0
     - _ReceivesSSR: 1
@@ -114,7 +120,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Roughness: 0.56
+    - _Roughness: 0.5
     - _Scale: 0
     - _ScaleOffset: 23.89
     - _Smoothness: -10
@@ -135,10 +141,10 @@ Material:
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
-    - _TransparentDepthPrepassEnable: 0
+    - _TransparentDepthPrepassEnable: 1
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
-    - _TransparentZWrite: 0
+    - _TransparentZWrite: 1
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
@@ -147,10 +153,11 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Highlight: {r: 0.0005608878, g: 0.0005608878, b: 0.0005608878, a: 0}
+    - _HeightOffset: {r: 0, g: 350, b: 366.9, a: 0}
+    - _Highlight: {r: 0.0007314646, g: 0.0007314646, b: 0.0007314646, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutScale: {r: 1, g: 1, b: 0, a: 0}
     - _SpherizedStrength: {r: 1, g: 1, b: 0, a: 0}
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 2, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
