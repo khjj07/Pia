@@ -30,7 +30,7 @@ Material:
   m_ValidKeywords:
   - _DISABLE_SSR_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
@@ -92,7 +92,7 @@ Material:
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
-    - _DoubleSidedNormalMode: 2
+    - _DoubleSidedNormalMode: 0
     - _DstBlend: 0
     - _DstBlend2: 0
     - _EnableBlendModePreserveSpecularLighting: 1
@@ -105,7 +105,7 @@ Material:
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _NoiseOffset: 12.16
-    - _NoiseScale: 67.6
+    - _NoiseScale: 62
     - _Offset1: -0.31
     - _Offset2: -1.81
     - _Offset24: 0
@@ -151,9 +151,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
+    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HeightOffset: {r: 0, g: 350, b: 366.9, a: 0}
+    - _HeightOffset: {r: 0, g: -41.6, b: -15.3, a: 0}
     - _Highlight: {r: 0.0007314646, g: 0.0007314646, b: 0.0007314646, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutScale: {r: 1, g: 1, b: 0, a: 0}

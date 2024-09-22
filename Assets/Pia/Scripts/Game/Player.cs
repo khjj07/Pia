@@ -311,11 +311,11 @@ namespace Assets.Pia.Scripts.Game
         private void CreateCrouchingStream()
         {
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .SkipWhile(_ => !StoryModeManager.IsInteractionActive())
+                .Where(_ => StoryModeManager.IsInteractionActive())
                 .Where(_ => !_isCrouching && _ableToCrouch).Subscribe(_ => Crouch()).AddTo(gameObject);
 
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .SkipWhile(_ => !StoryModeManager.IsInteractionActive())
+                .Where(_ => StoryModeManager.IsInteractionActive())
                 .Where(_ => _isCrouching && _ableToCrouch).Subscribe(_ => StandUp()).AddTo(gameObject);
         }
         private void CreateWalkingStream()

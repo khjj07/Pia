@@ -1,6 +1,8 @@
-﻿namespace Assets.Pia.Scripts.Game.Events
+﻿using UnityEngine;
+
+namespace Assets.Pia.Scripts.Game.Events
 {
-    public class EventPathNode
+    public class EventPathNode : MonoBehaviour
     {
         
     }

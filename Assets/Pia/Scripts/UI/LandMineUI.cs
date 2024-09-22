@@ -34,10 +34,12 @@ namespace Assets.Pia.Scripts.UI
                         .Subscribe(_ => SetTimer(timer - 0.1f)).AddTo(gameObject);
             StoryModeManager.GetStepStream().Take(1).Subscribe(_ =>
             {
+                StoryModeManager.Instance.SetInteractionActive(true);
                 StoryModeManager.GetStepUpStream()
                     .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.MineExplosion))
                     .AddTo(StoryModeManager.Instance.gameObject);
                 Disappear();
+
             });
         }
 

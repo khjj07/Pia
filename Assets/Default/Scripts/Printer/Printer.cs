@@ -366,6 +366,7 @@ namespace Default.Scripts.Printer
             int letterCount = 0;
             _parsedTextIndex = 0;
             _isPrinting = true;
+
             while (_parsedTextIndex < _parsedText.Count)
             {
                 PrintStyle style = _dialogStyle[_parsedTextIndex];
@@ -454,6 +455,7 @@ namespace Default.Scripts.Printer
 
                 _parsedTextIndex++;
             }
+
             _isPrinting = false;
             _isAppeared = true;
             await Task.CompletedTask;

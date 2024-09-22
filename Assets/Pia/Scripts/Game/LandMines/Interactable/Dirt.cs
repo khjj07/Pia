@@ -11,12 +11,6 @@ namespace Assets.Pia.Scripts.Effect
     {
         [Range(0.0f, 1.0f)]
         public float holeDepth;
-        [SerializeField]
-        [ColorUsage(true, true, 0f, 8f, 0.125f, 3f)]
-        private Color defaultColor;
-        [SerializeField]
-        [ColorUsage(true, true, 0f, 8f, 0.125f, 3f)]
-        private Color highlightColor;
 
         [SerializeField] private float extend = 0.25f;
 
@@ -32,17 +26,13 @@ namespace Assets.Pia.Scripts.Effect
         {
             if (item is Shovel)
             {
-                HightLightOn();
-            }
-            else
-            {
-                HightLightOff();
+          
             }
         }
 
         public override void OnExit()
         {
-            HightLightOff();
+           
         }
 
         public override void Start()
@@ -61,10 +51,6 @@ namespace Assets.Pia.Scripts.Effect
             _dirt.material.SetFloat("_HoleDepth", holeDepth);
         }
 
-        public void HightLightOn()
-        {
-            _dirt.sharedMaterial.SetColor("_Highlight", highlightColor);
-        }
         public void Dig(float interval)
         {
             holeDepth = Mathf.Clamp(holeDepth + extend, 0, 1);
@@ -74,10 +60,6 @@ namespace Assets.Pia.Scripts.Effect
             {
                 GetComponent<Collider>().enabled = false;
             }
-        }
-        public void HightLightOff()
-        {
-            _dirt.sharedMaterial.SetColor("_Highlight", defaultColor);
         }
     }
 }

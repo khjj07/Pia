@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DefaultStyle
   m_EditorClassIdentifier: 
   name: default
-  appearInterval: 0.1
+  appearInterval: 0.05
   repeatInterval: 0.3
-  disappearInterval: 0.1
+  disappearInterval: 0.5
   appearAndRepeatUnit: 0
   disappearUnit: 2
   useAppearAnimation: 1

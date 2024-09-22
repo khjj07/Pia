@@ -51,7 +51,7 @@ namespace Assets.Pia.Scripts.Game.Items
         public virtual void Initialize(Player player)
         {
            holdStream  = CreateHoldStream()
-                .SkipWhile(_ => !StoryModeManager.IsInteractionActive())
+                .Where(_ => StoryModeManager.IsInteractionActive())
                 .Subscribe(_ =>
                 {
                     //player.Hold(this);

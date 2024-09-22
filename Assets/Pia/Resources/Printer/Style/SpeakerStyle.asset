@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpeakerStyle
   m_EditorClassIdentifier: 
   name: speaker
-  appearInterval: 0.1
+  appearInterval: 0.2
   repeatInterval: 0.1
   disappearInterval: 0.1
   appearAndRepeatUnit: 2
@@ -24,7 +24,7 @@ MonoBehaviour:
   appearEndScale: {x: 1, y: 1, z: 1}
   appearScaleEase: 0
   appearPositionSpeed: 1
-  appearBeginPosition: {x: 0, y: 50, z: 0}
+  appearBeginPosition: {x: 0, y: 0, z: 0}
   appearEndPosition: {x: 0, y: 0, z: 0}
   appearPositionEase: 0
   appearRotationSpeed: 1
@@ -66,7 +66,7 @@ MonoBehaviour:
   disappearBeginRotation: {x: 0, y: 0, z: 0}
   disappearEndRotation: {x: 0, y: 0, z: 0}
   disappearRotationEase: 0
-  disappearColorSpeed: 1
+  disappearColorSpeed: 0.5
   disappearBeginColor: {r: 1, g: 1, b: 1, a: 1}
   disappearEndColor: {r: 1, g: 1, b: 1, a: 0}
   disappearColorEase: 0

@@ -30,10 +30,13 @@ namespace Assets.Pia.Scripts.Path
             _isPrinting = true;
             foreach (var node in _subNodes)
             {
+                
+                await Task.Delay((int)(node.appearDelay*1000));
                 if (node.clearPreviousNode)
                 {
-                   await ClearPreviousSubNode();
+                    await ClearPreviousSubNode();
                 }
+                
                 await node.Appear();
             }
             _isPrinting = false;

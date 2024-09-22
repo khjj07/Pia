@@ -64,7 +64,7 @@ namespace Pia.Scripts.StoryMode
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
-                    _isInteractionActive = true;
+                    _isInteractionActive = false;
                     _player.OnStepMine();
                     _landMineUI.Appear();
                     PlayerPrefs.SetString("Save","LandMineDirt");
@@ -169,9 +169,9 @@ namespace Pia.Scripts.StoryMode
             return Instance._isInteractionActive;
         }
 
-        public void SetInteractionActive()
+        public void SetInteractionActive(bool value)
         {
-            _isInteractionActive = true;
+            _isInteractionActive = value;
         }
     }
 }
