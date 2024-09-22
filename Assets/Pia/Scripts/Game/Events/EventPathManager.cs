@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Assets.Pia.Scripts.Game.Events
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(EventPathManager))]
     public class EventPathManagerInspector : Editor
     {
@@ -34,14 +35,13 @@ namespace Assets.Pia.Scripts.Game.Events
                     Selection.activeObject = wm.nodes[i].gameObject;
             }
         }
-
-
     }
-
+#endif
     public class EventPathManager : MonoBehaviour
     {
         public EventPathNode[] nodes;
         private EventPathNode currentNode = null;
+#if UNITY_EDITOR
         public void OnDrawGizmos()
         {
             if (nodes.Length > 0)
@@ -62,5 +62,6 @@ namespace Assets.Pia.Scripts.Game.Events
                 }
             }
         }
+#endif
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Assets.Pia.Scripts.StoryMode.StoryBoard
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(DialogAsset))]
     public class DialogAssetInspector : Editor
     {
@@ -22,6 +23,7 @@ namespace Assets.Pia.Scripts.StoryMode.StoryBoard
             }
         }
     }
+#endif
 
     [CreateAssetMenu(fileName = "Story Board Dialog Asset",menuName = "Story Board/Dialog Asset")]
     public class DialogAsset : ScriptableObject

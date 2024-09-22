@@ -24,11 +24,12 @@ namespace Default.Scripts.Printer
 
         [Header("단위")]
         public Unit appearAndRepeatUnit;
-        public Unit disappearUnit;
-#if UNITY_EDITOR
+        public Unit disappearUnit; 
         [Header("나타내기")]
         public bool useAppearAnimation;
-
+        [Header("사라지기")]
+        public bool useDisappearAnimation;
+#if UNITY_EDITOR
         [Header("Scale")]
         [ShowIf(ShowIfAttribute.ActionOnConditionFail.JustDisable, ShowIfAttribute.ConditionOperator.And, nameof(useAppearAnimation))]
         public float appearScaleSpeed = 1;
@@ -114,9 +115,6 @@ namespace Default.Scripts.Printer
         [ShowIf(ShowIfAttribute.ActionOnConditionFail.JustDisable, ShowIfAttribute.ConditionOperator.And, nameof(useRepeatAnimation))]
         public Ease repeatColorEase;
 
-        [Header("사라지기")]
-        public bool useDisappearAnimation;
-
         [Header("Scale")]
         [ShowIf(ShowIfAttribute.ActionOnConditionFail.JustDisable, ShowIfAttribute.ConditionOperator.And, nameof(useDisappearAnimation))]
         public float disappearScaleSpeed = 1;
@@ -157,8 +155,6 @@ namespace Default.Scripts.Printer
         public Ease disappearColorEase;
 
 #else
-    [Header("나타내기")]
-    public bool useAppearAnimation;
     [Header("Scale")]
     public float appearScaleSpeed = 1;
     public Vector3 appearBeginScale = Vector3.one;
@@ -234,8 +230,7 @@ namespace Default.Scripts.Printer
     public Color repeatEndColor = Color.black;
     
     public Ease repeatColorEase;
-      [Header("사라지기")]
-        public bool useDisppearAnimation;
+  
 
         [Header("Scale")]
        public float disappearScaleSpeed = 1;

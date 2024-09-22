@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 namespace Default.Scripts.Sound
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(SoundManager))]
     public class SoundManagerInspector : Editor
     {
@@ -16,6 +17,7 @@ namespace Default.Scripts.Sound
             sm.channels = sm.GetComponentsInChildren<Channel>();
         }
     }
+#endif
 
     public class SoundManager : Singleton<SoundManager>
     {

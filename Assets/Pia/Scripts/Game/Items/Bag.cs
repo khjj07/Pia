@@ -32,7 +32,7 @@ namespace Assets.Pia.Scripts.Game.Items
         private void CreateUseStream()
         {
             GlobalInputBinder.CreateGetKeyDownStream(openKey)
-                .SkipWhile(_=>!StoryModeManager.IsInteractionActive())
+                .Where(_=>StoryModeManager.IsInteractionActive())
                 .Subscribe(_ =>
                 {
                     if (_isOpen)

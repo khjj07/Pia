@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Default.Scripts.Util.StatePattern
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(StateManagerBase), true)]
     public class StateManagerInspector : Editor
     {
@@ -27,7 +28,7 @@ namespace Default.Scripts.Util.StatePattern
             }
         }
     }
-
+#endif
     public abstract class StateManagerBase : MonoBehaviour
     {
         public StateBase[] states;

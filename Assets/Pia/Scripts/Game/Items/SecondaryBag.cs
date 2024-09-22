@@ -1,6 +1,5 @@
 ﻿using Assets.Pia.Scripts.UI;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace Assets.Pia.Scripts.Game.Items
 {

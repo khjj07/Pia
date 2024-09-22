@@ -1,7 +1,6 @@
 ﻿using System;
 using Assets.Pia.Scripts.Interface;
 using UniRx;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 namespace Assets.Pia.Scripts.Game.Items

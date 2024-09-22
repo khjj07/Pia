@@ -10,10 +10,11 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+
 
 namespace Assets.Pia.Scripts.StoryMode.Walking
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(PathManager))]
     public class WalkingManagerInspector : Editor
     {
@@ -46,6 +47,7 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
 
 
     }
+#endif
 
     public class PathManager : MonoBehaviour
     {
@@ -149,7 +151,7 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
             currentNode = item;
             await currentNode.Print();
         }
-
+#if UNITY_EDITOR
         public void OnDrawGizmos()
         {
             if (nodes.Length > 0)
@@ -171,5 +173,6 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
                 }
             }
         }
+#endif
     }
 }
