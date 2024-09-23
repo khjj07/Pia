@@ -98,14 +98,14 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Height: 0.5
+    - _Height: -1
     - _HoleDepth: 0
     - _HoleSize: 0
     - _HoleWidth: 1.5
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _NoiseOffset: 12.16
-    - _NoiseScale: 62
+    - _NoiseScale: 100
     - _Offset1: -0.31
     - _Offset2: -1.81
     - _Offset24: 0
@@ -120,7 +120,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Roughness: 0.5
+    - _Roughness: 0.25
     - _Scale: 0
     - _ScaleOffset: 23.89
     - _Smoothness: -10
@@ -153,10 +153,11 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HeightOffset: {r: 0, g: -41.6, b: -15.3, a: 0}
+    - _HeightOffset: {r: 569, g: 456.8, b: 555.8, a: 342.1}
     - _Highlight: {r: 0.0007314646, g: 0.0007314646, b: 0.0007314646, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutScale: {r: 1, g: 1, b: 0, a: 0}
+    - _Size: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _SpherizedStrength: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling: {r: 2, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []

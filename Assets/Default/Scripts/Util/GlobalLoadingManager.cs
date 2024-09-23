@@ -11,7 +11,7 @@ namespace Default.Scripts.Util
     {
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            
         }
 
         public void OnSceneLoaded()
