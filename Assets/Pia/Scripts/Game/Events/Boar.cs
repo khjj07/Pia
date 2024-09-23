@@ -1,7 +1,9 @@
-﻿namespace Assets.Pia.Scripts.Game.Events
+﻿using UnityEngine;
+
+namespace Assets.Pia.Scripts.Game.Events
 {
-    public class Boar
+    public class Boar : MonoBehaviour
     {
-        
+       
     }
 }

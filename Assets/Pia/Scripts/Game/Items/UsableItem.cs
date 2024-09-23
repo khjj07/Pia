@@ -11,7 +11,8 @@ namespace Assets.Pia.Scripts.Game.Items
     {
         [SerializeField]
         protected KeyCode useKey = KeyCode.Mouse0;
-
+           [SerializeField]
+        private bool ignoreIsInteractive=false;
 
         public IObservable<Unit> CreateUseStream()
         {
@@ -26,7 +27,7 @@ namespace Assets.Pia.Scripts.Game.Items
         {
             gameObject.SetActive(false);
             holdStream = CreateHoldStream()
-                .SkipWhile(_ => !StoryModeManager.IsInteractionActive())
+                .Where(_ => StoryModeManager.IsInteractionActive())
                 .Subscribe(_ =>
                 {
                     if (player.Hold(this) == this)
@@ -34,7 +35,7 @@ namespace Assets.Pia.Scripts.Game.Items
                         OnHold(player);
                         CreateUseStream()
                             .TakeWhile(_ => _isHold)
-                            .Where(_ => player.IsInteractable())
+                            .Where(_ => ignoreIsInteractive || player.IsInteractable())
                             .Subscribe(_ =>
                             {
                                 OnUse(player);
