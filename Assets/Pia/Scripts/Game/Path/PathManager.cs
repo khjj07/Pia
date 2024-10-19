@@ -51,15 +51,17 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
 
     public class PathManager : MonoBehaviour
     {
+        [Header("Walk")]
         public PathNode[] nodes;
+        int currentIndex = 0;
+
+        private PathNode currentPrintNode = null;
         private Queue<PathNode> appearQueue;
 
         [SerializeField] bool runPrintProcess = true;
 
 
         [SerializeField] float tolerance = 0.1f;
-        int nextIndex = 0;
-        private PathNode currentNode = null;
 
         private void Start()
         {
@@ -68,28 +70,12 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
             StartCoroutine(PrintProcess());
         }
 
-        public int CheckNode(Player player)
-        {
-            if (nodes.Length > nextIndex)
-            {
-                if (Vector3.Distance(player.transform.position, nodes[nextIndex].transform.position) < tolerance)
-                {
-                    nextIndex++;
-                }
-
-                return nextIndex;
-            }
-            else
-            {
-                return -1;
-            }
-        }
 
         public bool PlayerIsMovable()
         {
-            if (nextIndex > 1)
+            if (currentIndex > 1)
             {
-                return !nodes[nextIndex - 1].stopAtNode;
+                return !nodes[currentIndex - 1].stopAtNode;
             }
             else
             {
@@ -97,17 +83,21 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
             }
         }
 
-    public Vector3 GetPlayerDirection(Player player)
+        public PathNode GetNext()
         {
-
-            if (nodes.Length > nextIndex)
+            if (currentIndex < nodes.Length-1)
             {
-                return Vector3.Normalize(nodes[nextIndex].transform.position - player.transform.position);
+                return nodes[currentIndex+1];
             }
             else
             {
-                return Vector3.forward;
+                return null;
             }
+        }
+
+        public void Next()
+        {
+            currentIndex++;
         }
 
         private void RegisterAllNode()
@@ -128,11 +118,7 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
             {
                 if (appearQueue.Count > 0)
                 {
-                    if (!currentNode)
-                    {
-                        Print(appearQueue.Dequeue());
-                    }
-                    else if (currentNode && !currentNode.IsPrinting())
+                    if (currentPrintNode && !currentPrintNode.IsPrinting())
                     {
                         Print(appearQueue.Dequeue());
                     }
@@ -144,12 +130,12 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
 
         private async void Print(PathNode item)
         {
-            if (currentNode)
+            if (currentPrintNode)
             {
-                await currentNode.Disappear();
+                await currentPrintNode.Disappear();
             }
-            currentNode = item;
-            await currentNode.Print();
+            currentPrintNode = item;
+            await item.Print();
         }
 #if UNITY_EDITOR
         public void OnDrawGizmos()
@@ -174,5 +160,17 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
             }
         }
 #endif
+        public void UpdateCurrentNode(Vector3 position)
+        {
+            var next = GetNext();
+
+            if (next != null)
+            {
+                if (Vector3.Distance(position, next.transform.position) < tolerance)
+                {
+                    currentIndex++;
+                }
+            }
+        }
     }
 }

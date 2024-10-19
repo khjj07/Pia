@@ -34,6 +34,7 @@ namespace Assets.Pia.Scripts.Game
         public KeyCode stepPedalKey = KeyCode.F7;
 
         public Bag bag;
+        public Flashlight flashlight;
 
         [Header("Body Part")]
         [SerializeField] private Transform head;
@@ -156,13 +157,13 @@ namespace Assets.Pia.Scripts.Game
             var hpStream = this.UpdateAsObservable()
                 .Select(_ => (float)hp / initialHp);
 
-            hpStream.Where(hpRate => hpRate <= 0.8f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP80));
-            hpStream.Where(hpRate => hpRate <= 0.6f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP60));
-            hpStream.Where(hpRate => hpRate <= 0.4f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP40));
-            hpStream.Where(hpRate => hpRate <= 0.2f).Take(1).Subscribe(_ => EventManager.PrintEvent(EventManager.Event.HP20));
+            hpStream.Where(hpRate => hpRate <= 0.8f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP80));
+            hpStream.Where(hpRate => hpRate <= 0.6f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP60));
+            hpStream.Where(hpRate => hpRate <= 0.4f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP40));
+            hpStream.Where(hpRate => hpRate <= 0.2f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP20));
             hpStream.Where(hpRate => hpRate <= 0.1f).Take(1).Subscribe(hpRate =>
             {
-                EventManager.PrintEvent(EventManager.Event.HP10);
+                EventManager.InvokeEvent(EventManager.Event.HP10);
                 dyingUI.gameObject.SetActive(true);
                 dyingUI.CrossFadeAlpha((0.1f - hpRate) / 0.1f, 0.1f, false);
             });
@@ -185,7 +186,7 @@ namespace Assets.Pia.Scripts.Game
                .Subscribe(_ =>
                {
                    Bleed();
-                   EventManager.PrintEvent(e);
+                   EventManager.InvokeEvent(e);
                })
                .AddTo(gameObject);
         }
@@ -198,7 +199,6 @@ namespace Assets.Pia.Scripts.Game
 
         private void SetHP(int value)
         {
-            Debug.Log(hp);
             hp = Math.Max(value,0);
             hpBar.DOFillAmount((float)hp / initialHp, hpDecreaseInterval);
             if (hp == 0)
@@ -215,7 +215,6 @@ namespace Assets.Pia.Scripts.Game
         {
             hpReduction = 2;
             _isBleeding = true;
-
             bleedUI.gameObject.SetActive(true);
             bleedUI.color = Color.white;
             bleedUI.DOFade(0.5f, 1).SetLoops(-1,LoopType.Yoyo).SetId("BleedTween");
@@ -322,11 +321,17 @@ namespace Assets.Pia.Scripts.Game
         {
             this.UpdateAsObservable()
                 .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
-                .Select(_ => pathManager.CheckNode(this))
                 .Subscribe(_ =>
                 {
                     DOTween.Kill("changeDirection");
-                    transform.DORotate(Quaternion.LookRotation(pathManager.GetPlayerDirection(this)).eulerAngles, 1.0f).SetId("changeDirection");
+                    transform.DORotate(Quaternion.LookRotation(GetCurrentDirection()).eulerAngles, 1.0f).SetId("changeDirection");
+                });
+
+            this.UpdateAsObservable()
+                .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
+                .Subscribe(_ =>
+                {
+                    pathManager.UpdateCurrentNode(transform.position);
                 });
 
             GlobalInputBinder.CreateGetKeyStream(walkKey)
@@ -339,6 +344,19 @@ namespace Assets.Pia.Scripts.Game
                 }).AddTo(gameObject);
         }
 
+
+        public Vector3 GetCurrentDirection()
+        {
+            var next = pathManager.GetNext();
+            if (next != null)
+            {
+                return Vector3.Normalize(next.transform.position - transform.position);
+            }
+            else
+            {
+                return Vector3.forward;
+            }
+        }
         private void RotateHead()
         {
             head.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
@@ -566,6 +584,16 @@ namespace Assets.Pia.Scripts.Game
         public bool IsInteractable()
         {
             return _isInteractable;
+        }
+
+        public bool IsCrouch()
+        {
+            return _isCrouching;
+        }
+
+        public bool IsLightOn()
+        {
+            return flashlight.isActiveAndEnabled;
         }
     }
 }

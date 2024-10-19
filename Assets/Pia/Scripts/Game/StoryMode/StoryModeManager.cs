@@ -59,6 +59,7 @@ namespace Pia.Scripts.StoryMode
                 .Subscribe(_ =>
                 {
                     _isInteractionActive = false;
+
                 });
 
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
@@ -86,6 +87,10 @@ namespace Pia.Scripts.StoryMode
             CheckSaveFlag();
         }
 
+        public Player GetPlayer()
+        {
+            return _player;
+        }
         private void CheckSaveFlag()
         {
             if (PlayerPrefs.HasKey("Save"))
@@ -141,7 +146,6 @@ namespace Pia.Scripts.StoryMode
 
         public static void GameOver(GameOverType type)
         {
-            Debug.Log("GameOver");
             switch (type)
             {
                 case GameOverType.MineExplosion:
@@ -149,6 +153,7 @@ namespace Pia.Scripts.StoryMode
                 case GameOverType.AirBomb:
                     break;
                 case GameOverType.Boar:
+                    Debug.Log(StoryModeManager.GameOverType.Boar);
                     break;
                 case GameOverType.Bleed:
                     break;

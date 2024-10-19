@@ -85,6 +85,7 @@ public class PressurePlate : InteractableClass
             {
                 isDead = true;
                 _isAvailable = false;
+                EventManager.InvokeEvent(EventManager.Event.AirBomb);
             }
             else
             {

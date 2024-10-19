@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fc035fdcd235d47811298e71e606ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 0}
+  asset: {fileID: 11400000, guid: 951b98a36a638314899c4d6fdd9b852f, type: 2}
   channels:
   - {fileID: 7992664976358811098}
   - {fileID: 2820833006177768436}

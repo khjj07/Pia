@@ -40,7 +40,35 @@ namespace Assets.Pia.Scripts.Game.Events
     public class EventPathManager : MonoBehaviour
     {
         public EventPathNode[] nodes;
-        private EventPathNode currentNode = null;
+
+        [SerializeField] float tolerance = 0.1f;
+        private int currentIndex = 0;
+
+        public EventPathNode GetNext()
+        {
+            if (currentIndex < nodes.Length - 1)
+            {
+                return nodes[currentIndex + 1];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void UpdateCurrentNode(Vector3 position)
+        {
+            var next = GetNext();
+
+            if (next != null)
+            {
+                if (Vector3.Distance(position, next.transform.position) < tolerance)
+                {
+                    currentIndex++;
+                }
+            }
+        }
+
 #if UNITY_EDITOR
         public void OnDrawGizmos()
         {

@@ -1,4 +1,5 @@
-﻿using Default.Scripts.Util;
+﻿using Default.Scripts.Sound;
+using Default.Scripts.Util;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +15,12 @@ namespace Pia.Scripts.Manager
             startButton.onClick.AddListener(OnStartButtonClick);
             quitButton.onClick.AddListener(OnQuitButtonClick);
             PlayerPrefs.DeleteKey("Save");
+            SoundManager.Play("BGM_Title");
         }
 
         private void OnStartButtonClick()
         {
+            SoundManager.Play("ui_Button",1);
             StartCoroutine(StoryModeLoadingManager.Load("StoryModeSynopsis", 1.0f));
         }
 
