@@ -33,7 +33,14 @@ namespace Default.Scripts.Sound
         {
             Instance.channels[0].Play(Instance.asset.GetSoundByName(name).clip);
         }
-
+        public static void PlayOneShot(string name, int channel)
+        {
+            Instance.channels[channel].PlayOneShot(Instance.asset.GetSoundByName(name).clip);
+        }
+        public static void PlayOneShot(string name)
+        {
+            Instance.channels[0].PlayOneShot(Instance.asset.GetSoundByName(name).clip);
+        }
         public static void Stop(int channel)
         {
             Instance.channels[channel].Stop();

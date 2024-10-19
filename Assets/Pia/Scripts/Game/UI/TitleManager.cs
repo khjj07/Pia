@@ -1,5 +1,7 @@
-﻿using Default.Scripts.Sound;
+﻿using System;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,17 +22,21 @@ namespace Pia.Scripts.Manager
 
         private void OnStartButtonClick()
         {
-            SoundManager.Play("ui_Button",1);
+            SoundManager.PlayOneShot("ui_button",1);
             StartCoroutine(StoryModeLoadingManager.Load("StoryModeSynopsis", 1.0f));
         }
 
         private void OnQuitButtonClick()
         {
+            SoundManager.PlayOneShot("ui_button", 1);
+            Observable.Timer(TimeSpan.FromSeconds(0.1f)).Subscribe(_ =>
+            {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+                UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit(); // 어플리케이션 종료
 #endif
+            }).AddTo(gameObject);
         }
     }
 }

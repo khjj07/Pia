@@ -10,6 +10,7 @@ using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 namespace Default.Scripts.Printer
@@ -17,6 +18,8 @@ namespace Default.Scripts.Printer
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class Printer : MonoBehaviour
     {
+        [SerializeField] private bool stayPosition = true;
+
         private string originalText;
         private TMP_Text _textComponent;
         private List<string> _parsedText;
@@ -48,6 +51,14 @@ namespace Default.Scripts.Printer
         private bool _isPrinting = false;
         private bool _isAppeared = false;
         private IEnumerator _printRoutine;
+
+    
+
+        //event
+        public UnityEvent onAppearEvent;
+        public UnityEvent onDisappearEvent;
+        public UnityEvent onBeginPrintEvent;
+        public UnityEvent onEndPrintEvent;
 
         private void Awake()
         {
@@ -123,7 +134,7 @@ namespace Default.Scripts.Printer
             for (int i = 0; i < count; i++)
             {
                 _textMeshScale[i] = Vector3.one;
-                _textMeshColor[i] = Color.black;
+                _textMeshColor[i] = new Color();
             }
 
             _textMeshScaleAppearTween = new Tween[count];
@@ -270,7 +281,11 @@ namespace Default.Scripts.Printer
 
         public void AppearTween(PrintStyle style, char letter, int letterCount)
         {
-            PrintCurrentLetter(letter);
+            if (!stayPosition)
+            {
+                PrintCurrentLetter(letter);
+            }
+            
             if (style.useAppearAnimation)
             {
                 _textMeshScaleAppearTween[letterCount] = AppearScaleTween(letterCount, style.appearBeginScale, style.appearEndScale, style.appearInterval / style.appearScaleSpeed, style.appearScaleEase);
@@ -376,6 +391,7 @@ namespace Default.Scripts.Printer
                         for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                         {
                             DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                            onDisappearEvent.Invoke();
                             letterCount++;
                             await Task.Delay((int)(style.disappearInterval * 1000));
                         }
@@ -384,6 +400,7 @@ namespace Default.Scripts.Printer
                         for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                         {
                             DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                            onDisappearEvent.Invoke();
                             letterCount++;
                             if (_parsedText[_parsedTextIndex][i] == ' ')
                             {
@@ -394,7 +411,8 @@ namespace Default.Scripts.Printer
                     case PrintStyle.Unit.Sentence:
                         for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                         {
-                            DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount); 
+                            DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                            onDisappearEvent.Invoke();
                             letterCount++;
                         }
                         await Task.Delay((int)(style.disappearInterval * 1000));
@@ -411,9 +429,26 @@ namespace Default.Scripts.Printer
 
         public async Task Print()
         {
+            onBeginPrintEvent.Invoke();
             int letterCount = 0;
             _parsedTextIndex = 0;
             _isPrinting = true;
+
+            if (stayPosition)
+            {
+                while (_parsedTextIndex < _parsedText.Count)
+                {
+                    for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                    {
+                        _currentText.Append(_parsedText[_parsedTextIndex][i]);
+                    }
+                    _parsedTextIndex++;
+                }
+                _textComponent.SetText(_currentText);
+            }
+
+            _parsedTextIndex = 0;
+
             while (_parsedTextIndex < _parsedText.Count)
             {
                 PrintStyle style = _dialogStyle[_parsedTextIndex];
@@ -423,6 +458,7 @@ namespace Default.Scripts.Printer
                         for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                         {
                             AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                            onAppearEvent.Invoke();
                             StartCoroutine(RepeatTween(style, letterCount));
                             letterCount++;
                            await Task.Delay((int)(style.appearInterval*1000));
@@ -432,6 +468,7 @@ namespace Default.Scripts.Printer
                         for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                         {
                             AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                            onAppearEvent.Invoke();
                             StartCoroutine(RepeatTween(style, letterCount));
                             letterCount++;
                             if (_parsedText[_parsedTextIndex][i] == ' ')
@@ -445,6 +482,7 @@ namespace Default.Scripts.Printer
                         for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                         {
                             AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                            onAppearEvent.Invoke();
                             StartCoroutine(RepeatTween(style, letterCount));
                             letterCount++;
                         }
@@ -458,6 +496,7 @@ namespace Default.Scripts.Printer
 
             _isPrinting = false;
             _isAppeared = true;
+            onEndPrintEvent.Invoke();
             await Task.CompletedTask;
         }
     }

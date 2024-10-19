@@ -25,6 +25,7 @@ namespace Assets.Pia.Scripts.Game.Events
         [SerializeField] private float speed = 1;
         [SerializeField] private float sprintSpeed = 2;
         [SerializeField] private float tolerance = 0.1f;
+        [SerializeField] private float delay = 2f;
 
         [SerializeField] private RectTransform boarUI;
         [SerializeField] private RectTransform boarPositionUI;
@@ -87,10 +88,11 @@ namespace Assets.Pia.Scripts.Game.Events
 
            boarUI.gameObject.SetActive(true);
            this.UpdateAsObservable()
+               .SkipUntil(Observable.Timer(TimeSpan.FromSeconds(delay)))
                .Where(_ => !player.IsCrouch() || player.IsLightOn()).Take(1)
                .Subscribe(_=>TriggerAttackFlag());
 
-          var boarStream =  this.UpdateAsObservable()
+           var boarStream = this.UpdateAsObservable()
                .Select(_ => Evaluate())
                .TakeWhile(x => x != State.End);
 

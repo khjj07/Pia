@@ -29,18 +29,15 @@ namespace Assets.Pia.Scripts.UI
             tap.localScale = Vector3.zero;
             ChangeSlotColor(activateColor);
             CancelTween(_tween);
-            _tween = tap.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
+            _tween = tap.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
             return _tween;
         }
 
         private Tween Close()
         {
+            ChangeSlotColor(inactivateColor);
             CancelTween(_tween);
-            _tween = tap.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
-            {
-                tap.gameObject.SetActive(false);
-                ChangeSlotColor(inactivateColor);
-            });
+            tap.gameObject.SetActive(false);
             return _tween;
         }
     }

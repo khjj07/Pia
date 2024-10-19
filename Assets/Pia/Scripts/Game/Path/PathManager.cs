@@ -75,7 +75,7 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
         {
             if (currentIndex > 1)
             {
-                return !nodes[currentIndex - 1].stopAtNode;
+                return !nodes[currentIndex].stopAtNode;
             }
             else
             {
@@ -119,6 +119,10 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
                 if (appearQueue.Count > 0)
                 {
                     if (currentPrintNode && !currentPrintNode.IsPrinting())
+                    {
+                        Print(appearQueue.Dequeue());
+                    }
+                    else if(!currentPrintNode)
                     {
                         Print(appearQueue.Dequeue());
                     }

@@ -13,7 +13,7 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
         private Image _image;
         [SerializeField] private Color beginColor = new Color();
         [SerializeField] private Color endColor = Color.white;
-        [SerializeField] private float duration = 0.5f;
+        [SerializeField] private float disappearDuration = 0.5f;
         public override async Task Appear()
         {
             await Task.Delay((int)(appearDelay * 1000));
@@ -24,7 +24,7 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
         }
         public override Task Disappear()
         {
-            _image.DOColor(new Color(),duration).OnComplete(() =>
+            _image.DOColor(new Color(), disappearDuration).OnComplete(() =>
             {
                 gameObject.SetActive(false);
             });

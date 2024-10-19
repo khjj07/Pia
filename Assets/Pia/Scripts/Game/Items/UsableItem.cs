@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Pia.Scripts.UI;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -11,8 +12,9 @@ namespace Assets.Pia.Scripts.Game.Items
     {
         [SerializeField]
         protected KeyCode useKey = KeyCode.Mouse0;
-           [SerializeField]
+        [SerializeField]
         private bool ignoreIsInteractive=false;
+  
 
         public IObservable<Unit> CreateUseStream()
         {

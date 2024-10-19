@@ -7,11 +7,14 @@ namespace Default.Scripts.Sound
     {
         [Range(0.0f, 1.0f)]
         public float volume = 0.5f;
+        public bool loop = false;
         private AudioSource _audioSource;
 
         public void Start()
         {
             _audioSource = GetComponent<AudioSource>();
+            volume=_audioSource.volume;
+            loop=_audioSource.loop;
         }
 
         public void Play(AudioClip clip)
@@ -19,8 +22,7 @@ namespace Default.Scripts.Sound
             _audioSource.clip = clip;
             _audioSource.volume = volume;
             _audioSource.Play();
-        }
-        public void PlayOneShot(AudioClip clip)
+        }        public void PlayOneShot(AudioClip clip)
         {
             _audioSource.volume = volume;
             _audioSource.PlayOneShot(clip);

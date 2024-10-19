@@ -5,6 +5,7 @@ using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.StoryMode.Walking;
 using Assets.Pia.Scripts.UI;
 using Default.Scripts.Printer;
+using Default.Scripts.Sound;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -310,11 +311,11 @@ namespace Assets.Pia.Scripts.Game
         private void CreateCrouchingStream()
         {
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .Where(_ => StoryModeManager.IsInteractionActive())
+                .Where(_ => StoryModeManager.IsInteractionActive() && !_isMove)
                 .Where(_ => !_isCrouching && _ableToCrouch).Subscribe(_ => Crouch()).AddTo(gameObject);
 
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .Where(_ => StoryModeManager.IsInteractionActive())
+                .Where(_ => StoryModeManager.IsInteractionActive() && !_isMove)
                 .Where(_ => _isCrouching && _ableToCrouch).Subscribe(_ => StandUp()).AddTo(gameObject);
         }
         private void CreateWalkingStream()
@@ -375,6 +376,13 @@ namespace Assets.Pia.Scripts.Game
             lowerStateSubject = new Subject<LowerAnimationState>();
             lowerStateSubject.Subscribe(AnimateLowerBody);
             lowerStateSubject.OnNext(LowerAnimationState.Idle);
+
+            lowerStateSubject.DistinctUntilChanged()
+                .Where(x => x == LowerAnimationState.Walk)
+                .Subscribe(_ =>SoundManager.Play("char_walk", 4));
+            lowerStateSubject.DistinctUntilChanged()
+                .Where(x => x == LowerAnimationState.Idle)
+                .Subscribe(_ => SoundManager.Stop(4));
         }
 
         private void AnimateLowerBody(LowerAnimationState state)
@@ -515,6 +523,7 @@ namespace Assets.Pia.Scripts.Game
         {
             _ableToCrouch = false;
             _isCrouching = true;
+            SoundManager.Play("char_standCrouch", 1);
             body.DOLocalMoveY(crouchHeight, crouchDuration).OnComplete(() =>
             {
                 _ableToCrouch = true;
@@ -539,6 +548,7 @@ namespace Assets.Pia.Scripts.Game
         {
             _ableToCrouch = false;
             _isCrouching = false;
+            SoundManager.Play("char_crouchStand", 1);
             body.DOLocalMoveY(standUpHeight, standUpDuration).OnComplete(() =>
             {
                 _ableToCrouch = true;

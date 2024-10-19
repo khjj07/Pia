@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.33333334}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -839,8 +839,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -30, y: -30}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970003931
 MonoBehaviour:
@@ -934,7 +934,6 @@ GameObject:
   m_Component:
   - component: {fileID: 989745348}
   - component: {fileID: 989745347}
-  - component: {fileID: 989745346}
   - component: {fileID: 989745349}
   m_Layer: 0
   m_Name: Main Camera
@@ -943,14 +942,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &989745346
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989745345}
-  m_Enabled: 1
 --- !u!20 &989745347
 Camera:
   m_ObjectHideFlags: 0
@@ -1268,9 +1259,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 175054899530204559, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 175054899530204559, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 720356824511535403, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
       propertyPath: m_Name
       value: '[DontDestroyAndDistinct]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450226937730658634, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430183640327281663, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8783684163617137255, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
       propertyPath: m_LocalPosition.x

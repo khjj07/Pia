@@ -36,8 +36,8 @@ namespace Assets.Pia.Scripts.Path
                 {
                     await ClearPreviousSubNode();
                 }
-                
                 await node.Appear();
+                await Task.Delay((int)(node.duration * 1000));
             }
             _isPrinting = false;
         }

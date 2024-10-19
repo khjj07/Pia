@@ -154,7 +154,7 @@ public class PressurePlate : InteractableClass
 
     public void MatchBarMove()
     {
-        SetMatchBarAngle(_matchBarAngle + _currentSpeed);
+        SetMatchBarAngle(_matchBarAngle - _currentSpeed);
     }
 
     public bool IsMovable()

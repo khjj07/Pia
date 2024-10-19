@@ -3,6 +3,7 @@ using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.UI;
 using Assets.Pia.Scripts.UI.Slot;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -16,9 +17,10 @@ namespace Assets.Pia.Scripts.Game.Items
         private SlotUI slot;
         [SerializeField]
         protected KeyCode holdKey;
-
+        [SerializeField]
+        protected string holdSoundName;
         protected bool _isHold=false;
-
+        
 
         public IDisposable holdStream;
         public IObservable<Unit> CreateHoldStream()
@@ -41,6 +43,10 @@ namespace Assets.Pia.Scripts.Game.Items
         {
             _isHold = true; 
             slot.SetActive(true);
+            if (holdSoundName != "")
+            {
+                SoundManager.Play(holdSoundName, 1);
+            }
         }
         public virtual void OnStopHold()
         {

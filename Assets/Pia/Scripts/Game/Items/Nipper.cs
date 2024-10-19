@@ -25,7 +25,7 @@ namespace Assets.Pia.Scripts.Game.Items
                         spring.TryToCut();
                     }).AddTo(gameObject);
 
-                this.UpdateAsObservable()
+                var finishStream = this.UpdateAsObservable()
                     .Where(_ => spring.progress >= 1.0f)
                     .Take(1).Subscribe(_ =>
                     {
@@ -40,6 +40,7 @@ namespace Assets.Pia.Scripts.Game.Items
                         player.SetCursorUnlocked();
                         spring.Cancel();
                         cutStream.Dispose();
+                        finishStream.Dispose();
                     });
             }
         }

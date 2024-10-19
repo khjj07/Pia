@@ -31,13 +31,14 @@ namespace Assets.Pia.Scripts.StoryMode
         [SerializeField] private EventActor boar;
         [SerializeField] private EventActor enemy;
         [SerializeField] private EventActor airBomb;
+        [SerializeField] private Canvas _canvas;
 
         [SerializeField,TextArea] private string[] eventText;
-
 
         private async Task PrintEvent(Event e)
         {
             Debug.Log(eventText[(int)e]);
+           _canvas.gameObject.SetActive(true);
             if (_eventPrinter.IsPrinting())
             {
                 _eventPrinter.Skip();
@@ -50,6 +51,7 @@ namespace Assets.Pia.Scripts.StoryMode
             {
                 await _eventPrinter.Disappear();
             }
+            _canvas.gameObject.SetActive(false);
         }
 
         public static void InvokeEvent(Event e)

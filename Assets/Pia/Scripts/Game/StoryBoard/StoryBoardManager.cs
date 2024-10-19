@@ -1,4 +1,5 @@
 using System;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using Default.Scripts.Util.StatePattern;
 using DG.Tweening;
@@ -37,12 +38,13 @@ namespace Pia.Scripts.Synopsis
         public override void Start()
         {
             base.Start();
+            SoundManager.Stop(0);
             guideNotice.gameObject.SetActive(false);
 
             goNextStream = this.UpdateAsObservable()
-                .Take(1).Repeat()
                 .Where(_ => currentState.CanGoNext())
                 .Where(_ => Input.GetKeyDown(currentState.nextkey))
+                .Take(1).Repeat()
                 .ThrottleFirst(TimeSpan.FromSeconds(1f))
                 .Subscribe(_ =>
                 {
@@ -51,6 +53,7 @@ namespace Pia.Scripts.Synopsis
                 }).AddTo(gameObject);
 
             guideNoticeStream = this.UpdateAsObservable()
+                .SkipWhile(_=> !currentState.CanGoNext())
                 .Where(_=>currentState.nextkey==KeyCode.Mouse0)
                 .Select(_ => currentState.CanGoNext())
                 .DistinctUntilChanged()
@@ -71,7 +74,7 @@ namespace Pia.Scripts.Synopsis
         }
         private void HideGuideNotice()
         {
-            guideNotice.DOColor(new Color(0,0,0,0), 0.5f).OnComplete(() =>
+            guideNotice.DOColor(new Color(0,0,0,0), 1f).OnComplete(() =>
             {
                 guideNotice.gameObject.SetActive(false);
             });
@@ -80,7 +83,8 @@ namespace Pia.Scripts.Synopsis
         private void ShowGuideNotice()
         {
             guideNotice.gameObject.SetActive(true);
-            guideNotice.DOColor(Color.white, 0.5f);
+            guideNotice.color = new Color();
+            guideNotice.DOColor(Color.white, 1f);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Default.Scripts.Sound
             var sl = (SoundListAsset)target;
             if (GUILayout.Button("Load All Sound"))
             {
+                EditorUtility.SetDirty(target);
                 var clips = sl.floder.LoadAllObjectsInFolder<AudioClip>();
                 sl.sounds = new List<Sound>();
                 foreach (var clip in clips)

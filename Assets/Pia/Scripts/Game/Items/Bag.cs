@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Pia.Scripts.UI;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
@@ -28,6 +29,8 @@ namespace Assets.Pia.Scripts.Game.Items
                 item.Initialize(player);
             }
             CreateUseStream();
+            _isOpen = false;
+            ui.SetActive(false);
         }
         private void CreateUseStream()
         {
@@ -53,18 +56,15 @@ namespace Assets.Pia.Scripts.Game.Items
 
         public void Open()
         {
-            ui.SetActive(true).OnComplete(() =>
-            {
-                _isOpen = true;
-            });
-           
+            _isOpen = true;
+            ui.SetActive(true);
+            SoundManager.Play("ui_button", 1);
         }
         public void Close()
         {
-            ui.SetActive(false).OnComplete(() =>
-            {
-                _isOpen = false;
-            });
+            _isOpen = false;
+            ui.SetActive(false);
+            SoundManager.Play("ui_button", 1);
         }
     }
 }

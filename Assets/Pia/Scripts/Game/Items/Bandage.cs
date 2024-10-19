@@ -1,4 +1,5 @@
-﻿using Default.Scripts.Util;
+﻿using System;
+using Default.Scripts.Util;
 using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
@@ -13,6 +14,8 @@ namespace Assets.Pia.Scripts.Game.Items
         [SerializeField] private RectTransform bandageUI;
         [SerializeField] private Image progressImage;
         [SerializeField] private float extent = 0.1f;
+        [SerializeField] private float decreaseInterval = 0.1f;
+        [SerializeField] private float decreaseExtent = 0.03f;
 
         private bool _isUsing = false;
         private float _progress = 0;
@@ -21,6 +24,7 @@ namespace Assets.Pia.Scripts.Game.Items
             if (player.IsBleeeding() && !_isUsing)
             {
                 InitializeUI();
+                _progress = 0;
                 //붕대 미니게임
                 var cutStream = GlobalInputBinder.CreateGetKeyDownStream(useKey)
                     .TakeWhile(_ => _progress < 1)
@@ -29,7 +33,11 @@ namespace Assets.Pia.Scripts.Game.Items
                         TryToCure();
                     });
 
-                this.UpdateAsObservable()
+                var decreaseStream = Observable.Interval(TimeSpan.FromSeconds(decreaseInterval)).TakeWhile(_ => _progress < 1)
+                    .Subscribe(_ => SetProgress(_progress - decreaseExtent))
+                    .AddTo(gameObject);
+
+                var finishStream = this.UpdateAsObservable()
                     .Where(_ => _progress >= 1.0f)
                     .Take(1).Subscribe(_ =>
                     {
@@ -37,12 +45,16 @@ namespace Assets.Pia.Scripts.Game.Items
                         player.SetCursorUnlocked();
                     }).AddTo(gameObject);
 
+               
+
                 player.UpdateAsObservable().Where(_ => !_isHold)
                     .Take(1).Subscribe(_ =>
                     {
                         player.SetCursorUnlocked();
                         Cancel();
                         cutStream.Dispose();
+                        finishStream.Dispose();
+                        decreaseStream.Dispose();
                     });
             }
         }
@@ -60,7 +72,7 @@ namespace Assets.Pia.Scripts.Game.Items
 
         private void SetProgress(float progress)
         {
-            _progress = progress;
+            _progress = Mathf.Clamp(progress, 0, 1);
             progressImage.DOKill();
             progressImage.DOFillAmount(progress, 0.1f);
         }

@@ -6,6 +6,7 @@ namespace Assets.Pia.Scripts.Path
     public abstract class SubPathNode : MonoBehaviour
     {
         public float appearDelay;
+        public float duration;
         public bool clearPreviousNode = false;
 
         public abstract Task Appear();

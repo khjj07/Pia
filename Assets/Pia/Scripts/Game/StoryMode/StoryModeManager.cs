@@ -5,6 +5,7 @@ using Assets.Pia.Scripts.General;
 using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.StoryMode.Walking;
 using Assets.Pia.Scripts.UI;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using Pia.Scripts.Dialog;
 using Pia.Scripts.Manager;
@@ -59,13 +60,16 @@ namespace Pia.Scripts.StoryMode
                 .Subscribe(_ =>
                 {
                     _isInteractionActive = false;
-
+                    SoundManager.Play("BGM_bug",3);
                 });
 
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
                     _isInteractionActive = false;
+                    SoundManager.Play("MP_Nightime", 0);
+                    SoundManager.Play("BGM_bug", 3);
+                    SoundManager.Play("StepLandmine", 1);
                     _player.OnStepMine();
                     _landMineUI.Appear();
                     PlayerPrefs.SetString("Save","LandMineDirt");
