@@ -150,22 +150,32 @@ namespace Pia.Scripts.StoryMode
 
         public static void GameOver(GameOverType type)
         {
+            Instance.GoToGameOverScene(type);
+        }
+
+        public void GoToGameOverScene(GameOverType type)
+        {
             switch (type)
             {
                 case GameOverType.MineExplosion:
+                    StartCoroutine(StoryModeLoadingManager.Load("GameOverMineBomb", 1.0f));
                     break;
                 case GameOverType.AirBomb:
+                    StartCoroutine(StoryModeLoadingManager.Load("GameOverAirBomb", 1.0f));
                     break;
                 case GameOverType.Boar:
-                    Debug.Log(StoryModeManager.GameOverType.Boar);
+                    StartCoroutine(StoryModeLoadingManager.Load("GameOverBoar", 1.0f));
                     break;
                 case GameOverType.Bleed:
+                    StartCoroutine(StoryModeLoadingManager.Load("GameOverHP0", 1.0f));
                     break;
                 case GameOverType.Enemy:
+                    StartCoroutine(StoryModeLoadingManager.Load("GameOverEnemy", 1.0f));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
+            
         }
 
         public void GameClear()

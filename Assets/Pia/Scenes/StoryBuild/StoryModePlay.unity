@@ -3223,14 +3223,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   airbombUI: {fileID: 1588020319}
   airbombGauge: {fileID: 1003764165}
-  airbombCheckBar: {fileID: 581496519}
   airbombTimerText: {fileID: 673983156}
-  maxPositionX: 450
-  direction: 1
-  speed: 1
-  balance: 1
+  airbombCheckBar: {fileID: 581496519}
+  positionBoundX: 225
+  matchPositionBound: 60
   remainTimer: 30
-  balanceDecreasement: 0.06
+  speeds:
+  - 5
+  - 7.5
+  - 10
+  - 12.5
+  - 15
+  balanceDecreasementAmounts:
+  - 5
+  - 10
+  - 15
+  - 20
+  - 25
+  balanceIncreasementAmount: 10
+  difficulty: 0
 --- !u!1 &1327561421
 GameObject:
   m_ObjectHideFlags: 0
@@ -5450,6 +5461,18 @@ PrefabInstance:
       propertyPath: holdSoundName
       value: equip_dagger
       objectReference: {fileID: 0}
+    - target: {fileID: 3883108013997099754, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883108013997099754, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883108013997099754, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -225
+      objectReference: {fileID: 0}
     - target: {fileID: 4196209455927137380, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: holdSoundName
       value: equip_bandage
@@ -5461,6 +5484,10 @@ PrefabInstance:
     - target: {fileID: 4979024020308950643, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: holdSoundName
       value: equip_flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389581640662918494, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6951264014851446251, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: holdSoundName

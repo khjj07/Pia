@@ -298,7 +298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 408337586}
   - component: {fileID: 408337585}
-  - component: {fileID: 408337584}
   - component: {fileID: 408337587}
   m_Layer: 0
   m_Name: Main Camera
@@ -307,14 +306,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &408337584
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408337583}
-  m_Enabled: 1
 --- !u!20 &408337585
 Camera:
   m_ObjectHideFlags: 0
@@ -1110,6 +1101,7 @@ MonoBehaviour:
   text: "\uC4F0\uB7EC\uC9C0\uC9C0 \uC54A\uB3C4\uB85D <red>\uC911\uC2EC</color>\uC744
     \uC7A1\uC73C\uC138\uC694.\r\n<red>\uCEE4\uC11C</red>\uAC00 <red>\uC911\uC559</red>\uC5D0
     \uC704\uCE58\uD560 \uB54C <red>\uD074\uB9AD</red>\uD574 \uADE0\uD615\uC744 \uC7A1\uC2B5\uB2C8\uB2E4."
+  typeSound: 1
 --- !u!114 &1741142752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,6 +1114,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db344a47e8601143a26c08c5d5231ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stayPosition: 1
+  onAppearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisappearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onBeginPrintEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onEndPrintEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1741142753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,6 +1527,7 @@ MonoBehaviour:
   appearDelay: 0.5
   text: "<red>\uD3ED\uACA9</red>\uC5D0 \uC758\uD574 <red>\uADE0\uD615</red>\uC744
     \uC783\uC5B4 \uC9C0\uB8B0\uAC00 <red>\uD3ED\uBC1C</red>\uD588\uC2B5\uB2C8\uB2E4."
+  typeSound: 1
 --- !u!114 &2031820078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,6 +1540,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db344a47e8601143a26c08c5d5231ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stayPosition: 1
+  onAppearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisappearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onBeginPrintEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onEndPrintEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2031820079
 MonoBehaviour:
   m_ObjectHideFlags: 0

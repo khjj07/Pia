@@ -425,6 +425,13 @@ namespace Assets.Pia.Scripts.Game
             Cursor.visible = false;
             _isInteractable = true;
         }
+        public void SetCursorLockedAndInteractable()
+        {
+            playerCursor.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            _isInteractable = true;
+        }
         public void RotateCameraX(float direction)
         {
             if (_ableToCrouch)

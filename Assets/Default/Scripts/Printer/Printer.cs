@@ -306,9 +306,9 @@ namespace Default.Scripts.Printer
             }
         }
 
-        public IEnumerator RepeatTween(PrintStyle style, int letterCount)
+        public async Task RepeatTween(PrintStyle style, int letterCount)
         {
-            yield return new WaitForSeconds(style.appearInterval);
+            await Task.Delay((int)(style.appearInterval*1000));
             if (style.useRepeatAnimation)
             {
                 _textMeshScaleRepeatTween[letterCount] = RepeatScaleTween(letterCount, style.repeatBeginScale,
@@ -361,7 +361,7 @@ namespace Default.Scripts.Printer
                 for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                 {
                     AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                    StartCoroutine(RepeatTween(style, letterCount));
+                    RepeatTween(style, letterCount);
                     letterCount++;
                 }
                 _parsedTextIndex++;
@@ -459,7 +459,7 @@ namespace Default.Scripts.Printer
                         {
                             AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
                             onAppearEvent.Invoke();
-                            StartCoroutine(RepeatTween(style, letterCount));
+                            RepeatTween(style, letterCount);
                             letterCount++;
                            await Task.Delay((int)(style.appearInterval*1000));
                         }
@@ -469,7 +469,7 @@ namespace Default.Scripts.Printer
                         {
                             AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
                             onAppearEvent.Invoke();
-                            StartCoroutine(RepeatTween(style, letterCount));
+                            RepeatTween(style, letterCount);
                             letterCount++;
                             if (_parsedText[_parsedTextIndex][i] == ' ')
                             {
@@ -483,7 +483,7 @@ namespace Default.Scripts.Printer
                         {
                             AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
                             onAppearEvent.Invoke();
-                            StartCoroutine(RepeatTween(style, letterCount));
+                            RepeatTween(style, letterCount);
                             letterCount++;
                         }
                         break;
