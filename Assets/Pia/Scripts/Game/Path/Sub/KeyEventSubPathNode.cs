@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Default.Scripts.Util;
 using UniRx;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Assets.Pia.Scripts.Path.Sub
     {
         public KeyCode nextKey = KeyCode.Tab;
         public UnityEvent keyPressedEvent;
-        public override async Task Appear()
+        public override async Task Appear(CancellationTokenSource cancellationTokenSource)
         {
             gameObject.SetActive(true);
             await WaitForKeyPress(nextKey);
@@ -18,7 +19,7 @@ namespace Assets.Pia.Scripts.Path.Sub
             gameObject.SetActive(false);
         }
 
-        public override Task Disappear()
+        public override Task Disappear(CancellationTokenSource cancellationTokenSource)
         {
             return Task.CompletedTask;
         }

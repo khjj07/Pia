@@ -55,5 +55,13 @@ namespace Default.Scripts.Sound
         {
             Instance.channels[channel].SetVolume(volume);
         }
+
+        public static void StopAll()
+        {
+            foreach (var channel in Instance.channels)
+            {
+                channel.Stop();
+            }
+        }
     }
 }

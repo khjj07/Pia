@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Default.Scripts.Sound;
 using Default.Scripts.Util;
@@ -27,10 +28,10 @@ namespace Pia.Scripts.Synopsis
             return !_isAppearing && _lastPageFlag;
         }
 
-        public override async Task OnEnter()
+        public override async Task OnEnter(CancellationTokenSource tokenSource)
         {
             CreateReadingBookStream();
-            await base.OnEnter();
+            await base.OnEnter(tokenSource);
         }
 
         private void CreateReadingBookStream()

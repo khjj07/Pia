@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Assets.Pia.Scripts.Game.Events;
 using Default.Scripts.Printer;
 using Default.Scripts.Util;
+using Pia.Scripts.StoryMode;
 using UnityEngine;
 
 namespace Assets.Pia.Scripts.StoryMode
@@ -37,21 +38,29 @@ namespace Assets.Pia.Scripts.StoryMode
 
         private async Task PrintEvent(Event e)
         {
-            Debug.Log(eventText[(int)e]);
-           _canvas.gameObject.SetActive(true);
-            if (_eventPrinter.IsPrinting())
+            try
             {
-                _eventPrinter.Skip();
-                await _eventPrinter.Disappear();
+                Debug.Log(eventText[(int)e]);
+                _canvas.gameObject.SetActive(true);
+                if (_eventPrinter.IsPrinting())
+                {
+                    _eventPrinter.Skip();
+                    await _eventPrinter.Disappear(StoryModeManager.GetGameOverTokenSource());
+                }
+                _eventPrinter.SetOriginalText(eventText[(int)e]);
+                await _eventPrinter.Print(StoryModeManager.GetGameOverTokenSource());
+                await Task.Delay((int)(duration * 1000));
+                if (!_eventPrinter.IsPrinting())
+                {
+                    await _eventPrinter.Disappear(StoryModeManager.GetGameOverTokenSource());
+                }
+                _canvas.gameObject.SetActive(false);
             }
-            _eventPrinter.SetOriginalText(eventText[(int)e]);
-            await _eventPrinter.Print();
-            await Task.Delay((int)(duration * 1000));
-            if (!_eventPrinter.IsPrinting())
+            catch (OperationCanceledException)
             {
-                await _eventPrinter.Disappear();
+                Debug.Log("Async task was canceled.");
             }
-            _canvas.gameObject.SetActive(false);
+
         }
 
         public static void InvokeEvent(Event e)

@@ -22,20 +22,33 @@ namespace Pia.Scripts.Manager
 
         public static async Task FadeOut()
         {
-            Instance._fadeCamera.gameObject.SetActive(true);
-            Instance.fadeImage.gameObject.SetActive(true);
-            Instance.fadeImage.DOColor(Color.black, Instance.fadeDuration);
-            await Task.Delay((int)(Instance.fadeDuration * 1000));
-            
+            try
+            {
+                Instance._fadeCamera.gameObject.SetActive(true);
+                Instance.fadeImage.gameObject.SetActive(true);
+                Instance.fadeImage.DOColor(Color.black, Instance.fadeDuration);
+                await Task.Delay((int)(Instance.fadeDuration * 1000));
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Async task was canceled.");
+            }
         }
 
         public static async Task FadeIn()
         {
-            
-            Instance.fadeImage.DOColor(new Color(0, 0, 0, 0), Instance.fadeDuration);
-            await Task.Delay((int)(Instance.fadeDuration *1000));
-            Instance._fadeCamera.gameObject.SetActive(false);
-            Instance.fadeImage.gameObject.SetActive(false);
+            try
+            {
+                Instance.fadeImage.DOColor(new Color(0, 0, 0, 0), Instance.fadeDuration);
+                await Task.Delay((int)(Instance.fadeDuration * 1000));
+                Instance._fadeCamera.gameObject.SetActive(false);
+                Instance.fadeImage.gameObject.SetActive(false);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Async task was canceled.");
+            }
+           
         }
     }
 }

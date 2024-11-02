@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.Path;
 using Default.Scripts.Printer;
 using Default.Scripts.Util.StatePattern;
+using Pia.Scripts.StoryMode;
 using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
@@ -100,6 +102,11 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
             currentIndex++;
         }
 
+        public void StopPrintProcess()
+        {
+            runPrintProcess = false;
+        }
+
         private void RegisterAllNode()
         {
             foreach (var node in nodes)
@@ -136,10 +143,10 @@ namespace Assets.Pia.Scripts.StoryMode.Walking
         {
             if (currentPrintNode)
             {
-                await currentPrintNode.Disappear();
+                await currentPrintNode.Disappear(StoryModeManager.GetGameOverTokenSource());
             }
             currentPrintNode = item;
-            await item.Print();
+            await item.Print(StoryModeManager.GetGameOverTokenSource());
         }
 #if UNITY_EDITOR
         public void OnDrawGizmos()

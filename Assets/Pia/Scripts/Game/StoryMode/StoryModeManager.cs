@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Assets.Pia.Scripts.Effect;
 using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.General;
@@ -52,8 +53,12 @@ namespace Pia.Scripts.StoryMode
         private LandMine _landMine;
 
         private bool _isInteractionActive;
+
+
+        private CancellationTokenSource _gameOverTokenSource;
         public void Start()
         {
+            _gameOverTokenSource = new CancellationTokenSource();
             stateSubject = new Subject<State>();
             stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
             stateSubject.DistinctUntilChanged().Where(x => x == State.Walking)
@@ -123,6 +128,10 @@ namespace Pia.Scripts.StoryMode
             return Instance.controlMode;
         }
 
+        public static CancellationTokenSource GetGameOverTokenSource()
+        {
+           return Instance._gameOverTokenSource;
+        }
         public static IObservable<Unit> GetStepStream()
         {
             switch (Instance.controlMode)
@@ -150,6 +159,8 @@ namespace Pia.Scripts.StoryMode
 
         public static void GameOver(GameOverType type)
         {
+            Instance._pathManager.StopPrintProcess();
+            Instance._gameOverTokenSource.Cancel();
             Instance.GoToGameOverScene(type);
         }
 

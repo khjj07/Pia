@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,12 +18,19 @@ namespace Assets.Pia.Scripts.StoryMode.Synopsis.Sub
             _image = GetComponent<Image>();
         }
 
-        public override async Task Appear()
+        public override async Task Appear(CancellationTokenSource cancellationTokenSource)
         {
-            await Task.Delay((int)(appearDelay * 1000));
-            gameObject.SetActive(true);
-            _image.rectTransform.DOAnchorPos(Vector2.zero, duration);
-            _image.rectTransform.DOScale(Vector2.one, duration);
+            try
+            {
+                await Task.Delay((int)(appearDelay * 1000), cancellationTokenSource.Token);
+                gameObject.SetActive(true);
+                _image.rectTransform.DOAnchorPos(Vector2.zero, duration);
+                _image.rectTransform.DOScale(Vector2.one, duration);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Async task was canceled.");
+            }
         }
     }
 }

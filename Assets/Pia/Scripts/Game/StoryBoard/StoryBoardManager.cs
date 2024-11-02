@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using Default.Scripts.Util.StatePattern;
@@ -20,6 +21,7 @@ namespace Pia.Scripts.Synopsis
         [SerializeField] string nextScene;
         private IDisposable goNextStream;
         private IDisposable guideNoticeStream;
+      
 
         public override void Next()
         {
@@ -27,6 +29,7 @@ namespace Pia.Scripts.Synopsis
             {
                 goNextStream.Dispose();
                 guideNoticeStream.Dispose();
+                _cancellationTokenSource.Cancel();
                 StartCoroutine(StoryModeLoadingManager.Load(nextScene, 1.0f));
             }
             else
@@ -38,9 +41,8 @@ namespace Pia.Scripts.Synopsis
         public override void Start()
         {
             base.Start();
-            SoundManager.Stop(0);
+            SoundManager.StopAll();
             guideNotice.gameObject.SetActive(false);
-
             goNextStream = this.UpdateAsObservable()
                 .Where(_ => currentState.CanGoNext())
                 .Where(_ => Input.GetKeyDown(currentState.nextkey))
@@ -61,6 +63,10 @@ namespace Pia.Scripts.Synopsis
                 .AddTo(gameObject);
         }
 
+        public CancellationToken GetCancellationToken()
+        {
+            return _cancellationTokenSource.Token;
+        }
         private void ChangeGuideNotice(bool value)
         {
             if (value)

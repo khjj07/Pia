@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,9 +42,10 @@ namespace Default.Scripts.Util.StatePattern
     public abstract class StateManager<T> : StateManagerBase where T : State<T>
     {
         public T currentState;
-        
+        protected CancellationTokenSource _cancellationTokenSource;
         public virtual void Start()
         {
+            _cancellationTokenSource = new CancellationTokenSource();
             states = GetComponentsInChildren<T>(true);
             foreach (var state in states)
             {
@@ -55,7 +57,7 @@ namespace Default.Scripts.Util.StatePattern
                 if (currentState != null)
                 {
                     currentState.gameObject.SetActive(true);
-                    currentState.OnEnter();
+                    currentState.OnEnter(_cancellationTokenSource);
                 }
             }
         }
@@ -92,9 +94,9 @@ namespace Default.Scripts.Util.StatePattern
 
         public override async void Change(StateBase state)
         {
-            await currentState.OnExit();
+            await currentState.OnExit(_cancellationTokenSource);
             currentState = state as T;
-            await currentState.OnEnter();
+            await currentState.OnEnter(_cancellationTokenSource);
         }
     }
 }

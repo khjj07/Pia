@@ -30,7 +30,7 @@ namespace Assets.Pia.Scripts.General
                 if (currentState != null)
                 {
                     currentState.gameObject.SetActive(true);
-                    currentState.OnEnter();
+                    currentState.OnEnter(_cancellationTokenSource);
                 }
             }
             this.UpdateAsObservable()

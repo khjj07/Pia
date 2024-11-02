@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 namespace Default.Scripts.Printer
@@ -9,7 +10,7 @@ namespace Default.Scripts.Printer
         {
             printer = GetComponent<Printer>();
             printer.SetOriginalText("hello world");
-            printer.Print();
+            printer.Print(new CancellationTokenSource());
         }
 
     }

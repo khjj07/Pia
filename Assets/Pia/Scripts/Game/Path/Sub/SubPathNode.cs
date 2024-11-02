@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Pia.Scripts.Path
@@ -9,7 +10,7 @@ namespace Assets.Pia.Scripts.Path
         public float duration;
         public bool clearPreviousNode = false;
 
-        public abstract Task Appear();
-        public abstract Task Disappear();
+        public abstract Task Appear(CancellationTokenSource cancellationTokenSource);
+        public abstract Task Disappear(CancellationTokenSource cancellationTokenSource);
     }
 }

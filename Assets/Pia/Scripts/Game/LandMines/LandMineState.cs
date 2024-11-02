@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Assets.Pia.Scripts.Interface;
 using Default.Scripts.Util.StatePattern;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 public class LandMineState : State<LandMineState>
 {
-    public override Task OnEnter()
+    public override Task OnEnter(CancellationTokenSource tokenSource)
     {
         foreach (var interatable in GetComponentsInChildren<InteractableClass>())
         {
@@ -16,7 +17,7 @@ public class LandMineState : State<LandMineState>
         return Task.CompletedTask;
     }
 
-    public override Task OnExit()
+    public override Task OnExit(CancellationTokenSource tokenSource)
     {
         foreach (var interatable in GetComponentsInChildren<InteractableClass>())
         {

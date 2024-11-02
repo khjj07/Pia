@@ -1,8 +1,10 @@
-﻿using Assets.Pia.Scripts.StoryMode.Synopsis.Sub;
+﻿using System;
+using Assets.Pia.Scripts.StoryMode.Synopsis.Sub;
 using System.Threading.Tasks;
 using Default.Scripts.Util;
 using UniRx;
 using UnityEngine;
+using System.Threading;
 
 namespace Assets.Pia.Scripts.Path
 {
@@ -24,40 +26,46 @@ namespace Assets.Pia.Scripts.Path
             }
             canvas.gameObject.SetActive(false);
         }
-        public async Task Print()
+        public async Task Print(CancellationTokenSource cancellationTokenSource)
         {
             canvas.gameObject.SetActive(true);
             _isPrinting = true;
             foreach (var node in _subNodes)
             {
-                
-                await Task.Delay((int)(node.appearDelay*1000));
-                if (node.clearPreviousNode)
+                try
                 {
-                    await ClearPreviousSubNode();
+                    await Task.Delay((int)(node.appearDelay * 1000), cancellationTokenSource.Token);
+                    if (node.clearPreviousNode)
+                    {
+                        await ClearPreviousSubNode(cancellationTokenSource);
+                    }
+                    await node.Appear(cancellationTokenSource);
+                    await Task.Delay((int)(node.duration * 1000), cancellationTokenSource.Token);
                 }
-                await node.Appear();
-                await Task.Delay((int)(node.duration * 1000));
+                catch (OperationCanceledException)
+                {
+                    Debug.Log("Async task was canceled.");
+                }
             }
             _isPrinting = false;
         }
 
-        public async Task ClearPreviousSubNode()
+        public async Task ClearPreviousSubNode(CancellationTokenSource cancellationTokenSource)
         {
             var tmp = GetComponentsInChildren<SubPathNode>();
             foreach (var node in tmp)
             {
-                await node.Disappear();
+                await node.Disappear(cancellationTokenSource);
             }
         }
 
-        public async Task Disappear()
+        public async Task Disappear(CancellationTokenSource cancellationTokenSource)
         {
             canvas.gameObject.SetActive(true);
             _isPrinting = true;
             foreach (var node in _subNodes)
             {
-                await node.Disappear();
+                await node.Disappear(cancellationTokenSource);
             }
             _isPrinting = false;
         }

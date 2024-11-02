@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading;
 using System.Threading.Tasks;
 using Pia.Scripts.StoryMode;
 using TMPro;
@@ -10,14 +11,14 @@ namespace Assets.Pia.Scripts.Path
 {
     public class MineNode : SubPathNode
     {
-        public override async Task Appear()
+        public override async Task Appear(CancellationTokenSource cancellationTokenSource)
         {
             StoryModeManager.SetState(StoryModeManager.State.LandMineDirt);
         }
 
-        public override Task Disappear()
+        public override Task Disappear(CancellationTokenSource cancellationTokenSource)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
 
 

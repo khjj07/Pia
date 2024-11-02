@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Default.Scripts.Util;
 using UniRx;
 using UnityEngine;
@@ -10,12 +11,12 @@ namespace Assets.Pia.Scripts.Path.Sub
     {
         public KeyCode nextKey = KeyCode.Tab;
 
-        public async override Task Appear()
+        public override async Task Appear(CancellationTokenSource cancellationTokenSource)
         {
             await WaitForKeyPress(nextKey);
         }
 
-        public override Task Disappear()
+        public override Task Disappear(CancellationTokenSource cancellationTokenSource)
         {
             return Task.CompletedTask;
         }

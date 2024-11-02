@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,19 +12,27 @@ namespace Assets.Pia.Scripts.Path.Sub
         [SerializeField] private float duration;
         [SerializeField] private Ease appearEase;
         [SerializeField] private Ease disappearEase;
-       private void Start()
+        private void Start()
         {
-            transform.localScale=Vector3.zero;
+            transform.localScale = Vector3.zero;
         }
 
-        public override async Task Appear()
+        public override async Task Appear(CancellationTokenSource cancellationTokenSource)
         {
-            await Task.Delay((int)(appearDelay * 1000));
-            gameObject.SetActive(true);
-            transform.DOScale(Vector3.one, duration).SetEase(appearEase);
+            try
+            {
+                await Task.Delay((int)(appearDelay * 1000), cancellationTokenSource.Token);
+                gameObject.SetActive(true);
+                transform.DOScale(Vector3.one, duration).SetEase(appearEase);
+
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Async task was canceled.");
+            }
         }
 
-        public override Task Disappear()
+        public override Task Disappear(CancellationTokenSource cancellationTokenSource)
         {
             transform.DOScale(Vector3.zero, duration).SetEase(disappearEase).OnComplete(() =>
             {

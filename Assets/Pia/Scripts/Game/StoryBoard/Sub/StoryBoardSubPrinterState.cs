@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Default.Scripts.Printer;
 using Default.Scripts.Sound;
 using UnityEngine;
@@ -22,12 +24,19 @@ namespace Assets.Pia.Scripts.StoryMode.Synopsis.Sub
                 _printer.onEndPrintEvent.AddListener(() => SoundManager.Stop(2));
             }
         }
-        public override async Task Appear()
+        public override async Task Appear(CancellationTokenSource cancellationTokenSource)
         {
-            await Task.Delay((int)(appearDelay * 1000));
-            _printer.SetOriginalText(text);
-            gameObject.SetActive(true);
-            await _printer.Print();
+            try
+            {
+                await Task.Delay((int)(appearDelay * 1000), cancellationTokenSource.Token);
+                _printer.SetOriginalText(text);
+                gameObject.SetActive(true);
+                await _printer.Print(cancellationTokenSource);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Async task was canceled.");
+            }
         }
     }
 }

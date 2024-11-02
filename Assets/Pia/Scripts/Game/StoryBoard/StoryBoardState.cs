@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Assets.Pia.Scripts.StoryMode.Synopsis.Sub;
 using Default.Scripts.Printer;
@@ -43,7 +44,7 @@ namespace Pia.Scripts.Dialog
             return !_isAppearing;
         }
 
-        public override async Task OnEnter()
+        public override async Task OnEnter(CancellationTokenSource tokenSource)
         {
             _isAppearing = true;
             gameObject.SetActive(true);
@@ -58,7 +59,7 @@ namespace Pia.Scripts.Dialog
                     foreach (var state in _subStates)
                     {
                         state.gameObject.SetActive(true);
-                        await state.Appear();
+                        await state.Appear(tokenSource);
                     }
                     break;
                 case AppearMode.Simultaneous:
@@ -66,7 +67,7 @@ namespace Pia.Scripts.Dialog
                     foreach (var state in _subStates)
                     {
                         state.gameObject.SetActive(true);
-                        tasks.Add(state.Appear());
+                        tasks.Add(state.Appear(tokenSource));
                     }
 
                     await Task.WhenAll(tasks.ToArray());
@@ -78,7 +79,7 @@ namespace Pia.Scripts.Dialog
             _isAppearing = false;
         }
 
-        public override async Task OnExit()
+        public override async Task OnExit(CancellationTokenSource tokenSource)
         {
             if (fadeOutEnable)
             {

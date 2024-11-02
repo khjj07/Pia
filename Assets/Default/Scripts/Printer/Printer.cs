@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
@@ -306,24 +307,32 @@ namespace Default.Scripts.Printer
             }
         }
 
-        public async Task RepeatTween(PrintStyle style, int letterCount)
+        public async Task RepeatTween(PrintStyle style, int letterCount, CancellationToken cancellationToken)
         {
-            await Task.Delay((int)(style.appearInterval*1000));
-            if (style.useRepeatAnimation)
+            try
             {
-                _textMeshScaleRepeatTween[letterCount] = RepeatScaleTween(letterCount, style.repeatBeginScale,
-                    style.repeatEndScale, style.repeatInterval / style.repeatScaleSpeed,
-                    style.repeatScaleEase, style.repeatLoopType);
-                _textMeshPositionRepeatTween[letterCount] = RepeatPositionTween(letterCount, style.repeatBeginPosition,
-                    style.repeatEndPosition, style.repeatInterval / style.repeatPositionSpeed,
-                    style.repeatPositionEase, style.repeatLoopType);
-                _textMeshRotationRepeatTween[letterCount] = RepeatRotationTween(letterCount, style.repeatBeginRotation,
-                    style.repeatEndRotation, style.repeatInterval / style.repeatRotationSpeed,
-                    style.repeatRotationEase, style.repeatLoopType);
-                _textMeshColorRepeatTween[letterCount] = RepeatColorTween(letterCount, style.repeatBeginColor,
-                    style.repeatEndColor, style.repeatInterval / style.repeatColorSpeed,
-                    style.repeatColorEase, style.repeatLoopType);
+                await Task.Delay((int)(style.appearInterval * 1000), cancellationToken);
+                if (style.useRepeatAnimation)
+                {
+                    _textMeshScaleRepeatTween[letterCount] = RepeatScaleTween(letterCount, style.repeatBeginScale,
+                        style.repeatEndScale, style.repeatInterval / style.repeatScaleSpeed,
+                        style.repeatScaleEase, style.repeatLoopType);
+                    _textMeshPositionRepeatTween[letterCount] = RepeatPositionTween(letterCount, style.repeatBeginPosition,
+                        style.repeatEndPosition, style.repeatInterval / style.repeatPositionSpeed,
+                        style.repeatPositionEase, style.repeatLoopType);
+                    _textMeshRotationRepeatTween[letterCount] = RepeatRotationTween(letterCount, style.repeatBeginRotation,
+                        style.repeatEndRotation, style.repeatInterval / style.repeatRotationSpeed,
+                        style.repeatRotationEase, style.repeatLoopType);
+                    _textMeshColorRepeatTween[letterCount] = RepeatColorTween(letterCount, style.repeatBeginColor,
+                        style.repeatEndColor, style.repeatInterval / style.repeatColorSpeed,
+                        style.repeatColorEase, style.repeatLoopType);
+                }
             }
+            catch (OperationCanceledException)
+            {
+                UnityEngine.Debug.Log("Async task was canceled.");
+            }
+          
         }
 
         public void StopPrinting()
@@ -361,7 +370,7 @@ namespace Default.Scripts.Printer
                 for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                 {
                     AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                    RepeatTween(style, letterCount);
+                    RepeatTween(style, letterCount,new CancellationTokenSource().Token);
                     letterCount++;
                 }
                 _parsedTextIndex++;
@@ -376,128 +385,148 @@ namespace Default.Scripts.Printer
             PrintImmediately();
         }
 
-        public async Task Disappear()
+        public async Task Disappear(CancellationTokenSource cancellationTokenSource)
         {
-            int letterCount = 0;
-            _parsedTextIndex = 0;
-            _isPrinting = true;
-
-            while (_parsedTextIndex < _parsedText.Count)
+            try
             {
-                PrintStyle style = _dialogStyle[_parsedTextIndex];
-                switch (style.disappearUnit)
-                {
-                    case PrintStyle.Unit.Letter:
-                        for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
-                        {
-                            DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                            onDisappearEvent.Invoke();
-                            letterCount++;
-                            await Task.Delay((int)(style.disappearInterval * 1000));
-                        }
-                        break;
-                    case PrintStyle.Unit.Word:
-                        for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
-                        {
-                            DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                            onDisappearEvent.Invoke();
-                            letterCount++;
-                            if (_parsedText[_parsedTextIndex][i] == ' ')
-                            {
-                                await Task.Delay((int)(style.disappearInterval * 1000));
-                            }
-                        }
-                        break;
-                    case PrintStyle.Unit.Sentence:
-                        for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
-                        {
-                            DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                            onDisappearEvent.Invoke();
-                            letterCount++;
-                        }
-                        await Task.Delay((int)(style.disappearInterval * 1000));
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                int letterCount = 0;
+                _parsedTextIndex = 0;
+                _isPrinting = true;
 
-                _parsedTextIndex++;
-            }
-           
-            StopPrinting();
-        }
-
-        public async Task Print()
-        {
-            onBeginPrintEvent.Invoke();
-            int letterCount = 0;
-            _parsedTextIndex = 0;
-            _isPrinting = true;
-
-            if (stayPosition)
-            {
                 while (_parsedTextIndex < _parsedText.Count)
                 {
-                    for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                    PrintStyle style = _dialogStyle[_parsedTextIndex];
+                    switch (style.disappearUnit)
                     {
-                        _currentText.Append(_parsedText[_parsedTextIndex][i]);
+                        case PrintStyle.Unit.Letter:
+                            for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                            {
+                                DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                                onDisappearEvent.Invoke();
+                                letterCount++;
+                                await Task.Delay((int)(style.disappearInterval * 1000), cancellationTokenSource.Token);
+                            }
+                            break;
+                        case PrintStyle.Unit.Word:
+                            for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                            {
+                                DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                                onDisappearEvent.Invoke();
+                                letterCount++;
+                                if (_parsedText[_parsedTextIndex][i] == ' ')
+                                {
+                                    await Task.Delay((int)(style.disappearInterval * 1000), cancellationTokenSource.Token);
+                                }
+                            }
+                            break;
+                        case PrintStyle.Unit.Sentence:
+                            for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                            {
+                                DisappearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                                onDisappearEvent.Invoke();
+                                letterCount++;
+                            }
+                            await Task.Delay((int)(style.disappearInterval * 1000), cancellationTokenSource.Token);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
+
                     _parsedTextIndex++;
                 }
-                _textComponent.SetText(_currentText);
+
+                StopPrinting();
             }
-
-            _parsedTextIndex = 0;
-
-            while (_parsedTextIndex < _parsedText.Count)
+            catch (OperationCanceledException)
             {
-                PrintStyle style = _dialogStyle[_parsedTextIndex];
-                switch (style.appearAndRepeatUnit)
+                UnityEngine.Debug.Log("Async task was canceled.");
+            }
+          
+        }
+
+        public async Task Print(CancellationTokenSource cancellationTokenSource)
+        {
+            try
+            {
+                onBeginPrintEvent.Invoke();
+                int letterCount = 0;
+                _parsedTextIndex = 0;
+                _isPrinting = true;
+
+                if (stayPosition)
                 {
-                    case PrintStyle.Unit.Letter:
+                    while (_parsedTextIndex < _parsedText.Count)
+                    {
                         for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
                         {
-                            AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                            onAppearEvent.Invoke();
-                            RepeatTween(style, letterCount);
-                            letterCount++;
-                           await Task.Delay((int)(style.appearInterval*1000));
+                            _currentText.Append(_parsedText[_parsedTextIndex][i]);
                         }
-                        break;
-                    case PrintStyle.Unit.Word:
-                        for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
-                        {
-                            AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                            onAppearEvent.Invoke();
-                            RepeatTween(style, letterCount);
-                            letterCount++;
-                            if (_parsedText[_parsedTextIndex][i] == ' ')
-                            {
-                                await Task.Delay((int)(style.appearInterval * 1000));
-                            }
-                        }
-                        await Task.Delay((int)(style.appearInterval * 1000));
-                        break;
-                    case PrintStyle.Unit.Sentence:
-                        for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
-                        {
-                            AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
-                            onAppearEvent.Invoke();
-                            RepeatTween(style, letterCount);
-                            letterCount++;
-                        }
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+
+                        _parsedTextIndex++;
+                    }
+
+                    _textComponent.SetText(_currentText);
                 }
 
-                _parsedTextIndex++;
-            }
+                _parsedTextIndex = 0;
 
-            _isPrinting = false;
-            _isAppeared = true;
-            onEndPrintEvent.Invoke();
-            await Task.CompletedTask;
+                while (_parsedTextIndex < _parsedText.Count)
+                {
+                    PrintStyle style = _dialogStyle[_parsedTextIndex];
+                    switch (style.appearAndRepeatUnit)
+                    {
+                        case PrintStyle.Unit.Letter:
+                            for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                            {
+                                AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                                onAppearEvent.Invoke();
+                                RepeatTween(style, letterCount, cancellationTokenSource.Token);
+                                letterCount++;
+                                await Task.Delay((int)(style.appearInterval * 1000), cancellationTokenSource.Token);
+                            }
+
+                            break;
+                        case PrintStyle.Unit.Word:
+                            for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                            {
+                                AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                                onAppearEvent.Invoke();
+                                RepeatTween(style, letterCount, cancellationTokenSource.Token);
+                                letterCount++;
+                                if (_parsedText[_parsedTextIndex][i] == ' ')
+                                {
+                                    await Task.Delay((int)(style.appearInterval * 1000), cancellationTokenSource.Token);
+                                }
+                            }
+
+                            await Task.Delay((int)(style.appearInterval * 1000), cancellationTokenSource.Token);
+                            break;
+                        case PrintStyle.Unit.Sentence:
+                            for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)
+                            {
+                                AppearTween(style, _parsedText[_parsedTextIndex][i], letterCount);
+                                onAppearEvent.Invoke();
+                                RepeatTween(style, letterCount, cancellationTokenSource.Token);
+                                letterCount++;
+                            }
+
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                    _parsedTextIndex++;
+                }
+
+                _isPrinting = false;
+                _isAppeared = true;
+                onEndPrintEvent.Invoke();
+                await Task.CompletedTask;
+            }
+            catch (OperationCanceledException)
+            { 
+                UnityEngine.Debug.Log("Async task was canceled.");
+            }
         }
     }
 }
