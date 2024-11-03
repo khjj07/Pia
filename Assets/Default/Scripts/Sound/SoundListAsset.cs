@@ -10,8 +10,6 @@ namespace Default.Scripts.Sound
     [CustomEditor(typeof(SoundListAsset))]
     public class SoundListAssetInspector : Editor
     {
-       
-
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -20,11 +18,14 @@ namespace Default.Scripts.Sound
             {
                 EditorUtility.SetDirty(target);
                 var clips = sl.floder.LoadAllObjectsInFolder<AudioClip>();
-                sl.sounds = new List<Sound>();
+                var tmp = new List<Sound>();
                 foreach (var clip in clips)
                 {
-                    sl.sounds.Add(new Sound(clip));
+                    tmp.Add(new Sound(clip));
                 }
+                sl.sounds = tmp.ToArray();
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
         }
     }
@@ -32,7 +33,7 @@ namespace Default.Scripts.Sound
     [CreateAssetMenu(fileName = "Sound List Asset",menuName = "Sound/Sound LIst Asset")]
     public class SoundListAsset : ScriptableObject
     {
-        public List<Sound> sounds;
+        public Sound[] sounds;
 #if UNITY_EDITOR
         public DefaultAsset floder;
 #endif

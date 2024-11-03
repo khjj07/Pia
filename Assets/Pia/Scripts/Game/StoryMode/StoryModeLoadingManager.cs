@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
 using Default.Scripts.Util;
 using DG.Tweening;
 using UnityEngine;
@@ -8,13 +10,15 @@ namespace Pia.Scripts.Manager
 {
     public class StoryModeLoadingManager : GlobalLoadingManager
     {
-        protected override void OnLoadBegin()
+        protected override IEnumerator OnLoadBegin()
         {
             GlobalFadeManager.FadeOut();
+            yield return new WaitForSeconds(GlobalFadeManager.Instance.fadeDuration);
         }
-        protected override void OnLoadEnd()
+        protected override IEnumerator OnLoadEnd()
         {
             GlobalFadeManager.FadeIn();
+            yield return new WaitForSeconds(GlobalFadeManager.Instance.fadeDuration);
         }
     }
 }

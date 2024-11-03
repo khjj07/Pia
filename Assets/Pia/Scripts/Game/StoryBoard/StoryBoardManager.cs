@@ -30,7 +30,7 @@ namespace Pia.Scripts.Synopsis
                 goNextStream.Dispose();
                 guideNoticeStream.Dispose();
                 _cancellationTokenSource.Cancel();
-                StartCoroutine(StoryModeLoadingManager.Load(nextScene, 1.0f));
+                StartCoroutine(StoryModeLoadingManager.Instance.Load(nextScene, 1.0f));
             }
             else
             {
@@ -67,6 +67,7 @@ namespace Pia.Scripts.Synopsis
         {
             return _cancellationTokenSource.Token;
         }
+
         private void ChangeGuideNotice(bool value)
         {
             if (value)

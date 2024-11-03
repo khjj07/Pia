@@ -3,6 +3,7 @@ using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Pia.Scripts.Manager
@@ -23,7 +24,7 @@ namespace Pia.Scripts.Manager
         private void OnStartButtonClick()
         {
             SoundManager.PlayOneShot("ui_button",1);
-            StartCoroutine(StoryModeLoadingManager.Load("StoryModeSynopsis", 1.0f));
+            StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeSynopsis", 1.0f));
         }
 
         private void OnQuitButtonClick()

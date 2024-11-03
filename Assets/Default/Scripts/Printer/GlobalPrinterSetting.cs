@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,11 +28,11 @@ namespace Default.Scripts.Printer
 
         public PrintStyle skipTextAnimationStyle;
 
-        public List<PrintStyle> dialogStyles;
+        public PrintStyle[] dialogStyles;
 
         public PrintStyle FindDialogStyle(string name)
         {
-            return dialogStyles.Find((x) => x.name == name);
+            return dialogStyles.ToList().Find((x) => x.name == name);
         }
     }
 }

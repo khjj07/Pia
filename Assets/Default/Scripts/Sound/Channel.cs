@@ -10,7 +10,7 @@ namespace Default.Scripts.Sound
         public bool loop = false;
         private AudioSource _audioSource;
 
-        public void Start()
+        public void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
             volume=_audioSource.volume;

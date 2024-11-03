@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -14,31 +15,25 @@ namespace Default.Scripts.Util
             
         }
 
-        public void OnSceneLoaded()
+        public IEnumerator Load(string scene, float defaultDelay = 0.0f)
         {
-
-        }
-        public static IEnumerator Load(string scene, float defaultDelay = 0.0f)
-        {
-            UnityEngine.Debug.Log("Load " + scene);
-            //var previousScene = SceneManager.GetActiveScene();
             var loadOperation = SceneManager.LoadSceneAsync(scene);
             loadOperation.allowSceneActivation = false;
-            Instance.OnLoadBegin();
+            yield return OnLoadBegin();
             yield return new WaitForSeconds(defaultDelay);
             yield return new WaitUntil(() => loadOperation.progress >= 0.9f);
             loadOperation.allowSceneActivation = true;
-            Instance.OnLoadEnd();
+            yield return OnLoadEnd();
         }
 
-        protected virtual void OnLoadEnd()
+        protected virtual IEnumerator OnLoadEnd()
         {
-            
+            yield return null;
         }
 
-        protected virtual void OnLoadBegin()
+        protected virtual IEnumerator OnLoadBegin()
         {
-           
+            yield return null;
         }
     }
 }

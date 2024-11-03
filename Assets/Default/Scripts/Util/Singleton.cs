@@ -40,13 +40,14 @@ namespace Default.Scripts.Util
                 if (_instance == null)
                     try
                     {
+                        var type = typeof(T).Name;
 #if UNITY_EDITOR
-                        var type = typeof(T).ToString();
+
                         var guid = AssetDatabase.FindAssets("t:" + type);
                         var path = AssetDatabase.GUIDToAssetPath(guid[0]);
                         _instance = (T)AssetDatabase.LoadAssetAtPath(path, typeof(T));
 #else
-                        _instance = (T)Resources.Load<T>("Global LevelObject Setting");
+                        _instance = (T)Resources.Load<T>(type);
 #endif
 
                     }

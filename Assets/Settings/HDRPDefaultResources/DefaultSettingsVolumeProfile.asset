@@ -353,9 +353,15 @@ MonoBehaviour:
   m_PhysicallyBased:
     m_OverrideState: 1
     m_Value: 0
+  m_AdaptiveSamplingWeight:
+    m_OverrideState: 1
+    m_Value: 0.75
   m_LimitManualRangeNearBlur:
     m_OverrideState: 1
     m_Value: 0
+  coCStabilization:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-7089757308646879465
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -508,6 +514,9 @@ MonoBehaviour:
   tileOpacityThreshold:
     m_OverrideState: 1
     m_Value: 1
+  writeDepthAlphaThreshold:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-5794383279937776532
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -532,7 +541,7 @@ MonoBehaviour:
     m_Value: 0.2
   patternTexture:
     m_OverrideState: 1
-    m_Value: {fileID: 0}
+    m_Value: {fileID: 2800000, guid: f4ffff85d7cd3b94e90a79fd1b54cac9, type: 3}
     dimension: 1
   patternFillAmount:
     m_OverrideState: 1
@@ -964,6 +973,9 @@ MonoBehaviour:
   cullingDistance:
     m_OverrideState: 1
     m_Value: 1000
+  minSolidAngle:
+    m_OverrideState: 1
+    m_Value: 4
 --- !u!114 &-1624368140684501634
 MonoBehaviour:
   m_ObjectHideFlags: 3

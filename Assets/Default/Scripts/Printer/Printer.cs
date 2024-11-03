@@ -153,13 +153,13 @@ namespace Default.Scripts.Printer
             _textMeshRotationDisappearTween = new Tween[count];
             _textMeshColorDisappearTween = new Tween[count];
 
-            _textComponent.SetText(_currentText);
+            _textComponent.text=_currentText.ToString();
         }
 
         public void PrintCurrentLetter(char c)
         {
             _currentText.Append(c);
-            _textComponent.SetText(_currentText);
+            _textComponent.text = _currentText.ToString();
         }
         public Tween DisappearScaleTween(int index, Vector3 startScale, Vector3 endScale, float duration, Ease ease)
         {
@@ -356,7 +356,7 @@ namespace Default.Scripts.Printer
                 _textMeshColorDisappearTween[i].Kill();
             }
             _textComponent.ClearMesh();
-            _textComponent.SetText("");
+            _textComponent.text ="";
             StopAllCoroutines();
         }
 
@@ -465,7 +465,7 @@ namespace Default.Scripts.Printer
                         _parsedTextIndex++;
                     }
 
-                    _textComponent.SetText(_currentText);
+                    _textComponent.text=_currentText.ToString();
                 }
 
                 _parsedTextIndex = 0;

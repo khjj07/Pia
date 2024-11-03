@@ -24,6 +24,10 @@ namespace Default.Scripts.Sound
         public SoundListAsset asset;
         [HideInInspector]
         public Channel[] channels;
+        public void Awake()
+        {
+            channels = GetComponentsInChildren<Channel>();
+        }
         public static void Play(string name,int channel)
         {
             Instance.channels[channel].Play(Instance.asset.GetSoundByName(name).clip);
