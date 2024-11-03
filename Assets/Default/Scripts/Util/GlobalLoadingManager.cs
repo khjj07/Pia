@@ -10,20 +10,27 @@ namespace Default.Scripts.Util
 {
     public class GlobalLoadingManager : Singleton<GlobalLoadingManager>
     {
-        private void Awake()
+        public enum Mode
         {
-            
+            Fade,
+            None
         }
 
-        public IEnumerator Load(string scene, float defaultDelay = 0.0f)
+        public IEnumerator Load(string scene,float defaultDelay = 0.0f, Mode mode = Mode.Fade)
         {
             var loadOperation = SceneManager.LoadSceneAsync(scene);
             loadOperation.allowSceneActivation = false;
-            yield return OnLoadBegin();
+            if (mode == Mode.Fade)
+            {
+                yield return OnLoadBegin();
+            }
             yield return new WaitForSeconds(defaultDelay);
             yield return new WaitUntil(() => loadOperation.progress >= 0.9f);
             loadOperation.allowSceneActivation = true;
-            yield return OnLoadEnd();
+            if (mode == Mode.Fade)
+            {
+                yield return OnLoadEnd();
+            }
         }
 
         protected virtual IEnumerator OnLoadEnd()

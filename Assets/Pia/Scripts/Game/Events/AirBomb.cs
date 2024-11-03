@@ -17,17 +17,19 @@ namespace Assets.Pia.Scripts.Game.Events
         public TMP_Text airbombTimerText;
 
         public RectTransform airbombCheckBar;
+     
         public float positionBoundX = 225;
-        public float matchPositionBound = 60;
+        [Header("판정")]
+        public float matchPositionBound = 100;
 
         private float direction = 1;
         private float balance = 100;
 
         public float remainTimer = 30.0f;
 
-        public float[] speeds = new float[5] { 5f, 7.5f, 10f, 12.5f, 15f }; // 5단계 속도
-        public float[] balanceDecreasementAmounts = new float[5] { 5f, 10f, 15f, 20f, 25f }; // 5단계 감소량
-        public float balanceIncreasementAmount = 0.1f;
+        public float[] speeds = new float[5] { 6, 9, 12, 15, 18 }; // 5단계 속도
+        public float[] balanceDecreasementAmounts = new float[5] { 6, 12, 18, 24, 30 }; // 5단계 감소량
+        public float balanceIncreasementAmount = 10f;
 
         public int difficulty;
         private void SetTimer(float f)

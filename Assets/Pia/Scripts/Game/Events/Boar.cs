@@ -33,6 +33,7 @@ namespace Assets.Pia.Scripts.Game.Events
         [SerializeField] private TMP_Text boarDistanceText;
 
         private bool _attackFlag = false;
+        private bool _finishFlag = false;
 
         public void TriggerAttackFlag()
         {
@@ -121,8 +122,9 @@ namespace Assets.Pia.Scripts.Game.Events
                            {
                                Sprint(GetDirection(attackPointNode));
                            }
-                           else
+                           else if(!_finishFlag)
                            {
+                               _finishFlag=true;
                                StoryModeManager.GameOver(StoryModeManager.GameOverType.Boar);
                            }
                        }

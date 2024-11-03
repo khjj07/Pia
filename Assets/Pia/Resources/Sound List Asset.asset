@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Sound List Asset
   m_EditorClassIdentifier: 
   sounds:
+  - clip: {fileID: 8300000, guid: c4c09b6da49030d4bb889f8afd68a41a, type: 3}
+    name: BadEndingSound
   - clip: {fileID: 8300000, guid: d67d2f8bc39214844b86d2566aff0ec4, type: 3}
     name: BGM_Cut
   - clip: {fileID: 8300000, guid: 8dd1f7bd2a1ab85459f33d16a0bc5e01, type: 3}

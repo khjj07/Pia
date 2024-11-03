@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -3226,19 +3227,19 @@ MonoBehaviour:
   airbombTimerText: {fileID: 673983156}
   airbombCheckBar: {fileID: 581496519}
   positionBoundX: 225
-  matchPositionBound: 60
+  matchPositionBound: 100
   remainTimer: 30
   speeds:
-  - 5
-  - 7.5
-  - 10
-  - 12.5
+  - 6
+  - 9
+  - 12
   - 15
+  - 18
   balanceDecreasementAmounts:
-  - 5
-  - 10
-  - 15
-  - 20
+  - 7
+  - 12
+  - 17
+  - 21
   - 25
   balanceIncreasementAmount: 10
   difficulty: 0
@@ -3664,6 +3665,18 @@ PrefabInstance:
     - target: {fileID: 3891953414284364354, guid: 911c5cef11357e643b043c48eed987a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445678485404852202, guid: 911c5cef11357e643b043c48eed987a1, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445678485404852202, guid: 911c5cef11357e643b043c48eed987a1, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445678485404852202, guid: 911c5cef11357e643b043c48eed987a1, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 8240428885815192987, guid: 911c5cef11357e643b043c48eed987a1, type: 3}
       propertyPath: boar
@@ -4979,7 +4992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2006091680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5445,9 +5458,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 719559928}
     m_Modifications:
+    - target: {fileID: 630018122607650956, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 630018122607650956, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 630018122607650956, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 749833761577747340, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: holdSoundName
       value: equip_bottle
+      objectReference: {fileID: 0}
+    - target: {fileID: 986866410750005185, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 2975992725648806221, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: m_Name
@@ -5501,6 +5530,26 @@ PrefabInstance:
       propertyPath: pathManager
       value: 
       objectReference: {fileID: 434206128}
+    - target: {fileID: 7472070535566274258, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: crouchDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472070535566274258, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: standUpDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750228291563671773, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037672276290884318, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_RenderingPathCustomFrameSettings.bitDatas.data2
+      value: 12934340311651155992
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037672276290884318, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: renderingPathCustomFrameSettingsOverrideMask.mask.data2
+      value: 36030975641083935
+      objectReference: {fileID: 0}
     - target: {fileID: 8458014645576573313, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5548,6 +5597,10 @@ PrefabInstance:
     - target: {fileID: 8676182177235633212, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: holdSoundName
       value: equip_shovel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681855349874061509, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6454,6 +6507,10 @@ PrefabInstance:
     - target: {fileID: 720356824511535403, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
       propertyPath: m_Name
       value: '[DontDestroyAndDistinct]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114004691541023321, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8783684163617137255, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
       propertyPath: m_LocalPosition.x

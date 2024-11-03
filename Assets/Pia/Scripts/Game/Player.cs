@@ -539,16 +539,16 @@ namespace Assets.Pia.Scripts.Game
             
             if (StoryModeManager.GetState() == StoryModeManager.State.LandMineDirt)
             {
-                head.DOLocalMove(crouchHeadTransform1.localPosition, crouchDuration);
-                arm.DOLocalMove(crouchArmTransform1.localPosition, crouchDuration);
+                head.DOLocalMove(crouchHeadTransform1.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
+                arm.DOLocalMove(crouchArmTransform1.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
             }
             else if (StoryModeManager.GetState() == StoryModeManager.State.LandMine)
             {
-                head.DOLocalMove(crouchHeadTransform2.localPosition, crouchDuration);
-                arm.DOLocalMove(crouchArmTransform2.localPosition, crouchDuration);
+                head.DOLocalMove(crouchHeadTransform2.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
+                arm.DOLocalMove(crouchArmTransform2.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
             }
             mainCamera.DOFieldOfView(crouchFov, crouchDuration);
-            DOTween.To(() => rotationX, x => rotationX = x, crouchMaxRotationX, crouchDuration);
+            DOTween.To(() => rotationX, x => rotationX = x, crouchMaxRotationX, crouchDuration).SetEase(Ease.InOutQuad);
 
         }
         public void StandUp()
@@ -556,15 +556,15 @@ namespace Assets.Pia.Scripts.Game
             _ableToCrouch = false;
             _isCrouching = false;
             SoundManager.Play("char_crouchStand", 1);
+            SetCursorLocked();
             body.DOLocalMoveY(standUpHeight, standUpDuration).OnComplete(() =>
             {
                 _ableToCrouch = true;
-                SetCursorLocked();
-            });
-            arm.DOLocalMove(standArmTransform.localPosition, standUpDuration);
-            head.DOLocalMove(standHeadTransform.localPosition, crouchDuration);
-            mainCamera.DOFieldOfView(defaultFov, standUpDuration);
-            DOTween.To(() => rotationX, x => rotationX = x, (maxRotationX + minRotationX) / 2, standUpDuration);
+            }).SetEase(Ease.InOutQuad);
+            arm.DOLocalMove(standArmTransform.localPosition, standUpDuration).SetEase(Ease.InOutQuad);
+            head.DOLocalMove(standHeadTransform.localPosition, standUpDuration).SetEase(Ease.InOutQuad);
+            mainCamera.DOFieldOfView(defaultFov, standUpDuration).SetEase(Ease.InOutQuad);
+            DOTween.To(() => rotationX, x => rotationX = x, (maxRotationX + minRotationX) / 2, standUpDuration).SetEase(Ease.InOutQuad);
         }
 
         public void ActiveBagSlot()

@@ -80,7 +80,7 @@ public class PressurePlate : InteractableClass
         if (_currentLevel == 2)
         {
             count++;
-            origin.DOLocalRotateQuaternion(Quaternion.Euler(0, 90 * (float)count / targetCount, 0), 1.0f).SetEase(Ease.InExpo);
+            origin.DOLocalRotateQuaternion(Quaternion.Euler(0, -90 * (float)count / targetCount, 0), 1.0f).SetEase(Ease.InExpo);
             if (count == targetCount)
             {
                 isDead = true;

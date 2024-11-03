@@ -169,19 +169,19 @@ namespace Pia.Scripts.StoryMode
             switch (type)
             {
                 case GameOverType.MineExplosion:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb", 1.0f));
+                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb",0,GlobalLoadingManager.Mode.None));
                     break;
                 case GameOverType.AirBomb:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverAirBomb", 1.0f));
+                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverAirBomb",0, GlobalLoadingManager.Mode.None));
                     break;
                 case GameOverType.Boar:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverBoar", 1.0f));
+                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverBoar", 0, GlobalLoadingManager.Mode.None));
                     break;
                 case GameOverType.Bleed:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverHP0", 1.0f));
+                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverHP0", 0, GlobalLoadingManager.Mode.None));
                     break;
                 case GameOverType.Enemy:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverEnemy", 1.0f));
+                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverEnemy", 0, GlobalLoadingManager.Mode.None));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

@@ -15,7 +15,7 @@ public class BoltState : LandMineState
         this.UpdateAsObservable()
             .SkipWhile(_ => !bolts[boltIndex].isDead)
             .Take(1)
-            .Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.AirBomb));
+            .Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.Boar));
     }
 
 

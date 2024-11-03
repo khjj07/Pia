@@ -1,4 +1,5 @@
-﻿using Pia.Scripts.StoryMode;
+﻿using System;
+using Pia.Scripts.StoryMode;
 using TMPro;
 using UniRx;
 using UniRx.Triggers;
@@ -17,13 +18,13 @@ namespace Assets.Pia.Scripts.Game.Events
         [SerializeField] private float speed = 1;
         [SerializeField] private float sprintSpeed = 2;
         [SerializeField] private float tolerance = 0.1f;
+        [SerializeField] private float delay = 2f;
 
         [SerializeField] private RectTransform enemyUI;
         [SerializeField] private RectTransform enemyPositionUI;
         [SerializeField] private RectTransform enemyDirectionArrowOrigin;
         [SerializeField] private RectTransform enemyDirectionArrow;
         [SerializeField] private TMP_Text enemyDistanceText;
-
         public State Evaluate()
         {
             if (pathManager.GetNext())
@@ -58,8 +59,10 @@ namespace Assets.Pia.Scripts.Game.Events
 
             enemyUI.gameObject.SetActive(true);
             this.UpdateAsObservable()
+                .SkipUntil(Observable.Timer(TimeSpan.FromSeconds(delay)))
                 .Where(_ => !player.IsCrouch() || player.IsLightOn()).Take(1)
                 .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.Enemy));
+
             var enemyStream = this.UpdateAsObservable()
                 .Select(_ => Evaluate())
                 .TakeWhile(x => x != State.End);
