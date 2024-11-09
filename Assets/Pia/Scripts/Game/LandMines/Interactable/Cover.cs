@@ -3,6 +3,7 @@ using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
+using Default.Scripts.Sound;
 using UniRx;
 using UnityEngine;
 
@@ -44,5 +45,6 @@ public class Cover : InteractableClass
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
         _rigidbody.AddForce(direction * force, ForceMode.Impulse);
+        SoundManager.Play("use_coverRemove", 1);
     }
 }

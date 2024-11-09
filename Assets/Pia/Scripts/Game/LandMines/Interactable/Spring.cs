@@ -3,6 +3,7 @@ using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using DG.Tweening;
 using UniRx;
@@ -20,7 +21,7 @@ public class Spring : InteractableClass
     [SerializeField] private float decreaseInterval = 0.1f;
     [SerializeField] private float decreaseExtent = 0.02f;
 
-    [SerializeField] private Canvas springCanvas;
+ 
     [SerializeField] private Image springUIImage;
     [SerializeField] private Image springProgressImage;
     [SerializeField] private Mesh brokenModel;
@@ -42,7 +43,7 @@ public class Spring : InteractableClass
 
     public void Initialize()
     {
-        springCanvas.gameObject.SetActive(true);
+        springUIImage.gameObject.SetActive(true);
         springProgressImage.fillAmount = 0;
         springUIImage.rectTransform.anchoredPosition = Input.mousePosition;
         decreaseStream = Observable.Interval(TimeSpan.FromSeconds(decreaseInterval))
@@ -52,14 +53,14 @@ public class Spring : InteractableClass
 
     public void Cancel()
     {
-        springCanvas.gameObject.SetActive(false);
+        springUIImage.gameObject.SetActive(false);
         decreaseStream.Dispose();
         progress = 0;
     }
 
     public void Finish()
     {
-        springCanvas.gameObject.SetActive(false);
+        springUIImage.gameObject.SetActive(false);
         GetComponent<MeshFilter>().sharedMesh = brokenModel;
         DOTween.To(() => GetComponent<MeshRenderer>().material.GetFloat("_Alpha"),
             x => GetComponent<MeshRenderer>().material.SetFloat("_Alpha", x), 0, 1).OnComplete(() =>
@@ -68,12 +69,14 @@ public class Spring : InteractableClass
         });
         isDead = true;
         _isAvailable = false;
+        SoundManager.Play("use_SpringCut", 1);
     }
 
     public void TryToCut()
     {
         transform.DOShakePosition(0.1f, 0.1f);
         SetProgress(progress + extent);
+        SoundManager.Play("use_SpringCut", 1);
     }
     public void SetProgress(float value)
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Default.Scripts.Sound;
 using Pia.Scripts.StoryMode;
 using TMPro;
 using UniRx;
@@ -58,14 +59,18 @@ namespace Assets.Pia.Scripts.Game.Events
             var player = StoryModeManager.Instance.GetPlayer();
 
             enemyUI.gameObject.SetActive(true);
-            this.UpdateAsObservable()
-                .SkipUntil(Observable.Timer(TimeSpan.FromSeconds(delay)))
-                .Where(_ => !player.IsCrouch() || player.IsLightOn()).Take(1)
-                .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.Enemy));
-
+            SoundManager.Play("event_enemyStart", 6);
+            SoundManager.Play("event_enemy", 7);
             var enemyStream = this.UpdateAsObservable()
                 .Select(_ => Evaluate())
                 .TakeWhile(x => x != State.End);
+
+            enemyStream.SkipUntil(Observable.Timer(TimeSpan.FromSeconds(delay)))
+                .Where(_ => !player.IsCrouch() || player.IsLightOn()).Take(1)
+                .Subscribe(_ =>
+                {
+                    StoryModeManager.GameOver(StoryModeManager.GameOverType.Enemy);
+                });
 
             enemyStream.Subscribe(_ =>
             {
@@ -77,7 +82,12 @@ namespace Assets.Pia.Scripts.Game.Events
                 enemyDirectionArrowOrigin.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
                 enemyDistanceText.SetText(distance.ToString("F2") + "m");
-            }, null, () => { enemyUI.gameObject.SetActive(false); }).AddTo(gameObject);
+            }, null, () =>
+            {
+                SoundManager.Stop(6);
+                SoundManager.Stop(7);
+                enemyUI.gameObject.SetActive(false);
+            }).AddTo(gameObject);
             enemyStream.Subscribe(x =>
             {
                 switch (x)

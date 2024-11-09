@@ -3,6 +3,7 @@ using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
+using Default.Scripts.Sound;
 using DG.Tweening;
 using Knife.HDRPOutline.Core;
 using UniRx;
@@ -23,12 +24,13 @@ public class Bolt : InteractableClass
 
     private Rigidbody _rigidbody;
 
+
     public void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         initialHeight = transform.localPosition.y;
-    }
 
+    }
     public override void OnHover(Item item)
     {
         if (item is Driver)

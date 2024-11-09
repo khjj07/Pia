@@ -18,27 +18,27 @@ namespace Default.Scripts.Util
 
         public IEnumerator Load(string scene,float defaultDelay = 0.0f, Mode mode = Mode.Fade)
         {
-            var loadOperation = SceneManager.LoadSceneAsync(scene);
-            loadOperation.allowSceneActivation = false;
             if (mode == Mode.Fade)
             {
-                yield return OnLoadBegin();
+                yield return OnLoadBegin(mode);
             }
+            var loadOperation = SceneManager.LoadSceneAsync(scene);
+            loadOperation.allowSceneActivation = false;
             yield return new WaitForSeconds(defaultDelay);
             yield return new WaitUntil(() => loadOperation.progress >= 0.9f);
             loadOperation.allowSceneActivation = true;
             if (mode == Mode.Fade)
             {
-                yield return OnLoadEnd();
+                yield return OnLoadEnd(mode);
             }
         }
 
-        protected virtual IEnumerator OnLoadEnd()
+        protected virtual IEnumerator OnLoadEnd(Mode mode)
         {
             yield return null;
         }
 
-        protected virtual IEnumerator OnLoadBegin()
+        protected virtual IEnumerator OnLoadBegin(Mode mode)
         {
             yield return null;
         }

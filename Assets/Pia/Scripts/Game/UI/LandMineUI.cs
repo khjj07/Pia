@@ -1,4 +1,5 @@
 ﻿using System;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
@@ -47,6 +48,7 @@ namespace Assets.Pia.Scripts.UI
         {
 
             gameObject.SetActive(true);
+            SoundManager.Play("StepLandmine", 1);
             blood.DOFade(0.5f,1).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);
             SetTimer(timeLimit);
             CreateLandMineStream();

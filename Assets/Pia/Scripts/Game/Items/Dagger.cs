@@ -28,11 +28,11 @@ namespace Assets.Pia.Scripts.Game.Items
                     player.SetCursorLocked();
                     plate.Initialize();
                     var spinStream = Observable.Interval(TimeSpan.FromSeconds(0.01f))
-                        .TakeWhile(_ => plate.IsFinish())
+                        .TakeWhile(_ => !plate.IsFinish())
                         .Subscribe(_ => plate.MatchBarMove());
 
                     var useStream = this.UpdateAsObservable()
-                        .TakeWhile(_ => plate.IsFinish())
+                        .TakeWhile(_ => !plate.IsFinish())
                         .Where(_ => Input.GetKeyDown(useKey))
                         .Subscribe(_ =>
                         {

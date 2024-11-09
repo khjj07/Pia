@@ -2,6 +2,7 @@ using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
+using Default.Scripts.Sound;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using Unity.VisualScripting;
@@ -34,6 +35,8 @@ namespace Assets.Pia.Scripts.Interactable
                 pen.DOMove(transform.position, 1.0f)
                     .OnComplete(StoryModeManager.Instance.GameClear);
                 inserted= true;
+                SoundManager.Play("use_penInsert", 1); ;
+
             }
         }
     }

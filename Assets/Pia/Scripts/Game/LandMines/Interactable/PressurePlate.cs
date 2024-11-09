@@ -3,6 +3,7 @@ using Assets.Pia.Scripts.Game;
 using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using DG.Tweening;
 using UniRx;
@@ -50,7 +51,7 @@ public class PressurePlate : InteractableClass
 
     public void ResetCurrent()
     {
-        origin.DOLocalRotateQuaternion(Quaternion.Euler(0, 90 * (float)count / targetCount, 0), 1.0f);
+        origin.DOLocalRotateQuaternion(Quaternion.Euler(0, -90 * (float)count / targetCount, 0), 1.0f);
         _currentLevel = 0;
         SetLevel(_currentLevel);
     }
@@ -79,6 +80,7 @@ public class PressurePlate : InteractableClass
     {
         if (_currentLevel == 2)
         {
+            SoundManager.Play("use_pressurePlate", 1); ;
             count++;
             origin.DOLocalRotateQuaternion(Quaternion.Euler(0, -90 * (float)count / targetCount, 0), 1.0f).SetEase(Ease.InExpo);
             if (count == targetCount)
@@ -113,7 +115,7 @@ public class PressurePlate : InteractableClass
     private void SetMatchBarAngle(float angle)
     {
         _matchBarAngle = angle % 360;
-        matchBar.rectTransform.DOLocalRotate(new Vector3(0, 0, _matchBarAngle), 0.01f);
+        matchBar.rectTransform.DOLocalRotate(new Vector3(0, 0, -_matchBarAngle), 0.01f);
     }
 
     public void Initialize()
@@ -149,12 +151,12 @@ public class PressurePlate : InteractableClass
 
     public bool IsFinish()
     {
-        return count < targetCount;
+        return count >= targetCount;
     }
 
     public void MatchBarMove()
     {
-        SetMatchBarAngle(_matchBarAngle - _currentSpeed);
+        SetMatchBarAngle(_matchBarAngle + _currentSpeed);
     }
 
     public bool IsMovable()

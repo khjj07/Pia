@@ -1,4 +1,5 @@
 ﻿using System;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
@@ -28,7 +29,7 @@ namespace Assets.Pia.Scripts.Game.Events
         public float remainTimer = 30.0f;
 
         public float[] speeds = new float[5] { 6, 9, 12, 15, 18 }; // 5단계 속도
-        public float[] balanceDecreasementAmounts = new float[5] { 6, 12, 18, 24, 30 }; // 5단계 감소량
+        public float[] balanceDecreasementAmounts = new float[5] { 7, 12, 17, 21, 25 }; // 5단계 감소량
         public float balanceIncreasementAmount = 10f;
 
         public int difficulty;
@@ -46,7 +47,9 @@ namespace Assets.Pia.Scripts.Game.Events
         {
             //흔들림 + 미니게임
             var player = StoryModeManager.Instance.GetPlayer();
-            player.SetCursorLockedAndInteractable();
+            player.SetCursorLocked();
+            player.StandUp();
+            SoundManager.Play("event_startBombing", 6);
             airbombUI.gameObject.SetActive(true);
             Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeWhile(_ => remainTimer > 0 && balance>0)
                 .Subscribe(_ =>
@@ -58,6 +61,8 @@ namespace Assets.Pia.Scripts.Game.Events
                 {
                     player.SetCursorUnlocked();
                     airbombUI.gameObject.SetActive(false);
+                    player.Crouch();
+                    SoundManager.Stop(6);
                     if (balance <= 0)
                     {
                         StoryModeManager.GameOver(StoryModeManager.GameOverType.AirBomb);
@@ -86,7 +91,7 @@ namespace Assets.Pia.Scripts.Game.Events
 
         private void SetBalance(float gauge)
         {
-            balance = gauge;
+            balance = Math.Clamp(gauge,0,100);
             airbombGauge.fillAmount = balance / 100.0f;
         }
 

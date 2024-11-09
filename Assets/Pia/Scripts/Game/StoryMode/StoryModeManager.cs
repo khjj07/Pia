@@ -76,6 +76,7 @@ namespace Pia.Scripts.StoryMode
                     SoundManager.Play("BGM_bug", 3);
                     SoundManager.Play("StepLandmine", 1);
                     _player.OnStepMine();
+                    _player.SetCursorLocked();
                     _landMineUI.Appear();
                     PlayerPrefs.SetString("Save","LandMineDirt");
                     _player.UpdateAsObservable()
@@ -159,6 +160,7 @@ namespace Pia.Scripts.StoryMode
 
         public static void GameOver(GameOverType type)
         {
+            SoundManager.StopAll();
             Instance._pathManager.StopPrintProcess();
             Instance._gameOverTokenSource.Cancel();
             Instance.GoToGameOverScene(type);

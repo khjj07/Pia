@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Default.Scripts.Sound;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using TMPro;
@@ -87,7 +88,8 @@ namespace Assets.Pia.Scripts.Game.Events
            var player = StoryModeManager.Instance.GetPlayer();
 
            boarUI.gameObject.SetActive(true);
-           this.UpdateAsObservable()
+           SoundManager.Play("event_startBoar", 6);
+            this.UpdateAsObservable()
                .SkipUntil(Observable.Timer(TimeSpan.FromSeconds(delay)))
                .Where(_ => !player.IsCrouch() || player.IsLightOn()).Take(1)
                .Subscribe(_=>TriggerAttackFlag());
@@ -95,6 +97,10 @@ namespace Assets.Pia.Scripts.Game.Events
            var boarStream = this.UpdateAsObservable()
                .Select(_ => Evaluate())
                .TakeWhile(x => x != State.End);
+
+           boarStream.Where(x => x == State.AttackSprint).Take(1)
+               .Subscribe(_ => SoundManager.Play("boar_death", 7))
+               .AddTo(gameObject);
 
           boarStream.Subscribe(_ =>
           {
@@ -106,7 +112,11 @@ namespace Assets.Pia.Scripts.Game.Events
               boarDirectionArrowOrigin.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
               boarDistanceText.SetText(distance.ToString("F2") + "m");
-          },null,()=> { boarUI.gameObject.SetActive(false); }).AddTo(gameObject);
+          },null, () =>
+          {
+              SoundManager.Stop(6);
+            boarUI.gameObject.SetActive(false);
+          }).AddTo(gameObject);
 
             boarStream.Subscribe(x =>
                {

@@ -158,15 +158,33 @@ namespace Assets.Pia.Scripts.Game
             var hpStream = this.UpdateAsObservable()
                 .Select(_ => (float)hp / initialHp);
 
-            hpStream.Where(hpRate => hpRate <= 0.8f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP80));
-            hpStream.Where(hpRate => hpRate <= 0.6f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP60));
-            hpStream.Where(hpRate => hpRate <= 0.4f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP40));
-            hpStream.Where(hpRate => hpRate <= 0.2f).Take(1).Subscribe(_ => EventManager.InvokeEvent(EventManager.Event.HP20));
+            hpStream.Where(hpRate => hpRate <= 0.8f).Take(1).Subscribe(_ =>
+            {
+                EventManager.InvokeEvent(EventManager.Event.HP80);
+                SoundManager.Play("300hz_noise", 5);
+            });
+            hpStream.Where(hpRate => hpRate <= 0.6f).Take(1).Subscribe(_ =>
+            {
+                EventManager.InvokeEvent(EventManager.Event.HP60);
+                SoundManager.Play("600hz_noise", 5);
+            });
+            hpStream.Where(hpRate => hpRate <= 0.4f).Take(1).Subscribe(_ =>
+            {
+                EventManager.InvokeEvent(EventManager.Event.HP40);
+                SoundManager.Play("1000hz_noise", 5);
+            });
+            hpStream.Where(hpRate => hpRate <= 0.2f).Take(1).Subscribe(_ =>
+            {
+                EventManager.InvokeEvent(EventManager.Event.HP20);
+                SoundManager.Play("1500hz_noise", 5);
+
+            });
             hpStream.Where(hpRate => hpRate <= 0.1f).Take(1).Subscribe(hpRate =>
             {
                 EventManager.InvokeEvent(EventManager.Event.HP10);
                 dyingUI.gameObject.SetActive(true);
                 dyingUI.CrossFadeAlpha((0.1f - hpRate) / 0.1f, 0.1f, false);
+                SoundManager.Play("2400hz_noise", 5);
             });
          
         }
@@ -187,6 +205,7 @@ namespace Assets.Pia.Scripts.Game
                .Subscribe(_ =>
                {
                    Bleed();
+                   SoundManager.Play("event_startEmergency", 8);
                    EventManager.InvokeEvent(e);
                })
                .AddTo(gameObject);
@@ -228,6 +247,7 @@ namespace Assets.Pia.Scripts.Game
             _isBleeding = false;
             DOTween.Kill("BleedTween");
             DOTween.Kill("BandageGuideTween");
+            SoundManager.Stop( 8);
             bandageGuideImage.DOFade(0, 1).OnComplete(() =>
             {
                 bleedUI.gameObject.SetActive(false);
@@ -279,7 +299,7 @@ namespace Assets.Pia.Scripts.Game
             mainCamera.transform.localRotation = initialLocalRotation;
             if (state == LowerAnimationState.Walk)
             {
-                mainCamera.transform.DOShakePosition(0.5f, Vector3.up * 0.1f, 0).SetLoops(-1).SetId("shakeCamera").SetEase(Ease.InOutBounce).Restart();
+                mainCamera.transform.DOShakePosition(0.5f, Vector3.up * 0.05f, 0).SetLoops(-1).SetId("shakeCamera").SetEase(Ease.InOutBounce).Restart();
                 mainCamera.transform.DOShakeRotation(1.0f, Vector3.forward, 0).SetLoops(-1).SetId("shakeCameraRot").SetEase(Ease.InOutBounce).Restart();
             }
             else
@@ -360,12 +380,12 @@ namespace Assets.Pia.Scripts.Game
         }
         private void RotateHead()
         {
+           
             head.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
-            if (!_isCrouching)
+            if (!_isCrouching&& _ableToCrouch)
             {
                 head.localPosition = new Vector3(rotationY * 0.003f, head.localPosition.y, 0.14f + rotationX * 0.003f);
             }
-
             DOTween.Kill("followHeadPos");
             upperBody.localRotation = head.localRotation;
             upperBody.DOLocalMove(head.localPosition, 0.2f).SetId("followHeadPos"); ;
@@ -434,11 +454,10 @@ namespace Assets.Pia.Scripts.Game
         }
         public void RotateCameraX(float direction)
         {
-            if (_ableToCrouch)
+            if (!_isCrouching && _ableToCrouch)
             {
                 rotationDirectionX = direction;
                 rotationX -= direction * sensitiveY;
-
                 if (currentLowerState == LowerAnimationState.Walk)
                 {
                     rotationX = Mathf.Clamp(rotationX, walkMinRotationX, walkMaxRotationX);
@@ -455,17 +474,19 @@ namespace Assets.Pia.Scripts.Game
         }
         public void RotateCameraY(float direction)
         {
-            rotationDirectionY = direction;
-            rotationY += direction * sensitiveY;
-            if (currentLowerState == LowerAnimationState.Crouch)
+            if (_ableToCrouch)
             {
-                rotationY = Mathf.Clamp(rotationY, -crouchLimitRotationY, crouchLimitRotationY);
+                rotationDirectionY = direction;
+                rotationY += direction * sensitiveY;
+                if (currentLowerState == LowerAnimationState.Crouch)
+                {
+                    rotationY = Mathf.Clamp(rotationY, -crouchLimitRotationY, crouchLimitRotationY);
+                }
+                else
+                {
+                    rotationY = Mathf.Clamp(rotationY, -limitRotationY, limitRotationY);
+                }
             }
-            else
-            {
-                rotationY = Mathf.Clamp(rotationY, -limitRotationY, limitRotationY);
-            }
-
         }
         public void RepositioningThroughFoot(Transform mineTransform)
         {
@@ -549,6 +570,7 @@ namespace Assets.Pia.Scripts.Game
             }
             mainCamera.DOFieldOfView(crouchFov, crouchDuration);
             DOTween.To(() => rotationX, x => rotationX = x, crouchMaxRotationX, crouchDuration).SetEase(Ease.InOutQuad);
+            DOTween.To(() => rotationY, x => rotationY = x, 0, crouchDuration).SetEase(Ease.InOutQuad);
 
         }
         public void StandUp()
@@ -565,6 +587,7 @@ namespace Assets.Pia.Scripts.Game
             head.DOLocalMove(standHeadTransform.localPosition, standUpDuration).SetEase(Ease.InOutQuad);
             mainCamera.DOFieldOfView(defaultFov, standUpDuration).SetEase(Ease.InOutQuad);
             DOTween.To(() => rotationX, x => rotationX = x, (maxRotationX + minRotationX) / 2, standUpDuration).SetEase(Ease.InOutQuad);
+            DOTween.To(() => rotationY, x => rotationY = x, 0, standUpDuration).SetEase(Ease.InOutQuad);
         }
 
         public void ActiveBagSlot()

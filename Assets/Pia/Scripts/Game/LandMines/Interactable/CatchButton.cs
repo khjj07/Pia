@@ -4,6 +4,7 @@ using Assets.Pia.Scripts.Game.Items;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.UI;
+using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using DG.Tweening;
 using UniRx;
@@ -38,6 +39,7 @@ public class CatchButton : InteractableClass
     public void Press()
     {
         isPressed = true;
+        SoundManager.Play("use_daggerButton", 1);
     }
 
     public void StopPress()
