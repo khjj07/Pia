@@ -12,6 +12,7 @@ namespace Assets.Pia.Scripts.Game.Items
 {
     public class Nipper : UsableItem
     {
+        private IDisposable cancelStream;
         public override void OnUse(Player player)
         {
             if (player.target is Spring spring)
@@ -31,17 +32,18 @@ namespace Assets.Pia.Scripts.Game.Items
                     {
                         spring.Finish();
                         player.SetCursorUnlocked();
+                        cancelStream.Dispose();
                     });
 
 
-                player.UpdateAsObservable().Where(_ => !_isHold)
+                cancelStream = player.UpdateAsObservable().Where(_ => !_isHold)
                     .Take(1).Subscribe(_ =>
                     {
                         player.SetCursorUnlocked();
                         spring.Cancel();
                         cutStream.Dispose();
                         finishStream.Dispose();
-                    });
+                    }).AddTo(gameObject);
             }
         }
     }

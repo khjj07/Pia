@@ -9,7 +9,7 @@ namespace Assets.Pia.Scripts.Game.Items
 {
     public class Dagger : UsableItem
     {
-
+        private IDisposable cancelStream;
         public override void OnUse(Player player)
         {
             if (player.target is CatchButton button)
@@ -46,18 +46,19 @@ namespace Assets.Pia.Scripts.Game.Items
                             }
                         }, null, () =>
                         {
-                            player.SetCursorUnlocked();
+                            player.SetCursorLockedAndInteractable();
                             plate.ResetAll();
+                            cancelStream.Dispose();
                         });
 
-                    player.UpdateAsObservable().Where(_ => !_isHold)
+                    cancelStream = player.UpdateAsObservable().Where(_ => !_isHold)
                         .Take(1).Subscribe(_ =>
                         {
-                            player.SetCursorUnlocked();
-                            plate.ResetAll();
                             spinStream.Dispose();
                             useStream.Dispose();
-                        });
+                            player.SetCursorUnlocked();
+                            plate.ResetAll();
+                        }).AddTo(gameObject);
                 }
 
             }

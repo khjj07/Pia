@@ -309,7 +309,7 @@ namespace Assets.Pia.Scripts.Game
         }
         private void CreateLowerBodyStream()
         {
-            this.LateUpdateAsObservable().Subscribe(_ =>
+            this.UpdateAsObservable().Subscribe(_ =>
             {
                 if (_isMove)
                 {
@@ -384,7 +384,7 @@ namespace Assets.Pia.Scripts.Game
             head.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
             if (!_isCrouching&& _ableToCrouch)
             {
-                head.localPosition = new Vector3(rotationY * 0.003f, head.localPosition.y, 0.14f + rotationX * 0.003f);
+                head.localPosition = new Vector3(rotationY * 0.005f, head.localPosition.y, 0.14f + rotationX * 0.003f);
             }
             DOTween.Kill("followHeadPos");
             upperBody.localRotation = head.localRotation;
@@ -435,26 +435,23 @@ namespace Assets.Pia.Scripts.Game
         {
             playerCursor.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
             _isInteractable = false;
         }
         public void SetCursorUnlocked()
         {
             playerCursor.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = false;
             _isInteractable = true;
         }
         public void SetCursorLockedAndInteractable()
         {
             playerCursor.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
             _isInteractable = true;
         }
         public void RotateCameraX(float direction)
         {
-            if (!_isCrouching && _ableToCrouch)
+            if (!_isCrouching && _ableToCrouch && !_isInteractable)
             {
                 rotationDirectionX = direction;
                 rotationX -= direction * sensitiveY;
@@ -474,7 +471,7 @@ namespace Assets.Pia.Scripts.Game
         }
         public void RotateCameraY(float direction)
         {
-            if (_ableToCrouch)
+            if (_ableToCrouch && !_isInteractable)
             {
                 rotationDirectionY = direction;
                 rotationY += direction * sensitiveY;

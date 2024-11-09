@@ -47,8 +47,8 @@ namespace Assets.Pia.Scripts.Game.Events
         {
             //흔들림 + 미니게임
             var player = StoryModeManager.Instance.GetPlayer();
-            player.SetCursorLocked();
             player.StandUp();
+
             SoundManager.Play("event_startBombing", 6);
             airbombUI.gameObject.SetActive(true);
             Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeWhile(_ => remainTimer > 0 && balance>0)

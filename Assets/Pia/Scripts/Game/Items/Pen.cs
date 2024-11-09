@@ -13,7 +13,6 @@ namespace Assets.Pia.Scripts.Game.Items
             if (player.target is PenHole penHole)
             {
                 penHole.InsertPen();
-                SoundManager.Play("use_penInsert",1);
             }
         }
     }

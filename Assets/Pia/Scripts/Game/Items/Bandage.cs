@@ -19,6 +19,8 @@ namespace Assets.Pia.Scripts.Game.Items
 
         private bool _isUsing = false;
         private float _progress = 0;
+        private IDisposable cancelStream;
+
         public override void OnUse(Player player)
         {
             if (player.IsBleeeding() && !_isUsing)
@@ -43,11 +45,12 @@ namespace Assets.Pia.Scripts.Game.Items
                     {
                         Finish(player);
                         player.SetCursorUnlocked();
+                        cancelStream.Dispose();
                     }).AddTo(gameObject);
 
-               
 
-                player.UpdateAsObservable().Where(_ => !_isHold)
+
+                cancelStream = player.UpdateAsObservable().Where(_ => !_isHold)
                     .Take(1).Subscribe(_ =>
                     {
                         player.SetCursorUnlocked();

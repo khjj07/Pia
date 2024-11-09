@@ -171,7 +171,7 @@ namespace Pia.Scripts.StoryMode
             switch (type)
             {
                 case GameOverType.MineExplosion:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb",0,GlobalLoadingManager.Mode.None));
+                    //StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb",0,GlobalLoadingManager.Mode.None));
                     break;
                 case GameOverType.AirBomb:
                     StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverAirBomb",0, GlobalLoadingManager.Mode.None));
