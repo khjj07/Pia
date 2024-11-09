@@ -50,7 +50,7 @@ namespace Assets.Pia.Scripts.Game.Items
 
 
 
-                cancelStream = player.UpdateAsObservable().Where(_ => !_isHold)
+                cancelStream = player.UpdateAsObservable().Where(_ => !_isActive)
                     .Take(1).Subscribe(_ =>
                     {
                         player.SetCursorUnlocked();

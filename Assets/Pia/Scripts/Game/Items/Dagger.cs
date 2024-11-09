@@ -15,7 +15,7 @@ namespace Assets.Pia.Scripts.Game.Items
             if (player.target is CatchButton button)
             {
                 button.Press();
-                player.UpdateAsObservable().Where(_ => !_isHold)
+                player.UpdateAsObservable().Where(_ => !_isActive)
                     .Take(1).Subscribe(_ =>
                     {
                         button.StopPress();
@@ -51,7 +51,7 @@ namespace Assets.Pia.Scripts.Game.Items
                             cancelStream.Dispose();
                         });
 
-                    cancelStream = player.UpdateAsObservable().Where(_ => !_isHold)
+                    cancelStream = player.UpdateAsObservable().Where(_ => !_isActive)
                         .Take(1).Subscribe(_ =>
                         {
                             spinStream.Dispose();

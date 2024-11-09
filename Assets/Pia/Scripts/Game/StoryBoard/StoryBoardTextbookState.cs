@@ -22,7 +22,7 @@ namespace Pia.Scripts.Synopsis
 
         private int _currentPage = 0;
         private bool _lastPageFlag;
-
+    
         public override bool CanGoNext()
         {
             return !_isAppearing && _lastPageFlag;
@@ -36,8 +36,13 @@ namespace Pia.Scripts.Synopsis
 
         private void CreateReadingBookStream()
         {
-            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.E).Where(_=> _currentPage < pages.Length - 1).Subscribe(_=>NextPage()).AddTo(gameObject);
-            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Q).Where(_=> _currentPage >0).Subscribe(_=>PreviousPage()).AddTo(gameObject);
+            var nextSream = GlobalInputBinder.CreateGetKeyDownStream(KeyCode.E).Where(_=> _currentPage < pages.Length - 1).Subscribe(_=>NextPage()).AddTo(gameObject);
+            var prevSream = GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Q).Where(_=> _currentPage >0).Subscribe(_=>PreviousPage()).AddTo(gameObject);
+            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Mouse0).Where(_ => CanGoNext()).Take(1).Subscribe(_ =>
+            {
+                nextSream.Dispose();
+                prevSream.Dispose();
+            }).AddTo(gameObject);
         }
 
         private void NextPage()

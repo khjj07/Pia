@@ -1,15 +1,15 @@
 ﻿namespace Assets.Pia.Scripts.Game.Items
 {
-    public class Bottle : Item
+    public class Bottle : HoldableItem
     {
-        public override void OnHold(Player player)
+        public override void OnActive(Player player)
         {
-            base.OnHold(player);
+            base.OnActive(player);
             gameObject.SetActive(true);
         }
-        public override void OnStopHold()
+        public override void OnInActive()
         {
-            base.OnStopHold();
+            base.OnInActive();
             gameObject.SetActive(false);
         }
     }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Pia.Scripts.Game.Items
 {
-    public abstract class UsableItem : Item
+    public abstract class UsableItem : HoldableItem
     {
         [SerializeField]
         protected KeyCode useKey = KeyCode.Mouse0;
@@ -28,15 +28,15 @@ namespace Assets.Pia.Scripts.Game.Items
         public override void Initialize(Player player)
         {
             gameObject.SetActive(false);
-            holdStream = CreateHoldStream()
+            activeStream = CreateActiveStream()
                 .Where(_ => StoryModeManager.IsInteractionActive())
                 .Subscribe(_ =>
                 {
                     if (player.Hold(this) == this)
                     {
-                        OnHold(player);
+                        OnActive(player);
                         CreateUseStream()
-                            .TakeWhile(_ => _isHold)
+                            .TakeWhile(_ => _isActive)
                             .Where(_ => ignoreIsInteractive || player.IsInteractable())
                             .Subscribe(_ =>
                             {
@@ -44,13 +44,13 @@ namespace Assets.Pia.Scripts.Game.Items
                             })
                             .AddTo(player.gameObject);
 
-                        CreateStopHoldStream()
-                            .TakeWhile(_ => _isHold)
+                        CreateInActiveStream()
+                            .TakeWhile(_ => _isActive)
                             .Take(1)
                             .Subscribe(_ =>
                             {
                                 player.Hold(null);
-                                OnStopHold();
+                                OnInActive();
                             })
                             .AddTo(player.gameObject);
                     }

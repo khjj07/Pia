@@ -16,59 +16,58 @@ namespace Assets.Pia.Scripts.Game.Items
         [SerializeField]
         private SlotUI slot;
         [SerializeField]
-        protected KeyCode holdKey;
+        protected KeyCode itemKey;
         [SerializeField]
-        protected string holdSoundName;
-        protected bool _isHold=false;
+        protected string itemSoundName;
+        protected bool _isActive=false;
         
 
-        public IDisposable holdStream;
-        public IObservable<Unit> CreateHoldStream()
+        public IDisposable activeStream;
+        public IObservable<Unit> CreateActiveStream()
         {
-            return GlobalInputBinder.CreateGetKeyDownStream(holdKey);
+            return GlobalInputBinder.CreateGetKeyDownStream(itemKey);
         }
-        public IObservable<Unit> CreateStopHoldStream()
+        public IObservable<Unit> CreateInActiveStream()
         {
-            return GlobalInputBinder.CreateGetKeyUpStream(holdKey);
+            return GlobalInputBinder.CreateGetKeyUpStream(itemKey);
         }
 
         public void DisposeHoldStream()
         {
-            if (holdStream != null)
+            if (activeStream != null)
             {
-                holdStream.Dispose();
+                activeStream.Dispose();
             }
         }
-        public virtual void OnHold(Player player)
+        public virtual void OnActive(Player player)
         {
-            _isHold = true; 
+            _isActive = true; 
             slot.SetActive(true);
-            if (holdSoundName != "")
+            if (itemSoundName != "")
             {
-                SoundManager.Play(holdSoundName, 1);
+                SoundManager.Play(itemSoundName, 1);
             }
         }
-        public virtual void OnStopHold()
+        public virtual void OnInActive()
         {
-            _isHold = false;
+            _isActive = false;
             slot.SetActive(false);
         }
 
         public virtual void Initialize(Player player)
         {
-           holdStream  = CreateHoldStream()
+           activeStream  = CreateActiveStream()
                 .Where(_ => StoryModeManager.IsInteractionActive())
                 .Subscribe(_ =>
                 {
                     //player.Hold(this);
-                    OnHold(player);
-                    CreateStopHoldStream()
-                        .TakeWhile(_ => _isHold)
+                    OnActive(player);
+                    CreateInActiveStream()
+                        .TakeWhile(_ => _isActive)
                         .Take(1)
                         .Subscribe(_ =>
                         {
-                            player.Hold(null);
-                            OnStopHold();
+                            OnInActive();
                         })
                         .AddTo(gameObject);
 

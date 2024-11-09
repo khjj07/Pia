@@ -20,7 +20,7 @@ namespace Assets.Pia.Scripts.Game.Items
                 animator.SetBool("Use", true);
                 Observable.Interval(TimeSpan.FromSeconds(digInterval))
                     .TakeUntil(CreateStopUseStream())
-                    .TakeWhile(_ => _isHold)
+                    .TakeWhile(_ => _isActive)
                     .TakeWhile(_ => player.target == dirt)
                     .Subscribe(_ =>
                     {
@@ -38,7 +38,7 @@ namespace Assets.Pia.Scripts.Game.Items
                 SoundManager.Play("use_shovelDig", 1);
                 Observable.Interval(TimeSpan.FromSeconds(soundInterval))
                     .TakeUntil(CreateStopUseStream())
-                    .TakeWhile(_ => _isHold)
+                    .TakeWhile(_ => _isActive)
                     .TakeWhile(_ => player.target is Dirt)
                     .Subscribe(_ => SoundManager.Play("use_shovelDig", 1), null, () =>
                     {

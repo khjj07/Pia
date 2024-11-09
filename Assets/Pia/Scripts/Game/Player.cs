@@ -123,7 +123,7 @@ namespace Assets.Pia.Scripts.Game
         private Image dyingUI;
 
         public InteractableClass target;
-        private UsableItem hand;
+        private HoldableItem hand;
         void Start()
         {
             Initialize();
@@ -309,7 +309,7 @@ namespace Assets.Pia.Scripts.Game
         }
         private void CreateLowerBodyStream()
         {
-            this.UpdateAsObservable().Subscribe(_ =>
+            this.LateUpdateAsObservable().Subscribe(_ =>
             {
                 if (_isMove)
                 {
@@ -598,7 +598,7 @@ namespace Assets.Pia.Scripts.Game
             hpUI.gameObject.SetActive(true);
         }
 
-        public UsableItem Hold(UsableItem item)
+        public HoldableItem Hold(HoldableItem item)
         {
             if (item == null)
             {

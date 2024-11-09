@@ -14,9 +14,9 @@ namespace Assets.Pia.Scripts.Game.Items
         [Header("아이템")]
         public Item[] items;
 
-        public override void OnHold(Player player)
+        public override void OnActive(Player player)
         {
-            base.OnHold(player);
+            base.OnActive(player);
             foreach (var item in items)
             {
                 Debug.Log("Initialize");
@@ -24,14 +24,14 @@ namespace Assets.Pia.Scripts.Game.Items
             }
         }
 
-        public override void OnStopHold()
+        public override void OnInActive()
         {
-            base.OnStopHold();
+            base.OnInActive();
             foreach (var item in items)
             {
                 Debug.Log("Dispose");
                 item.DisposeHoldStream();
-                item.OnStopHold();
+                item.OnInActive();
             }
         }
     }

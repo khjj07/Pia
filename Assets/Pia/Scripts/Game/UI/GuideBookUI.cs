@@ -1,12 +1,8 @@
-using Assets.Pia.Scripts.StoryMode;
-using Default.Scripts.Util;
+using Assets.Pia.Scripts.UI;
 using Default.Scripts.Util.StatePattern;
 using UnityEngine;
 
-namespace Assets.Pia.Scripts.UI
+public class GuideBookUI : StateManager<GuideBookPage>
 {
-    public class GuideBookUI : StateManager<GuideBookPage>
-    {
-   
-    }
+  
 }

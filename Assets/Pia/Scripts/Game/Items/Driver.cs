@@ -21,7 +21,7 @@ namespace Assets.Pia.Scripts.Game.Items
             {
                 Observable.Interval(TimeSpan.FromSeconds(screwInterval))
                     .TakeUntil(CreateStopUseStream())
-                    .TakeWhile(_ => _isHold && player.target == bolt)
+                    .TakeWhile(_ => _isActive && player.target == bolt)
                     .Subscribe(_ =>
                     {
                         bolt.Screw(screwInterval);
@@ -30,7 +30,7 @@ namespace Assets.Pia.Scripts.Game.Items
                 SoundManager.Play("use_driverScrew", 1);
                 Observable.Interval(TimeSpan.FromSeconds(soundInterval))
                     .TakeUntil(CreateStopUseStream())
-                    .TakeWhile(_ => _isHold && player.target == bolt)
+                    .TakeWhile(_ => _isActive && player.target == bolt)
                     .Subscribe(_ => SoundManager.Play("use_driverScrew", 1), null, () =>
                     {
                         SoundManager.Stop(1);
