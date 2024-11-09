@@ -17,9 +17,9 @@ namespace Assets.Pia.Scripts.Game.Items
             base.OnActive(player);
             gameObject.SetActive(true);
         }
-        public override void OnInActive()
+        public override void OnInActive(Player player)
         {
-            base.OnInActive();
+            base.OnInActive(player);
             gameObject.SetActive(false);
         }
     }

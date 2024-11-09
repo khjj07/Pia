@@ -357,6 +357,7 @@ MonoBehaviour:
   maxRelativeHeight: 2.5
   progress: 0
   extent: 0.05
+  rotateAngle: -35
   throwDirection: {x: 1, y: 1, z: 1}
   force: 0.5
 --- !u!1 &6591449389099123336

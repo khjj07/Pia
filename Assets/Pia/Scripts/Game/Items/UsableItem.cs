@@ -50,7 +50,7 @@ namespace Assets.Pia.Scripts.Game.Items
                             .Subscribe(_ =>
                             {
                                 player.Hold(null);
-                                OnInActive();
+                                OnInActive(player);
                             })
                             .AddTo(player.gameObject);
                     }

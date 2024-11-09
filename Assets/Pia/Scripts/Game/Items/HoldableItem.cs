@@ -8,6 +8,17 @@ namespace Assets.Pia.Scripts.Game.Items
 {
     public abstract class HoldableItem : Item
     {
+        public override void OnActive(Player player)
+        {
+            base.OnActive(player);
+            gameObject.SetActive(true);
+        }
+        public override void OnInActive(Player player)
+        {
+            base.OnInActive(player);
+            gameObject.SetActive(false);
+            player.Hold(null);
+        }
         public override void Initialize(Player player)
         {
             activeStream = CreateActiveStream()
@@ -22,7 +33,7 @@ namespace Assets.Pia.Scripts.Game.Items
                             .Take(1)
                             .Subscribe(_ =>
                             {
-                                OnInActive();
+                                OnInActive(player);
                                 player.Hold(null);
                             })
                             .AddTo(gameObject);

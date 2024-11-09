@@ -69,6 +69,16 @@ namespace Assets.Pia.Scripts.Game.Events
             }
         }
 
+        public float GetTotalDistance()
+        {
+            float totalDistance = 0;
+            for (int i=0;i< nodes.Length-1;i++)
+            {
+                totalDistance += Vector3.Distance(nodes[i].transform.position, nodes[i+1].transform.position);
+            }
+            return totalDistance;
+        }
+
 #if UNITY_EDITOR
         public void OnDrawGizmos()
         {

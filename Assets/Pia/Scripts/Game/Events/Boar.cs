@@ -22,12 +22,14 @@ namespace Assets.Pia.Scripts.Game.Events
 
         [SerializeField] EventPathManager pathManager;
         [SerializeField] EventPathNode attackPointNode;
-        [SerializeField] private float speed = 1;
+
+        public float eventTime = 18.0f;
+        private float speed = 1;
         [SerializeField] private float sprintSpeed = 2;
         [SerializeField] private float tolerance = 0.1f;
         [SerializeField] private float delay = 2f;
 
-        [SerializeField] private RectTransform boarUI;
+        [SerializeField] private CanvasGroup boarUI;
         [SerializeField] private RectTransform boarPositionUI;
         [SerializeField] private RectTransform boarDirectionArrowOrigin;
         [SerializeField] private RectTransform boarDirectionArrow;
@@ -36,6 +38,10 @@ namespace Assets.Pia.Scripts.Game.Events
         private bool _attackFlag = false;
         private bool _finishFlag = false;
 
+        public void Start()
+        {
+            speed = pathManager.GetTotalDistance() / eventTime;
+        }
         public void TriggerAttackFlag()
         {
             _attackFlag = true;
@@ -88,6 +94,7 @@ namespace Assets.Pia.Scripts.Game.Events
            var player = StoryModeManager.Instance.GetPlayer();
 
            boarUI.gameObject.SetActive(true);
+           boarUI.DOFade(1,2.0f);
            SoundManager.Play("event_startBoar", 6);
             this.UpdateAsObservable()
                .SkipUntil(Observable.Timer(TimeSpan.FromSeconds(delay)))
@@ -115,7 +122,8 @@ namespace Assets.Pia.Scripts.Game.Events
           },null, () =>
           {
               SoundManager.Stop(6);
-            boarUI.gameObject.SetActive(false);
+              boarUI.DOFade(0, 2.0f);
+              //boarUI.gameObject.SetActive(false);
           }).AddTo(gameObject);
 
             boarStream.Subscribe(x =>

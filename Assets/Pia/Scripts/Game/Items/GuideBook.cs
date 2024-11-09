@@ -19,7 +19,6 @@ namespace Assets.Pia.Scripts.Game.Items
         public override void OnActive(Player player)
         {
             base.OnActive(player);
-           gameObject.SetActive(true);
            var nextStream = GlobalInputBinder.CreateGetKeyDownStream(nextKey).Subscribe(_ =>
            {
                if (_guideBookUi.currentIndex < _guideBookUi.states.Length-1)
@@ -41,11 +40,6 @@ namespace Assets.Pia.Scripts.Game.Items
                nextStream.Dispose();
                prevStream.Dispose();
            }).AddTo(gameObject);
-        }
-        public override void OnInActive()
-        {
-            base.OnInActive();
-            gameObject.SetActive(false);
         }
     }
 }

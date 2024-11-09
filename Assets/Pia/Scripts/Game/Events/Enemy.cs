@@ -1,5 +1,6 @@
 ﻿using System;
 using Default.Scripts.Sound;
+using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using TMPro;
 using UniRx;
@@ -16,16 +17,21 @@ namespace Assets.Pia.Scripts.Game.Events
             End,
         }
         [SerializeField] EventPathManager pathManager;
-        [SerializeField] private float speed = 1;
-        [SerializeField] private float sprintSpeed = 2;
+        private float speed = 1;
+        public float eventTime = 18.0f;
         [SerializeField] private float tolerance = 0.1f;
         [SerializeField] private float delay = 2f;
 
-        [SerializeField] private RectTransform enemyUI;
+        [SerializeField] private CanvasGroup enemyUI;
         [SerializeField] private RectTransform enemyPositionUI;
         [SerializeField] private RectTransform enemyDirectionArrowOrigin;
         [SerializeField] private RectTransform enemyDirectionArrow;
         [SerializeField] private TMP_Text enemyDistanceText;
+
+        public void Start()
+        {
+            speed = pathManager.GetTotalDistance() / eventTime;
+        }
         public State Evaluate()
         {
             if (pathManager.GetNext())
@@ -57,8 +63,9 @@ namespace Assets.Pia.Scripts.Game.Events
         public override void Act()
         {
             var player = StoryModeManager.Instance.GetPlayer();
-
             enemyUI.gameObject.SetActive(true);
+            enemyUI.DOFade(1,2.0f);
+
             SoundManager.Play("event_enemyStart", 6);
             SoundManager.Play("event_enemy", 7);
             var enemyStream = this.UpdateAsObservable()
@@ -86,7 +93,7 @@ namespace Assets.Pia.Scripts.Game.Events
             {
                 SoundManager.Stop(6);
                 SoundManager.Stop(7);
-                enemyUI.gameObject.SetActive(false);
+                enemyUI.DOFade(0, 2.0f);
             }).AddTo(gameObject);
             enemyStream.Subscribe(x =>
             {

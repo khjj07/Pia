@@ -24,14 +24,14 @@ namespace Assets.Pia.Scripts.Game.Items
             }
         }
 
-        public override void OnInActive()
+        public override void OnInActive(Player player)
         {
-            base.OnInActive();
+            base.OnInActive(player);
             foreach (var item in items)
             {
                 Debug.Log("Dispose");
-                item.DisposeHoldStream();
-                item.OnInActive();
+                item.DisposeActiveStream();
+                item.OnInActive(player);
             }
         }
     }

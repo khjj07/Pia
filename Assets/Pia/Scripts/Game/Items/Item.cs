@@ -32,7 +32,7 @@ namespace Assets.Pia.Scripts.Game.Items
             return GlobalInputBinder.CreateGetKeyUpStream(itemKey);
         }
 
-        public void DisposeHoldStream()
+        public void DisposeActiveStream()
         {
             if (activeStream != null)
             {
@@ -48,7 +48,7 @@ namespace Assets.Pia.Scripts.Game.Items
                 SoundManager.Play(itemSoundName, 1);
             }
         }
-        public virtual void OnInActive()
+        public virtual void OnInActive(Player player)
         {
             _isActive = false;
             slot.SetActive(false);
@@ -67,7 +67,7 @@ namespace Assets.Pia.Scripts.Game.Items
                         .Take(1)
                         .Subscribe(_ =>
                         {
-                            OnInActive();
+                            OnInActive(player);
                         })
                         .AddTo(gameObject);
 

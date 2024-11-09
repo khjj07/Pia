@@ -237,8 +237,8 @@ namespace Assets.Pia.Scripts.Game
             _isBleeding = true;
             bleedUI.gameObject.SetActive(true);
             bleedUI.color = Color.white;
-            bleedUI.DOFade(0.5f, 1).SetLoops(-1,LoopType.Yoyo).SetId("BleedTween");
-            bandageGuideImage.DOFade(0.5f, 1).SetLoops(-1,LoopType.Yoyo).SetId("BandageGuideTween");
+            bleedUI.DOFade(0.32f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetId("BleedTween");
+            bandageGuideImage.DOFade(0.5f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetId("BandageGuideTween");
         }
 
         public void CureBleed()

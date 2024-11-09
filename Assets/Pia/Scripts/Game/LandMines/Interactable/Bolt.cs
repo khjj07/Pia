@@ -15,6 +15,7 @@ public class Bolt : InteractableClass
     [SerializeField] private float maxRelativeHeight;
     [SerializeField] private float progress=0;
     [SerializeField] private float extent = 0.1f;
+    [SerializeField] private float rotateAngle = 40;
 
     [Header("사라지기 효과")]
     [SerializeField] private Vector3 throwDirection;
@@ -53,7 +54,7 @@ public class Bolt : InteractableClass
         {
             progress = Mathf.Clamp(progress + extent, 0, 1);
             transform.DOLocalMoveY(initialHeight + maxRelativeHeight * progress, interval);
-            transform.DOLocalRotate(Vector3.up * 20, interval).SetRelative();
+            transform.DOLocalRotate(Vector3.up * rotateAngle, interval).SetRelative();
         }
     }
 
