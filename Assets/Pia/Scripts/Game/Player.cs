@@ -42,7 +42,7 @@ namespace Assets.Pia.Scripts.Game
         [SerializeField] private Transform body;
         [SerializeField] private Transform upperBody;
         [SerializeField] private Transform arm;
-        [SerializeField] private Camera mainCamera;
+        public Camera mainCamera;
         [SerializeField] private Transform foot;
         [SerializeField] private Transform crouchArmTransform1;
         [SerializeField] private Transform crouchArmTransform2;
@@ -236,8 +236,7 @@ namespace Assets.Pia.Scripts.Game
             hpReduction = 2;
             _isBleeding = true;
             bleedUI.gameObject.SetActive(true);
-            bleedUI.color = Color.white;
-            bleedUI.DOFade(0.32f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetId("BleedTween");
+            bleedUI.DOFade(0.04f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetId("BleedTween");
             bandageGuideImage.DOFade(0.5f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetId("BandageGuideTween");
         }
 

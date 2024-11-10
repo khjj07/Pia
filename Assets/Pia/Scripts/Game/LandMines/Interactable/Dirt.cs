@@ -53,9 +53,11 @@ namespace Assets.Pia.Scripts.Effect
 
         public void Dig(float interval)
         {
-            holeDepth = Mathf.Clamp(holeDepth + extend, 0, 1);
+            //holeDepth = Mathf.Clamp(holeDepth + extend, 0, 1);
 
+            DOTween.To(() => holeDepth, x => holeDepth =x, holeDepth + extend,1.0f);
             transform.DOShakeRotation(interval, 0.1f, 1);
+
             if (holeDepth >= targetDepth)
             {
                 GetComponent<Collider>().enabled = false;

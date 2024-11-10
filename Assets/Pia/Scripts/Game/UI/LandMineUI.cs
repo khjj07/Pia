@@ -49,7 +49,7 @@ namespace Assets.Pia.Scripts.UI
 
             gameObject.SetActive(true);
             SoundManager.Play("StepLandmine", 1);
-            blood.DOFade(0.5f,0.5f).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);
+            blood.DOFade(0.2f,0.5f).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);
             SetTimer(timeLimit);
             CreateLandMineStream();
             switch (StoryModeManager.GetControlMode())

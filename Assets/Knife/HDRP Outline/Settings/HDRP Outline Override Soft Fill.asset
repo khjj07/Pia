@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MegaOutline
   m_EditorClassIdentifier: 
   active: 1
+  m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
     m_Value: 2
@@ -22,13 +23,16 @@ MonoBehaviour:
   fillAmount:
     m_OverrideState: 1
     m_Value: 0.064
+    min: 0
+    max: 1
   patternTexture:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: e2e22020a6b7dd84aa9c27889eb188e7, type: 3}
-    dimension: 1
+    m_Value: {fileID: 2800000, guid: f4ffff85d7cd3b94e90a79fd1b54cac9, type: 3}
   patternFillAmount:
     m_OverrideState: 1
     m_Value: 0
+    min: 0
+    max: 1
   patternTile:
     m_OverrideState: 1
     m_Value: {x: 1.2, y: 0.675}
@@ -50,9 +54,8 @@ MonoBehaviour:
   softness:
     m_OverrideState: 1
     m_Value: 1
-  singlePassInstanced:
-    m_OverrideState: 0
-    m_Value: 0
+    min: 0.001
+    max: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

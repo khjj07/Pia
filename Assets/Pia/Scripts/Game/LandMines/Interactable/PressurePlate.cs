@@ -78,11 +78,11 @@ public class PressurePlate : InteractableClass
 
     public void Operate()
     {
+        SoundManager.Play("use_pressurePlate", 1); ;
         if (_currentLevel == 2)
         {
-            SoundManager.Play("use_pressurePlate", 1); ;
             count++;
-            origin.DOLocalRotateQuaternion(Quaternion.Euler(0, -90 * (float)count / targetCount, 0), 1.0f).SetEase(Ease.InExpo);
+            origin.DOLocalRotateQuaternion(Quaternion.Euler(0, -90 * (float)count / targetCount, 0), 1.0f).SetEase(Ease.InOutQuad);
             if (count == targetCount)
             {
                 isDead = true;

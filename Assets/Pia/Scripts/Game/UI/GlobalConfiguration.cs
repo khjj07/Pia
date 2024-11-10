@@ -1,16 +1,33 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
-public class GlobalConfiguration : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+namespace Assets.Pia.Scripts.Game.UI
+{ 
+    public class GlobalConfiguration : MonoBehaviour
     {
-        Cursor.visible = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        [SerializeField] private Volume volume;
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        public void SetExposure(float value)
+        {
+            VolumeProfile profile = volume.sharedProfile;
         
+            if (profile.TryGet<Exposure>(out var exposure))
+            {
+                exposure.fixedExposure.value = value;
+            }
+        }
+
+        public float GetExposure()
+        {
+            VolumeProfile profile = volume.sharedProfile;
+
+            if (profile.TryGet<Exposure>(out var exposure))
+            {
+                return exposure.fixedExposure.value;
+            }
+
+            return 0;
+        }
     }
 }

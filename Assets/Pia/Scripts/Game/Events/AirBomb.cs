@@ -13,7 +13,7 @@ namespace Assets.Pia.Scripts.Game.Events
 {
     public class AirBomb : EventActor
     {
-        public RectTransform airbombUI;
+        public CanvasGroup airbombUI;
         public Image airbombGauge;
         public TMP_Text airbombTimerText;
 
@@ -48,40 +48,76 @@ namespace Assets.Pia.Scripts.Game.Events
             //흔들림 + 미니게임
             var player = StoryModeManager.Instance.GetPlayer();
             player.StandUp();
-
+            player.SetCursorLockedAndInteractable();
             SoundManager.Play("event_startBombing", 6);
-            airbombUI.gameObject.SetActive(true);
-            Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeWhile(_ => remainTimer > 0 && balance>0)
-                .Subscribe(_ =>
-                {
-                    player.transform.DOShakePosition(0.1f,new Vector3(0.01f,0,0.01f));
-                    SetTimer(remainTimer - 0.1f);
-                    UpdateDifficulty();
-                },null, () =>
-                {
-                    player.SetCursorUnlocked();
-                    airbombUI.gameObject.SetActive(false);
-                    player.Crouch();
-                    SoundManager.Stop(6);
-                    if (balance <= 0)
+            Sequence sequnce = DOTween.Sequence();
+
+            sequnce.AppendInterval(6.0f);
+       
+            sequnce.AppendCallback(()=>
+            {
+                player.transform.DOShakePosition(0.2f,0.1f).SetLoops(-1).SetId("AirBombPlayerShake");
+            });
+            sequnce.AppendInterval(3.0f);
+            sequnce.AppendCallback(() =>
+            {
+                airbombUI.gameObject.SetActive(true);
+                airbombUI.DOFade(1, 1);
+                Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeWhile(_ => remainTimer > 0 && balance > 0)
+                    .Subscribe(_ =>
                     {
-                        StoryModeManager.GameOver(StoryModeManager.GameOverType.AirBomb);
-                    }
-                }).AddTo(gameObject);
+
+                        SetTimer(remainTimer - 0.1f);
+                        UpdateDifficulty();
+                    }, null, () =>
+                    {
+                        player.SetCursorUnlocked();
+                        airbombUI.DOFade(0, 2);
+                        player.Crouch();
+                        SoundManager.Stop(6);
+                        DOTween.Kill("AirBombPlayerShake");
+                        if (balance <= 0)
+                        {
+                            StoryModeManager.GameOver(StoryModeManager.GameOverType.AirBomb);
+                        }
+                    }).AddTo(gameObject);
 
 
-            this.UpdateAsObservable().TakeWhile(_ => remainTimer > 0 && balance > 0)
-                .Subscribe(_ =>
-                {
-                    SetBalance(balance - balanceDecreasementAmounts[difficulty]*Time.deltaTime);
-                    MoveCheckBar();
-                });
+                this.UpdateAsObservable().TakeWhile(_ => remainTimer > 0 && balance > 0)
+                    .Subscribe(_ =>
+                    {
+                        SetBalance(balance - balanceDecreasementAmounts[difficulty] * Time.deltaTime);
+                        MoveCheckBar();
+                    });
 
-            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Mouse0)
-                .TakeWhile(_ => remainTimer > 0 && balance > 0)
-                .Where(_ => CheckIsInBound())
-                .Subscribe(_ => SetBalance(balance + balanceIncreasementAmount));
-
+                GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Mouse0)
+                    .TakeWhile(_ => remainTimer > 0 && balance > 0)
+                    .Where(_ => CheckIsInBound())
+                    .Subscribe(_ => SetBalance(balance + balanceIncreasementAmount));
+            });
+            sequnce.AppendInterval(4.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(1.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(2.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(6.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(2.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(3.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(3.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(2.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(1.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(6.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.AppendInterval(2.0f);
+            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Play();
         }
 
         private bool CheckIsInBound()

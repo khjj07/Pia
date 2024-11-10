@@ -99,9 +99,9 @@ Material:
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
     - _Height: -0.87
-    - _HoleDepth: 0
+    - _HoleDepth: 0.3
     - _HoleSize: 0
-    - _HoleWidth: 1.36
+    - _HoleWidth: 4.5
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _NoiseOffset: 12.16

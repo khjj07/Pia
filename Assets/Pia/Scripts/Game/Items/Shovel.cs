@@ -21,6 +21,7 @@ namespace Assets.Pia.Scripts.Game.Items
             if (player.target is Dirt dirt)
             {
                 animator.SetBool("Use", true);
+                dirt.Dig(digInterval);
                 var useStream = Observable.Interval(TimeSpan.FromSeconds(digInterval))
                     .TakeUntil(CreateStopUseStream())
                     .TakeWhile(_ => player.target == dirt)

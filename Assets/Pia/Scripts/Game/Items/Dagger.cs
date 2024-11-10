@@ -46,7 +46,6 @@ namespace Assets.Pia.Scripts.Game.Items
                             }
                         }, null, () =>
                         {
-                            player.SetCursorLockedAndInteractable();
                             plate.ResetAll();
                             cancelStream.Dispose();
                         });
