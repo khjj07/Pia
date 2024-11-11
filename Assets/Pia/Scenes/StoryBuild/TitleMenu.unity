@@ -3796,10 +3796,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cursor
       objectReference: {fileID: 0}
-    - target: {fileID: 4029491373275079031, guid: 62f98df251c34384ea7e8eb8fe23d0a9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4167,8 +4163,8 @@ RectTransform:
   - {fileID: 360449747}
   - {fileID: 970003930}
   - {fileID: 1057738685}
-  - {fileID: 1727619453}
   - {fileID: 1321761541}
+  - {fileID: 1727619453}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
