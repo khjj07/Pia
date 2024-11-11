@@ -98,7 +98,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Height: -0.87
+    - _Height: -0.88
     - _HoleDepth: 0.3
     - _HoleSize: 0
     - _HoleWidth: 4.5
@@ -120,7 +120,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Roughness: 0.111
+    - _Roughness: 0
     - _Scale: 0
     - _ScaleOffset: 23.89
     - _Smoothness: -10
@@ -150,15 +150,15 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
-    - _a1: -0.47
-    - _a2: -0.35
+    - _a1: -0.45
+    - _a2: -0.31
     - _a3: -0.07
     - _a4: -0.7
     - _a5: -0.71
     - _a6: -0.35
     - _a7: -0.62
     - _a8: -0.69
-    - _a9: -0.5
+    - _a9: -0.36
     m_Colors:
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

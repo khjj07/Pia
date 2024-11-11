@@ -55,7 +55,8 @@ namespace Assets.Pia.Scripts.Effect
         {
             //holeDepth = Mathf.Clamp(holeDepth + extend, 0, 1);
 
-            DOTween.To(() => holeDepth, x => holeDepth =x, holeDepth + extend,1.0f);
+            DOTween.To(() => holeDepth, x => holeDepth =x, holeDepth + extend,1.0f).SetEase(Ease.InOutQuad);
+            
             transform.DOShakeRotation(interval, 0.1f, 1);
 
             if (holeDepth >= targetDepth)
