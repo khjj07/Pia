@@ -24,6 +24,9 @@ namespace Default.Scripts.Sound
         public SoundListAsset asset;
         [HideInInspector]
         public Channel[] channels;
+
+        public float mainVolume;
+
         public void Awake()
         {
             channels = GetComponentsInChildren<Channel>();
@@ -58,6 +61,14 @@ namespace Default.Scripts.Sound
         public static void SetVolume(float volume,int channel)
         {
             Instance.channels[channel].SetVolume(volume);
+        }
+        public static void SetMainVolume(float volume)
+        {
+            Instance.mainVolume = volume;
+        }
+        public static float GetMainVolume()
+        {
+            return Instance.mainVolume;
         }
 
         public static void StopAll()

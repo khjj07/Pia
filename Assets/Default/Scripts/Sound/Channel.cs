@@ -20,11 +20,11 @@ namespace Default.Scripts.Sound
         public void Play(AudioClip clip)
         {
             _audioSource.clip = clip;
-            _audioSource.volume = volume;
+            _audioSource.volume = volume * SoundManager.GetMainVolume();
             _audioSource.Play();
         }        public void PlayOneShot(AudioClip clip)
         {
-            _audioSource.volume = volume;
+            _audioSource.volume = volume * SoundManager.GetMainVolume();
             _audioSource.PlayOneShot(clip);
         }
 

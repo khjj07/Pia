@@ -86,11 +86,11 @@ namespace Assets.Pia.Scripts.Game.Events
 
                 if (Math.Abs(direction.x / direction.z) >= 1920.0f / 1080.0f)
                 {
-                    enemyPositionUI.anchoredPosition = new Vector2(800 * Math.Sign(direction.x), direction.z * 400);
+                    enemyPositionUI.anchoredPosition = Vector2.Lerp(enemyPositionUI.anchoredPosition, new Vector2(800 * Math.Sign(direction.x), direction.z * 400), Time.deltaTime);
                 }
                 else
                 {
-                    enemyPositionUI.anchoredPosition = new Vector2(direction.x * 800, 400 * Math.Sign(direction.z));
+                    enemyPositionUI.anchoredPosition = Vector2.Lerp(enemyPositionUI.anchoredPosition, new Vector2(direction.x * 800, 400 * Math.Sign(direction.z)), Time.deltaTime);
                 }
 
                 float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;

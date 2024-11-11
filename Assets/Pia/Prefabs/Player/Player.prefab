@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7529412, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2438,7 +2438,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5389581640662918494}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -3097,7 +3097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7529412, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3172,7 +3172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7529412, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3364,7 +3364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7529412, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -33647,17 +33647,25 @@ PrefabInstance:
       propertyPath: m_VertexColorAlwaysGammaSpace
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5680742662240990761, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5884023235285556690, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4fa0a8fb69554064d875b339835e9fec, type: 3}
     - target: {fileID: 5884023235285556690, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
       propertyPath: m_Color.a
-      value: 0.64705884
+      value: 0.15686275
       objectReference: {fileID: 0}
     - target: {fileID: 6911637931518862393, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
       propertyPath: m_Name
       value: PlayerCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322588734316926088, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6262078577608831761, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
@@ -33676,6 +33684,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 201703918271507780}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5255663776652147964, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 3583781252271141374}
     - targetCorrespondingSourceObject: {fileID: 5255663776652147964, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4106686760613242804}
@@ -33958,6 +33969,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5255663776652147964, guid: ff001a26512b3af408c2c852209a4fc9, type: 3}
   m_PrefabInstance: {fileID: 4270891592706618510}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &3583781252271141374
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334649009239476338}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &4106686760613242804
 MonoBehaviour:
   m_ObjectHideFlags: 0

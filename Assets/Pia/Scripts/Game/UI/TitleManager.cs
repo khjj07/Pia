@@ -11,14 +11,40 @@ namespace Pia.Scripts.Manager
     public class TitleManager : MonoBehaviour
     {
         public Button startButton;
+        public Button optionButton;
         public Button quitButton;
+
+        public Image optionPanel;
+        public Button optionConfirmButton;
+        public Button optionResetButton;
 
         private void Start()
         {
             startButton.onClick.AddListener(OnStartButtonClick);
+            optionButton.onClick.AddListener(OnOptionButtonClick);
             quitButton.onClick.AddListener(OnQuitButtonClick);
+            optionConfirmButton.onClick.AddListener(OnOptionConfirmButtonClick);
+            optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
             PlayerPrefs.DeleteKey("Save");
             SoundManager.Play("BGM_Title");
+        }
+
+        private void OnOptionResetButtonClick()
+        {
+            SoundManager.PlayOneShot("ui_button", 1);
+            PlayerPrefs.DeleteAll();
+        }
+
+        private void OnOptionConfirmButtonClick()
+        {
+            SoundManager.PlayOneShot("ui_button", 1);
+            PlayerPrefs.Save();
+        }
+
+        private void OnOptionButtonClick()
+        {
+            SoundManager.PlayOneShot("ui_button", 1);
+            optionPanel.gameObject.SetActive(true);
         }
 
         private void OnStartButtonClick()
