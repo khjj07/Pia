@@ -78,9 +78,9 @@ public class PressurePlate : InteractableClass
 
     public void Operate()
     {
-        SoundManager.Play("use_pressurePlate", 1); ;
         if (_currentLevel == 2)
         {
+             SoundManager.Play("use_pressurePlate", 1);
             count++;
             origin.DOLocalRotateQuaternion(Quaternion.Euler(0, -90 * (float)count / targetCount, 0), 1.0f).SetEase(Ease.InOutQuad);
             if (count == targetCount)
@@ -98,6 +98,7 @@ public class PressurePlate : InteractableClass
         {
             _currentLevel++;
             origin.DOShakeRotation(0.1f, Vector3.up * 5).SetEase(Ease.OutBack);
+             SoundManager.Play("pressurePlate_tick", 1);
         }
         SetLevel(_currentLevel);
     }

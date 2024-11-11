@@ -76,7 +76,7 @@ public class Spring : InteractableClass
     {
         transform.DOShakePosition(0.1f, 0.1f);
         SetProgress(progress + extent);
-        SoundManager.Play("use_SpringCut", 1);
+        SoundManager.Play("spring_tick", 1);
     }
     public void SetProgress(float value)
     {
