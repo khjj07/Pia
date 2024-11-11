@@ -2,6 +2,7 @@
 using System.Threading;
 using Assets.Pia.Scripts.Effect;
 using Assets.Pia.Scripts.Game;
+using Assets.Pia.Scripts.Game.UI;
 using Assets.Pia.Scripts.General;
 using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.StoryMode.Walking;
@@ -14,6 +15,7 @@ using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 using Unit = UniRx.Unit;
 
 namespace Pia.Scripts.StoryMode
@@ -58,6 +60,7 @@ namespace Pia.Scripts.StoryMode
         private CancellationTokenSource _gameOverTokenSource;
         public void Start()
         {
+            InitializeVolumeSetting();
             _gameOverTokenSource = new CancellationTokenSource();
             stateSubject = new Subject<State>();
             stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
@@ -95,6 +98,11 @@ namespace Pia.Scripts.StoryMode
                         .AddTo(_player.gameObject);
                 });
             CheckSaveFlag();
+        }
+
+        private void InitializeVolumeSetting()
+        {
+            GlobalConfiguration.Instance.SetFog(true);
         }
 
         public Player GetPlayer()

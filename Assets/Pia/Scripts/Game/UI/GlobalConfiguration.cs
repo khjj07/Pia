@@ -11,8 +11,8 @@ namespace Assets.Pia.Scripts.Game.UI
     public class GlobalConfiguration : Singleton<GlobalConfiguration>
     {
         [SerializeField] private Volume graphciVolume;
-        [SerializeField] private int motionBlur;
-        [SerializeField] private int headBob;
+        [SerializeField] private bool motionBlur;
+        [SerializeField] private bool headBob;
         [SerializeField] private float mouseSensitive;
         [SerializeField] private float soundVolume;
         [SerializeField] private float exposure;
@@ -43,17 +43,29 @@ namespace Assets.Pia.Scripts.Game.UI
             return alt;
         }
 
-        public void Start()
+        public void Awake()
+        {
+            LoadAllProperty();
+            Cursor.visible = false;
+        }
+        public void LoadAllProperty()
         {
             SetExposure(GetFloatProperty("exposure", 0.75f));
             SetVolume(GetFloatProperty("soundVolume", 1));
             SetMouseSensitive(GetFloatProperty("mouseSensitive", 1));
-            SetHeadBob(GetIntProperty("headBob", 1));
-            SetMotionBlur(GetIntProperty("motionBlur", 1));
-
+            SetHeadBob(GetIntProperty("headBob", 1) == 1);
+            SetMotionBlur(GetIntProperty("motionBlur", 1)==1 );
         }
 
+        public void SetFog(bool value)
+        {
+            VolumeProfile profile = graphciVolume.sharedProfile;
 
+            if (profile.TryGet<Fog>(out var fog))
+            {
+                fog.enabled.value = value;
+            }
+        }
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         public void SetExposure(float value)
         {
@@ -95,29 +107,29 @@ namespace Assets.Pia.Scripts.Game.UI
             return mouseSensitive;
         }
 
-        public void SetMotionBlur(int value)
+        public void SetMotionBlur(bool value)
         {
             VolumeProfile profile = graphciVolume.sharedProfile;
             if (profile.TryGet<MotionBlur>(out var m))
             {
-                m.active = value == 1 ? true : false;
-                PlayerPrefs.SetInt("motionBlur", value);
+                m.active = value;
+                PlayerPrefs.SetInt("motionBlur", value ? 1 : 0);
                 motionBlur = value;
             }
         }
 
-        public int GetMotionBlur()
+        public bool GetMotionBlur()
         {
-            return headBob;
+            return motionBlur;
         }
 
-        public void SetHeadBob(int value)
+        public void SetHeadBob(bool value)
         {
-            PlayerPrefs.SetFloat("headBob", value);
+            PlayerPrefs.SetInt("headBob", value ? 1 : 0);
             headBob = value;
         }
 
-        public int GetHeadBob()
+        public bool GetHeadBob()
         {
             return headBob;
         }

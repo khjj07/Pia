@@ -65,6 +65,10 @@ namespace Default.Scripts.Sound
         public static void SetMainVolume(float volume)
         {
             Instance.mainVolume = volume;
+            foreach (var channel in Instance.channels)
+            {
+                channel.SetVolume(volume);
+            }
         }
         public static float GetMainVolume()
         {

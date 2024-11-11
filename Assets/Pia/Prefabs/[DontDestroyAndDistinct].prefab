@@ -114,6 +114,7 @@ MonoBehaviour:
   - {fileID: 7085414908489909878}
   - {fileID: 783686090591470813}
   - {fileID: 5477527095084787737}
+  mainVolume: 0
 --- !u!81 &3592204860938539329
 AudioListener:
   m_ObjectHideFlags: 0
@@ -184,6 +185,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4571f62d51eacb4439ee0ca20372877a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphciVolume: {fileID: 708586034783923009}
+  motionBlur: 0
+  headBob: 0
+  mouseSensitive: 0
+  soundVolume: 0
+  exposure: 0
 --- !u!1 &1156924743096307763
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +424,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -647,7 +654,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -783,7 +790,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -927,7 +934,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1.35
   Loop: 1

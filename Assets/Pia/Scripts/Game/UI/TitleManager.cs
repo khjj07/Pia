@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Pia.Scripts.Game.UI;
 using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using UniRx;
@@ -18,6 +19,12 @@ namespace Pia.Scripts.Manager
         public Button optionConfirmButton;
         public Button optionResetButton;
 
+        public Slider exposureSlider;
+        public Slider mouseSensitiveSlider;
+        public Slider volumeSlider;
+        public Toggle motionBlurToggle;
+        public Toggle headBobToggle;
+
         private void Start()
         {
             startButton.onClick.AddListener(OnStartButtonClick);
@@ -25,19 +32,33 @@ namespace Pia.Scripts.Manager
             quitButton.onClick.AddListener(OnQuitButtonClick);
             optionConfirmButton.onClick.AddListener(OnOptionConfirmButtonClick);
             optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
+            InitializeOption();
             PlayerPrefs.DeleteKey("Save");
             SoundManager.Play("BGM_Title");
+            GlobalConfiguration.Instance.SetFog(false);
+        }
+
+        private void InitializeOption()
+        {
+            exposureSlider.value = GlobalConfiguration.Instance.GetExposure();
+            motionBlurToggle.isOn = GlobalConfiguration.Instance.GetMotionBlur();
+            headBobToggle.isOn = GlobalConfiguration.Instance.GetHeadBob();
+            mouseSensitiveSlider.value = GlobalConfiguration.Instance.GetMouseSensitive();
+            volumeSlider.value = GlobalConfiguration.Instance.GetVolume();
         }
 
         private void OnOptionResetButtonClick()
         {
             SoundManager.PlayOneShot("ui_button", 1);
             PlayerPrefs.DeleteAll();
+            GlobalConfiguration.Instance.LoadAllProperty();
+            InitializeOption();
         }
 
         private void OnOptionConfirmButtonClick()
         {
             SoundManager.PlayOneShot("ui_button", 1);
+            optionPanel.gameObject.SetActive(false);
             PlayerPrefs.Save();
         }
 

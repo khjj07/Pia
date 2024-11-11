@@ -1,5 +1,6 @@
 using System;
 using Assets.Pia.Scripts.Game.Items;
+using Assets.Pia.Scripts.Game.UI;
 using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
 using Assets.Pia.Scripts.StoryMode.Walking;
@@ -134,7 +135,8 @@ namespace Assets.Pia.Scripts.Game
             initialLocalPosition = mainCamera.transform.localPosition;
             initialLocalRotation = mainCamera.transform.localRotation;
             mainCamera.fieldOfView = defaultFov;
-
+            sensitiveY *= GlobalConfiguration.Instance.GetMouseSensitive();
+            sensitiveX *= GlobalConfiguration.Instance.GetMouseSensitive();
             SetCursorLocked();
             CreateAnimationSubject();
             CreateLowerBodyStream();
@@ -287,7 +289,7 @@ namespace Assets.Pia.Scripts.Game
             GlobalInputBinder.CreateGetAxisStream("Mouse X").Subscribe(RotateCameraY);
             GlobalInputBinder.CreateGetAxisStream("Mouse Y").Subscribe(RotateCameraX);
             this.UpdateAsObservable().Subscribe(_ => RotateHead());
-            this.UpdateAsObservable().Select(_ => currentLowerState)
+            this.UpdateAsObservable().Where(_=>GlobalConfiguration.Instance.GetHeadBob()).Select(_ => currentLowerState)
                 .DistinctUntilChanged().Subscribe(ShakeCamera);
         }
         private void ShakeCamera(LowerAnimationState state)

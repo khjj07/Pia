@@ -6,8 +6,8 @@ namespace Default.Scripts.Sound
     public class Channel : MonoBehaviour
     {
         [Range(0.0f, 1.0f)]
-        public float volume = 0.5f;
-        public bool loop = false;
+        private float volume = 0.5f;
+        private bool loop = false;
         private AudioSource _audioSource;
 
         public void Awake()
@@ -41,7 +41,7 @@ namespace Default.Scripts.Sound
         public void SetVolume(float v)
         {
             volume = v;
-            _audioSource.volume = volume;
+            _audioSource.volume = volume * SoundManager.GetMainVolume();
         }
     }
 }
