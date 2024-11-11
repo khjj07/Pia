@@ -269,11 +269,19 @@ namespace Assets.Pia.Scripts.Game
                     {
                         target.OnExit();
                     }
-                    if (t != null)
+                    if (t != null && IsLightOn())
                     {
                         t.OnHover(hand);
                     }
-                    target = t;
+
+                    if (IsLightOn())
+                    {
+                        target = t;
+                    }
+                    else
+                    {
+                        target = null;
+                    }
                 }, null, () =>
                 {
                     if (target != null)

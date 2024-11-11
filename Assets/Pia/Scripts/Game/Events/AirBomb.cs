@@ -18,7 +18,7 @@ namespace Assets.Pia.Scripts.Game.Events
         public TMP_Text airbombTimerText;
 
         public RectTransform airbombCheckBar;
-     
+
         public float positionBoundX = 225;
         [Header("판정")]
         public float matchPositionBound = 100;
@@ -41,7 +41,7 @@ namespace Assets.Pia.Scripts.Game.Events
 
         private void UpdateDifficulty()
         {
-            difficulty = (int)(30.0f-remainTimer) / 6;
+            difficulty = (int)(30.0f - remainTimer) / 6;
         }
         public override void Act()
         {
@@ -53,10 +53,10 @@ namespace Assets.Pia.Scripts.Game.Events
             Sequence sequnce = DOTween.Sequence();
 
             sequnce.AppendInterval(6.0f);
-       
-            sequnce.AppendCallback(()=>
+
+            sequnce.AppendCallback(() =>
             {
-                player.transform.DOShakePosition(0.2f,0.1f).SetLoops(-1).SetId("AirBombPlayerShake");
+                player.mainCamera.DOShakePosition(0.2f, 0.1f).SetLoops(-1).SetId("AirBombPlayerShake");
             });
             sequnce.AppendInterval(3.0f);
             sequnce.AppendCallback(() =>
@@ -96,27 +96,27 @@ namespace Assets.Pia.Scripts.Game.Events
                     .Subscribe(_ => SetBalance(balance + balanceIncreasementAmount));
             });
             sequnce.AppendInterval(4.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(1.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(2.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(6.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(2.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(3.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(3.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(2.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(1.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(6.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.AppendInterval(2.0f);
-            sequnce.Append(player.mainCamera.DOShakePosition(0.1f, 0.3f).SetEase(Ease.InBounce));
+            sequnce.Append(player.transform.DOShakePosition(0.1f, 0.5f).SetEase(Ease.InOutElastic));
             sequnce.Play();
         }
 
@@ -127,7 +127,7 @@ namespace Assets.Pia.Scripts.Game.Events
 
         private void SetBalance(float gauge)
         {
-            balance = Math.Clamp(gauge,0,100);
+            balance = Math.Clamp(gauge, 0, 100);
             airbombGauge.fillAmount = balance / 100.0f;
         }
 
