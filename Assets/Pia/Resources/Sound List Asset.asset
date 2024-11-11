@@ -81,6 +81,10 @@ MonoBehaviour:
     name: 2400hz_noise
   - clip: {fileID: 8300000, guid: 5a4c26a18969d994ca5bac174ae9f45d, type: 3}
     name: ui_button
+  - clip: {fileID: 8300000, guid: 7f2d0bfdee68e61479601fc6af2ae3fb, type: 3}
+    name: pressurePlate_tick
+  - clip: {fileID: 8300000, guid: b568cca7c9a555a40b11aa01134dc4d7, type: 3}
+    name: spring_tick
   - clip: {fileID: 8300000, guid: 0e0b067c3ffb8c348858de2e8cefb363, type: 3}
     name: use_bandage
   - clip: {fileID: 8300000, guid: 9c68efb82b68635488927969730ed72c, type: 3}
