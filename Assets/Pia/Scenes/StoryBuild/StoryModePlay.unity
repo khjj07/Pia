@@ -2929,6 +2929,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.315
       objectReference: {fileID: 0}
+    - target: {fileID: 7819593589646005436, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8332578455986408659, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472199011355132583, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8592415612758492195, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.747

@@ -21,8 +21,16 @@ namespace Pia.Scripts.Synopsis
         [SerializeField] string nextScene;
         private IDisposable goNextStream;
         private IDisposable guideNoticeStream;
-      
 
+        [SerializeField] private KeyCode skipKey;
+        [SerializeField] private CanvasGroup skipUI;
+        [SerializeField] private float skipDelay = 1.0f;
+        [SerializeField] private float skipAmount = 0f;
+        [SerializeField] private float fillInterval = 0.1f;
+        [SerializeField] private Image fillImage;
+
+        private bool finishFlag = false;
+        private IDisposable skipStream;
         public override void Next()
         {
             if (currentIndex >= states.Length - 1)
@@ -43,6 +51,46 @@ namespace Pia.Scripts.Synopsis
             base.Start();
             SoundManager.StopAll();
             guideNotice.gameObject.SetActive(false);
+
+            GlobalInputBinder.CreateGetKeyDownStream(skipKey).Subscribe(_ =>
+            {
+                skipUI.DOKill();
+                skipUI.DOFade(1, 0.1f);
+                if (skipStream is not null)
+                {
+                    skipStream.Dispose();
+                }
+
+                skipStream = Observable.Interval(TimeSpan.FromSeconds(fillInterval)).Subscribe(_ =>
+                {
+                    skipAmount += fillInterval * skipDelay;
+                    fillImage.fillAmount = skipAmount;
+                    if (skipAmount >= 1.0f && !finishFlag)
+                    {
+                        finishFlag = true;
+                        StartCoroutine(StoryModeLoadingManager.Instance.Load(nextScene, 1.0f));
+                    }
+                }).AddTo(gameObject);
+            }).AddTo(gameObject);
+
+            GlobalInputBinder.CreateGetKeyUpStream(skipKey).Subscribe(_ =>
+            {
+                skipUI.DOKill();
+                skipUI.DOFade(0, 0.1f);
+                if (skipStream is not null)
+                {
+                    skipStream.Dispose();
+                }
+                skipStream = Observable.Interval(TimeSpan.FromSeconds(fillInterval))
+                    .TakeWhile(_ => skipAmount > 0)
+                    .Subscribe(_ =>
+                    {
+                        skipAmount -= fillInterval * skipDelay;
+                        fillImage.fillAmount = skipAmount;
+                    }).AddTo(gameObject);
+            }).AddTo(gameObject);
+
+
             goNextStream = this.UpdateAsObservable()
                 .Where(_ => currentState.CanGoNext())
                 .Where(_ => Input.GetKeyDown(currentState.nextkey))
