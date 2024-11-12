@@ -475,22 +475,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a79cc06cc9d6e4e93a5b23efdfcdca, type: 3}
---- !u!225 &895527892 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 7528667448666117693, guid: 11998444b3ecd0144b654edbc522e841, type: 3}
-  m_PrefabInstance: {fileID: 3442371532442221515}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2087381488 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 930742106853293704, guid: 11998444b3ecd0144b654edbc522e841, type: 3}
-  m_PrefabInstance: {fileID: 3442371532442221515}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3442371532442221515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -583,18 +567,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6664533445268968280, guid: 11998444b3ecd0144b654edbc522e841, type: 3}
-      propertyPath: skipUI
-      value: 
-      objectReference: {fileID: 895527892}
-    - target: {fileID: 6664533445268968280, guid: 11998444b3ecd0144b654edbc522e841, type: 3}
-      propertyPath: skipKey
-      value: 27
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664533445268968280, guid: 11998444b3ecd0144b654edbc522e841, type: 3}
-      propertyPath: fillImage
-      value: 
-      objectReference: {fileID: 2087381488}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

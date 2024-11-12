@@ -55,7 +55,7 @@ namespace Pia.Scripts.Synopsis
             GlobalInputBinder.CreateGetKeyDownStream(skipKey).Subscribe(_ =>
             {
                 skipUI.DOKill();
-                skipUI.DOFade(1, 0.1f);
+                skipUI.DOFade(1, 0.5f);
                 if (skipStream is not null)
                 {
                     skipStream.Dispose();
@@ -76,7 +76,7 @@ namespace Pia.Scripts.Synopsis
             GlobalInputBinder.CreateGetKeyUpStream(skipKey).Subscribe(_ =>
             {
                 skipUI.DOKill();
-                skipUI.DOFade(0, 0.1f);
+                skipUI.DOFade(0, 0.5f);
                 if (skipStream is not null)
                 {
                     skipStream.Dispose();
