@@ -50,7 +50,7 @@ namespace Assets.Pia.Scripts.Game.UI
         }
         public void LoadAllProperty()
         {
-            SetExposure(GetFloatProperty("exposure", 0.75f));
+            SetExposure(GetFloatProperty("exposure", 0.4f));
             SetVolume(GetFloatProperty("soundVolume", 1));
             SetMouseSensitive(GetFloatProperty("mouseSensitive", 1));
             SetHeadBob(GetIntProperty("headBob", 1) == 1);

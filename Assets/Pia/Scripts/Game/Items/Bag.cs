@@ -21,7 +21,7 @@ namespace Assets.Pia.Scripts.Game.Items
         public Item[] items;
 
         private bool _isOpen = false;
-
+        private bool _isActivated;
         public void Initialize(Player player)
         {
             foreach (var item in items)
@@ -52,6 +52,7 @@ namespace Assets.Pia.Scripts.Game.Items
         public void Activate()
         {
            ui.gameObject.SetActive(true);
+           _isActivated = true;
         }
 
         public void Open()
@@ -65,6 +66,11 @@ namespace Assets.Pia.Scripts.Game.Items
             _isOpen = false;
             ui.SetActive(false);
             SoundManager.Play("ui_button", 1);
+        }
+
+        public bool IsActivated()
+        {
+           return _isActivated;
         }
     }
 }

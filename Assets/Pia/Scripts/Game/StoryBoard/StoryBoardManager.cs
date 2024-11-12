@@ -68,6 +68,10 @@ namespace Pia.Scripts.Synopsis
                     if (skipAmount >= 1.0f && !finishFlag)
                     {
                         finishFlag = true;
+                        goNextStream.Dispose();
+                        guideNoticeStream.Dispose();
+                        _cancellationTokenSource.Cancel();
+                        SoundManager.Stop(2);
                         StartCoroutine(StoryModeLoadingManager.Instance.Load(nextScene, 1.0f));
                     }
                 }).AddTo(gameObject);

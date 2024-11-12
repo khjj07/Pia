@@ -71,7 +71,7 @@ namespace Pia.Scripts.Manager
         private void OnStartButtonClick()
         {
             SoundManager.PlayOneShot("ui_button",1);
-            StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeSynopsis", 1.0f));
+            StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeSynopsis"));
         }
 
         private void OnQuitButtonClick()

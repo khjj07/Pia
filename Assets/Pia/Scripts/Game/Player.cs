@@ -147,7 +147,11 @@ namespace Assets.Pia.Scripts.Game
 
         public void OnStepMine()
         {
-            ActiveBagSlot();
+            if (!bag.IsActivated())
+            {
+                ActiveBagSlot();
+            }
+          
             ActiveHealthBar();
             CreateHPStream();
             CreateRandomBleedEvent(0.95f, 0.87f, EventManager.Event.Bleed1);
