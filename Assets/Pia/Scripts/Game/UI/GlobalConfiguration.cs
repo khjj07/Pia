@@ -3,8 +3,6 @@ using Default.Scripts.Util;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
-using static UnityEditor.AddressableAssets.Build.Layout.BuildLayout;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Assets.Pia.Scripts.Game.UI
 {
@@ -43,9 +41,8 @@ namespace Assets.Pia.Scripts.Game.UI
             return alt;
         }
 
-        public void Awake()
+        public void Start()
         {
-            LoadAllProperty();
             Cursor.visible = false;
         }
         public void LoadAllProperty()
@@ -54,7 +51,7 @@ namespace Assets.Pia.Scripts.Game.UI
             SetVolume(GetFloatProperty("soundVolume", 1));
             SetMouseSensitive(GetFloatProperty("mouseSensitive", 1));
             SetHeadBob(GetIntProperty("headBob", 1) == 1);
-            SetMotionBlur(GetIntProperty("motionBlur", 1)==1 );
+            SetMotionBlur(GetIntProperty("motionBlur", 1) == 1);
         }
 
         public void SetFog(bool value)

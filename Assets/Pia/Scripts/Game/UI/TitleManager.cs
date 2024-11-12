@@ -32,6 +32,7 @@ namespace Pia.Scripts.Manager
             quitButton.onClick.AddListener(OnQuitButtonClick);
             optionConfirmButton.onClick.AddListener(OnOptionConfirmButtonClick);
             optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
+            GlobalConfiguration.Instance.LoadAllProperty();
             InitializeOption();
             PlayerPrefs.DeleteKey("Save");
             SoundManager.Play("BGM_Title");
