@@ -186,8 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphciVolume: {fileID: 708586034783923009}
-  motionBlur: 0
-  headBob: 0
+  motionBlur: 1
+  headBob: 1
   mouseSensitive: 0
   soundVolume: 0
   exposure: 0
@@ -377,8 +377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 1
 --- !u!1 &1823501704024818552
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,8 +519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 0
 --- !u!1 &2114004691541023321
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,8 +883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 0
 --- !u!1 &4357909311277433991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,8 +1025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 0
 --- !u!1 &6012839658380075659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,8 +1167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 0
 --- !u!1 &6820354265253420379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,8 +1309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 0
 --- !u!1 &7662061365003554780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,8 +1451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 0
 --- !u!1 &8887448649952771634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,8 +1593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
-  loop: 1
 --- !u!1 &9173150049616000137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,5 +1735,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048af72f2ba727448a5fda33d9df06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.25
-  loop: 1

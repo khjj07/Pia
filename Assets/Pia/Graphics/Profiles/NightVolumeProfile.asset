@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 0.4
   compensation:
     m_OverrideState: 1
     m_Value: 0
@@ -169,16 +169,16 @@ MonoBehaviour:
     m_Value: 1
   enabled:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   colorMode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    m_Value: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.17702027, g: 0.735849, b: 0.700156, a: 1}
   maxFogDistance:
     m_OverrideState: 1
     m_Value: 5000
@@ -199,13 +199,13 @@ MonoBehaviour:
     m_Value: 55.66
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 62
   enableVolumetricFog:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.21586867, g: 0.30623385, b: 0.31132078, a: 1}
   globalLightProbeDimmer:
     m_OverrideState: 1
     m_Value: 1
