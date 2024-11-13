@@ -44,6 +44,7 @@ namespace Assets.Pia.Scripts.Game.UI
         public void Start()
         {
             Cursor.visible = false;
+            LoadAllProperty();
         }
         public void LoadAllProperty()
         {

@@ -328,7 +328,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Boolean_DCF9EE01",
     "m_StageCapability": 3,
-    "m_Value": false,
+    "m_Value": true,
     "m_DefaultValue": false
 }
 
