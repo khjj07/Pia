@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: -1
+    m_Value: 1
   compensation:
     m_OverrideState: 1
     m_Value: 0
@@ -193,19 +193,19 @@ MonoBehaviour:
     m_Value: 1000
   baseHeight:
     m_OverrideState: 1
-    m_Value: 6.2
+    m_Value: 11.31
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 112.81
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 20
+    m_Value: 21.91
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 0.21586867, g: 0.30623385, b: 0.31132078, a: 1}
+    m_Value: {r: 0.19023676, g: 0.23461631, b: 0.23584908, a: 1}
   globalLightProbeDimmer:
     m_OverrideState: 1
     m_Value: 1
@@ -240,6 +240,34 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.5
   directionalLightsOnly:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &-4105545792539863485
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8bcdf71d7fafa419fca1ed162f5fc9, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 0.5
+  contrast:
+    m_OverrideState: 0
+    m_Value: 0
+  colorFilter:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  hueShift:
+    m_OverrideState: 0
+    m_Value: 0
+  saturation:
     m_OverrideState: 0
     m_Value: 0
 --- !u!114 &-3689841953102662281
@@ -335,7 +363,7 @@ MonoBehaviour:
     m_Value: 20000
   groundTint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.44739297, g: 0.5152035, b: 0.49239826, a: 1}
   groundColorTexture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -405,6 +433,9 @@ MonoBehaviour:
   - {fileID: -5402622938690840433}
   - {fileID: 2040547201987479877}
   - {fileID: 6437806406792290321}
+  - {fileID: 2375209222706315639}
+  - {fileID: -4105545792539863485}
+  - {fileID: 5602676800612215398}
 --- !u!114 &901138684722380909
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -426,7 +457,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.01
+    m_Value: 0.195
   scatter:
     m_OverrideState: 1
     m_Value: 0.7
@@ -578,6 +609,40 @@ MonoBehaviour:
   m_ObsoleteScrollSpeed:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &2375209222706315639
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b24b200358312b4fa1004e2431c2f1f, type: 3}
+  m_Name: ShadowsMidtonesHighlights
+  m_EditorClassIdentifier: 
+  active: 1
+  shadows:
+    m_OverrideState: 1
+    m_Value: {x: 0.85, y: 0.8875, z: 1, w: 0}
+  midtones:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  highlights:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  shadowsStart:
+    m_OverrideState: 0
+    m_Value: 0
+  shadowsEnd:
+    m_OverrideState: 0
+    m_Value: 0.3
+  highlightsStart:
+    m_OverrideState: 0
+    m_Value: 0.55
+  highlightsEnd:
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!114 &4696204406512663556
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -596,7 +661,7 @@ MonoBehaviour:
     m_Value: 4
   cloudType:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 1
@@ -622,6 +687,25 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   m_Version: 1
+--- !u!114 &5602676800612215398
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51a78e223a2e504bb88a059b55229ea, type: 3}
+  m_Name: WhiteBalance
+  m_EditorClassIdentifier: 
+  active: 1
+  temperature:
+    m_OverrideState: 1
+    m_Value: 64.4
+  tint:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &6437806406792290321
 MonoBehaviour:
   m_ObjectHideFlags: 3

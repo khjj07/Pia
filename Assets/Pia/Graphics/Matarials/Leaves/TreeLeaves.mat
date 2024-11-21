@@ -60,7 +60,7 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
-    - _BranchMove: 0.1
+    - _BranchMove: 0
     - _BranchStiffness: 0.1
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
@@ -76,7 +76,7 @@ Material:
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
     - _LeafFrequency: 0.1
-    - _LeafSpeed: 2.95
+    - _LeafSpeed: 1.5
     - _LeafWave: 0.1
     - _MaterialID: 1
     - _MaterialTypeMask: 2
