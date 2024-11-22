@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.75
   compensation:
     m_OverrideState: 1
     m_Value: 0
@@ -457,7 +457,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.195
+    m_Value: 0.143
   scatter:
     m_OverrideState: 1
     m_Value: 0.7
