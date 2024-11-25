@@ -312,12 +312,12 @@ namespace Assets.Pia.Scripts.Game
             mainCamera.transform.localRotation = initialLocalRotation;
             if (state == LowerAnimationState.Walk)
             {
-                mainCamera.transform.DOShakePosition(0.5f, Vector3.up * 0.05f, 0).SetLoops(-1).SetId("shakeCamera").SetEase(Ease.InOutBounce).Restart();
-                mainCamera.transform.DOShakeRotation(1.0f, Vector3.forward, 0).SetLoops(-1).SetId("shakeCameraRot").SetEase(Ease.InOutBounce).Restart();
+                mainCamera.transform.DOShakePosition(0.5f, Vector3.up * 0.05f, 0).SetLoops(-1).SetId("shakeCamera").SetEase(Ease.InOutQuad).Restart();
+                mainCamera.transform.DOShakeRotation(1.0f, Vector3.forward, 0).SetLoops(-1).SetId("shakeCameraRot").SetEase(Ease.InOutQuad).Restart();
             }
             else
             {
-                mainCamera.transform.DOShakeRotation(2.0f, Vector3.forward, 0).SetLoops(-1).SetId("shakeCameraRot").SetEase(Ease.InOutCirc).Restart();
+                mainCamera.transform.DOShakeRotation(2.0f, Vector3.forward, 0).SetLoops(-1).SetId("shakeCameraRot").SetEase(Ease.InOutQuad).Restart();
             }
         }
         private void CreateLowerBodyStream()
