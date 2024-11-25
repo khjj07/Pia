@@ -9,7 +9,6 @@ using DG.Tweening;
 using UniRx;
 using Unity.Collections;
 using Unity.VisualScripting;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.UI;
 using Unit = UniRx.Unit;

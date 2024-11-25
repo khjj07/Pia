@@ -129,7 +129,6 @@ namespace Assets.Pia.Scripts.Game.UI
                 m.active = value;
                 PlayerPrefs.SetInt("motionBlur", value ? 1 : 0);
             }
-            Debug.Log(motionBlur);
         }
 
         public bool GetMotionBlur()
@@ -141,7 +140,6 @@ namespace Assets.Pia.Scripts.Game.UI
         {
             headBob = value;
             PlayerPrefs.SetInt("headBob", value ? 1 : 0);
-            Debug.Log(headBob);
         } 
       
         public bool GetHeadBob()

@@ -21,19 +21,30 @@ namespace Assets.Pia.Scripts.Game.Items
         private float _progress = 0;
         private IDisposable cancelStream;
 
+        public override void OnActive(Player player)
+        {
+            base.OnActive(player);
+            InitializeUI();
+            SetProgress(0);
+        }
+
+        public override void OnInActive(Player player)
+        {
+            base.OnInActive(player);
+            bandageUI.gameObject.SetActive(false);
+        }
         public override void OnUse(Player player)
         {
-            if (player.IsBleeeding() && !_isUsing)
+            if (!_isUsing)
             {
-                InitializeUI();
-                _progress = 0;
+                _isUsing = true;
                 //붕대 미니게임
                 var cutStream = GlobalInputBinder.CreateGetKeyDownStream(useKey)
                     .TakeWhile(_ => _progress < 1)
                     .Subscribe(_ =>
                     {
                         TryToCure();
-                    });
+                    }).AddTo(gameObject);
 
                 var decreaseStream = Observable.Interval(TimeSpan.FromSeconds(decreaseInterval)).TakeWhile(_ => _progress < 1)
                     .Subscribe(_ => SetProgress(_progress - decreaseExtent))
@@ -46,6 +57,8 @@ namespace Assets.Pia.Scripts.Game.Items
                         Finish(player);
                         player.SetCursorUnlocked();
                         cancelStream.Dispose();
+                        decreaseStream.Dispose();
+                        cutStream.Dispose();
                     }).AddTo(gameObject);
 
 
@@ -65,7 +78,6 @@ namespace Assets.Pia.Scripts.Game.Items
         private void InitializeUI()
         {
             bandageUI.gameObject.SetActive(true);
-            _isUsing = true;
         }
 
         private void TryToCure()
@@ -86,14 +98,14 @@ namespace Assets.Pia.Scripts.Game.Items
             {
                 player.CureBleed();
             }
-            bandageUI.gameObject.SetActive(false);
             _isUsing = false;
+            bandageUI.gameObject.SetActive(false);
         }
 
         private void Cancel()
         {
-            bandageUI.gameObject.SetActive(false);
             _isUsing = false;
+            bandageUI.gameObject.SetActive(false);
         }
     }
 }
