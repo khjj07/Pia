@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 8783684163617137255}
   - component: {fileID: 528353424199632867}
   - component: {fileID: 6170103947615770166}
+  - component: {fileID: 5713635224661388509}
   m_Layer: 0
   m_Name: '[DontDestroyAndDistinct]'
   m_TagString: Untagged
@@ -136,12 +137,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4571f62d51eacb4439ee0ca20372877a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphciVolume: {fileID: 0}
+  graphciVolume: {fileID: 8390777333605357159}
   motionBlur: 1
   headBob: 1
   mouseSensitive: 0
   soundVolume: 0
   exposure: 0
+--- !u!114 &5713635224661388509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720356824511535403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a5f2b46a96db4468d443ddd1ff2d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerFlag: 0
 --- !u!1 &1156924743096307763
 GameObject:
   m_ObjectHideFlags: 0

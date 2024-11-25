@@ -57,11 +57,12 @@ namespace Pia.Scripts.StoryMode
         private bool _isInteractionActive;
 
 
-        private CancellationTokenSource _gameOverTokenSource;
+        public CancellationTokenSource gameOverTokenSource;
         public void Start()
         {
             InitializeVolumeSetting();
-            _gameOverTokenSource = new CancellationTokenSource();
+            
+            gameOverTokenSource = new CancellationTokenSource();
             stateSubject = new Subject<State>();
             stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
             stateSubject.DistinctUntilChanged().Where(x => x == State.Walking)
@@ -74,6 +75,8 @@ namespace Pia.Scripts.StoryMode
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
+                    controlMode = GlobalConfiguration.Instance.GetPedalUse() ? ControlMode.WithPedal : ControlMode.General;
+                    Debug.Log(controlMode);
                     _isInteractionActive = false;
                     SoundManager.Play("MP_Nightime", 0);
                     SoundManager.Play("BGM_bug", 3);
@@ -134,16 +137,16 @@ namespace Pia.Scripts.StoryMode
         }
         public static ControlMode GetControlMode()
         {
-            return Instance.controlMode;
+           return Instance.controlMode;
         }
 
         public static CancellationTokenSource GetGameOverTokenSource()
         {
-           return Instance._gameOverTokenSource;
+           return Instance.gameOverTokenSource;
         }
         public static IObservable<Unit> GetStepStream()
         {
-            switch (Instance.controlMode)
+            switch (GetControlMode())
             {
                 case ControlMode.General:
                     return Instance.UpdateAsObservable().Where(_=>Input.GetKey(Instance._player.stepKey));
@@ -155,7 +158,7 @@ namespace Pia.Scripts.StoryMode
         }
         public static IObservable<Unit> GetStepUpStream()
         {
-            switch (Instance.controlMode)
+            switch (GetControlMode())
             {
                 case ControlMode.General:
                     return Instance.UpdateAsObservable().Where(_ => Input.GetKeyUp(Instance._player.stepKey));
@@ -170,7 +173,7 @@ namespace Pia.Scripts.StoryMode
         {
             SoundManager.StopAll();
             Instance._pathManager.StopPrintProcess();
-            Instance._gameOverTokenSource.Cancel();
+            Instance.gameOverTokenSource.Cancel();
             Instance.GoToGameOverScene(type);
         }
 

@@ -9,11 +9,12 @@ namespace Assets.Pia.Scripts.Game.UI
     public class GlobalConfiguration : Singleton<GlobalConfiguration>
     {
         [SerializeField] private Volume graphciVolume;
-        [SerializeField] private bool motionBlur;
-        [SerializeField] private bool headBob;
-        [SerializeField] private float mouseSensitive;
-        [SerializeField] private float soundVolume;
-        [SerializeField] private float exposure;
+        public bool motionBlur;
+        public bool headBob;
+        public bool isPedalUse;
+        private float mouseSensitive;
+        private float soundVolume;
+        private float exposure;
 
 
         public float GetFloatProperty(string name, float alt = 0f)
@@ -41,6 +42,7 @@ namespace Assets.Pia.Scripts.Game.UI
             return alt;
         }
 
+      
         public void Start()
         {
             Cursor.visible = false;
@@ -52,6 +54,7 @@ namespace Assets.Pia.Scripts.Game.UI
             SetVolume(GetFloatProperty("soundVolume", 1));
             SetMouseSensitive(GetFloatProperty("mouseSensitive", 1));
             SetHeadBob(GetIntProperty("headBob", 1) == 1);
+            SetPedalUse(GetIntProperty("pedalUse", 1) == 1);
             SetMotionBlur(GetIntProperty("motionBlur", 1) == 1);
         }
 
@@ -76,6 +79,17 @@ namespace Assets.Pia.Scripts.Game.UI
                 exposure = value;
             }
         }
+        public void SetPedalUse(bool value)
+        {
+            isPedalUse = value;
+            PlayerPrefs.SetInt("pedalUse", value ? 1 : 0);
+            Debug.Log(isPedalUse);
+        }
+
+        public bool GetPedalUse()
+        {
+            return isPedalUse;
+        }
 
         public float GetExposure()
         {
@@ -84,6 +98,7 @@ namespace Assets.Pia.Scripts.Game.UI
 
         public void SetVolume(float value)
         {
+            Debug.Log(value);
             SoundManager.SetMainVolume(value);
             PlayerPrefs.SetFloat("soundVolume", value);
             soundVolume = value;
@@ -107,13 +122,14 @@ namespace Assets.Pia.Scripts.Game.UI
 
         public void SetMotionBlur(bool value)
         {
+            motionBlur = value;
             VolumeProfile profile = graphciVolume.sharedProfile;
             if (profile.TryGet<MotionBlur>(out var m))
             {
                 m.active = value;
                 PlayerPrefs.SetInt("motionBlur", value ? 1 : 0);
-                motionBlur = value;
             }
+            Debug.Log(motionBlur);
         }
 
         public bool GetMotionBlur()
@@ -123,10 +139,11 @@ namespace Assets.Pia.Scripts.Game.UI
 
         public void SetHeadBob(bool value)
         {
-            PlayerPrefs.SetInt("headBob", value ? 1 : 0);
             headBob = value;
-        }
-
+            PlayerPrefs.SetInt("headBob", value ? 1 : 0);
+            Debug.Log(headBob);
+        } 
+      
         public bool GetHeadBob()
         {
             return headBob;

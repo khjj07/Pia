@@ -33,6 +33,7 @@ namespace Assets.Pia.Scripts.UI
         {
             Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeUntil(StoryModeManager.GetStepStream())
                         .Subscribe(_ => SetTimer(timer - 0.1f)).AddTo(gameObject);
+
             StoryModeManager.GetStepStream().Take(1).Subscribe(_ =>
             {
                 StoryModeManager.Instance.SetInteractionActive(true);
@@ -40,13 +41,11 @@ namespace Assets.Pia.Scripts.UI
                     .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.MineExplosion))
                     .AddTo(StoryModeManager.Instance.gameObject);
                 Disappear();
-
-            });
+            }).AddTo(gameObject);
         }
 
         public void Appear()
         {
-
             gameObject.SetActive(true);
             SoundManager.Play("StepLandmine", 1);
             blood.DOFade(0.2f,0.5f).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);

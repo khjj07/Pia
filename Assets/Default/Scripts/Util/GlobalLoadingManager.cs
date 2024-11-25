@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using Default.Scripts.Sound;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -22,6 +23,10 @@ namespace Default.Scripts.Util
             {
                 yield return OnLoadBegin(mode);
             }
+            else
+            {
+                SoundManager.StopAll();
+            }
             var loadOperation = SceneManager.LoadSceneAsync(scene);
             loadOperation.allowSceneActivation = false;
             yield return new WaitForSeconds(defaultDelay);
@@ -30,6 +35,10 @@ namespace Default.Scripts.Util
             if (mode == Mode.Fade)
             {
                 yield return OnLoadEnd(mode);
+            }
+            else
+            {
+                SoundManager.StopAll();
             }
         }
 

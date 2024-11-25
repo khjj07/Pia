@@ -921,6 +921,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'SkipUI '
       objectReference: {fileID: 0}
+    - target: {fileID: 5305615767020197359, guid: 1f4d0a1213b645849a8f8d9dece4b310, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5919181361035481481, guid: 1f4d0a1213b645849a8f8d9dece4b310, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0

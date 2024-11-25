@@ -9,6 +9,7 @@ using DG.Tweening;
 using UniRx;
 using Unity.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.UI;
 using Unit = UniRx.Unit;
@@ -62,8 +63,7 @@ public class Spring : InteractableClass
     {
         springUIImage.gameObject.SetActive(false);
         GetComponent<MeshFilter>().sharedMesh = brokenModel;
-        DOTween.To(() => GetComponent<MeshRenderer>().material.GetFloat("_Alpha"),
-            x => GetComponent<MeshRenderer>().material.SetFloat("_Alpha", x), 0, 1).OnComplete(() =>
+        DOTween.To(() => GetComponent<MeshRenderer>().material.GetVector("_BaseColor"), x => GetComponent<MeshRenderer>().material.SetVector("_BaseColor", x), new Vector4(), 1).OnComplete(() =>
         {
             gameObject.SetActive(false);
         });
