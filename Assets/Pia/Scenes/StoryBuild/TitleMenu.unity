@@ -4551,6 +4551,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5651180119181843074, guid: 41718b10e91114c42b22bf42e0beb29e, type: 3}
+      propertyPath: m_VolumetricShadowDimmer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324108050515423309, guid: 41718b10e91114c42b22bf42e0beb29e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324108050515423309, guid: 41718b10e91114c42b22bf42e0beb29e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324108050515423309, guid: 41718b10e91114c42b22bf42e0beb29e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324108050515423309, guid: 41718b10e91114c42b22bf42e0beb29e, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324108050515423309, guid: 41718b10e91114c42b22bf42e0beb29e, type: 3}
+      propertyPath: m_UseColorTemperature
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7365395709661542526, guid: 41718b10e91114c42b22bf42e0beb29e, type: 3}
       propertyPath: m_Name
       value: DefaultLight
@@ -5155,42 +5179,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_Intensity
-      value: 14121.756
-      objectReference: {fileID: 0}
-    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_SpotAngle
-      value: 113.37678
-      objectReference: {fileID: 0}
-    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_ShadowRadius
-      value: 55.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_UseColorTemperature
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2895423938486303669, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_ShapeRadius
-      value: 55.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 2895423938486303669, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
-      propertyPath: m_InnerSpotPercent
-      value: 0.8820148
-      objectReference: {fileID: 0}
     - target: {fileID: 5021576767469449549, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
       propertyPath: m_Name
       value: ExposureTest

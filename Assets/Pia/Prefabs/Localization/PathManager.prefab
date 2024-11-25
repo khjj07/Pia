@@ -1865,7 +1865,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Assets.Pia.Scripts.Game.Player, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: ActiveBagSlot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1877,7 +1877,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Assets.Pia.Scripts.Game.Items.Bag, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: Open
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1889,7 +1889,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Pia.Scripts.StoryMode.StoryModeManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: SetInteractionActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
