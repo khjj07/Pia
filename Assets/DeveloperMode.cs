@@ -57,6 +57,15 @@ public class DeveloperMode : MonoBehaviour
                 PlayerPrefs.SetString("Save", "LandMineDirt");
                 StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModePlay",0,GlobalLoadingManager.Mode.None));
             });
+        developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha5))
+            .Subscribe(_ =>
+            {
+                if (StoryModeManager.Instance)
+                {
+                    StoryModeManager.Instance.gameOverTokenSource.Cancel();
+                }
+                StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeEnding", 0, GlobalLoadingManager.Mode.None));
+            });
     }
 
     // Update is called once per frame
