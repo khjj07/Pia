@@ -3576,6 +3576,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7472070535566274258, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: sensitiveX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472070535566274258, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
+      propertyPath: sensitiveY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472070535566274258, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
       propertyPath: pathManager
       value: 
       objectReference: {fileID: 434206128}
@@ -3707,7 +3715,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 854876472991671934, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
-      insertIndex: 0
+      insertIndex: 4
       addedObject: {fileID: 1929089687}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f7b784cfa65b6c408600e0b339da978, type: 3}
@@ -3963,6 +3971,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4034879714776687927, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058951381964581659, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: duration
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4058951381964581659, guid: 2965886d4fe1a7341b850d587797b497, type: 3}

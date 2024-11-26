@@ -145,14 +145,17 @@ namespace Assets.Pia.Scripts.Game
             initialLocalPosition = mainCamera.transform.localPosition;
             initialLocalRotation = mainCamera.transform.localRotation;
             mainCamera.fieldOfView = defaultFov;
-            sensitiveY *= GlobalConfiguration.Instance.GetMouseSensitive();
-            sensitiveX *= GlobalConfiguration.Instance.GetMouseSensitive();
             SetCursorLocked();
             CreateAnimationSubject();
             CreateLowerBodyStream();
             CreateCameraStream();
             CreateHandStream();
             CreateHoverStream();
+            this.UpdateAsObservable().Select(_=> GlobalConfiguration.Instance.GetMouseSensitive())
+                .DistinctUntilChanged().Subscribe(_ => {
+                sensitiveY = GlobalConfiguration.Instance.GetMouseSensitive();
+                sensitiveX = GlobalConfiguration.Instance.GetMouseSensitive();
+            }).AddTo(gameObject);
         }
 
         public void OnStepMine()
@@ -322,12 +325,11 @@ namespace Assets.Pia.Scripts.Game
             mainCamera.transform.localRotation = initialLocalRotation;
             if (state == LowerAnimationState.Walk)
             {
-                mainCamera.transform.DOShakePosition(0.5f, Vector3.up * 0.05f, 0).SetLoops(-1).SetId("shakeCamera").SetEase(Ease.InOutQuad).Restart();
-                mainCamera.transform.DOShakeRotation(1.0f, Vector3.forward, 0).SetLoops(-1).SetId("shakeCameraRot").SetEase(Ease.InOutQuad).Restart();
+                mainCamera.transform.DOMoveY(0.05f, 0.5f).SetRelative().SetLoops(-1,LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutQuad);
             }
             else
             {
-                mainCamera.transform.DOShakeRotation(2.0f, Vector3.forward, 0).SetLoops(-1).SetId("shakeCameraRot").SetEase(Ease.InOutQuad).Restart();
+                mainCamera.transform.DOShakeRotation(2.0f, Vector3.forward, 0).SetLoops(-1, LoopType.Yoyo).SetId("shakeCameraRot").SetEase(Ease.InOutQuad);
             }
         }
         private void CreateLowerBodyStream()

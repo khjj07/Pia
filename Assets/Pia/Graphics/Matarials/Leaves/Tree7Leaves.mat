@@ -76,8 +76,8 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _LeafFrequency: 0.1
-    - _LeafSpeed: 1.5
+    - _LeafFrequency: 0.2
+    - _LeafSpeed: 1
     - _LeafWave: 0.1
     - _MaterialID: 1
     - _MaterialTypeMask: 2
@@ -113,7 +113,7 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _WIND: 1
-    - _WindBend: 2
+    - _WindBend: 1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
