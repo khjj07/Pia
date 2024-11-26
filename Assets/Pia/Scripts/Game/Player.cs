@@ -125,11 +125,21 @@ namespace Assets.Pia.Scripts.Game
 
         public InteractableClass target;
         private HoldableItem hand;
+        private bool _isMovable = true;
+
         void Start()
         {
             Initialize();
         }
 
+        public bool IsMovable()
+        {
+           return pathManager.PlayerIsMovable() && _isMovable;
+        }
+        public void SetMovable(bool value)
+        {
+             _isMovable = value;
+        }
         private void Initialize()
         {
             initialLocalPosition = mainCamera.transform.localPosition;
@@ -344,11 +354,11 @@ namespace Assets.Pia.Scripts.Game
         private void CreateCrouchingStream()
         {
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .Where(_ => StoryModeManager.IsInteractionActive() && !_isMove)
+                .Where(_ => StoryModeManager.GetState() != StoryModeManager.State.Walking && StoryModeManager.IsInteractionActive() && !_isMove)
                 .Where(_ => !_isCrouching && _ableToCrouch).Subscribe(_ => Crouch()).AddTo(gameObject);
 
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .Where(_ => StoryModeManager.IsInteractionActive() && !_isMove)
+                .Where(_ => StoryModeManager.GetState() != StoryModeManager.State.Walking && StoryModeManager.IsInteractionActive() && !_isMove)
                 .Where(_ => _isCrouching && _ableToCrouch).Subscribe(_ => StandUp()).AddTo(gameObject);
         }
         private void CreateWalkingStream()
@@ -370,7 +380,7 @@ namespace Assets.Pia.Scripts.Game
 
             GlobalInputBinder.CreateGetKeyStream(walkKey)
                 .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
-                .Where(_ => !_isCrouching && pathManager.PlayerIsMovable())
+                .Where(_ => !_isCrouching && _ableToCrouch && IsMovable())
                 .Subscribe(_ =>
                 {
                     MoveForward();

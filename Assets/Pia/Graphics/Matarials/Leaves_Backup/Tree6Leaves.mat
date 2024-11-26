@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tree3Leaves
+  m_Name: Tree6Leaves
   m_Shader: {fileID: -6465566751694194690, guid: 57a1738fbf7ebb145a5151b80e75cd5d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -15,7 +15,6 @@ Material:
   - _ALPHATEST_ON
   - _DISABLE_SSR_TRANSPARENT
   - _ENABLE_FOG_ON_TRANSPARENT
-  - _MATERIAL_FEATURE_TRANSMISSION
   - _SURFACE_TYPE_TRANSPARENT
   - _WIND
   m_InvalidKeywords: []
@@ -36,11 +35,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 072ebb5cb1779314ba76f9f42156fd56, type: 3}
+        m_Texture: {fileID: 2800000, guid: 87a34f86cbda7404cbc8df1f2025cf74, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 3cddfddaae841c141a922dc3e2c62ffe, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9c85a88beb4204d49a0ef366a1fa7d6b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -80,7 +79,7 @@ Material:
     - _LeafFrequency: 0.1
     - _LeafSpeed: 1.5
     - _LeafWave: 0.1
-    - _MaterialID: 5
+    - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _OpaqueCullMode: 2
     - _PerPixelSorting: 0
@@ -114,7 +113,7 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _WIND: 1
-    - _WindBend: 2
+    - _WindBend: 1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
