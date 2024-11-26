@@ -5179,6 +5179,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
+      propertyPath: m_Intensity
+      value: 32.11119
+      objectReference: {fileID: 0}
+    - target: {fileID: 887150704716714345, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
+      propertyPath: m_SpotAngle
+      value: 179
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895423938486303669, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
+      propertyPath: m_InnerSpotPercent
+      value: 0.5586592
+      objectReference: {fileID: 0}
     - target: {fileID: 5021576767469449549, guid: 38d5809a05c295545b7ebc37eadc131f, type: 3}
       propertyPath: m_Name
       value: ExposureTest
