@@ -68,7 +68,6 @@ namespace Assets.Pia.Scripts.Game.UI
             StoryModeManager.Instance.GetPlayer().SetCursorLocked();
             StoryModeManager.Instance.GetPlayer().SetMovable(true);
             GlobalConfiguration.Instance.SetFog(true);
-            Time.timeScale = 1;
             _isOpen = false;
         }
 
@@ -79,7 +78,6 @@ namespace Assets.Pia.Scripts.Game.UI
             GlobalConfiguration.Instance.SetFog(false);
             StoryModeManager.Instance.GetPlayer().SetCursorUnlocked();
             StoryModeManager.Instance.GetPlayer().SetMovable(false);
-            Time.timeScale = 0;
             _isOpen = true;
         }
     }

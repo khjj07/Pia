@@ -53,9 +53,9 @@ namespace Assets.Pia.Scripts.Game.UI
             SetExposure(GetFloatProperty("exposure", 0.4f));
             SetVolume(GetFloatProperty("soundVolume", 1));
             SetMouseSensitive(GetFloatProperty("mouseSensitive", 1));
-            SetHeadBob(GetIntProperty("headBob", 1) == 1);
+            SetHeadBob(GetIntProperty("headBob", 0) == 1);
             SetPedalUse(GetIntProperty("pedalUse", 1) == 1);
-            SetMotionBlur(GetIntProperty("motionBlur", 1) == 1);
+            SetMotionBlur(GetIntProperty("motionBlur",0) == 1);
         }
 
         public void SetFog(bool value)

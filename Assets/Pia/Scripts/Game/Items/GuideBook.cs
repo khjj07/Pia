@@ -54,12 +54,8 @@ namespace Assets.Pia.Scripts.Game.Items
         public override void OnInActive(Player player)
         {
             base.OnInActive(player);
-            gameObject.SetActive(true);
-            _canvasGroup.DOKill();
-            _tween = _canvasGroup.DOFade(0.0f, fadeDuration).OnComplete(() =>
-            {
-                gameObject.SetActive(false);
-            });
+            _canvasGroup.DOKill(); 
+            gameObject.SetActive(false);
         }
     }
 }
