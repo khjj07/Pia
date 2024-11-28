@@ -3693,7 +3693,7 @@ MonoBehaviour:
   skipUI: {fileID: 406157580}
   skipDelay: 1
   skipAmount: 0
-  fillInterval: 0.1
+  fillInterval: 0.01
   fillImage: {fileID: 406157579}
 --- !u!1 &1999716767
 GameObject:
