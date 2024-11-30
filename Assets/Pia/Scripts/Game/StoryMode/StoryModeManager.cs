@@ -70,21 +70,22 @@ namespace Pia.Scripts.StoryMode
                 {
                     _isInteractionActive = false;
                     SoundManager.Play("BGM_bug",3);
-                });
+                }).AddTo(gameObject);
 
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
-                    controlMode = GlobalConfiguration.Instance.GetPedalUse() ? ControlMode.WithPedal : ControlMode.General;
-                    Debug.Log(controlMode);
+                    controlMode = GlobalConfiguration.Instance.GetPedalUse()
+                        ? ControlMode.WithPedal
+                        : ControlMode.General;
                     _isInteractionActive = false;
                     SoundManager.Play("MP_Nightime", 0);
                     SoundManager.Play("BGM_bug", 3);
                     SoundManager.Play("StepLandmine", 1);
+                    PlayerPrefs.SetString("Save", "LandMineDirt");
                     _player.OnStepMine();
                     _player.SetCursorLocked();
                     _landMineUI.Appear();
-                    PlayerPrefs.SetString("Save","LandMineDirt");
                     _player.UpdateAsObservable()
                         .TakeWhile(_ => currentState == State.LandMineDirt)
                         .Where(_ => _landMine.IsAvailable())
@@ -92,14 +93,13 @@ namespace Pia.Scripts.StoryMode
                         {
                             SetState(State.LandMine);
                             _player.Crouch();
-                        })
-                        .AddTo(_player.gameObject);
+                        }).AddTo(_player.gameObject);
 
                     _player.UpdateAsObservable()
-                        .TakeWhile(_=>currentState==State.LandMineDirt)
-                        .Subscribe(_=>_player.RepositioningThroughFoot(_landMine.Dirt.top))
+                        .TakeWhile(_ => currentState == State.LandMineDirt)
+                        .Subscribe(_ => _player.RepositioningThroughFoot(_landMine.Dirt.top))
                         .AddTo(_player.gameObject);
-                });
+                }).AddTo(gameObject);
             CheckSaveFlag();
         }
 
@@ -156,6 +156,8 @@ namespace Pia.Scripts.StoryMode
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+      
         public static IObservable<Unit> GetStepUpStream()
         {
             switch (GetControlMode())

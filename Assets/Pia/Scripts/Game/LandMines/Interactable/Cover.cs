@@ -13,20 +13,12 @@ public class Cover : InteractableClass
 
     [SerializeField] private Vector3 standardDirection;
     [SerializeField] private float force = 2.0f;
-
+    [SerializeField] private Vector3 throwDirection;
     public void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
-    public void TryThrow(object direction)
-    {
-        Debug.Log((Vector3)direction);
-        if (Vector3.Dot(standardDirection, (Vector3)direction) > 0.5f)
-        {
-            Throw((Vector3)direction+Vector3.up);
-        }
-    }
-
+   
     public override void OnHover(Item item)
     {
         if (item == null)
@@ -39,12 +31,12 @@ public class Cover : InteractableClass
         }
     }
 
-    private void Throw(Vector3 direction)
+    public void Throw()
     {
         isDead = true;
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
-        _rigidbody.AddForce(direction * force, ForceMode.Impulse);
+        _rigidbody.AddForce(throwDirection * force, ForceMode.Impulse);
         SoundManager.Play("use_coverRemove", 1);
     }
 }
