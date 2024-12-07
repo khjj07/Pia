@@ -21,5 +21,10 @@ namespace Assets.Pia.Scripts.StoryMode.Synopsis.Sub
             }
            
         }
+
+        public virtual Task Disappear(CancellationTokenSource tokenSource)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

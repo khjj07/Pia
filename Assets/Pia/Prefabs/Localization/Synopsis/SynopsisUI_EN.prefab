@@ -655,6 +655,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3357588010256610072}
+  - {fileID: 9214987020616526353}
   - {fileID: 7684279013662355055}
   m_Father: {fileID: 2944786751503102915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -679,7 +680,7 @@ MonoBehaviour:
   fadeInEnable: 1
   fadeOutEnable: 1
   _subStates: []
-  appearMode: 0
+  appearMode: 1
 --- !u!1 &1442229856011451231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,13 +1323,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd98ff035b30984884c438d6e56ed14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearDelay: 0
+  appearDelay: 1
   text: Press the                  key to get up.
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0
-  speed: 1
+  speed: 2
 --- !u!1 &2483022190423914995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,13 +1360,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000306, y: 1.0000306, z: 1.0000306}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8981889704982018638}
+  m_Children: []
   m_Father: {fileID: 8772963224804312788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 905, y: 534}
+  m_AnchoredPosition: {x: 920, y: 534}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8948046900209584616
@@ -1418,10 +1418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b481eefd51e438c41a4e50d5f2bcbd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearDelay: 0
+  appearDelay: 1.5
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
-  duration: 0.5
+  duration: 1.2
 --- !u!1 &2718485888353209074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,8 +2614,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000306, y: 1.0000306, z: 1.0000306}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 9214987020616526353}
+  m_Children: []
   m_Father: {fileID: 7874751696310528857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -2673,10 +2672,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b481eefd51e438c41a4e50d5f2bcbd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearDelay: 0
+  appearDelay: 0.5
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
-  duration: 0.5
+  duration: 1
 --- !u!1 &4615271285849382823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,7 +2958,7 @@ MonoBehaviour:
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0
-  speed: 1
+  speed: 2
 --- !u!1 &4996914243890377521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3891,6 +3890,7 @@ GameObject:
   - component: {fileID: 4109196329923659405}
   - component: {fileID: 3004633119160198165}
   - component: {fileID: 2017927911505553309}
+  - component: {fileID: 9201050376802904892}
   m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
@@ -3905,16 +3905,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6407367870746245072}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1999625, y: 1.1999625, z: 1}
+  m_LocalScale: {x: 1.1999992, y: 1.1999992, z: 1.0000306}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1599017232509000019}
+  m_Father: {fileID: 8772963224804312788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 104}
+  m_AnchoredPosition: {x: -40, y: 98.003174}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4109196329923659405
@@ -3971,6 +3971,22 @@ MonoBehaviour:
   length: 30
   duration: 1
   easing: 32
+--- !u!114 &9201050376802904892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6407367870746245072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b481eefd51e438c41a4e50d5f2bcbd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearDelay: 1.5
+  beginColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
+  duration: 1.2
 --- !u!1 &6575318156772499183
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,6 +4452,7 @@ GameObject:
   - component: {fileID: 886544144454815424}
   - component: {fileID: 3011807744035429989}
   - component: {fileID: 8842221992256928533}
+  - component: {fileID: 971484800674517227}
   m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
@@ -4450,16 +4467,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7310903485204898990}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1999625, y: 1.1999625, z: 1}
+  m_LocalScale: {x: 1.1999992, y: 1.1999992, z: 1.0000306}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3357588010256610072}
+  m_Father: {fileID: 7874751696310528857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 104}
+  m_AnchoredPosition: {x: -215, y: 98.003174}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &886544144454815424
@@ -4516,6 +4533,22 @@ MonoBehaviour:
   length: 30
   duration: 1
   easing: 32
+--- !u!114 &971484800674517227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310903485204898990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b481eefd51e438c41a4e50d5f2bcbd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearDelay: 0.5
+  beginColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
+  duration: 1
 --- !u!1 &7360716108636125284
 GameObject:
   m_ObjectHideFlags: 0
@@ -4805,6 +4838,7 @@ RectTransform:
   m_Children:
   - {fileID: 6871833974645268810}
   - {fileID: 1599017232509000019}
+  - {fileID: 8981889704982018638}
   - {fileID: 6136392836093351338}
   m_Father: {fileID: 2944786751503102915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4829,7 +4863,7 @@ MonoBehaviour:
   fadeInEnable: 1
   fadeOutEnable: 1
   _subStates: []
-  appearMode: 0
+  appearMode: 1
 --- !u!1 &8007086604877186695
 GameObject:
   m_ObjectHideFlags: 0

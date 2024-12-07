@@ -85,6 +85,10 @@ namespace Pia.Scripts.Dialog
             {
                 await GlobalFadeManager.FadeOut();
             }
+            foreach (var state in _subStates)
+            {
+                await state.Disappear(tokenSource);
+            }
             gameObject.SetActive(false);
         }
     }

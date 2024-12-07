@@ -19,7 +19,7 @@ MonoBehaviour:
   appearAndRepeatUnit: 2
   disappearUnit: 2
   useAppearAnimation: 1
-  useDisappearAnimation: 1
+  useDisappearAnimation: 0
   appearScaleSpeed: 1
   appearBeginScale: {x: 1, y: 1, z: 1}
   appearEndScale: {x: 1, y: 1, z: 1}
