@@ -15,14 +15,50 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Japanese (ja)
   m_GUID: 2bb204a85e735ab4bb2d7a370200fcb4
   m_SerializeEntries:
+  - m_GUID: 09eecbc54c1c2554796336cc8350316e
+    m_Address: EndingUI_JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 542b1ab7e25073d4ba95454f264d6494
     m_Address: SynopsisUI_JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b13c48583231074b997b77a9d566cd2
+    m_Address: EndingAirBomb_JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f3634824063aaf48ac768a42d174cf8
+    m_Address: EndingEnemy_JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b674d9ef99a5e1c48861b9e381a9e31f
     m_Address: GameManager_JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b76814351b78f43488e5cfc0648d46a9
+    m_Address: EndingHP0_JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb286abbd5e41114fb4b80f92c18e862
+    m_Address: EndingMineBomb_JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4f06e617681dad469623511197c4326
+    m_Address: EndingBoar_JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja

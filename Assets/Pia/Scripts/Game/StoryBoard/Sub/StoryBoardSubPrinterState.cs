@@ -22,6 +22,7 @@ namespace Assets.Pia.Scripts.StoryMode.Synopsis.Sub
         [SerializeField] private Color beginColor = new Color();
         [SerializeField] private Color endColor = Color.white;
         [SerializeField] private float duration = 0.5f;
+        [SerializeField] private float speed = 1;
         public void Awake()
         {
             
@@ -50,7 +51,7 @@ namespace Assets.Pia.Scripts.StoryMode.Synopsis.Sub
                     await Task.Delay((int)(duration * 1000), cancellationTokenSource.Token);
                 }
                 _printer.SetOriginalText(text);
-                await _printer.Print(cancellationTokenSource);
+                await _printer.Print(cancellationTokenSource,speed);
             }
             catch (OperationCanceledException)
             {

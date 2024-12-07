@@ -19,6 +19,7 @@ namespace Assets.Pia.Scripts.Path.Sub
         [SerializeField] private Color beginColor = new Color();
         [SerializeField] private Color endColor = Color.white;
         [SerializeField] private float disappearDuration = 0.5f;
+        [SerializeField] private float printSpeed = 1;
 
         private void Awake()
         {
@@ -42,7 +43,7 @@ namespace Assets.Pia.Scripts.Path.Sub
                     await Task.Delay((int)(duration * 1000), cancellationTokenSource.Token);
                 }
                 _printer.SetOriginalText(text);
-                await _printer.Print(cancellationTokenSource);
+                await _printer.Print(cancellationTokenSource,printSpeed);
             }
             catch (OperationCanceledException)
             {

@@ -27,6 +27,42 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ko
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2830801c23f0cc14ab34cc16cf167252
+    m_Address: EndingBoar_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36cfe4e3942e2d94595520d6f5f19376
+    m_Address: EndingAirBomb_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96e013c80aeb70c47a9b3c88136ed150
+    m_Address: EndingUI_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96e5ae9bbb0fbf34389fdc8589c329ef
+    m_Address: EndingMineBomb_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab9310c03604dbc4b912861a50815167
+    m_Address: EndingEnemy_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe8551e6634366e469c6613b2f8812fa
+    m_Address: EndingHP0_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: e61b47c7c52829941bc334a7dc59443c, type: 2}
   m_SchemaSet:
