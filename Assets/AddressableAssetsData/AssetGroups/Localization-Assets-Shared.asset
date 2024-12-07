@@ -15,8 +15,18 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: b26a6443d25f85348be0ea46e1f0c1a5
   m_SerializeEntries:
-  - m_GUID: d0be3b7a3168cdd43b698baa72daadb7
-    m_Address: Assets/Pia/Localization/Prefab/Prefab Shared Data.asset
+  - m_GUID: 1216a48f7273d444e8f66d8c9b287ac0
+    m_Address: Assets/Pia/Localization/Title Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55a31b3f314f5754f90a70bac66464cb
+    m_Address: Assets/Pia/Localization/Synopsis/Synopsis Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6863f822a6822224eb9f68dbdba7f40c
+    m_Address: Assets/Pia/Localization/Ingame/StoryMode Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

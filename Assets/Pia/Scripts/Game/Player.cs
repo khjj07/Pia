@@ -7,6 +7,7 @@ using Assets.Pia.Scripts.StoryMode.Walking;
 using Assets.Pia.Scripts.UI;
 using Default.Scripts.Printer;
 using Default.Scripts.Sound;
+using Default.Scripts.Util;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -19,7 +20,7 @@ using Unit = UniRx.Unit;
 
 namespace Assets.Pia.Scripts.Game
 {
-    public class Player : MonoBehaviour
+    public class Player : Singleton<Player>
     {
         public enum LowerAnimationState
         {
@@ -27,7 +28,7 @@ namespace Assets.Pia.Scripts.Game
             Walk,
             Crouch
         }
-        [SerializeField] PathManager pathManager;
+        PathManager _pathManager;
 
         [Header("Å° ¼¼ÆÃ")]
         public KeyCode walkKey = KeyCode.W;
@@ -80,7 +81,7 @@ namespace Assets.Pia.Scripts.Game
         private bool _isCrouching;
         private bool _isMove = false;
         private bool _isInteractable = false;
-        private bool _ableToCrouch = true;
+        public bool _ableToCrouch = true;
 
         private Vector3 initialLocalPosition;
         private Quaternion initialLocalRotation;
@@ -127,21 +128,17 @@ namespace Assets.Pia.Scripts.Game
         private HoldableItem hand;
         private bool _isMovable = true;
 
-        void Start()
-        {
-            Initialize();
-        }
-
         public bool IsMovable()
         {
-           return pathManager.PlayerIsMovable() && _isMovable;
+           return _pathManager.PlayerIsMovable() && _isMovable;
         }
         public void SetMovable(bool value)
         {
              _isMovable = value;
         }
-        private void Initialize()
+        public void Initialize(PathManager pathManager)
         {
+            _pathManager = pathManager;
             initialLocalPosition = mainCamera.transform.localPosition;
             initialLocalRotation = mainCamera.transform.localRotation;
             mainCamera.fieldOfView = defaultFov;
@@ -389,7 +386,7 @@ namespace Assets.Pia.Scripts.Game
                 .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
                 .Subscribe(_ =>
                 {
-                    pathManager.UpdateCurrentNode(transform.position);
+                    _pathManager.UpdateCurrentNode(transform.position);
                 }).AddTo(gameObject);
 
             GlobalInputBinder.CreateGetKeyStream(walkKey)
@@ -405,7 +402,7 @@ namespace Assets.Pia.Scripts.Game
 
         public Vector3 GetCurrentDirection()
         {
-            var next = pathManager.GetNext();
+            var next = _pathManager.GetNext();
             if (next != null)
             {
                 return Vector3.Normalize(next.transform.position - transform.position);
@@ -602,7 +599,7 @@ namespace Assets.Pia.Scripts.Game
             DOTween.To(() => rotationY, x => rotationY = x, 0, crouchDuration).SetEase(Ease.InOutQuad);
 
         }
-        public void StandUp()
+        public void StandUp(bool ableToCrouch = true)
         {
             _ableToCrouch = false;
             _isCrouching = false;
@@ -610,7 +607,7 @@ namespace Assets.Pia.Scripts.Game
             SetCursorLocked();
             body.DOLocalMoveY(standUpHeight, standUpDuration).OnComplete(() =>
             {
-                _ableToCrouch = true;
+                _ableToCrouch = ableToCrouch;
             }).SetEase(Ease.InOutQuad);
             arm.DOLocalMove(standArmTransform.localPosition, standUpDuration).SetEase(Ease.InOutQuad);
             head.DOLocalMove(standHeadTransform.localPosition, standUpDuration).SetEase(Ease.InOutQuad);

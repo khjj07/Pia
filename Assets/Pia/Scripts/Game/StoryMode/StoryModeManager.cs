@@ -15,6 +15,7 @@ using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.Rendering.DebugUI;
 using Unit = UniRx.Unit;
 
@@ -50,10 +51,9 @@ namespace Pia.Scripts.StoryMode
         [SerializeField]
         private LandMineUI _landMineUI;
         [SerializeField]
-        private Player _player;
-        [SerializeField]
         private LandMine _landMine;
 
+        private Player _player;
         private bool _isInteractionActive;
 
 
@@ -61,7 +61,8 @@ namespace Pia.Scripts.StoryMode
         public void Start()
         {
             InitializeVolumeSetting();
-            
+            _player = Player.Instance;
+            _player.Initialize(_pathManager);
             gameOverTokenSource = new CancellationTokenSource();
             stateSubject = new Subject<State>();
             stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
@@ -112,6 +113,12 @@ namespace Pia.Scripts.StoryMode
         {
             return _player;
         }
+
+        public PathManager GetPathManager()
+        {
+            return _pathManager;
+        }
+
         private void CheckSaveFlag()
         {
             if (PlayerPrefs.HasKey("Save"))
@@ -217,6 +224,13 @@ namespace Pia.Scripts.StoryMode
         public void SetInteractionActive(bool value)
         {
             _isInteractionActive = value;
+        }
+
+        public void OpenBag()
+        {
+            _isInteractionActive = true;
+            _player.ActiveBagSlot();
+            _player.bag.Open();
         }
     }
 }
