@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f9afbaad19081a94fa048613d889079c, type: 2}
-  m_sharedMaterial: {fileID: -7972189528616202572, guid: f9afbaad19081a94fa048613d889079c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
+  m_sharedMaterial: {fileID: 3994248388636400084, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -176,12 +176,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearDelay: 0.5
-  text: "\uD480\uC232\uC5D0\uC11C \uB098\uD0C0\uB09C <red>\uBA67\uB3FC\uC9C0</red>\uAC00
-    \uB2F9\uC2E0\uC744 \uB4E4\uC774\uBC1B\uC558\uC2B5\uB2C8\uB2E4."
+  text: "\u8302\u307F\u304B\u3089\u73FE\u308C\u305F<red>\u30A4\u30CE\u30B7\u30B7</red>\u304C\u3042\u306A\u305F\u306B\u7A81\u9032\u3057\u3066\u304D\u307E\u3057\u305F\u3002"
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.5
+  speed: 1
 --- !u!1 &2922247629045813715
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,8 +669,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f9afbaad19081a94fa048613d889079c, type: 2}
-  m_sharedMaterial: {fileID: -7972189528616202572, guid: f9afbaad19081a94fa048613d889079c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
+  m_sharedMaterial: {fileID: 3994248388636400084, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -694,8 +694,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -776,12 +776,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearDelay: 0.5
-  text: "<red>\uC57C\uC0DD\uB3D9\uBB3C</red>\uC740 <red>\uBE5B</red>\uC5D0 \uBBFC\uAC10\uD569\uB2C8\uB2E4.\r\n\uC57C\uC0DD\uB3D9\uBB3C\uC774
-    \uADFC\uCC98\uC5D0 \uC788\uC744 \uB54C\uB294 <red>\uB79C\uD134</red>\uC744 \uAEBC\uC8FC\uC138\uC694."
+  text: "<red>\u91CE\u751F\u52D5\u7269</red>\u306F<red>\u5149</red>\u306B\u654F\u611F\u3067\u3059\u3002\r\n\u91CE\u751F\u52D5\u7269\u304C\u8FD1\u304F\u306B\u3044\u308B\u3068\u304D\u306F<red>\u30E9\u30F3\u30BF\u30F3</red>\u3092\u6D88\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.5
+  speed: 1
 --- !u!1 &7694149864688188545
 GameObject:
   m_ObjectHideFlags: 0

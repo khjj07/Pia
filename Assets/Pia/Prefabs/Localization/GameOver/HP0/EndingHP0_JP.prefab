@@ -539,8 +539,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f9afbaad19081a94fa048613d889079c, type: 2}
-  m_sharedMaterial: {fileID: -7972189528616202572, guid: f9afbaad19081a94fa048613d889079c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
+  m_sharedMaterial: {fileID: 3994248388636400084, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -646,12 +646,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearDelay: 0.5
-  text: "\uB2F9\uC2E0\uC774 <red>\uD758\uB9B0 \uD53C</red>\uAC00 \uC628 \uBC14\uB2E5\uC744
-    \uC801\uC2ED\uB2C8\uB2E4."
+  text: "\u3042\u306A\u305F\u304C<red>\u6D41\u3057\u305F\u8840</red>\u304C\u5E8A\u4E00\u9762\u3092\u8D64\u304F\u67D3\u3081\u3066\u3044\u307E\u3059\u3002"
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.5
+  speed: 1
 --- !u!1 &5839135897524159423
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,8 +776,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f9afbaad19081a94fa048613d889079c, type: 2}
-  m_sharedMaterial: {fileID: -7972189528616202572, guid: f9afbaad19081a94fa048613d889079c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
+  m_sharedMaterial: {fileID: 3994248388636400084, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -883,10 +883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearDelay: 0.5
-  text: "\uC0C1\uCC98\uAC00 \uBC8C\uC5B4\uC838 <red>\uC751\uAE09\uCC98\uCE58</red>\uAC00
-    \uD544\uC694\uD55C \uACBD\uC6B0 \r\n<red>\uBD95\uB300</red>\uB97C \uC0AC\uC6A9\uD574
-    <red>\uC9C0\uD608</red>\uD574\uC57C \uD569\uB2C8\uB2E4."
+  text: "\u50B7\u53E3\u304C\u958B\u3044\u3066<red>\u5FDC\u6025\u51E6\u7F6E</red>\u304C\u5FC5\u8981\u306A\u5834\u5408\r\n<red>\u5305\u5E2F</red>\u3092\u4F7F\u3063\u3066<red>\u6B62\u8840</red>\u3057\u306A\u3051\u308C\u3070\u306A\u308A\u307E\u305B\u3093\u3002"
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.5
+  speed: 1

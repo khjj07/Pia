@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f9afbaad19081a94fa048613d889079c, type: 2}
-  m_sharedMaterial: {fileID: -7972189528616202572, guid: f9afbaad19081a94fa048613d889079c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
+  m_sharedMaterial: {fileID: 3994248388636400084, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -176,13 +176,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearDelay: 0.5
-  text: "\uC6C0\uC9C1\uC77C \uC218 \uC5C6\uB294 \uC0C1\uD669\uC5D0\uC11C \uCD5C\uC120\uC758
-    \uC120\uD0DD\uC740\r\n<red>\uB0AE\uC740 \uC790\uC138</red>\uB97C \uC720\uC9C0\uD558\uBA70
-    <red>\uB79C\uD134</red>\uC744 <red>\uB044\uB294 \uAC83</red> \uC785\uB2C8\uB2E4."
+  text: "\u52D5\u3051\u306A\u3044\u72B6\u6CC1\u3067\u6700\u5584\u306E\u9078\u629E\u306F\r\n<red>\u4F4E\u3044\u59FF\u52E2</red>\u3092<red>\u4FDD\u3061</red>\u306A\u304C\u3089<red>\u30E9\u30F3\u30BF\u30F3</red>\u3092<red>\u6D88\u3059</red>\u3053\u3068\u3067\u3059\u3002"
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.5
+  speed: 1
 --- !u!1 &273635026083045236
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,8 +616,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f9afbaad19081a94fa048613d889079c, type: 2}
-  m_sharedMaterial: {fileID: -7972189528616202572, guid: f9afbaad19081a94fa048613d889079c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
+  m_sharedMaterial: {fileID: 3994248388636400084, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -724,12 +723,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearDelay: 0.5
-  text: "\uB0A0\uC544\uC628 <red>\uD0C4\uD658</red>\uC774 \uB2F9\uC2E0\uC758 <red>\uBA38\uB9AC</red>\uB97C
-    <red>\uAD00\uD1B5</red>\uD588\uC2B5\uB2C8\uB2E4."
+  text: "\u98DB\u3093\u3067\u304D\u305F<red>\u5F3E\u4E38</red>\u304C\u3042\u306A\u305F\u306E<red>\u982D</red>\u3092<red>\u8CAB\u901A</red>\u3057\u307E\u3057\u305F\u3002"
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.5
+  speed: 1
 --- !u!1 &9010731836545646093
 GameObject:
   m_ObjectHideFlags: 0

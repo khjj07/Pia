@@ -85,6 +85,7 @@ namespace Pia.Scripts.StoryMode
                     SoundManager.Play("StepLandmine", 1);
                     PlayerPrefs.SetString("Save", "LandMineDirt");
                     _player.OnStepMine();
+                    _player.bag.Close();
                     _player.SetCursorLocked();
                     _landMineUI.Appear();
                     _player.UpdateAsObservable()
@@ -231,6 +232,11 @@ namespace Pia.Scripts.StoryMode
             _isInteractionActive = true;
             _player.ActiveBagSlot();
             _player.bag.Open();
+        }
+
+        public void CloseBag()
+        {
+            _player.bag.Close();
         }
     }
 }
