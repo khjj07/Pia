@@ -15,8 +15,7 @@ using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.Rendering.DebugUI;
+
 using Unit = UniRx.Unit;
 
 namespace Pia.Scripts.StoryMode
@@ -139,6 +138,7 @@ namespace Pia.Scripts.StoryMode
         {
             Instance.stateSubject.OnNext(state);
         }
+
         public static State GetState()
         {
             return Instance.currentState;

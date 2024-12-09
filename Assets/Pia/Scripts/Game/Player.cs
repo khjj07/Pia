@@ -77,6 +77,19 @@ namespace Assets.Pia.Scripts.Game
         [SerializeField] private float crouchFov = 50;
         [SerializeField] private float speed = 1.0f;
 
+        [Header("Head Bob")]
+        [SerializeField]
+        private float walkHeadBobFrequency = 10.0f;
+        [SerializeField]
+        private float walkHeadBobSmooth = 10.0f;
+        [SerializeField]
+        private float walkHeadBobAmount = 0.002f;
+        [SerializeField]
+        private float idleHeadBobFrequency = 10.0f;
+        [SerializeField]
+        private float idleHeadBobSmooth = 10.0f;
+        [SerializeField]
+        private float idleHeadBobAmount = 0.002f;
 
         private bool _isCrouching;
         private bool _isMove = false;
@@ -127,6 +140,7 @@ namespace Assets.Pia.Scripts.Game
         public InteractableClass target;
         private HoldableItem hand;
         private bool _isMovable = true;
+        
 
         public bool IsMovable()
         {
@@ -323,22 +337,25 @@ namespace Assets.Pia.Scripts.Game
             GlobalInputBinder.CreateGetAxisStream("Mouse X").Subscribe(RotateCameraY).AddTo(gameObject); ;
             GlobalInputBinder.CreateGetAxisStream("Mouse Y").Subscribe(RotateCameraX).AddTo(gameObject);
             this.UpdateAsObservable().Subscribe(_ => RotateHead()).AddTo(gameObject);
-            this.UpdateAsObservable().Where(_=>GlobalConfiguration.Instance.GetHeadBob()).Select(_ => currentLowerState)
-                .DistinctUntilChanged().Subscribe(ShakeCamera).AddTo(gameObject);
+            this.UpdateAsObservable().Where(_=>GlobalConfiguration.Instance.GetHeadBob())
+                .Select(_ => currentLowerState)
+                .Subscribe(ShakeCamera).AddTo(gameObject);
         }
         private void ShakeCamera(LowerAnimationState state)
         {
-            DOTween.Kill("shakeCamera");
-            DOTween.Kill("shakeCameraRot");
-            mainCamera.transform.localPosition = initialLocalPosition;
-            mainCamera.transform.localRotation = initialLocalRotation;
             if (state == LowerAnimationState.Walk)
             {
-                mainCamera.transform.DOMoveY(0.05f, 0.5f).SetRelative().SetLoops(-1,LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutQuad);
+                Vector3 pos = Vector3.zero;
+                pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * walkHeadBobFrequency) * walkHeadBobAmount * 3f, walkHeadBobSmooth * Time.deltaTime);
+                pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * walkHeadBobFrequency/2f) * walkHeadBobAmount * 1.6f, walkHeadBobSmooth * Time.deltaTime);
+                mainCamera.transform.localPosition += pos;
             }
             else
             {
-                mainCamera.transform.DOShakeRotation(2.0f, Vector3.forward, 0).SetLoops(-1, LoopType.Yoyo).SetId("shakeCameraRot").SetEase(Ease.InOutQuad);
+                Vector3 pos = Vector3.zero;
+                pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * idleHeadBobFrequency) * idleHeadBobAmount * 1.4f, idleHeadBobSmooth * Time.deltaTime);
+                pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * idleHeadBobFrequency/2f) * idleHeadBobAmount * 1.6f, idleHeadBobSmooth * Time.deltaTime);
+                mainCamera.transform.localPosition += pos;
             }
         }
         private void CreateLowerBodyStream()

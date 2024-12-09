@@ -31,7 +31,7 @@ namespace Assets.Pia.Scripts.Game.UI
             optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
             GlobalConfiguration.Instance.LoadAllProperty();
             InitializeOption();
-            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Escape).Where(_=> !_isOpen && StoryModeManager.Instance.GetState()==StoryModeManager.State.Walking).Subscribe(_ => Open()).AddTo(gameObject);
+            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Escape).Where(_=> !_isOpen && StoryModeManager.GetState()==StoryModeManager.State.Walking).Subscribe(_ => Open()).AddTo(gameObject);
      }
 
         private void InitializeOption()
