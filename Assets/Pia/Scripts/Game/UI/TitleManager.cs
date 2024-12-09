@@ -2,6 +2,7 @@
 using Assets.Pia.Scripts.Game.UI;
 using Default.Scripts.Sound;
 using Default.Scripts.Util;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,9 @@ namespace Pia.Scripts.Manager
         public Toggle headBobToggle;
         public Toggle pedalToggle;
 
+
+        public TMP_Dropdown languageDropdown;
+
         private void Start()
         {
             startButton.onClick.AddListener(OnStartButtonClick);
@@ -33,7 +37,11 @@ namespace Pia.Scripts.Manager
             quitButton.onClick.AddListener(OnQuitButtonClick);
             optionConfirmButton.onClick.AddListener(OnOptionConfirmButtonClick);
             optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
+            languageDropdown.onValueChanged.AddListener(OnLanguageDropdownChanged);
+          
+
             GlobalConfiguration.Instance.LoadAllProperty();
+            languageDropdown.value = GlobalConfiguration.Instance.GetLanguage();
             InitializeOption();
             PlayerPrefs.DeleteKey("Save");
             SoundManager.Play("BGM_Title");
@@ -83,6 +91,11 @@ namespace Pia.Scripts.Manager
         {
             SoundManager.PlayOneShot("ui_button",1);
             StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeSynopsis"));
+        }
+
+        private void OnLanguageDropdownChanged(int value)
+        {
+            GlobalConfiguration.Instance.SetLanguage(value);
         }
 
         private void OnQuitButtonClick()

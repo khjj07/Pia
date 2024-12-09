@@ -1,6 +1,8 @@
 using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 
@@ -15,7 +17,7 @@ namespace Assets.Pia.Scripts.Game.UI
         private float mouseSensitive;
         private float soundVolume;
         private float exposure;
-
+        public int language;
 
         public float GetFloatProperty(string name, float alt = 0f)
         {
@@ -56,6 +58,22 @@ namespace Assets.Pia.Scripts.Game.UI
             SetHeadBob(GetIntProperty("headBob", 0) == 1);
             SetPedalUse(GetIntProperty("pedalUse", 1) == 1);
             SetMotionBlur(GetIntProperty("motionBlur",0) == 1);
+            SetLanguage(GetIntProperty("language", 0));
+        }
+
+        private string LanguageToString(int lang)
+        {
+            switch (lang)
+            {
+                case 0:
+                    return "en";
+                case 1:
+                    return "ko";
+                case 2:
+                    return "ja";
+                default:
+                   return "en";
+            }
         }
 
         public void SetFog(bool value)
@@ -145,6 +163,28 @@ namespace Assets.Pia.Scripts.Game.UI
         public bool GetHeadBob()
         {
             return headBob;
+        }
+
+        public int GetLanguage()
+        {
+            return language;
+        }
+
+        public void SetLanguage(int value)
+        {
+            LocaleIdentifier localeCode = new LocaleIdentifier(LanguageToString(value));
+            for (int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++)
+            {
+                Locale aLocale = LocalizationSettings.AvailableLocales.Locales[i];
+                LocaleIdentifier anIdentifier = aLocale.Identifier;
+                if (anIdentifier == localeCode)
+                {
+                    LocalizationSettings.SelectedLocale = aLocale;
+                }
+            }
+
+            language = value;
+            PlayerPrefs.SetInt("language", value);
         }
     }
 }

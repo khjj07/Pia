@@ -3031,7 +3031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearDelay: 0
-  text: "1966\u5E749\u67086\u65E5 \r\n\u9244\u539F15\u5E2B\u56E3 \r\n\u6545\u6734\u937E\u71EE\u4E2D\u58EB
+  text: "1966\u5E749\u67086\u65E5 \r\n\u9244\u539F15\u5E2B\u56E3 \r\n\u6545Park Jong-seop\u4E2D\u58EB
     \r\n\u5730\u96F7\u9664\u53BB/\u89E3\u4F53\u4F5C\u696D\u4E2D\u306B\u6B89\u8077\r"
   typeSound: 1
   beginColor: {r: 0, g: 0, b: 0, a: 0}
