@@ -1580,7 +1580,7 @@
         "m_SerializableColors": []
     },
     "m_matrix": -1,
-    "m_MatrixType": 0
+    "m_MatrixType": 2
 }
 
 {
@@ -1618,10 +1618,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 3888.032470703125,
-            "y": 1455.032470703125,
-            "width": 208.0,
-            "height": 315.0
+            "x": 4021.999755859375,
+            "y": 1394.0,
+            "width": 206.000244140625,
+            "height": 131.0
         }
     },
     "m_Slots": [
@@ -4319,7 +4319,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
