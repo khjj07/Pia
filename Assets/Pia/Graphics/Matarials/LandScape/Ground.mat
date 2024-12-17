@@ -74,7 +74,7 @@ Material:
     - _MaterialTypeMask: 2
     - _OpaqueCullMode: 2
     - _PerPixelSorting: 0
-    - _Power: -0.6
+    - _Power: -0.72
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
@@ -110,11 +110,13 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
-    - _density: 27
+    - _density: 60.05
     - _offset: 100
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _NoiseTiling: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _TextureTiling: {r: 100, g: 100, b: 0, a: 0}
     - _Tiling: {r: 100, g: 100, b: 0, a: 0}
     - _VertexTiling: {r: 20, g: 20, b: 0, a: 0}
   m_BuildTextureStacks: []
