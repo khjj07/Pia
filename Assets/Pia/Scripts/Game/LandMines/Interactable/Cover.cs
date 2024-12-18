@@ -5,6 +5,7 @@ using Assets.Pia.Scripts.Interface;
 using Assets.Pia.Scripts.StoryMode;
 using Default.Scripts.Sound;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 public class Cover : InteractableClass

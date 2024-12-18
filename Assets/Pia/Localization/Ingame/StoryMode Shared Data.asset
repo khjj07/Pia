@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: GameManager
     m_Metadata:
       m_Items: []
+  - m_Id: 4164214759899136
+    m_Key: Letter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4167080207728640
+    m_Key: GuideBook
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 3440090565771788401
@@ -40,5 +48,15 @@ MonoBehaviour:
           - en
           - ja
           - ko
+        - m_KeyId: 4164214759899136
+          m_TableCodes:
+          - en
+          - ja
+          - ko
+        - m_KeyId: 4167080207728640
+          m_TableCodes:
+          - en
+          - ko
+          - ja
         m_TypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null

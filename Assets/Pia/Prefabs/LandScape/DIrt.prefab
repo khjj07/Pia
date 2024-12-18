@@ -168,7 +168,7 @@ MonoBehaviour:
   availableOutline: {fileID: 0}
   inavailableOutline: {fileID: 0}
   holeDepth: 0
-  extend: 0.1
+  extend: 0.2
   top: {fileID: 1362882810740654570}
   bottom: {fileID: 334791966258514795}
   worldHeight: 0

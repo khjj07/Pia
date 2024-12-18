@@ -22,15 +22,16 @@ namespace Assets.Pia.Scripts.Game.Items
 
         public void Awake()
         {
-            _guideBookUi = GetComponent<GuideBookUI>();
             _canvasGroup = GetComponent<CanvasGroup>();
             _rectTransform = GetComponent<RectTransform>();
+            _rectTransform.anchoredPosition = initialPosition;
         }
         
         public override void OnActive(Player player)
         {
             base.OnActive(player);
             _canvasGroup.DOKill();
+            _guideBookUi = GetComponentInChildren<GuideBookUI>(true);
             _rectTransform.anchoredPosition = initialPosition;
             _tween = _rectTransform.DOAnchorPosX(0, 0.5f).SetEase(Ease.OutBack);
             var nextStream = GlobalInputBinder.CreateGetKeyDownStream(nextKey).Subscribe(_ =>

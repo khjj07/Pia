@@ -57,6 +57,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ko
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e358f7e4862caef44b8266f0ef9a049d
+    m_Address: Letter_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f86b3d480d7e73946b83e1f6613a522d
+    m_Address: GuideBookUI_KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe8551e6634366e469c6613b2f8812fa
     m_Address: EndingHP0_KR
     m_ReadOnly: 1

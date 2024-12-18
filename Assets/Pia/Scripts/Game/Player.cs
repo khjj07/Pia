@@ -158,11 +158,9 @@ namespace Assets.Pia.Scripts.Game
 
         private void CreateFlashLightStream()
         {
-            this.UpdateAsObservable().ThrottleFirst(TimeSpan.FromSeconds(0.01f)).Subscribe(_ =>
+            this.UpdateAsObservable().Subscribe(_ =>
             {
-                flashlight.transform.DOKill();
-                flashlight.transform.DOMove(mainCamera.transform.position, 0.1f).SetEase(Ease.InOutQuad);
-                flashlight.transform.DORotate(mainCamera.transform.eulerAngles, 0.1f).SetEase(Ease.InOutQuad);
+                flashlight.Follow(mainCamera.transform);
             }).AddTo(gameObject);
         }
 

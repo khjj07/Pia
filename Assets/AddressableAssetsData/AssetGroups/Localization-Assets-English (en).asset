@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18b96da22716ee34da2a3ce781d25ce2
+    m_Address: GuideBookUI_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 67de31d577339a7408c2e6a82f13d18b
     m_Address: EndingAirBomb_EN
     m_ReadOnly: 1
@@ -59,6 +65,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e0646cbedf322b047a4de08de22cd360
     m_Address: EndingEnemy_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7fc9ac4037dca742aecb59a13f5810f
+    m_Address: Letter_EN
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

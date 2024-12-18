@@ -11,11 +11,17 @@ namespace Assets.Pia.Scripts.Game.Items
         private Tween _tween=null;
         public void Awake()
         {
-            _image = GetComponent<Image>();
+            
+        }
+
+        public void Start()
+        {
+
         }
         public override void OnActive(Player player)
         {
             base.OnActive(player);
+            _image = GetComponentInChildren<Image>(true);
             _image.DOKill();
             _image.color = new Color(1,1,1,0);
             _tween = _image.DOFade(1.0f, fadeDuration).OnComplete(() =>
