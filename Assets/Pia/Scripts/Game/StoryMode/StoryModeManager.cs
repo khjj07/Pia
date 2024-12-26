@@ -43,8 +43,8 @@ namespace Pia.Scripts.StoryMode
         }
 
         public Subject<State> stateSubject;
-        public State currentState;
-        public ControlMode controlMode;
+        public State currentState = State.Walking;
+        public ControlMode controlMode = ControlMode.General;
         [SerializeField]
         private PathManager _pathManager;
         [SerializeField]
@@ -57,11 +57,12 @@ namespace Pia.Scripts.StoryMode
 
 
         public CancellationTokenSource gameOverTokenSource;
+        private bool _invincibility;
+
         public void Start()
         {
             InitializeVolumeSetting();
             _player = Player.Instance;
-            _player.Initialize(_pathManager);
             gameOverTokenSource = new CancellationTokenSource();
             stateSubject = new Subject<State>();
             stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
@@ -71,7 +72,6 @@ namespace Pia.Scripts.StoryMode
                     _isInteractionActive = false;
                     SoundManager.Play("BGM_bug",3);
                 }).AddTo(gameObject);
-
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
@@ -101,6 +101,7 @@ namespace Pia.Scripts.StoryMode
                         .Subscribe(_ => _player.RepositioningThroughFoot(_landMine.Dirt.top))
                         .AddTo(_player.gameObject);
                 }).AddTo(gameObject);
+            _player.Initialize(_pathManager);
             CheckSaveFlag();
         }
 
@@ -127,10 +128,10 @@ namespace Pia.Scripts.StoryMode
                 {
                     SetState(State.LandMineDirt);
                 }
-                else
-                {
-                    SetState(State.Walking);
-                }
+            }
+            else
+            {
+                SetState(State.Walking);
             }
         }
 
@@ -189,27 +190,29 @@ namespace Pia.Scripts.StoryMode
 
         public void GoToGameOverScene(GameOverType type)
         {
-            switch (type)
+            if (!_invincibility)
             {
-                case GameOverType.MineExplosion:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb",0,GlobalLoadingManager.Mode.None));
-                    break;
-                case GameOverType.AirBomb:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverAirBomb",0, GlobalLoadingManager.Mode.None));
-                    break;
-                case GameOverType.Boar:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverBoar", 0, GlobalLoadingManager.Mode.None));
-                    break;
-                case GameOverType.Bleed:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverHP0", 0, GlobalLoadingManager.Mode.None));
-                    break;
-                case GameOverType.Enemy:
-                    StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverEnemy", 0, GlobalLoadingManager.Mode.None));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+                switch (type)
+                {
+                    case GameOverType.MineExplosion:
+                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb", 0, GlobalLoadingManager.Mode.None, true));
+                        break;
+                    case GameOverType.AirBomb:
+                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverAirBomb", 0, GlobalLoadingManager.Mode.None, true));
+                        break;
+                    case GameOverType.Boar:
+                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverBoar", 0, GlobalLoadingManager.Mode.None, true));
+                        break;
+                    case GameOverType.Bleed:
+                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverHP0", 0, GlobalLoadingManager.Mode.None, true));
+                        break;
+                    case GameOverType.Enemy:
+                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverEnemy", 0, GlobalLoadingManager.Mode.None, true));
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(type), type, null);
+                }
             }
-            
         }
 
         public void GameClear()
@@ -237,6 +240,11 @@ namespace Pia.Scripts.StoryMode
         public void CloseBag()
         {
             _player.bag.Close();
+        }
+
+        public void SetInvincibility(bool invincibilityFlag)
+        {
+            _invincibility = invincibilityFlag;
         }
     }
 }

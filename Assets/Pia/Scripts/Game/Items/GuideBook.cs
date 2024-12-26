@@ -1,6 +1,7 @@
 ﻿using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using DG.Tweening;
+using System;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -17,8 +18,11 @@ namespace Assets.Pia.Scripts.Game.Items
         private GuideBookUI _guideBookUi;
         private CanvasGroup _canvasGroup;
         private RectTransform _rectTransform;
-        [SerializeField] private float fadeDuration=1.0f;
+        [SerializeField] private float fadeDuration = 1.0f;
         private Tween _tween;
+        public int index = 0;
+        private IDisposable nextStream;
+        private IDisposable prevStream;
 
         public void Awake()
         {
@@ -26,43 +30,43 @@ namespace Assets.Pia.Scripts.Game.Items
             _rectTransform = GetComponent<RectTransform>();
             _rectTransform.anchoredPosition = initialPosition;
         }
-        
+
         public override void OnActive(Player player)
         {
             base.OnActive(player);
             _canvasGroup.DOKill();
             _guideBookUi = GetComponentInChildren<GuideBookUI>(true);
+            _guideBookUi.Change(index);
             _rectTransform.anchoredPosition = initialPosition;
             _tween = _rectTransform.DOAnchorPosX(0, 0.5f).SetEase(Ease.OutBack);
-            var nextStream = GlobalInputBinder.CreateGetKeyDownStream(nextKey).Subscribe(_ =>
+            nextStream = GlobalInputBinder.CreateGetKeyDownStream(nextKey).Subscribe(_ =>
            {
-               if (_guideBookUi.currentIndex < _guideBookUi.states.Length-1)
-               {
-                   SoundManager.Play("use_book",1);
-                   _rectTransform.DOShakeRotation(0.1f, 2,0).SetEase(Ease.InOutElastic);
-               }
-               _guideBookUi.Next();
-           }).AddTo(gameObject);
-           var prevStream = GlobalInputBinder.CreateGetKeyDownStream(previousKey).Subscribe(_ =>
-           {
-               if (_guideBookUi.currentIndex > 0)
+               if (_guideBookUi.currentIndex < _guideBookUi.states.Length - 1)
                {
                    SoundManager.Play("use_book", 1);
                    _rectTransform.DOShakeRotation(0.1f, 2, 0).SetEase(Ease.InOutElastic);
                }
-               _guideBookUi.Previous();
+               _guideBookUi.Next();
            }).AddTo(gameObject);
-           player.UpdateAsObservable().Where(_ => !_isActive).Take(1).Subscribe(_ =>
-           {
-               nextStream.Dispose();
-               prevStream.Dispose();
-           }).AddTo(gameObject);
+            prevStream = GlobalInputBinder.CreateGetKeyDownStream(previousKey).Subscribe(_ =>
+            {
+                if (_guideBookUi.currentIndex > 0)
+                {
+                    SoundManager.Play("use_book", 1);
+                    _rectTransform.DOShakeRotation(0.1f, 2, 0).SetEase(Ease.InOutElastic);
+                }
+                _guideBookUi.Previous();
+            }).AddTo(gameObject);
+
         }
         public override void OnInActive(Player player)
         {
+            index = _guideBookUi.currentIndex;
             base.OnInActive(player);
-            _canvasGroup.DOKill(); 
-            gameObject.SetActive(false);
+            _canvasGroup.DOKill();
+            nextStream.Dispose();
+            prevStream.Dispose();
+          
         }
     }
 }

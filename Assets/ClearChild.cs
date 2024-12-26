@@ -4,6 +4,7 @@ using UnityEngine;
 [ExecuteAlways]
 public class ClearChild : MonoBehaviour
 {
+#if UNITY_EDITOR
     private void Update()
     {
         if (!Application.isPlaying)
@@ -22,4 +23,5 @@ public class ClearChild : MonoBehaviour
             Destroy(this);
         }
     }
+#endif
 }

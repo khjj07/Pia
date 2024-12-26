@@ -5076,10 +5076,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LandMineUI
       objectReference: {fileID: 0}
-    - target: {fileID: 511483940170434324, guid: f614dc629690eaa44b88f5a1b1cf9263, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1871702896539662547, guid: f614dc629690eaa44b88f5a1b1cf9263, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

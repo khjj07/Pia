@@ -1125,7 +1125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2824156330133530309, guid: 7c2835e57c5106e4c89ef3a70ce55d72, type: 3}
       propertyPath: throwDirection.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2824156330133530309, guid: 7c2835e57c5106e4c89ef3a70ce55d72, type: 3}
       propertyPath: standardDirection.x
@@ -1145,7 +1145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4428918666668663750, guid: 7c2835e57c5106e4c89ef3a70ce55d72, type: 3}
       propertyPath: throwDirection.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4428918666668663750, guid: 7c2835e57c5106e4c89ef3a70ce55d72, type: 3}
       propertyPath: standardDirection.x

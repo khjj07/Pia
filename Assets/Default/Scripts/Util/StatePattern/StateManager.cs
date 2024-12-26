@@ -37,6 +37,7 @@ namespace Default.Scripts.Util.StatePattern
         public abstract void Next();
         public abstract void Previous();
         public abstract void Change(StateBase state);
+        public abstract void Change(int index);
     }
 
     public abstract class StateManager<T> : StateManagerBase where T : State<T>
@@ -94,8 +95,21 @@ namespace Default.Scripts.Util.StatePattern
 
         public override async void Change(StateBase state)
         {
-            await currentState.OnExit(_cancellationTokenSource);
+            if (currentState != null)
+            {
+                await currentState.OnExit(_cancellationTokenSource);
+            }
             currentState = state as T;
+            await currentState.OnEnter(_cancellationTokenSource);
+        }
+        public override async void Change(int index)
+        {
+            if (currentState != null)
+            {
+                await currentState.OnExit(_cancellationTokenSource);
+            }
+            currentIndex= index;
+            currentState = states[index] as T;
             await currentState.OnEnter(_cancellationTokenSource);
         }
     }

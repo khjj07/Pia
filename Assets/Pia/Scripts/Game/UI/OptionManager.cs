@@ -31,7 +31,9 @@ namespace Assets.Pia.Scripts.Game.UI
             optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
             GlobalConfiguration.Instance.LoadAllProperty();
             InitializeOption();
-            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Escape).Where(_=> !_isOpen && StoryModeManager.GetState()==StoryModeManager.State.Walking).Subscribe(_ => Open()).AddTo(gameObject);
+            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Escape)
+                .Where(_=> !_isOpen && StoryModeManager.GetState()==StoryModeManager.State.Walking)
+                .Subscribe(_ => Open()).AddTo(gameObject);
      }
 
         private void InitializeOption()
@@ -54,7 +56,7 @@ namespace Assets.Pia.Scripts.Game.UI
         private void OnOptionResetButtonClick()
         {
             SoundManager.PlayOneShot("ui_button", 1);
-            PlayerPrefs.DeleteAll();
+            GlobalConfiguration.Instance.ResetOption();
             GlobalConfiguration.Instance.LoadAllProperty();
             InitializeOption();
         }
