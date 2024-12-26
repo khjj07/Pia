@@ -7,6 +7,7 @@ using Default.Scripts.Sound;
 using DG.Tweening;
 using Knife.HDRPOutline.Core;
 using UniRx;
+using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -66,6 +67,10 @@ public class Bolt : InteractableClass
         _rigidbody.isKinematic = false;
         _rigidbody.AddForce(throwDirection*force,ForceMode.Impulse);
         _rigidbody.AddTorque(throwDirection*force,ForceMode.Impulse);
+        this.OnCollisionEnterAsObservable().Take(1).Subscribe(_ =>
+        {
+            _rigidbody.linearVelocity=Vector3.zero;
+            _rigidbody.angularVelocity=Vector3.zero;
+        }).AddTo(gameObject);
     }
-
 }

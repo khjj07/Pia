@@ -47,7 +47,7 @@ namespace Assets.Pia.Scripts.Game.Events
         {
             //흔들림 + 미니게임
             var player = StoryModeManager.Instance.GetPlayer();
-            player.StandUp();
+            player.StandUp(false);
             player.SetCursorLockedAndInteractable();
             SoundManager.Play("event_startBombing", 6);
             Sequence sequnce = DOTween.Sequence();

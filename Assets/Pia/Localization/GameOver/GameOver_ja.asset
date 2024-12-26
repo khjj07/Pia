@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
+  m_Name: GameOver_ja
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ja
+  m_SharedData: {fileID: 11400000, guid: e1d79ef0c24dd8b409fddb4a967f3ade, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 15632711680
+    m_Localized: f4f06e617681dad469623511197c4326
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1068432375808
+    m_Localized: 6b13c48583231074b997b77a9d566cd2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1411794878464
+    m_Localized: 8f3634824063aaf48ac768a42d174cf8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1749721563136
+    m_Localized: b76814351b78f43488e5cfc0648d46a9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2055435993088
+    m_Localized: cb286abbd5e41114fb4b80f92c18e862
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

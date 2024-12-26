@@ -169,7 +169,7 @@ MonoBehaviour:
     m_Value: 1
   enabled:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   colorMode:
     m_OverrideState: 1
     m_Value: 0
@@ -624,13 +624,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.4077928, y: 0.51465714, z: 1, w: 0.35139093}
+    m_Value: {x: 0.41000003, y: 0.5181666, z: 1, w: 0.35139093}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 0.91496074, y: 0.9738728, z: 1, w: 0.11713032}
+    m_Value: {x: 0.90999997, y: 0.973, z: 1, w: 0.11713032}
   highlights:
     m_OverrideState: 0
-    m_Value: {x: 0.96158326, y: 1, z: 0.99999976, w: 0}
+    m_Value: {x: 0.96, y: 1, z: 1, w: 0}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -724,7 +724,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   maximumVelocity:
     m_OverrideState: 1
     m_Value: 200

@@ -12,7 +12,6 @@ namespace Assets.Pia.Scripts.Game.Items
             base.OnActive(player);
             foreach (var item in items)
             {
-                Debug.Log("Initialize");
                 item.Initialize(player);
             }
         }
@@ -22,7 +21,6 @@ namespace Assets.Pia.Scripts.Game.Items
             base.OnInActive(player);
             foreach (var item in items)
             {
-                Debug.Log("Dispose");
                 item.DisposeActiveStream();
                 item.OnInActive(player);
             }

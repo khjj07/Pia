@@ -49,20 +49,17 @@ namespace Assets.Pia.Scripts.Effect
         {
             top.position = bottom.position + Vector3.up * worldHeight * (1 - holeDepth);
             _dirt.material.SetFloat("_HoleDepth", holeDepth);
+            if (holeDepth >= targetDepth)
+            {
+                GetComponent<Collider>().enabled = false;
+            }
         }
 
         public void Dig(float interval)
         {
             //holeDepth = Mathf.Clamp(holeDepth + extend, 0, 1);
-
             DOTween.To(() => holeDepth, x => holeDepth =x, holeDepth + extend,1.0f).SetEase(Ease.InOutQuad);
-            
-            transform.DOShakeRotation(interval, 0.1f, 1);
-
-            if (holeDepth >= targetDepth)
-            {
-                GetComponent<Collider>().enabled = false;
-            }
+            transform.DOShakeScale(1, 0.01f, 0).SetEase(Ease.InOutQuad);
         }
     }
 }

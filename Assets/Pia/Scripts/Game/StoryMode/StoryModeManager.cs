@@ -15,7 +15,7 @@ using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
+
 using Unit = UniRx.Unit;
 
 namespace Pia.Scripts.StoryMode
@@ -50,10 +50,9 @@ namespace Pia.Scripts.StoryMode
         [SerializeField]
         private LandMineUI _landMineUI;
         [SerializeField]
-        private Player _player;
-        [SerializeField]
         private LandMine _landMine;
 
+        private Player _player;
         private bool _isInteractionActive;
 
 
@@ -61,7 +60,8 @@ namespace Pia.Scripts.StoryMode
         public void Start()
         {
             InitializeVolumeSetting();
-            
+            _player = Player.Instance;
+            _player.Initialize(_pathManager);
             gameOverTokenSource = new CancellationTokenSource();
             stateSubject = new Subject<State>();
             stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
@@ -70,21 +70,23 @@ namespace Pia.Scripts.StoryMode
                 {
                     _isInteractionActive = false;
                     SoundManager.Play("BGM_bug",3);
-                });
+                }).AddTo(gameObject);
 
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
                 {
-                    controlMode = GlobalConfiguration.Instance.GetPedalUse() ? ControlMode.WithPedal : ControlMode.General;
-                    Debug.Log(controlMode);
+                    controlMode = GlobalConfiguration.Instance.GetPedalUse()
+                        ? ControlMode.WithPedal
+                        : ControlMode.General;
                     _isInteractionActive = false;
                     SoundManager.Play("MP_Nightime", 0);
                     SoundManager.Play("BGM_bug", 3);
                     SoundManager.Play("StepLandmine", 1);
+                    PlayerPrefs.SetString("Save", "LandMineDirt");
                     _player.OnStepMine();
+                    _player.bag.Close();
                     _player.SetCursorLocked();
                     _landMineUI.Appear();
-                    PlayerPrefs.SetString("Save","LandMineDirt");
                     _player.UpdateAsObservable()
                         .TakeWhile(_ => currentState == State.LandMineDirt)
                         .Where(_ => _landMine.IsAvailable())
@@ -92,14 +94,13 @@ namespace Pia.Scripts.StoryMode
                         {
                             SetState(State.LandMine);
                             _player.Crouch();
-                        })
-                        .AddTo(_player.gameObject);
+                        }).AddTo(_player.gameObject);
 
                     _player.UpdateAsObservable()
-                        .TakeWhile(_=>currentState==State.LandMineDirt)
-                        .Subscribe(_=>_player.RepositioningThroughFoot(_landMine.Dirt.top))
+                        .TakeWhile(_ => currentState == State.LandMineDirt)
+                        .Subscribe(_ => _player.RepositioningThroughFoot(_landMine.Dirt.top))
                         .AddTo(_player.gameObject);
-                });
+                }).AddTo(gameObject);
             CheckSaveFlag();
         }
 
@@ -112,6 +113,12 @@ namespace Pia.Scripts.StoryMode
         {
             return _player;
         }
+
+        public PathManager GetPathManager()
+        {
+            return _pathManager;
+        }
+
         private void CheckSaveFlag()
         {
             if (PlayerPrefs.HasKey("Save"))
@@ -131,6 +138,7 @@ namespace Pia.Scripts.StoryMode
         {
             Instance.stateSubject.OnNext(state);
         }
+
         public static State GetState()
         {
             return Instance.currentState;
@@ -156,6 +164,8 @@ namespace Pia.Scripts.StoryMode
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+      
         public static IObservable<Unit> GetStepUpStream()
         {
             switch (GetControlMode())
@@ -215,6 +225,18 @@ namespace Pia.Scripts.StoryMode
         public void SetInteractionActive(bool value)
         {
             _isInteractionActive = value;
+        }
+
+        public void OpenBag()
+        {
+            _isInteractionActive = true;
+            _player.ActiveBagSlot();
+            _player.bag.Open();
+        }
+
+        public void CloseBag()
+        {
+            _player.bag.Close();
         }
     }
 }

@@ -15,20 +15,20 @@ MonoBehaviour:
   m_GroupName: Localization-Locales
   m_GUID: f4fc408961b7aa0438102e3b8499a63c
   m_SerializeEntries:
-  - m_GUID: 171863886e5b3ef4d80c6fb8988b1dc6
-    m_Address: Japanese (ja)
+  - m_GUID: 6e67cb4f0b7bf2940ad4a232f9dcfcbb
+    m_Address: English (en)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8bf2f28f9444b694796569bf700956d6
+  - m_GUID: f186af7e748c64644b07890cc946d3f0
     m_Address: Korean (ko)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e2f01942782a825439a7912950b3dc9d
-    m_Address: English (en)
+  - m_GUID: ff9d3b6de9787aa42b3ed5dfb7717ab4
+    m_Address: Japanese (ja)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale

@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-English (en)
   m_GUID: 390330159dd46f142b7a4a7c5df81b19
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 4eca1169e0111fd4b96b4a603f44c2f8
+    m_Address: Title_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: e61b47c7c52829941bc334a7dc59443c, type: 2}
   m_SchemaSet:

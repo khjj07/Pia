@@ -5,6 +5,7 @@ using Default.Scripts.Printer;
 using Default.Scripts.Util;
 using Pia.Scripts.StoryMode;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Pia.Scripts.StoryMode
 {
@@ -27,12 +28,13 @@ namespace Assets.Pia.Scripts.StoryMode
         [SerializeField]
         private Printer _eventPrinter;
         [SerializeField]
+        private Image _eventPrinterFrame;
+        [SerializeField]
         private float duration;
 
         [SerializeField] private EventActor boar;
         [SerializeField] private EventActor enemy;
         [SerializeField] private EventActor airBomb;
-        [SerializeField] private Canvas _canvas;
 
         [SerializeField,TextArea] private string[] eventText;
 
@@ -41,7 +43,7 @@ namespace Assets.Pia.Scripts.StoryMode
             try
             {
                 Debug.Log(eventText[(int)e]);
-                _canvas.gameObject.SetActive(true);
+                _eventPrinterFrame.gameObject.SetActive(true);
                 if (_eventPrinter.IsPrinting())
                 {
                     _eventPrinter.Skip();
@@ -54,7 +56,7 @@ namespace Assets.Pia.Scripts.StoryMode
                 {
                     await _eventPrinter.Disappear(StoryModeManager.GetGameOverTokenSource());
                 }
-                _canvas.gameObject.SetActive(false);
+                _eventPrinterFrame.gameObject.SetActive(false);
             }
             catch (OperationCanceledException)
             {

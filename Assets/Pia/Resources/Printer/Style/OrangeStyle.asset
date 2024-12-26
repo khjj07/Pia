@@ -19,6 +19,7 @@ MonoBehaviour:
   appearAndRepeatUnit: 0
   disappearUnit: 2
   useAppearAnimation: 1
+  useDisappearAnimation: 0
   appearScaleSpeed: 1
   appearBeginScale: {x: 0, y: 0, z: 0}
   appearEndScale: {x: 1, y: 1, z: 1}
@@ -53,7 +54,6 @@ MonoBehaviour:
   repeatBeginColor: {r: 1, g: 1, b: 1, a: 1}
   repeatEndColor: {r: 1, g: 1, b: 1, a: 1}
   repeatColorEase: 0
-  useDisappearAnimation: 1
   disappearScaleSpeed: 1
   disappearBeginScale: {x: 1, y: 1, z: 1}
   disappearEndScale: {x: 1, y: 1, z: 1}

@@ -121,7 +121,7 @@ Material:
     - _DiffusionProfileAsset: {r: 3.4976084e+20, g: 4.7294206e+12, b: 417955650, a: 2.3776818e-38}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _MainColor: {r: 0.25605196, g: 0.3962264, b: 0.25605196, a: 0.5882353}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1300343316779486634

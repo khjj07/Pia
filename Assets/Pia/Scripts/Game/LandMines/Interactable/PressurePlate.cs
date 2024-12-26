@@ -22,7 +22,7 @@ public class PressurePlate : InteractableClass
     private float _currentBoundAngle = 0;
     private float _matchBarAngle = 0;
     private int _currentLevel = 0;
-    private int _currentSpeed = 0;
+    private float _currentSpeed = 0;
 
     public int targetCount = 3;
     public int count = 0;
@@ -134,17 +134,17 @@ public class PressurePlate : InteractableClass
             case 0:
                 boundingArea.fillAmount = 120f / 360f;
                 _currentBoundAngle = 60f;
-                _currentSpeed = 3;
+                _currentSpeed = 4.5f;
                 break;
             case 1:
                 boundingArea.fillAmount = 80f / 360f;
                 _currentBoundAngle = 40f;
-                _currentSpeed = 6;
+                _currentSpeed = 9;
                 break;
             case 2:
                 boundingArea.fillAmount = 40f / 360f;
                 _currentBoundAngle = 20f;
-                _currentSpeed = 9;
+                _currentSpeed = 13.5f;
                 break;
         }
         boundingArea.rectTransform.localEulerAngles = new Vector3(0f, 0f, _currentBoundAngle);

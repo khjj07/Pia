@@ -31,6 +31,8 @@ namespace Pia.Scripts.Synopsis
 
         private bool finishFlag = false;
         private IDisposable skipStream;
+        private bool nextFlag = true;
+
         public override void Next()
         {
             if (currentIndex >= states.Length - 1)
@@ -96,14 +98,21 @@ namespace Pia.Scripts.Synopsis
 
 
             goNextStream = this.UpdateAsObservable()
-                .Where(_ => currentState.CanGoNext())
                 .Where(_ => Input.GetKeyDown(currentState.nextkey))
-                .Take(1).Repeat()
                 .ThrottleFirst(TimeSpan.FromSeconds(1f))
+                .Where(_ => currentState.CanGoNext() && nextFlag)
+                .Take(1).Repeat()
                 .Subscribe(_ =>
                 {
                     Next();
+                    nextFlag = false;
                     HideGuideNotice();
+                    this.UpdateAsObservable()
+                        .SkipWhile(_ => currentState.CanGoNext())
+                        .Take(1)
+                        .Subscribe(_ => nextFlag = true)
+                        .AddTo(gameObject);
+
                 }).AddTo(gameObject);
 
             guideNoticeStream = this.UpdateAsObservable()

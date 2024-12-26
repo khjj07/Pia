@@ -444,7 +444,7 @@ namespace Default.Scripts.Printer
           
         }
 
-        public async Task Print(CancellationTokenSource cancellationTokenSource)
+        public async Task Print(CancellationTokenSource cancellationTokenSource, float speedMultiplier = 1)
         {
             try
             {
@@ -482,7 +482,7 @@ namespace Default.Scripts.Printer
                                 onAppearEvent.Invoke();
                                 RepeatTween(style, letterCount, cancellationTokenSource.Token);
                                 letterCount++;
-                                await Task.Delay((int)(style.appearInterval * 1000), cancellationTokenSource.Token);
+                                await Task.Delay((int)(style.appearInterval * 1000 / speedMultiplier), cancellationTokenSource.Token);
                             }
 
                             break;
@@ -495,11 +495,11 @@ namespace Default.Scripts.Printer
                                 letterCount++;
                                 if (_parsedText[_parsedTextIndex][i] == ' ')
                                 {
-                                    await Task.Delay((int)(style.appearInterval * 1000), cancellationTokenSource.Token);
+                                    await Task.Delay((int)(style.appearInterval * 1000 / speedMultiplier), cancellationTokenSource.Token);
                                 }
                             }
 
-                            await Task.Delay((int)(style.appearInterval * 1000), cancellationTokenSource.Token);
+                            await Task.Delay((int)(style.appearInterval * 1000 / speedMultiplier), cancellationTokenSource.Token);
                             break;
                         case PrintStyle.Unit.Sentence:
                             for (int i = 0; i < _parsedText[_parsedTextIndex].Length; i++)

@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class GuideBookUI : StateManager<GuideBookPage>
 {
-  
+    public override void Start()
+    {
+        base.Start();
+    }
 }

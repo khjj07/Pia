@@ -16,6 +16,7 @@ namespace Assets.Pia.Scripts.UI
         public float timeLimit;
         public float timer;
         public Image blood;
+        private bool _isStep = false;
 
         [SerializeField] private RectTransform generalControlAlert;
         [SerializeField] private RectTransform PedalControlAlert;
@@ -31,19 +32,18 @@ namespace Assets.Pia.Scripts.UI
         }
         private void CreateLandMineStream()
         {
-            Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeUntil(StoryModeManager.GetStepStream())
+            Observable.Interval(TimeSpan.FromMilliseconds(100)).TakeWhile(_=>!_isStep)
                         .Subscribe(_ => SetTimer(timer - 0.1f)).AddTo(gameObject);
-
-            StoryModeManager.GetStepStream().Take(1).Subscribe(_ =>
-            {
-                StoryModeManager.Instance.SetInteractionActive(true);
-                StoryModeManager.GetStepUpStream()
-                    .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.MineExplosion))
-                    .AddTo(StoryModeManager.Instance.gameObject);
-                Disappear();
-            }).AddTo(gameObject);
         }
-
+        public void StepLandMine()
+        {
+            StoryModeManager.Instance.SetInteractionActive(true);
+            StoryModeManager.GetStepUpStream()
+                .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.MineExplosion))
+                .AddTo(StoryModeManager.Instance.gameObject);
+            Disappear();
+            _isStep = true;
+        }
         public void Appear()
         {
             gameObject.SetActive(true);

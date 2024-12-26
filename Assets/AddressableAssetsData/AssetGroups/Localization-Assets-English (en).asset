@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-English (en)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-English (en)
+  m_GUID: 16a13b0b11fe30149894bd4943e8bbee
+  m_SerializeEntries:
+  - m_GUID: 0832985d4ccf2554a8f9f4ce85199615
+    m_Address: EndingMineBomb_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18b96da22716ee34da2a3ce781d25ce2
+    m_Address: GuideBookUI_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67de31d577339a7408c2e6a82f13d18b
+    m_Address: EndingAirBomb_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f79c8a1f9aeb3444a3bdbb324472f77
+    m_Address: EndingHP0_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f6ec4ac0bfc2464da7b3eae256e3eae
+    m_Address: GameManager_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 937a612c4301dd742aca91b8b6f59c0a
+    m_Address: EndingBoar_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9685f0c8f7aea3946bc6531192bfea9d
+    m_Address: SynopsisUI_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a31681b3eca65d247b29c6a02fef2e21
+    m_Address: EndingUI_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0646cbedf322b047a4de08de22cd360
+    m_Address: EndingEnemy_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7fc9ac4037dca742aecb59a13f5810f
+    m_Address: Letter_EN
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: e61b47c7c52829941bc334a7dc59443c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4b19677ab7138e3459f9ec34c6f66908, type: 2}
+    - {fileID: 11400000, guid: 4c69b1141653e4b43b0b3d4ec734bc9c, type: 2}

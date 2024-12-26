@@ -11,9 +11,10 @@ namespace Assets.Pia.Scripts.Path
 {
     public class MineNode : SubPathNode
     {
-        public override async Task Appear(CancellationTokenSource cancellationTokenSource)
+        public override Task Appear(CancellationTokenSource cancellationTokenSource)
         {
             StoryModeManager.SetState(StoryModeManager.State.LandMineDirt);
+            return Task.CompletedTask;
         }
 
         public override Task Disappear(CancellationTokenSource cancellationTokenSource)

@@ -7,6 +7,7 @@ using Assets.Pia.Scripts.StoryMode.Walking;
 using Assets.Pia.Scripts.UI;
 using Default.Scripts.Printer;
 using Default.Scripts.Sound;
+using Default.Scripts.Util;
 using DG.Tweening;
 using Pia.Scripts.StoryMode;
 using UniRx;
@@ -19,7 +20,7 @@ using Unit = UniRx.Unit;
 
 namespace Assets.Pia.Scripts.Game
 {
-    public class Player : MonoBehaviour
+    public class Player : Singleton<Player>
     {
         public enum LowerAnimationState
         {
@@ -27,7 +28,7 @@ namespace Assets.Pia.Scripts.Game
             Walk,
             Crouch
         }
-        [SerializeField] PathManager pathManager;
+        PathManager _pathManager;
 
         [Header("Å° ¼¼ÆÃ")]
         public KeyCode walkKey = KeyCode.W;
@@ -80,7 +81,7 @@ namespace Assets.Pia.Scripts.Game
         private bool _isCrouching;
         private bool _isMove = false;
         private bool _isInteractable = false;
-        private bool _ableToCrouch = true;
+        public bool _ableToCrouch = true;
 
         private Vector3 initialLocalPosition;
         private Quaternion initialLocalRotation;
@@ -127,21 +128,17 @@ namespace Assets.Pia.Scripts.Game
         private HoldableItem hand;
         private bool _isMovable = true;
 
-        void Start()
-        {
-            Initialize();
-        }
-
         public bool IsMovable()
         {
-           return pathManager.PlayerIsMovable() && _isMovable;
+           return _pathManager.PlayerIsMovable() && _isMovable;
         }
         public void SetMovable(bool value)
         {
              _isMovable = value;
         }
-        private void Initialize()
+        public void Initialize(PathManager pathManager)
         {
+            _pathManager = pathManager;
             initialLocalPosition = mainCamera.transform.localPosition;
             initialLocalRotation = mainCamera.transform.localRotation;
             mainCamera.fieldOfView = defaultFov;
@@ -149,12 +146,21 @@ namespace Assets.Pia.Scripts.Game
             CreateAnimationSubject();
             CreateLowerBodyStream();
             CreateCameraStream();
+            CreateFlashLightStream();
             CreateHandStream();
             CreateHoverStream();
             this.UpdateAsObservable().Select(_=> GlobalConfiguration.Instance.GetMouseSensitive())
                 .DistinctUntilChanged().Subscribe(_ => {
                 sensitiveY = GlobalConfiguration.Instance.GetMouseSensitive();
                 sensitiveX = GlobalConfiguration.Instance.GetMouseSensitive();
+            }).AddTo(gameObject);
+        }
+
+        private void CreateFlashLightStream()
+        {
+            this.UpdateAsObservable().Subscribe(_ =>
+            {
+                flashlight.Follow(mainCamera.transform);
             }).AddTo(gameObject);
         }
 
@@ -181,31 +187,30 @@ namespace Assets.Pia.Scripts.Game
             {
                 EventManager.InvokeEvent(EventManager.Event.HP80);
                 SoundManager.Play("300hz_noise", 5);
-            });
+            }).AddTo(gameObject);
             hpStream.Where(hpRate => hpRate <= 0.6f).Take(1).Subscribe(_ =>
             {
                 EventManager.InvokeEvent(EventManager.Event.HP60);
                 SoundManager.Play("600hz_noise", 5);
-            });
+            }).AddTo(gameObject);
             hpStream.Where(hpRate => hpRate <= 0.4f).Take(1).Subscribe(_ =>
             {
                 EventManager.InvokeEvent(EventManager.Event.HP40);
                 SoundManager.Play("1000hz_noise", 5);
-            });
+            }).AddTo(gameObject);
             hpStream.Where(hpRate => hpRate <= 0.2f).Take(1).Subscribe(_ =>
             {
                 EventManager.InvokeEvent(EventManager.Event.HP20);
                 SoundManager.Play("1500hz_noise", 5);
-
-            });
+            }).AddTo(gameObject);
             hpStream.Where(hpRate => hpRate <= 0.1f).Take(1).Subscribe(hpRate =>
             {
                 EventManager.InvokeEvent(EventManager.Event.HP10);
                 dyingUI.gameObject.SetActive(true);
                 dyingUI.CrossFadeAlpha((0.1f - hpRate) / 0.1f, 0.1f, false);
                 SoundManager.Play("2400hz_noise", 5);
-            });
-         
+            }).AddTo(gameObject);
+
         }
 
         private void CreateHandStream()
@@ -233,11 +238,14 @@ namespace Assets.Pia.Scripts.Game
         private void CreateHPStream()
         {
             hp = initialHp;
-            Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval)).Subscribe(_ => SetHP(hp- hpReduction));
+            Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval))
+                .Subscribe(_ => SetHP(hp- hpReduction))
+                .AddTo(gameObject);
         }
 
         private void SetHP(int value)
         {
+            Debug.Log(hp);
             hp = Math.Max(value,0);
             hpBar.DOFillAmount((float)hp / initialHp, hpDecreaseInterval);
             if (hp == 0)
@@ -278,25 +286,35 @@ namespace Assets.Pia.Scripts.Game
         private void CreateHoverStream()
         {
             this.LateUpdateAsObservable()
-                .Where(t => _isInteractable)
                 .Select(_ => CheckInteractable())
                 .Subscribe(t =>
                 {
-                    if (target != null)
+                    if (_isInteractable)
                     {
-                        target.OnExit();
-                    }
-                    if (t != null && IsLightOn())
-                    {
-                        t.OnHover(hand);
-                    }
+                        if (target != null)
+                        {
+                            target.OnExit();
+                        }
+                        if (t != null && IsLightOn())
+                        {
+                            t.OnHover(hand);
+                        }
 
-                    if (IsLightOn())
-                    {
-                        target = t;
+                        if (IsLightOn())
+                        {
+                            target = t;
+                        }
+                        else
+                        {
+                            target = null;
+                        }
                     }
                     else
                     {
+                        if (target != null)
+                        {
+                            target.OnExit();
+                        }
                         target = null;
                     }
                 }, null, () =>
@@ -311,11 +329,11 @@ namespace Assets.Pia.Scripts.Game
 
         private void CreateCameraStream()
         {
-            GlobalInputBinder.CreateGetAxisStream("Mouse X").Subscribe(RotateCameraY);
-            GlobalInputBinder.CreateGetAxisStream("Mouse Y").Subscribe(RotateCameraX);
-            this.UpdateAsObservable().Subscribe(_ => RotateHead());
+            GlobalInputBinder.CreateGetAxisStream("Mouse X").Subscribe(RotateCameraY).AddTo(gameObject); ;
+            GlobalInputBinder.CreateGetAxisStream("Mouse Y").Subscribe(RotateCameraX).AddTo(gameObject);
+            this.UpdateAsObservable().Subscribe(_ => RotateHead()).AddTo(gameObject);
             this.UpdateAsObservable().Where(_=>GlobalConfiguration.Instance.GetHeadBob()).Select(_ => currentLowerState)
-                .DistinctUntilChanged().Subscribe(ShakeCamera);
+                .DistinctUntilChanged().Subscribe(ShakeCamera).AddTo(gameObject);
         }
         private void ShakeCamera(LowerAnimationState state)
         {
@@ -325,11 +343,11 @@ namespace Assets.Pia.Scripts.Game
             mainCamera.transform.localRotation = initialLocalRotation;
             if (state == LowerAnimationState.Walk)
             {
-                mainCamera.transform.DOMoveY(0.05f, 0.5f).SetRelative().SetLoops(-1,LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutQuad);
+                mainCamera.transform.DOShakePosition(1f, new Vector3(1, 0.5f, 0) * 0.06f, 0).SetLoops(-1, LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutSine);
             }
-            else
+            else if(state == LowerAnimationState.Idle)
             {
-                mainCamera.transform.DOShakeRotation(2.0f, Vector3.forward, 0).SetLoops(-1, LoopType.Yoyo).SetId("shakeCameraRot").SetEase(Ease.InOutQuad);
+                mainCamera.transform.DOShakePosition(4.0f, new Vector3(1,1,0) * 0.02f,1).SetLoops(-1, LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutSine);
             }
         }
         private void CreateLowerBodyStream()
@@ -371,14 +389,14 @@ namespace Assets.Pia.Scripts.Game
                 {
                     DOTween.Kill("changeDirection");
                     transform.DORotate(Quaternion.LookRotation(GetCurrentDirection()).eulerAngles, 1.0f).SetId("changeDirection");
-                });
+                }).AddTo(gameObject);
 
             this.UpdateAsObservable()
                 .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
                 .Subscribe(_ =>
                 {
-                    pathManager.UpdateCurrentNode(transform.position);
-                });
+                    _pathManager.UpdateCurrentNode(transform.position);
+                }).AddTo(gameObject);
 
             GlobalInputBinder.CreateGetKeyStream(walkKey)
                 .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
@@ -393,7 +411,7 @@ namespace Assets.Pia.Scripts.Game
 
         public Vector3 GetCurrentDirection()
         {
-            var next = pathManager.GetNext();
+            var next = _pathManager.GetNext();
             if (next != null)
             {
                 return Vector3.Normalize(next.transform.position - transform.position);
@@ -413,21 +431,21 @@ namespace Assets.Pia.Scripts.Game
             }
             DOTween.Kill("followHeadPos");
             upperBody.localRotation = head.localRotation;
-            upperBody.DOLocalMove(head.localPosition, 0.2f).SetId("followHeadPos"); ;
+            upperBody.DOLocalMove(head.localPosition, 0.2f).SetId("followHeadPos");
         }
 
         private void CreateAnimationSubject()
         {
             lowerStateSubject = new Subject<LowerAnimationState>();
-            lowerStateSubject.Subscribe(AnimateLowerBody);
+            lowerStateSubject.Subscribe(AnimateLowerBody).AddTo(gameObject);
             lowerStateSubject.OnNext(LowerAnimationState.Idle);
 
             lowerStateSubject.DistinctUntilChanged()
                 .Where(x => x == LowerAnimationState.Walk)
-                .Subscribe(_ =>SoundManager.Play("char_walk", 4));
+                .Subscribe(_ =>SoundManager.Play("char_walk", 4)).AddTo(gameObject);
             lowerStateSubject.DistinctUntilChanged()
                 .Where(x => x == LowerAnimationState.Idle)
-                .Subscribe(_ => SoundManager.Stop(4));
+                .Subscribe(_ => SoundManager.Stop(4)).AddTo(gameObject);
         }
 
         private void AnimateLowerBody(LowerAnimationState state)
@@ -557,16 +575,11 @@ namespace Assets.Pia.Scripts.Game
         {
             var mouseUpStream = GlobalInputBinder.CreateGetKeyUpStream(KeyCode.Mouse0);
             var beginPosition = Input.mousePosition;
-            mouseUpStream.Select(_ => Input.mousePosition)
-                .Where(_ => t != null)
-                .Take(1)
-                .Subscribe(v =>
-                {
-                    if (t is Cover cover)
-                    {
-                        cover.TryThrow(Vector3.Normalize(v - beginPosition));
-                    }
-                });
+
+            if (t is Cover cover)
+            {
+                cover.Throw();
+            }
         }
 
         public void Crouch()
@@ -595,7 +608,7 @@ namespace Assets.Pia.Scripts.Game
             DOTween.To(() => rotationY, x => rotationY = x, 0, crouchDuration).SetEase(Ease.InOutQuad);
 
         }
-        public void StandUp()
+        public void StandUp(bool ableToCrouch = true)
         {
             _ableToCrouch = false;
             _isCrouching = false;
@@ -603,7 +616,7 @@ namespace Assets.Pia.Scripts.Game
             SetCursorLocked();
             body.DOLocalMoveY(standUpHeight, standUpDuration).OnComplete(() =>
             {
-                _ableToCrouch = true;
+                _ableToCrouch = ableToCrouch;
             }).SetEase(Ease.InOutQuad);
             arm.DOLocalMove(standArmTransform.localPosition, standUpDuration).SetEase(Ease.InOutQuad);
             head.DOLocalMove(standHeadTransform.localPosition, standUpDuration).SetEase(Ease.InOutQuad);
