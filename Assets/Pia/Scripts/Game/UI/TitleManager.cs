@@ -38,8 +38,6 @@ namespace Pia.Scripts.Manager
             optionConfirmButton.onClick.AddListener(OnOptionConfirmButtonClick);
             optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
             languageDropdown.onValueChanged.AddListener(OnLanguageDropdownChanged);
-          
-
             GlobalConfiguration.Instance.LoadAllProperty();
             languageDropdown.value = GlobalConfiguration.Instance.GetLanguage();
             InitializeOption();
@@ -69,7 +67,7 @@ namespace Pia.Scripts.Manager
         private void OnOptionResetButtonClick()
         {
             SoundManager.PlayOneShot("ui_button", 1);
-            PlayerPrefs.DeleteAll();
+            GlobalConfiguration.Instance.ResetOption();
             GlobalConfiguration.Instance.LoadAllProperty();
             InitializeOption();
         }

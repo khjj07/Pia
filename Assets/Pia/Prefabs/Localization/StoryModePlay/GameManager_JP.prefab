@@ -2833,7 +2833,7 @@ MonoBehaviour:
   m_text: "\r\u6B8B\u308A\u6642\u9593"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
-  m_sharedMaterial: {fileID: -2104315280609313634, guid: 6c507abc9448d9b4ea688fade50a50d0, type: 2}
+  m_sharedMaterial: {fileID: 3994248388636400084, guid: 0283c7b5dd8860e4baea77a5bd0af3ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

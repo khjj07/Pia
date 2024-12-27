@@ -11,21 +11,28 @@ namespace Default.Scripts.Util
 {
     public class GlobalLoadingManager : Singleton<GlobalLoadingManager>
     {
+        public Subject<string> sceneSubject;
         public enum Mode
         {
             Fade,
             None
         }
 
-        public IEnumerator Load(string scene,float defaultDelay = 0.0f, Mode mode = Mode.Fade)
+        public void Start()
+        {
+            sceneSubject = new Subject<string>();
+            sceneSubject.Subscribe(x => LoadScene(x)).AddTo(gameObject);
+        }
+        public void LoadScene(string scene, float defaultDelay = 1.0f, Mode mode = Mode.Fade, bool stopSound = false)
+        {
+            StartCoroutine(Load(scene));
+        }
+
+        public IEnumerator Load(string scene,float defaultDelay = 1.0f, Mode mode = Mode.Fade,bool stopSound = false)
         {
             if (mode == Mode.Fade)
             {
                 yield return OnLoadBegin(mode);
-            }
-            else
-            {
-                SoundManager.StopAll();
             }
             var loadOperation = SceneManager.LoadSceneAsync(scene);
             loadOperation.allowSceneActivation = false;
@@ -36,7 +43,7 @@ namespace Default.Scripts.Util
             {
                 yield return OnLoadEnd(mode);
             }
-            else
+            if (stopSound)
             {
                 SoundManager.StopAll();
             }

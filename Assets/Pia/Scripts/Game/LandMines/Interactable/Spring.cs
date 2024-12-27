@@ -61,7 +61,7 @@ public class Spring : InteractableClass
     public void Finish()
     {
         springUIImage.gameObject.SetActive(false);
-        GetComponent<MeshFilter>().sharedMesh = brokenModel;
+        GetComponent<MeshFilter>().mesh = brokenModel;
         DOTween.To(() => GetComponent<MeshRenderer>().material.GetVector("_BaseColor"), x => GetComponent<MeshRenderer>().material.SetVector("_BaseColor", x), new Vector4(), 1).OnComplete(() =>
         {
             gameObject.SetActive(false);

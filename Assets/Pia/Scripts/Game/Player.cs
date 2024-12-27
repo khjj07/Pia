@@ -155,7 +155,6 @@ namespace Assets.Pia.Scripts.Game
                 sensitiveX = GlobalConfiguration.Instance.GetMouseSensitive();
             }).AddTo(gameObject);
         }
-
         private void CreateFlashLightStream()
         {
             this.UpdateAsObservable().Subscribe(_ =>
