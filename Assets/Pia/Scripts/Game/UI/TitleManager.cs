@@ -15,6 +15,7 @@ namespace Pia.Scripts.Manager
         public Button startButton;
         public Button optionButton;
         public Button quitButton;
+        public Button discordButton;
 
         public Image optionPanel;
         public Button optionConfirmButton;
@@ -35,6 +36,7 @@ namespace Pia.Scripts.Manager
             startButton.onClick.AddListener(OnStartButtonClick);
             optionButton.onClick.AddListener(OnOptionButtonClick);
             quitButton.onClick.AddListener(OnQuitButtonClick);
+            discordButton.onClick.AddListener(OnDiscordButtonClick);
             optionConfirmButton.onClick.AddListener(OnOptionConfirmButtonClick);
             optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
             languageDropdown.onValueChanged.AddListener(OnLanguageDropdownChanged);
@@ -45,6 +47,11 @@ namespace Pia.Scripts.Manager
             SoundManager.Play("BGM_Title");
             GlobalConfiguration.Instance.SetFog(false);
             Cursor.lockState= CursorLockMode.None;
+        }
+
+        private void OnDiscordButtonClick()
+        {
+            Application.OpenURL("https://discord.gg/TkTcEyRHbh");
         }
 
         private void InitializeOption()
