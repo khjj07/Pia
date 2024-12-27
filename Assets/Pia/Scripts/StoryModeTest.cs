@@ -24,7 +24,7 @@ namespace Assets.Pia.Scripts
 
         public void Start()
         {
-            var keyStream = GlobalInputBinder.CreateGetKeyDownStream(KeyCode.F1)
+            var keyStream = GlobalInputBinder.CreateGetKeyDownStream(KeyCode.F3)
                 .Subscribe(_ =>
                 {
                     _developerFlag = !_developerFlag;
@@ -36,7 +36,7 @@ namespace Assets.Pia.Scripts
                     {
                         testUI.gameObject.SetActive(true);
                     }
-                });
+                }).AddTo(gameObject);
             var developerStream = this.UpdateAsObservable().Where(_ => _developerFlag);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad0))
                 .Subscribe(_ =>
@@ -45,7 +45,7 @@ namespace Assets.Pia.Scripts
                     {
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                     }
-                });
+                }).AddTo(gameObject);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad1))
             .Subscribe(_ =>
             {
@@ -54,7 +54,7 @@ namespace Assets.Pia.Scripts
                     StoryModeManager.Instance.GetPlayer().Hold(null);
                     StoryModeManager.Instance.GetPlayer().Hold(shovel);
                 }
-            });
+            }).AddTo(gameObject);
 
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad2))
                 .Subscribe(_ =>
@@ -64,7 +64,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(driver);
                     }
-                });
+                }).AddTo(gameObject);
 
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad3))
                 .Subscribe(_ =>
@@ -74,7 +74,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(nipper);
                     }
-                });
+                }).AddTo(gameObject);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad4))
                 .Subscribe(_ =>
                 {
@@ -83,7 +83,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(dagger);
                     }
-                });
+                }).AddTo(gameObject);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad5))
                 .Subscribe(_ =>
                 {
@@ -92,7 +92,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(pen);
                     }
-                });
+                }).AddTo(gameObject);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad6))
                 .Subscribe(_ =>
                 {
@@ -101,7 +101,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(bottle);
                     }
-                });
+                }).AddTo(gameObject);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad7))
                 .Subscribe(_ =>
                 {
@@ -110,7 +110,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(bandage);
                     }
-                });
+                }).AddTo(gameObject);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad8))
                 .Subscribe(_ =>
                 {
@@ -119,7 +119,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(letter);
                     }
-                });
+                }).AddTo(gameObject);
             developerStream.Where(_ => Input.GetKeyDown(KeyCode.Keypad9))
                 .Subscribe(_ =>
                 {
@@ -128,7 +128,7 @@ namespace Assets.Pia.Scripts
                         StoryModeManager.Instance.GetPlayer().Hold(null);
                         StoryModeManager.Instance.GetPlayer().Hold(guideBook);
                     }
-                });
+                }).AddTo(gameObject);
         }
     }
         
