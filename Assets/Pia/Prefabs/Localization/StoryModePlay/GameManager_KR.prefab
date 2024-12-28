@@ -5207,6 +5207,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5318970463497794476}
     m_Modifications:
+    - target: {fileID: 22781203594107087, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: text
+      value: "<fade>\uD0A4\uB97C \uB204\uB974\uC2DC\uC624.</fade>"
+      objectReference: {fileID: 0}
     - target: {fileID: 241505928980944691, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.144
@@ -5307,6 +5311,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.88600004
       objectReference: {fileID: 0}
+    - target: {fileID: 4058951381964581659, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: disappearDuration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302549265751410026, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: disappearDuration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4362326954134267705, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.7950002
@@ -5324,12 +5336,16 @@ PrefabInstance:
       value: StepLandMine
       objectReference: {fileID: 0}
     - target: {fileID: 5611249958077886031, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.062000036
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611249958077886031, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 5611249958077886031, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 46.451
+      value: 46.854
       objectReference: {fileID: 0}
     - target: {fileID: 5951579479216560702, guid: 2965886d4fe1a7341b850d587797b497, type: 3}
       propertyPath: m_LocalPosition.x

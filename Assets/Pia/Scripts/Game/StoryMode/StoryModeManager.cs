@@ -94,7 +94,7 @@ namespace Pia.Scripts.StoryMode
                         {
                             SetState(State.LandMine);
                             _player.Crouch();
-                        }).AddTo(_player.gameObject);
+                        }).AddTo(gameObject);
 
                     _player.UpdateAsObservable()
                         .TakeWhile(_ => currentState == State.LandMineDirt)

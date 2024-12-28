@@ -11,7 +11,7 @@ namespace Assets.Pia.Scripts.Game.UI
 {
     public class OptionManager : MonoBehaviour
     {
-
+        public GameObject exposureTest;
         public Image optionPanel;
         public Button optionConfirmButton;
         public Button optionResetButton;
@@ -64,6 +64,7 @@ namespace Assets.Pia.Scripts.Game.UI
         private void Close()
         {
             SoundManager.PlayOneShot("ui_button", 1);
+            exposureTest.SetActive(false);
             optionPanel.gameObject.SetActive(false);
             PlayerPrefs.Save();
             Cursor.lockState = CursorLockMode.Locked;
@@ -76,6 +77,7 @@ namespace Assets.Pia.Scripts.Game.UI
         private void Open()
         {
             SoundManager.PlayOneShot("ui_button", 1);
+            exposureTest.SetActive(true);
             optionPanel.gameObject.SetActive(true);
             GlobalConfiguration.Instance.SetFog(false);
             StoryModeManager.Instance.GetPlayer().SetCursorUnlocked();

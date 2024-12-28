@@ -316,10 +316,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager_KR
       objectReference: {fileID: 0}
-    - target: {fileID: 8641424292185563232, guid: 1d9a4c62f3f06c44587a9253e20ed62e, type: 3}
-      propertyPath: text
-      value: "<fade>\uD0A4\uB97C \uB204\uB974\uC2DC\uC624.</fade>"
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -972,10 +968,6 @@ PrefabInstance:
     - target: {fileID: 6011786746622374637, guid: b674d9ef99a5e1c48861b9e381a9e31f, type: 3}
       propertyPath: m_Name
       value: GameManager_JP
-      objectReference: {fileID: 0}
-    - target: {fileID: 8641424292185563232, guid: b674d9ef99a5e1c48861b9e381a9e31f, type: 3}
-      propertyPath: text
-      value: "<fade>\u30AD\u30FC\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002</fade>"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
