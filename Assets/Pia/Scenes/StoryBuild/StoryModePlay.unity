@@ -1180,7 +1180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1487196158}
-  - component: {fileID: 1487196157}
+  - component: {fileID: 1487196161}
   - component: {fileID: 1487196159}
   - component: {fileID: 1487196160}
   m_Layer: 0
@@ -1190,29 +1190,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1487196157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487196156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b3cd5170c86484a90a082230ff4b59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LocalizedAssetReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:6863f822a6822224eb9f68dbdba7f40c
-    m_TableEntryReference:
-      m_KeyId: 18855603224576
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 1
-  m_UpdateAsset:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1487196158
 Transform:
   m_ObjectHideFlags: 0
@@ -1262,6 +1239,29 @@ MonoBehaviour:
   letter: {fileID: 1046381022793079523}
   guideBook: {fileID: 1046381022793079522}
   testUI: {fileID: 1739025384}
+--- !u!114 &1487196161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487196156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f3e2db015ef1c449b8733c7bbed518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LocalizedAssetReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:6863f822a6822224eb9f68dbdba7f40c
+    m_TableEntryReference:
+      m_KeyId: 18855603224576
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+  m_UpdateAsset:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1586002135
 GameObject:
   m_ObjectHideFlags: 0

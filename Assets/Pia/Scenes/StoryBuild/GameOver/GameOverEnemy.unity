@@ -774,7 +774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1901100341}
-  - component: {fileID: 1901100342}
+  - component: {fileID: 1901100344}
   - component: {fileID: 1901100343}
   m_Layer: 5
   m_Name: Ending(Localized)
@@ -802,7 +802,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1901100342
+--- !u!114 &1901100343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -811,7 +811,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1901100340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b3cd5170c86484a90a082230ff4b59, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fea8f204270def4cbd0fb7102a291ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1901100344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901100340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f3e2db015ef1c449b8733c7bbed518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocalizedAssetReference:
@@ -825,18 +837,6 @@ MonoBehaviour:
   m_UpdateAsset:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1901100343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901100340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fea8f204270def4cbd0fb7102a291ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2021474380
 PrefabInstance:
   m_ObjectHideFlags: 0
