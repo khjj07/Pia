@@ -12,6 +12,7 @@ public class FixResolution : MonoBehaviour
     private void Update()
     {
         canvasScaler.referenceResolution = new Vector2(Screen.width,Screen.height);
+        canvasScaler.matchWidthOrHeight = 0;
     }
 
    

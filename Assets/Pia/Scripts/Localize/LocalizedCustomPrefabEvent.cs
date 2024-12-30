@@ -19,16 +19,17 @@ namespace UnityEngine.Localization.Components
         /// <inheritdoc/>
         protected override void UpdateAsset(GameObject localizedAsset)
         {
+            Debug.Log(m_Current);
             if (m_Current != null)
             {
-                DestroyImmediate(m_Current);
+                Destroy(m_Current);
                 m_Current = null;
             }
 
             if (localizedAsset != null)
             {
                 m_Current = Instantiate(localizedAsset, transform);
-                //m_Current.hideFlags = HideFlags.NotEditable | HideFlags.DontSave;
+                m_Current.hideFlags = HideFlags.NotEditable;
             }
 
             OnUpdateAsset.Invoke(m_Current);

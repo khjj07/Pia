@@ -16,7 +16,7 @@ namespace Default.Scripts.Util
                 {
                     try
                     {
-                        _instance = FindObjectOfType<T>();
+                        _instance = FindAnyObjectByType<T>(FindObjectsInactive.Include);
                     }
                     catch (Exception e)
                     {

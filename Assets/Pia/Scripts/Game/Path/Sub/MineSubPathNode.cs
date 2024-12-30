@@ -13,7 +13,7 @@ namespace Assets.Pia.Scripts.Path
     {
         public override Task Appear(CancellationTokenSource cancellationTokenSource)
         {
-            StoryModeManager.SetState(StoryModeManager.State.LandMineDirt);
+            StoryModeManager.Instance.SetState(StoryModeManager.State.LandMineDirt);
             return Task.CompletedTask;
         }
 

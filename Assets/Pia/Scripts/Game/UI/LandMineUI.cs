@@ -38,7 +38,7 @@ namespace Assets.Pia.Scripts.UI
         public void StepLandMine()
         {
             StoryModeManager.Instance.SetInteractionActive(true);
-            StoryModeManager.GetStepUpStream()
+            StoryModeManager.Instance.GetStepUpStream()
                 .Subscribe(_ => StoryModeManager.GameOver(StoryModeManager.GameOverType.MineExplosion))
                 .AddTo(StoryModeManager.Instance.gameObject);
             Disappear();
@@ -51,7 +51,7 @@ namespace Assets.Pia.Scripts.UI
             blood.DOFade(0.2f,0.5f).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);
             SetTimer(timeLimit);
             CreateLandMineStream();
-            switch (StoryModeManager.GetControlMode())
+            switch (StoryModeManager.Instance.GetControlMode())
             {
                 case StoryModeManager.ControlMode.General:
                     generalControlAlert.gameObject.SetActive(true);

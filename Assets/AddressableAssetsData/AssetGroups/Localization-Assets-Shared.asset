@@ -16,12 +16,17 @@ MonoBehaviour:
   m_GUID: b26a6443d25f85348be0ea46e1f0c1a5
   m_SerializeEntries:
   - m_GUID: 1216a48f7273d444e8f66d8c9b287ac0
-    m_Address: Assets/Pia/Localization/Title Shared Data.asset
+    m_Address: Assets/Pia/Localization/Title/Title Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 151206d745c3d2b448f411990bb56357
     m_Address: Assets/Pia/Localization/Ending/Ending Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40ef003628cdbf34b968afafd0e30c1c
+    m_Address: Assets/Pia/Localization/Option/Option Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

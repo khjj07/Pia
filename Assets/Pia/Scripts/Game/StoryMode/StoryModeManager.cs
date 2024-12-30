@@ -24,11 +24,11 @@ namespace Pia.Scripts.StoryMode
     {
         public enum GameOverType
         {
-           MineExplosion,
-           AirBomb,
-           Boar,
-           Bleed,
-           Enemy,
+            MineExplosion,
+            AirBomb,
+            Boar,
+            Bleed,
+            Enemy,
         }
         public enum ControlMode
         {
@@ -52,6 +52,9 @@ namespace Pia.Scripts.StoryMode
         [SerializeField]
         private LandMine _landMine;
 
+        [SerializeField]
+        private OptionManager optionManager;
+
         private Player _player;
         private bool _isInteractionActive;
 
@@ -59,18 +62,22 @@ namespace Pia.Scripts.StoryMode
         public CancellationTokenSource gameOverTokenSource;
         private bool _invincibility;
 
+        public void Awake()
+        {
+            stateSubject = new Subject<State>();
+            gameOverTokenSource = new CancellationTokenSource();
+        }
         public void Start()
         {
             InitializeVolumeSetting();
             _player = Player.Instance;
-            gameOverTokenSource = new CancellationTokenSource();
-            stateSubject = new Subject<State>();
-            stateSubject.DistinctUntilChanged().Subscribe(x=> currentState=x);
+         
+            stateSubject.DistinctUntilChanged().Subscribe(x => currentState = x);
             stateSubject.DistinctUntilChanged().Where(x => x == State.Walking)
                 .Subscribe(_ =>
                 {
                     _isInteractionActive = false;
-                    SoundManager.Play("BGM_bug",3);
+                    SoundManager.Play("BGM_bug", 3);
                 }).AddTo(gameObject);
             stateSubject.DistinctUntilChanged().Where(x => x == State.LandMineDirt)
                 .Subscribe(_ =>
@@ -103,6 +110,23 @@ namespace Pia.Scripts.StoryMode
                 }).AddTo(gameObject);
             _player.Initialize(_pathManager);
             CheckSaveFlag();
+            optionManager.Initialize();
+            GlobalInputBinder.CreateGetKeyDownStream(KeyCode.Escape)
+                .Where(_ => !optionManager._isOpen && GetState() == State.Walking)
+                .Subscribe(_ =>
+                {
+                    _player.SetCursorUnlocked();
+                    _player.SetMovable(false);
+                    optionManager.Open();
+                }).AddTo(gameObject);
+
+            optionManager.optionConfirmButton.onClick.AddListener(() =>
+            {
+                _player.SetCursorLocked();
+                _player.SetMovable(true);
+                GlobalConfiguration.Instance.SetFog(true);
+            });
+
         }
 
         private void InitializeVolumeSetting()
@@ -135,39 +159,39 @@ namespace Pia.Scripts.StoryMode
             }
         }
 
-        public static void SetState(State state)
+        public void SetState(State state)
         {
-            Instance.stateSubject.OnNext(state);
+            stateSubject.OnNext(state);
         }
 
-        public static State GetState()
+        public State GetState()
         {
-            return Instance.currentState;
+            return currentState;
         }
-        public static ControlMode GetControlMode()
+        public ControlMode GetControlMode()
         {
-           return Instance.controlMode;
+            return controlMode;
         }
 
         public static CancellationTokenSource GetGameOverTokenSource()
         {
-           return Instance.gameOverTokenSource;
+            return Instance.gameOverTokenSource;
         }
-        public static IObservable<Unit> GetStepStream()
+        public IObservable<Unit> GetStepStream()
         {
             switch (GetControlMode())
             {
                 case ControlMode.General:
-                    return Instance.UpdateAsObservable().Where(_=>Input.GetKey(Instance._player.stepKey));
+                    return Instance.UpdateAsObservable().Where(_ => Input.GetKey(Instance._player.stepKey));
                 case ControlMode.WithPedal:
-                    return Instance.UpdateAsObservable().Where(_=>Input.GetKey(Instance._player.stepKey) && Input.GetKey(Instance._player.stepPedalKey));
+                    return Instance.UpdateAsObservable().Where(_ => Input.GetKey(Instance._player.stepKey) && Input.GetKey(Instance._player.stepPedalKey));
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-      
-        public static IObservable<Unit> GetStepUpStream()
+
+        public IObservable<Unit> GetStepUpStream()
         {
             switch (GetControlMode())
             {

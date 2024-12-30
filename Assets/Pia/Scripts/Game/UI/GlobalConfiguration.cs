@@ -1,5 +1,7 @@
 using Default.Scripts.Sound;
 using Default.Scripts.Util;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -14,10 +16,16 @@ namespace Assets.Pia.Scripts.Game.UI
         public bool motionBlur;
         public bool headBob;
         public bool isPedalUse;
+        public bool vsync;
+        public int frameLimit;
+        public int screenMode;
         private float mouseSensitive;
         private float soundVolume;
         private float exposure;
         public int language;
+        public int resolution;
+
+        private List<Resolution> resolutionList = new List<Resolution>();
 
         public float GetFloatProperty(string name, float alt = 0f)
         {
@@ -56,10 +64,16 @@ namespace Assets.Pia.Scripts.Game.UI
             SetVolume(GetFloatProperty("soundVolume", 1));
             SetMouseSensitive(GetFloatProperty("mouseSensitive", 1));
             SetHeadBob(GetIntProperty("headBob", 1) == 1);
+            SetVsync(GetIntProperty("vsync", 1) == 1);
             SetPedalUse(GetIntProperty("pedalUse", 0) == 1);
+            SetFrameLimit(GetIntProperty("frameLimit", 30));
             SetMotionBlur(GetIntProperty("motionBlur",1) == 1);
             SetLanguage(GetIntProperty("language", 0));
+            SetScreenMode(GetIntProperty("screenMode", 0));
+            InitializeResolutionOptionData();
         }
+
+
         public void ResetOption()
         {
             PlayerPrefs.DeleteKey("exposure");
@@ -68,6 +82,8 @@ namespace Assets.Pia.Scripts.Game.UI
             PlayerPrefs.DeleteKey("headBob");
             PlayerPrefs.DeleteKey("pedalUse");
             PlayerPrefs.DeleteKey("motionBlur");
+            PlayerPrefs.DeleteKey("vsync");
+            PlayerPrefs.DeleteKey("screenMode");
         }
         private string LanguageToString(int lang)
         {
@@ -111,6 +127,60 @@ namespace Assets.Pia.Scripts.Game.UI
             PlayerPrefs.SetInt("pedalUse", value ? 1 : 0);
             Debug.Log(isPedalUse);
         }
+        public void SetVsync(bool b)
+        {
+            vsync = b;
+            PlayerPrefs.SetInt("vsync", vsync ? 1 : 0);
+            QualitySettings.vSyncCount = vsync ? 1 : 0;
+        }
+
+        public void SetFrameLimit(float frame)
+        {
+            frameLimit = (int)frame;
+            PlayerPrefs.SetInt("frameLimit", frameLimit);
+            Application.targetFrameRate = 30;
+        }
+
+        public void SetScreenMode(int mode)
+        {
+            screenMode = mode;
+            PlayerPrefs.SetInt("screenMode", screenMode);
+            Screen.fullScreenMode = IntegerToScreenMode(screenMode);
+        }
+
+        public FullScreenMode IntegerToScreenMode(int mode)
+        {
+            switch (screenMode)
+            {
+                case 0:
+                    return FullScreenMode.Windowed;
+                    break;
+                case 1:
+                    return FullScreenMode.ExclusiveFullScreen;
+                    
+                    break;
+                case 2:
+                    return FullScreenMode.FullScreenWindow;
+                    break;
+                default:
+                    return FullScreenMode.Windowed;
+            }
+        }
+
+        public int GetScreenMode()
+        {
+            return screenMode;
+        }
+
+        public int GetFrameLimit()
+        {
+            return frameLimit;
+        }
+
+        public bool GetVsync()
+        {
+            return vsync;
+        }
 
         public bool GetPedalUse()
         {
@@ -124,7 +194,6 @@ namespace Assets.Pia.Scripts.Game.UI
 
         public void SetVolume(float value)
         {
-            Debug.Log(value);
             SoundManager.SetMainVolume(value);
             PlayerPrefs.SetFloat("soundVolume", value);
             soundVolume = value;
@@ -156,28 +225,23 @@ namespace Assets.Pia.Scripts.Game.UI
                 PlayerPrefs.SetInt("motionBlur", value ? 1 : 0);
             }
         }
-
         public bool GetMotionBlur()
         {
             return motionBlur;
         }
-
         public void SetHeadBob(bool value)
         {
             headBob = value;
             PlayerPrefs.SetInt("headBob", value ? 1 : 0);
         } 
-      
         public bool GetHeadBob()
         {
             return headBob;
         }
-
         public int GetLanguage()
         {
             return language;
         }
-
         public void SetLanguage(int value)
         {
             LocaleIdentifier localeCode = new LocaleIdentifier(LanguageToString(value));
@@ -193,6 +257,40 @@ namespace Assets.Pia.Scripts.Game.UI
 
             language = value;
             PlayerPrefs.SetInt("language", value);
+        }
+
+        public int GetResolution()
+        {
+            return resolution;
+        }
+        public void SetResolution(int num)
+        {
+            resolution = num;
+            Screen.SetResolution(resolutionList[resolution].width, resolutionList[resolution].height, IntegerToScreenMode(screenMode));
+        }
+
+        public List<Resolution> GetResolutionList()
+        {
+            return resolutionList;
+        }
+
+        public void InitializeResolutionOptionData()
+        {
+
+            resolutionList=new List<Resolution>();
+            int index = 0;
+            foreach (Resolution item in Screen.resolutions)
+            {
+                if (item.refreshRateRatio.value == 60.0f)
+                {
+                    resolutionList.Add(item);
+                    if (item.width == Screen.width && item.height == Screen.height)
+                    {
+                        SetResolution(index);
+                    }
+                    index++;
+                }
+            }
         }
     }
 }

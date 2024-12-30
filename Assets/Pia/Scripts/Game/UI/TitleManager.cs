@@ -17,17 +17,7 @@ namespace Pia.Scripts.Manager
         public Button quitButton;
         public Button discordButton;
 
-        public Image optionPanel;
-        public Button optionConfirmButton;
-        public Button optionResetButton;
-
-        public Slider exposureSlider;
-        public Slider mouseSensitiveSlider;
-        public Slider volumeSlider;
-        public Toggle motionBlurToggle;
-        public Toggle headBobToggle;
-        public Toggle pedalToggle;
-
+        private OptionManager optionManager;
 
         public TMP_Dropdown languageDropdown;
 
@@ -37,16 +27,16 @@ namespace Pia.Scripts.Manager
             optionButton.onClick.AddListener(OnOptionButtonClick);
             quitButton.onClick.AddListener(OnQuitButtonClick);
             discordButton.onClick.AddListener(OnDiscordButtonClick);
-            optionConfirmButton.onClick.AddListener(OnOptionConfirmButtonClick);
-            optionResetButton.onClick.AddListener(OnOptionResetButtonClick);
+
             languageDropdown.onValueChanged.AddListener(OnLanguageDropdownChanged);
             GlobalConfiguration.Instance.LoadAllProperty();
             languageDropdown.value = GlobalConfiguration.Instance.GetLanguage();
-            InitializeOption();
+       
             PlayerPrefs.DeleteKey("Save");
             SoundManager.Play("BGM_Title");
             GlobalConfiguration.Instance.SetFog(false);
             Cursor.lockState= CursorLockMode.None;
+           
         }
 
         private void OnDiscordButtonClick()
@@ -54,42 +44,15 @@ namespace Pia.Scripts.Manager
             Application.OpenURL("https://discord.gg/TkTcEyRHbh");
         }
 
-        private void InitializeOption()
-        {
-            exposureSlider.value = GlobalConfiguration.Instance.GetExposure();
-            motionBlurToggle.isOn = GlobalConfiguration.Instance.GetMotionBlur();
-            headBobToggle.isOn = GlobalConfiguration.Instance.GetHeadBob();
-            pedalToggle.isOn = GlobalConfiguration.Instance.GetPedalUse();
-            mouseSensitiveSlider.value = GlobalConfiguration.Instance.GetMouseSensitive();
-            volumeSlider.value = GlobalConfiguration.Instance.GetVolume();
-
-            motionBlurToggle.onValueChanged.AddListener(GlobalConfiguration.Instance.SetMotionBlur);
-            headBobToggle.onValueChanged.AddListener(GlobalConfiguration.Instance.SetHeadBob);
-            pedalToggle.onValueChanged.AddListener(GlobalConfiguration.Instance.SetPedalUse);
-            mouseSensitiveSlider.onValueChanged.AddListener(GlobalConfiguration.Instance.SetMouseSensitive);
-            volumeSlider.onValueChanged.AddListener(GlobalConfiguration.Instance.SetVolume);
-            exposureSlider.onValueChanged.AddListener(GlobalConfiguration.Instance.SetExposure);
-        }
-
-        private void OnOptionResetButtonClick()
-        {
-            SoundManager.PlayOneShot("ui_button", 1);
-            GlobalConfiguration.Instance.ResetOption();
-            GlobalConfiguration.Instance.LoadAllProperty();
-            InitializeOption();
-        }
-
-        private void OnOptionConfirmButtonClick()
-        {
-            SoundManager.PlayOneShot("ui_button", 1);
-            optionPanel.gameObject.SetActive(false);
-            PlayerPrefs.Save();
-        }
-
         private void OnOptionButtonClick()
         {
             SoundManager.PlayOneShot("ui_button", 1);
-            optionPanel.gameObject.SetActive(true);
+            if (!optionManager)
+            {
+                optionManager = GetComponentInChildren<OptionManager>();
+                optionManager.Initialize();
+            }
+            optionManager.Open();
         }
 
         private void OnStartButtonClick()
@@ -101,6 +64,7 @@ namespace Pia.Scripts.Manager
         private void OnLanguageDropdownChanged(int value)
         {
             GlobalConfiguration.Instance.SetLanguage(value);
+            optionManager = null;
         }
 
         private void OnQuitButtonClick()

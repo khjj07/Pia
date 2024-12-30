@@ -117,7 +117,7 @@ namespace Assets.Pia.Scripts.Game
         public float hpDecreaseInterval = 1;
         public int hpReduction = 1;
         [SerializeField] private int hp;
-        private bool _isBleeding=false;
+        private bool _isBleeding = false;
         [SerializeField]
         private Image bleedUI;
         [SerializeField]
@@ -129,13 +129,17 @@ namespace Assets.Pia.Scripts.Game
         private HoldableItem hand;
         private bool _isMovable = true;
 
+        public void Update()
+        {
+            //Debug.Log(StoryModeManager.Instance);
+        }
         public bool IsMovable()
         {
-           return _pathManager.PlayerIsMovable() && _isMovable;
+            return _pathManager.PlayerIsMovable() && _isMovable;
         }
         public void SetMovable(bool value)
         {
-             _isMovable = value;
+            _isMovable = value;
         }
         public void Initialize(PathManager pathManager)
         {
@@ -150,11 +154,12 @@ namespace Assets.Pia.Scripts.Game
             CreateFlashLightStream();
             CreateHandStream();
             CreateHoverStream();
-            this.UpdateAsObservable().Select(_=> GlobalConfiguration.Instance.GetMouseSensitive())
-                .DistinctUntilChanged().Subscribe(_ => {
-                sensitiveY = GlobalConfiguration.Instance.GetMouseSensitive();
-                sensitiveX = GlobalConfiguration.Instance.GetMouseSensitive();
-            }).AddTo(_pathManager.gameObject);
+            this.UpdateAsObservable().Select(_ => GlobalConfiguration.Instance.GetMouseSensitive())
+                .DistinctUntilChanged().Subscribe(_ =>
+                {
+                    sensitiveY = GlobalConfiguration.Instance.GetMouseSensitive();
+                    sensitiveX = GlobalConfiguration.Instance.GetMouseSensitive();
+                }).AddTo(_pathManager.gameObject);
         }
         private void CreateFlashLightStream()
         {
@@ -170,7 +175,7 @@ namespace Assets.Pia.Scripts.Game
             {
                 ActiveBagSlot();
             }
-          
+
             ActiveHealthBar();
             CreateHPStream();
             CreateRandomBleedEvent(0.95f, 0.87f, EventManager.Event.Bleed1);
@@ -223,30 +228,30 @@ namespace Assets.Pia.Scripts.Game
 
         private void CreateRandomBleedEvent(float p0, float p1, EventManager.Event e)
         {
-           float random =  Random.Range(p1, p0);
-           Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval))
-                .Where(_ => random * initialHp >= hp).Take(1)
-               .Subscribe(_ =>
-               {
-                   Bleed();
-                   SoundManager.Play("event_startEmergency", 8);
-                   EventManager.InvokeEvent(e);
-               })
-               .AddTo(_pathManager.gameObject);
+            float random = Random.Range(p1, p0);
+            Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval))
+                 .Where(_ => random * initialHp >= hp).Take(1)
+                .Subscribe(_ =>
+                {
+                    Bleed();
+                    SoundManager.Play("event_startEmergency", 8);
+                    EventManager.InvokeEvent(e);
+                })
+                .AddTo(_pathManager.gameObject);
         }
 
         private void CreateHPStream()
         {
             hp = initialHp;
             Observable.Interval(TimeSpan.FromSeconds(hpDecreaseInterval))
-                .Subscribe(_ => SetHP(hp- hpReduction))
+                .Subscribe(_ => SetHP(hp - hpReduction))
                 .AddTo(gameObject);
         }
 
         private void SetHP(int value)
         {
             Debug.Log(hp);
-            hp = Math.Max(value,0);
+            hp = Math.Max(value, 0);
             hpBar.DOFillAmount((float)hp / initialHp, hpDecreaseInterval);
             if (hp == 0)
             {
@@ -263,8 +268,8 @@ namespace Assets.Pia.Scripts.Game
             hpReduction = 2;
             _isBleeding = true;
             bleedUI.gameObject.SetActive(true);
-            bleedUI.DOFade(0.04f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetId("BleedTween");
-            bandageGuideImage.DOFade(0.5f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetId("BandageGuideTween");
+            bleedUI.DOFade(0.04f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetId("BleedTween");
+            bandageGuideImage.DOFade(0.5f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetId("BandageGuideTween");
         }
 
         public void CureBleed()
@@ -273,7 +278,7 @@ namespace Assets.Pia.Scripts.Game
             _isBleeding = false;
             DOTween.Kill("BleedTween");
             DOTween.Kill("BandageGuideTween");
-            SoundManager.Stop( 8);
+            SoundManager.Stop(8);
             bandageGuideImage.DOFade(0, 1).OnComplete(() =>
             {
                 bleedUI.gameObject.SetActive(false);
@@ -332,7 +337,7 @@ namespace Assets.Pia.Scripts.Game
             GlobalInputBinder.CreateGetAxisStream("Mouse X").Subscribe(RotateCameraY).AddTo(_pathManager.gameObject); ;
             GlobalInputBinder.CreateGetAxisStream("Mouse Y").Subscribe(RotateCameraX).AddTo(_pathManager.gameObject);
             this.UpdateAsObservable().Subscribe(_ => RotateHead()).AddTo(_pathManager.gameObject);
-            this.UpdateAsObservable().Where(_=>GlobalConfiguration.Instance.GetHeadBob()).Select(_ => currentLowerState)
+            this.UpdateAsObservable().Where(_ => GlobalConfiguration.Instance.GetHeadBob()).Select(_ => currentLowerState)
                 .DistinctUntilChanged().Subscribe(ShakeCamera).AddTo(_pathManager.gameObject);
         }
         private void ShakeCamera(LowerAnimationState state)
@@ -345,9 +350,9 @@ namespace Assets.Pia.Scripts.Game
             {
                 mainCamera.transform.DOShakePosition(1f, new Vector3(1, 0.5f, 0) * 0.06f, 0).SetLoops(-1, LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutSine);
             }
-            else if(state == LowerAnimationState.Idle)
+            else if (state == LowerAnimationState.Idle)
             {
-                mainCamera.transform.DOShakePosition(4.0f, new Vector3(1,1,0) * 0.02f,1).SetLoops(-1, LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutSine);
+                mainCamera.transform.DOShakePosition(4.0f, new Vector3(1, 1, 0) * 0.02f, 1).SetLoops(-1, LoopType.Yoyo).SetId("shakeCamera").SetEase(Ease.InOutSine);
             }
         }
         private void CreateLowerBodyStream()
@@ -374,17 +379,17 @@ namespace Assets.Pia.Scripts.Game
         private void CreateCrouchingStream()
         {
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .Where(_ => StoryModeManager.GetState() != StoryModeManager.State.Walking && StoryModeManager.IsInteractionActive() && !_isMove)
+                .Where(_ => StoryModeManager.Instance.GetState() != StoryModeManager.State.Walking && StoryModeManager.IsInteractionActive() && !_isMove)
                 .Where(_ => !_isCrouching && _ableToCrouch).Subscribe(_ => Crouch()).AddTo(_pathManager.gameObject);
 
             GlobalInputBinder.CreateGetKeyDownStream(crouchKey)
-                .Where(_ => StoryModeManager.GetState() != StoryModeManager.State.Walking && StoryModeManager.IsInteractionActive() && !_isMove)
+                .Where(_ => StoryModeManager.Instance.GetState() != StoryModeManager.State.Walking && StoryModeManager.IsInteractionActive() && !_isMove)
                 .Where(_ => _isCrouching && _ableToCrouch).Subscribe(_ => StandUp()).AddTo(_pathManager.gameObject);
         }
         private void CreateWalkingStream()
         {
             this.UpdateAsObservable()
-                .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
+                .Where(_ => StoryModeManager.Instance.GetState() == StoryModeManager.State.Walking)
                 .Subscribe(_ =>
                 {
                     DOTween.Kill("changeDirection");
@@ -392,14 +397,14 @@ namespace Assets.Pia.Scripts.Game
                 }).AddTo(_pathManager.gameObject);
 
             this.UpdateAsObservable()
-                .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
+                .Where(_ => StoryModeManager.Instance.GetState() == StoryModeManager.State.Walking)
                 .Subscribe(_ =>
                 {
                     _pathManager.UpdateCurrentNode(transform.position);
                 }).AddTo(_pathManager.gameObject);
 
             GlobalInputBinder.CreateGetKeyStream(walkKey)
-                .Where(_ => StoryModeManager.GetState() == StoryModeManager.State.Walking)
+                .Where(_ => StoryModeManager.Instance.GetState() == StoryModeManager.State.Walking)
                 .Where(_ => !_isCrouching && _ableToCrouch && IsMovable())
                 .Subscribe(_ =>
                 {
@@ -423,9 +428,9 @@ namespace Assets.Pia.Scripts.Game
         }
         private void RotateHead()
         {
-           
+
             head.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
-            if (!_isCrouching&& _ableToCrouch)
+            if (!_isCrouching && _ableToCrouch)
             {
                 head.localPosition = new Vector3(rotationY * 0.005f, head.localPosition.y, 0.14f + rotationX * 0.003f);
             }
@@ -442,7 +447,7 @@ namespace Assets.Pia.Scripts.Game
 
             lowerStateSubject.DistinctUntilChanged()
                 .Where(x => x == LowerAnimationState.Walk)
-                .Subscribe(_ =>SoundManager.Play("char_walk", 4)).AddTo(_pathManager.gameObject);
+                .Subscribe(_ => SoundManager.Play("char_walk", 4)).AddTo(_pathManager.gameObject);
             lowerStateSubject.DistinctUntilChanged()
                 .Where(x => x == LowerAnimationState.Idle)
                 .Subscribe(_ => SoundManager.Stop(4)).AddTo(_pathManager.gameObject);
@@ -533,14 +538,14 @@ namespace Assets.Pia.Scripts.Game
             var diffrence = mineTransform.position - foot.position;
             transform.position += diffrence;
         }
-      
+
         private InteractableClass CheckInteractable()
         {
             RaycastHit hit;
             var center = Input.mousePosition;
             Ray ray = mainCamera.ScreenPointToRay(center);
 #if UNITY_EDITOR
-            Debug.DrawRay(ray.origin, ray.direction * checkTargetRayDistance,Color.red);
+            Debug.DrawRay(ray.origin, ray.direction * checkTargetRayDistance, Color.red);
 #endif
             var isContact = Physics.Raycast(ray.origin, ray.direction, out hit, checkTargetRayDistance);
             if (isContact && hit.transform.GetComponent<InteractableClass>().IsAvailable())
@@ -558,7 +563,7 @@ namespace Assets.Pia.Scripts.Game
             var center = Input.mousePosition;
             Ray ray = mainCamera.ScreenPointToRay(center);
 #if UNITY_EDITOR
-            Debug.DrawRay(ray.origin, ray.direction * checkTargetRayDistance,Color.red);
+            Debug.DrawRay(ray.origin, ray.direction * checkTargetRayDistance, Color.red);
 #endif
             var isContact = Physics.Raycast(ray.origin, ray.direction, out hit, checkTargetRayDistance);
             if (isContact && hit.collider.CompareTag(tag) && hit.transform.GetComponent<InteractableClass>().IsAvailable())
@@ -592,13 +597,13 @@ namespace Assets.Pia.Scripts.Game
                 _ableToCrouch = true;
                 SetCursorUnlocked();
             });
-            
-            if (StoryModeManager.GetState() == StoryModeManager.State.LandMineDirt)
+
+            if (StoryModeManager.Instance.GetState() == StoryModeManager.State.LandMineDirt)
             {
                 head.DOLocalMove(crouchHeadTransform1.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
                 arm.DOLocalMove(crouchArmTransform1.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
             }
-            else if (StoryModeManager.GetState() == StoryModeManager.State.LandMine)
+            else if (StoryModeManager.Instance.GetState() == StoryModeManager.State.LandMine)
             {
                 head.DOLocalMove(crouchHeadTransform2.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
                 arm.DOLocalMove(crouchArmTransform2.localPosition, crouchDuration).SetEase(Ease.InOutQuad);
@@ -646,7 +651,7 @@ namespace Assets.Pia.Scripts.Game
                 }
                 hand = null;
             }
-            else if(hand == null)
+            else if (hand == null)
             {
                 hand = item;
                 hand.gameObject.SetActive(true);
