@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-Korean
   m_GUID: 3f04ae44bd7c25c4eb56abcd86606860
-  m_SerializeEntries:
-  - m_GUID: cf652ce07feb2fa44ad54ac2b788da8e
-    m_Address: Title_ko
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ko
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: e61b47c7c52829941bc334a7dc59443c, type: 2}
   m_SchemaSet:
