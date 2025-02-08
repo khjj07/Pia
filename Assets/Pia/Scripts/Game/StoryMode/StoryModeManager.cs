@@ -106,7 +106,7 @@ namespace Pia.Scripts.StoryMode
                     _player.UpdateAsObservable()
                         .TakeWhile(_ => currentState == State.LandMineDirt)
                         .Subscribe(_ => _player.RepositioningThroughFoot(_landMine.Dirt.top))
-                        .AddTo(_player.gameObject);
+                        .AddTo(gameObject);
                 }).AddTo(gameObject);
             _player.Initialize(_pathManager);
             CheckSaveFlag();
@@ -219,19 +219,19 @@ namespace Pia.Scripts.StoryMode
                 switch (type)
                 {
                     case GameOverType.MineExplosion:
-                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb", 0, GlobalLoadingManager.Mode.None, true));
+                        StoryModeLoadingManager.Instance.LoadScene("GameOverMineBomb", 0, GlobalLoadingManager.Mode.None, true);
                         break;
                     case GameOverType.AirBomb:
-                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverAirBomb", 0, GlobalLoadingManager.Mode.None, true));
+                        StoryModeLoadingManager.Instance.LoadScene("GameOverAirBomb", 0, GlobalLoadingManager.Mode.None, true);
                         break;
                     case GameOverType.Boar:
-                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverBoar", 0, GlobalLoadingManager.Mode.None, true));
+                        StoryModeLoadingManager.Instance.LoadScene("GameOverBoar", 0, GlobalLoadingManager.Mode.None, true);
                         break;
                     case GameOverType.Bleed:
-                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverHP0", 0, GlobalLoadingManager.Mode.None, true));
+                        StoryModeLoadingManager.Instance.LoadScene("GameOverHP0", 0, GlobalLoadingManager.Mode.None, true);
                         break;
                     case GameOverType.Enemy:
-                        StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverEnemy", 0, GlobalLoadingManager.Mode.None, true));
+                        StoryModeLoadingManager.Instance.LoadScene("GameOverEnemy", 0, GlobalLoadingManager.Mode.None, true);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -241,7 +241,7 @@ namespace Pia.Scripts.StoryMode
 
         public void GameClear()
         {
-            StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeEnding", 1.0f)); ;
+            StoryModeLoadingManager.Instance.LoadScene("StoryModeEnding", 1.0f);
         }
 
         public static bool IsInteractionActive()

@@ -40,7 +40,7 @@ namespace Pia.Scripts.Synopsis
                 goNextStream.Dispose();
                 guideNoticeStream.Dispose();
                 _cancellationTokenSource.Cancel();
-                StoryModeLoadingManager.Instance.sceneSubject.OnNext(nextScene);
+                StoryModeLoadingManager.Instance.LoadScene(nextScene);
             }
             else
             {
@@ -75,7 +75,7 @@ namespace Pia.Scripts.Synopsis
                         _cancellationTokenSource.Cancel();
                         SoundManager.Stop(2);
                         SoundManager.Play("MP_Nightime",0);
-                        StoryModeLoadingManager.Instance.sceneSubject.OnNext(nextScene);
+                        StoryModeLoadingManager.Instance.LoadScene(nextScene);
                     }
                 }).AddTo(gameObject);
             }).AddTo(gameObject);

@@ -3,6 +3,7 @@ using Default.Scripts.Sound;
 using Default.Scripts.Util;
 using Pia.Scripts.StoryMode;
 using UniRx;
+using Unity.Collections;
 
 namespace Assets.Pia.Scripts.Game.Items
 {
@@ -28,7 +29,7 @@ namespace Assets.Pia.Scripts.Game.Items
                     if (player.Hold(this) == this)
                     {
                         OnActive(player);
-                        CreateInActiveStream()
+                       var inactiveStream = CreateInActiveStream()
                             .TakeWhile(_ => _isActive)
                             .Take(1)
                             .Subscribe(_ =>
@@ -37,6 +38,12 @@ namespace Assets.Pia.Scripts.Game.Items
                                 player.Hold(null);
                             })
                             .AddTo(gameObject);
+
+                        forceInactiveSubject.Subscribe(_ =>
+                        {
+                            inactiveStream.Dispose();
+                            OnInActive(player);
+                        });
                     }
                 }).AddTo(gameObject);
         }

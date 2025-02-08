@@ -23,6 +23,7 @@ namespace Assets.Pia.Scripts.Game.Items
         
 
         public IDisposable activeStream;
+        public Subject<bool> forceInactiveSubject = new Subject<bool>();
         public IObservable<Unit> CreateActiveStream()
         {
             return GlobalInputBinder.CreateGetKeyDownStream(itemKey);
@@ -62,16 +63,25 @@ namespace Assets.Pia.Scripts.Game.Items
                 {
                     //player.Hold(this);
                     OnActive(player);
-                    CreateInActiveStream()
+                    var inactiveStream = CreateInActiveStream()
                         .TakeWhile(_ => _isActive)
                         .Take(1)
-                        .Subscribe(_ =>
-                        {
-                            OnInActive(player);
-                        })
+                        .Subscribe(_ => { OnInActive(player); })
                         .AddTo(gameObject);
 
+                    forceInactiveSubject.Subscribe(_ =>
+                    {
+                        inactiveStream.Dispose();
+                        OnInActive(player);
+                    });
                 }).AddTo(gameObject);
+        }
+        public void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus)
+            {
+                forceInactiveSubject.OnNext(true);
+            }
         }
     }
 }

@@ -855,7 +855,7 @@ MonoBehaviour:
       m_KeyId: 18855603224576
       m_Key: 
     m_FallbackState: 0
-    m_WaitForCompletion: 1
+    m_WaitForCompletion: 0
   m_UpdateAsset:
     m_PersistentCalls:
       m_Calls: []

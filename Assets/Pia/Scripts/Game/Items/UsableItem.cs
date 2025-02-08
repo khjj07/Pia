@@ -44,6 +44,7 @@ namespace Assets.Pia.Scripts.Game.Items
                             })
                             .AddTo(player.gameObject);
 
+
                         CreateInActiveStream()
                             .TakeWhile(_ => _isActive)
                             .Take(1)

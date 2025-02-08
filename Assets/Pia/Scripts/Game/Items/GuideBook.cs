@@ -44,15 +44,18 @@ namespace Assets.Pia.Scripts.Game.Items
                if (_guideBookUi.currentIndex < _guideBookUi.states.Length - 1)
                {
                    SoundManager.Play("use_book", 1);
+                   _rectTransform.eulerAngles = Vector3.zero;
                    _rectTransform.DOShakeRotation(0.1f, 2, 0).SetEase(Ease.InOutElastic);
                }
                _guideBookUi.Next();
            }).AddTo(gameObject);
             prevStream = GlobalInputBinder.CreateGetKeyDownStream(previousKey).Subscribe(_ =>
             {
+                 
                 if (_guideBookUi.currentIndex > 0)
                 {
                     SoundManager.Play("use_book", 1);
+                    _rectTransform.eulerAngles = Vector3.zero;
                     _rectTransform.DOShakeRotation(0.1f, 2, 0).SetEase(Ease.InOutElastic);
                 }
                 _guideBookUi.Previous();

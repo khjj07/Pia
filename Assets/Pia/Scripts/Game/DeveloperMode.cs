@@ -56,7 +56,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("TitleMenu", 0, GlobalLoadingManager.Mode.None,true));
+                StoryModeLoadingManager.Instance.LoadScene("TitleMenu", 0, GlobalLoadingManager.Mode.None,true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha2))
             .Subscribe(_ =>
@@ -65,8 +65,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeSynopsis", 0,
-                    GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("StoryModeSynopsis", 0, GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha3))
             .Subscribe(_ =>
@@ -76,7 +75,7 @@ public class DeveloperMode : MonoBehaviour
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
                 PlayerPrefs.DeleteKey("Save");
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModePlay", 0, GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("StoryModePlay", 0, GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha4))
             .Subscribe(_ =>
@@ -86,7 +85,7 @@ public class DeveloperMode : MonoBehaviour
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
                 PlayerPrefs.SetString("Save", "LandMineDirt");
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModePlay",0,GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("StoryModePlay",0,GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha5))
             .Subscribe(_ =>
@@ -95,7 +94,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("StoryModeEnding", 0, GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("StoryModeEnding", 0, GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha6))
             .Subscribe(_ =>
@@ -104,7 +103,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverMineBomb", 0, GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("GameOverMineBomb", 0, GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha7))
             .Subscribe(_ =>
@@ -113,7 +112,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverBoar", 0, GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("GameOverBoar", 0, GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha8))
             .Subscribe(_ =>
@@ -122,7 +121,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverEnemy", 0, GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("GameOverEnemy", 0, GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha9))
             .Subscribe(_ =>
@@ -131,7 +130,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverAirBomb", 0, GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("GameOverAirBomb", 0, GlobalLoadingManager.Mode.None, true);
             });
         developerStream.Where(_ => Input.GetKeyDown(KeyCode.Alpha0))
             .Subscribe(_ =>
@@ -140,7 +139,7 @@ public class DeveloperMode : MonoBehaviour
                 {
                     StoryModeManager.Instance.gameOverTokenSource.Cancel();
                 }
-                StartCoroutine(StoryModeLoadingManager.Instance.Load("GameOverHP0", 0, GlobalLoadingManager.Mode.None, true));
+                StoryModeLoadingManager.Instance.LoadScene("GameOverHP0", 0, GlobalLoadingManager.Mode.None, true);
             });
     }
 

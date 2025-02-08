@@ -20,6 +20,11 @@ namespace UnityEngine.Localization.Components
         protected override void UpdateAsset(GameObject localizedAsset)
         {
             Debug.Log(m_Current);
+            if (m_Current != null && m_Current.name == localizedAsset.name + "(Clone)")
+            {
+                return;
+            }
+
             if (m_Current != null)
             {
                 Destroy(m_Current);
